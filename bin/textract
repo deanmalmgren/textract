@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+# -*- mode: python -*-
+# PYTHON_ARGCOMPLETE_OK
+
+import sys
+import argparse
+
+import argcomplete
+
+import textract
+
+
+# command line options here
+parser = argparse.ArgumentParser(
+    description='Command line tool for extracting text from any document'
+)
+parser.add_argument(
+    'filename', help='Filename to extract text.',
+)
+parser.add_argument(
+    '-o', '--output', type=argparse.FileType('w'), default='-',
+    help='Put raw text in here.',
+)
+
+# enable autocompletion with argcomplete
+argcomplete.autocomplete(parser)
+
+# extract text
+args = parser.parse_args()
+args.output.write(textract.textract(args.filename))
+args.output.write('\n')
+

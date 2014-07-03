@@ -12,6 +12,6 @@ export PYTHONPATH=/vagrant:$PYTHONPATH
 cd /vagrant
 EOF
 
-# # setup global tab completion on the flo command
-# # https://github.com/kislyuk/argcomplete#activating-global-completion
-# activate-global-python-argcomplete --dest /etc/bash_completion.d/
+# setup global tab completion on the flo command
+# https://github.com/kislyuk/argcomplete#activating-global-completion
+activate-global-python-argcomplete --dest /etc/bash_completion.d/
