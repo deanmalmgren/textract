@@ -1,0 +1,4 @@
+# This file contains all python dependencies that are required by the
+# textract package in order for it to properly work
+python-pptx
+python-docx

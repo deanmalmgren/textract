@@ -1,0 +1,7 @@
+include requirements/
+include MANIFEST.in
+include README.md
+include LICENSE
+recursive-exclude * *.py[co]
+recursive-exclude * *~ 
+recursive-exclude * *.orig
