@@ -11,3 +11,6 @@ fi
 # install the requirements for this package as well as this module.
 pip install -r requirements/python
 pip install .
+
+# install the requirements for this package in development
+pip install -r requirements/python-dev

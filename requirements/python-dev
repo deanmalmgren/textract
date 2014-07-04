@@ -1,0 +1,2 @@
+# needed for tests/run.py script to read .travis.yml file
+PyYAML

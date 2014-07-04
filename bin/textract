@@ -36,4 +36,3 @@ except CommandLineError, e:
 else:
     args.output.write(output)
     args.output.write('\n')
-

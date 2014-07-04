@@ -8,6 +8,9 @@
 sudo apt-get update -qq
 sudo apt-get install -y python-pip python-dev build-essential
 
+# install pep8 for testing
+sudo pip install pep8
+
 # make sure the PYTHONPATH and PATH variables are properly configured
 # for the vagrant user. Always change into the /vagrant directory on
 # the virtual machine to make it easy to start developing

@@ -12,7 +12,7 @@ def process(filename):
     # make sure the filename exists
     if not os.path.exists(filename):
         raise exceptions.MissingFileError(filename)
-    
+
     # get the filename extension, which is something like .docx for
     # example, and import the module dynamically using importlib. This
     # is a relative import so the name of the package is necessary
