@@ -8,6 +8,10 @@ def process(filename):
     """This is the core function used for parsing. It routes the filename
     to the appropriate parser and returns the result.
     """
+
+    # make sure the filename exists
+    if not os.path.exists(filename):
+        raise exceptions.MissingFileError(filename)
     
     # get the filename extension, which is something like .docx for
     # example, and import the module dynamically using importlib. This
