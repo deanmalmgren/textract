@@ -63,6 +63,7 @@ validate_example () {
 # checksum by just running this script and determining what the
 # correct checksum is
 validate_example ${BASEDIR}/docx/i_heart_word.docx 35b515d5e9d68af496f9233eb81547be
+validate_example ${BASEDIR}/pptx/i_love_powerpoint.pptx a5bc9cbe9284d4c81c1106a8137e4a4d
 
 # exit with the sum of the status
 exit ${EXIT_CODE}
