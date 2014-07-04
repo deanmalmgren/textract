@@ -7,7 +7,9 @@ import argparse
 
 import argcomplete
 
-import textract
+from textract import process
+from textract.colors import red
+from textract.exceptions import CommandLineError
 
 
 # command line options here
@@ -27,6 +29,11 @@ argcomplete.autocomplete(parser)
 
 # extract text
 args = parser.parse_args()
-args.output.write(textract.textract(args.filename))
-args.output.write('\n')
+try:
+    output = process(args.filename)
+except CommandLineError, e:
+    sys.stderr.write(red(e) + '\n')
+else:
+    args.output.write(output)
+    args.output.write('\n')
 
