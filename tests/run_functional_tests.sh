@@ -9,7 +9,6 @@
 # examples directory
 # http://stackoverflow.com/a/9107028/564709
 BASEDIR=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
-EXAMPLE_ROOT=$BASEDIR/../examples
 
 # annoying problem that md5 (OSX) and md5sum (Linux) are not the same
 # in coreutils
@@ -43,7 +42,10 @@ validate_example () {
 
     # run textract on an example document and make sure the md5sum is
     # the same as what we expect
-    local_checksum=$(textract $example | md5sum | awk '{print $1}')
+    textract $example > dummy.txt
+    update_status $? ''
+    local_checksum=$(md5sum dummy.txt | awk '{print $1}')
+    rm -f dummy.txt
 
     # hack to compute checksum of resulting archive since tarballs of
     # files with the same content are apparently not guaranteed to
@@ -56,15 +58,11 @@ validate_example () {
     fi
 }
 
-# download data if it doesn't already exist
-
-
-
 # run a few examples to make sure the checksums match what they are
 # supposed to. if you update an example, be sure to update the
 # checksum by just running this script and determining what the
 # correct checksum is
-validate_example hello-world.docx 040bf35be21ac0a3d6aa9ff4ff25df24
+validate_example ${BASEDIR}/docx/i_heart_word.docx 35b515d5e9d68af496f9233eb81547be
 
 # exit with the sum of the status
 exit ${EXIT_CODE}
