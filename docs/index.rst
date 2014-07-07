@@ -50,7 +50,7 @@ you will need to run:
 
 .. code-block:: bash
 
-    apt-get install python-dev libxml2-dev libxslt1-dev
+    apt-get install python-dev libxml2-dev libxslt1-dev antiword
 
 before running:
 

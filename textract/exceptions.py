@@ -29,3 +29,11 @@ class MissingFileError(CommandLineError):
             'The file "%(filename)s" can not be found.\n'
             'Is this the right path/to/file/you/want/to/extract%(ext)s?'
         ))
+
+
+class ShellError(CommandLineError):
+    def __init__(self, exit_code):
+        self.exit_code = exit_code
+
+    def __str__(self):
+        return "Command failed with exit code %s" % self.exit_code

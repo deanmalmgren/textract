@@ -64,6 +64,7 @@ validate_example () {
 # correct checksum is
 validate_example ${BASEDIR}/docx/i_heart_word.docx 35b515d5e9d68af496f9233eb81547be
 validate_example ${BASEDIR}/pptx/i_love_powerpoint.pptx a5bc9cbe9284d4c81c1106a8137e4a4d
+validate_example ${BASEDIR}/doc/i_heart_word.doc 95720710c2eac172e1e05e86e02964f0
 
 # exit with the sum of the status
 exit ${EXIT_CODE}
