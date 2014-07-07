@@ -2,8 +2,7 @@ from ..utils import non_local_import
 
 
 def extract(filename):
-    """Extract text from pptx file with inspiration from
-    https://python-pptx.readthedocs.org/en/latest/user/quickstart.html#extract-all-text-from-slides-in-presentation
+    """Extract text from pptx file using python-pptx
     """
     pptx = non_local_import('pptx')
     presentation = pptx.Presentation(filename)

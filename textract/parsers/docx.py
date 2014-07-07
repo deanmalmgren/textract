@@ -2,8 +2,7 @@ from ..utils import non_local_import
 
 
 def extract(filename):
-    """Extract text from docx file using
-    https://python-docx.readthedocs.org
+    """Extract text from docx file using python-docx.
     """
     docx = non_local_import('docx')
     document = docx.Document(filename)
