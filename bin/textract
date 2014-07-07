@@ -23,6 +23,10 @@ parser.add_argument(
     '-o', '--output', type=argparse.FileType('w'), default='-',
     help='Put raw text in here.',
 )
+parser.add_argument(
+    '-m', '--method', default='',
+    help='Specify a particular method of extraction here.',
+)
 
 # enable autocompletion with argcomplete
 argcomplete.autocomplete(parser)
@@ -30,7 +34,7 @@ argcomplete.autocomplete(parser)
 # extract text
 args = parser.parse_args()
 try:
-    output = process(args.filename)
+    output = process(**vars(args))
 except CommandLineError, e:
     sys.stderr.write(red(e) + '\n')
 else:

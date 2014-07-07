@@ -35,9 +35,13 @@ or the :ref:`python package <python-package>`
 Currently supporting
 --------------------
 
+* ``.doc`` via `antiword <http://www.winfield.demon.nl/>`__
+
 * ``.docx`` via `python-docx <https://python-docx.readthedocs.org/en/latest/>`__
 
 * ``.pptx`` via `python-pptx <https://python-pptx.readthedocs.org/en/latest/>`__
+
+* ``.pdf`` via `pdftotext <http://poppler.freedesktop.org/>`__ (default) or `pdfminer <https://euske.github.io/pdfminer/>`__
 
 Installation
 ------------
@@ -50,7 +54,7 @@ you will need to run:
 
 .. code-block:: bash
 
-    apt-get install python-dev libxml2-dev libxslt1-dev antiword
+    apt-get install python-dev libxml2-dev libxslt1-dev antiword poppler-utils
 
 before running:
 

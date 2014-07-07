@@ -1,7 +1,7 @@
 from ..shell import run
 
 
-def extract(filename):
+def extract(filename, **kwargs):
     """Extract text from doc files using antiword.
     """
     pipe = run('antiword %(filename)s' % locals())

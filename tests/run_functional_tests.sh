@@ -37,12 +37,15 @@ update_status () {
 # function for running test on a specific example to validate that the
 # checksum of results is consistent
 validate_example () {
-    example=$1
-    test_checksum=$2
+    # manipulate the list of arguments passed to this function via
+    # http://stackoverflow.com/a/10308353/564709
+    args=("$@")
+    test_checksum=${args[-1]}
+    unset args[${#args[@]}-1]
 
     # run textract on an example document and make sure the md5sum is
     # the same as what we expect
-    textract $example > dummy.txt
+    textract "${args[@]}" > dummy.txt
     update_status $? ''
     local_checksum=$(md5sum dummy.txt | awk '{print $1}')
     rm -f dummy.txt
@@ -65,6 +68,8 @@ validate_example () {
 validate_example ${BASEDIR}/docx/i_heart_word.docx 35b515d5e9d68af496f9233eb81547be
 validate_example ${BASEDIR}/pptx/i_love_powerpoint.pptx a5bc9cbe9284d4c81c1106a8137e4a4d
 validate_example ${BASEDIR}/doc/i_heart_word.doc 95720710c2eac172e1e05e86e02964f0
+validate_example ${BASEDIR}/pdf/i_heart_pdfs.pdf 06719d714211174a3851ac4cee880fe1
+validate_example -m pdfminer ${BASEDIR}/pdf/i_heart_pdfs.pdf d4377783e5fbde756d3a195bfd103be0
 
 # exit with the sum of the status
 exit ${EXIT_CODE}

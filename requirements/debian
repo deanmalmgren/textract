@@ -6,3 +6,6 @@ libxslt1-dev
 
 # parse word documents
 antiword
+
+# parse pdfs
+poppler-utils

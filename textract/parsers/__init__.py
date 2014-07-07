@@ -4,7 +4,7 @@ import importlib
 from .. import exceptions
 
 
-def process(filename):
+def process(filename, **kwargs):
     """This is the core function used for parsing. It routes the filename
     to the appropriate parser and returns the result.
     """
@@ -23,4 +23,4 @@ def process(filename):
     except ImportError, e:
         raise exceptions.ExtensionNotSupported(ext)
 
-    return filetype_module.extract(filename)
+    return filetype_module.extract(filename, **kwargs)

@@ -31,6 +31,16 @@ class MissingFileError(CommandLineError):
         ))
 
 
+class UnknownMethod(CommandLineError):
+    def __init__(self, method):
+        self.method = method
+
+    def __str__(self):
+        return self.render((
+            'The method "%(method)s" can not be found for this filetype.'
+        ))
+
+
 class ShellError(CommandLineError):
     def __init__(self, exit_code):
         self.exit_code = exit_code

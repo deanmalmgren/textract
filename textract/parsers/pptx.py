@@ -1,7 +1,7 @@
 from ..utils import non_local_import
 
 
-def extract(filename):
+def extract(filename, **kwargs):
     """Extract text from pptx file using python-pptx
     """
     pptx = non_local_import('pptx')
