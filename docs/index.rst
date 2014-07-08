@@ -72,6 +72,7 @@ Contents:
    command_line_interface
    python_package
    contributing
+   changelog
 
 
 Indices and tables
