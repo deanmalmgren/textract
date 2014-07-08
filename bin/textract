@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument(
     'filename', help='Filename to extract text.',
-)
+).completer = argcomplete.completers.FilesCompleter
 parser.add_argument(
     '-o', '--output', type=argparse.FileType('w'), default='-',
     help='Put raw text in here.',
