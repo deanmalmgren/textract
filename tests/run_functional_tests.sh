@@ -45,8 +45,11 @@ validate_example () {
 
     # run textract on an example document and make sure the md5sum is
     # the same as what we expect
+    set -x
     textract "${args[@]}" -o dummy.txt
-    update_status $? ''
+    update_status $? 'textract failed!'
+    cat dummy.txt
+    set +x
     local_checksum=$(md5sum dummy.txt | awk '{print $1}')
     rm -f dummy.txt
 
@@ -54,7 +57,7 @@ validate_example () {
     # files with the same content are apparently not guaranteed to
     # have the same md5 hash
     if [ "${local_checksum}" != "${test_checksum}" ]; then
-        red "ERROR--CHECKSUM OF ${example} DOES NOT MATCH"
+        red "ERROR--CHECKSUM FOR TEST '$@' DOES NOT MATCH"
         red "    local checksum=${local_checksum}"
         red "     test checksum=${test_checksum}"
 	update_status 1 ""
