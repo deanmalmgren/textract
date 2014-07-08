@@ -45,11 +45,11 @@ validate_example () {
 
     # run textract on an example document and make sure the md5sum is
     # the same as what we expect
-    set -x
+    echo running textract "${args[@]}"...
     textract "${args[@]}" -o dummy.txt
     update_status $? 'textract failed!'
-    cat dummy.txt
-    set +x
+    # cat dummy.txt
+    # set +x
     local_checksum=$(md5sum dummy.txt | awk '{print $1}')
     rm -f dummy.txt
 
