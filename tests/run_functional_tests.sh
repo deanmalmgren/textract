@@ -70,7 +70,7 @@ validate_example () {
 # correct checksum is
 validate_example ${BASEDIR}/docx/i_heart_word.docx 35b515d5e9d68af496f9233eb81547be
 validate_example ${BASEDIR}/pptx/i_love_powerpoint.pptx a5bc9cbe9284d4c81c1106a8137e4a4d
-validate_example ${BASEDIR}/doc/i_heart_word.doc 9e0c6e363bf1d665cb0aa0eefc3af3db
+validate_example ${BASEDIR}/doc/i_heart_word.doc 8c6b87285e7d5498cff369fe4536a54b
 validate_example ${BASEDIR}/pdf/i_heart_pdfs.pdf 06719d714211174a3851ac4cee880fe1
 validate_example -m pdfminer ${BASEDIR}/pdf/i_heart_pdfs.pdf d4377783e5fbde756d3a195bfd103be0
 
