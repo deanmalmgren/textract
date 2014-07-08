@@ -48,7 +48,7 @@ validate_example () {
     echo running textract "${args[@]}"...
     textract "${args[@]}" -o dummy.txt
     update_status $? 'textract failed!'
-    # cat dummy.txt
+    cat dummy.txt
     # set +x
     local_checksum=$(md5sum dummy.txt | awk '{print $1}')
     rm -f dummy.txt
