@@ -45,7 +45,7 @@ validate_example () {
 
     # run textract on an example document and make sure the md5sum is
     # the same as what we expect
-    textract "${args[@]}" > dummy.txt
+    textract "${args[@]}" -o dummy.txt
     update_status $? ''
     local_checksum=$(md5sum dummy.txt | awk '{print $1}')
     rm -f dummy.txt
