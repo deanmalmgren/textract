@@ -3,4 +3,4 @@
 argcomplete
 python-pptx
 python-docx
-pdfminer
+pdfminer==20140328
