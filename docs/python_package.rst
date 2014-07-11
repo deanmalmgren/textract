@@ -42,3 +42,10 @@ textract.parsers.pptx
 
 .. automodule:: textract.parsers.pptx
    :members:
+
+
+textract.parsers.txt
+--------------------
+
+.. automodule:: textract.parsers.txt
+   :members:

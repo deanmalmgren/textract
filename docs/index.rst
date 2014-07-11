@@ -43,6 +43,8 @@ Currently supporting
 
 * ``.pdf`` via `pdftotext <http://poppler.freedesktop.org/>`__ (default) or `pdfminer <https://euske.github.io/pdfminer/>`__
 
+* ``.txt`` via python builtins.
+
 Please recommend other file types by either mentioning them on the
 `issue tracker <https://github.com/deanmalmgren/textract/issues>`__ or
 by :ref:`contributing <contributing>`

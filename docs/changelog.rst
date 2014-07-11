@@ -9,6 +9,8 @@ track version numbers, where backwards incompatible changes
 latest
 ------
 
+* support for ``.txt`` files, haha (#8)
+
 
 0.2.0
 -----
