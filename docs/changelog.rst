@@ -9,8 +9,14 @@ track version numbers, where backwards incompatible changes
 latest
 ------
 
+
+0.3.0
+-----
+
 * support for ``.txt`` files, haha (#8)
 
+* fixed installation bug with not properly including requirements
+  files in the manifest
 
 0.2.0
 -----
