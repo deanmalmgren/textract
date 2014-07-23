@@ -30,6 +30,13 @@ textract.parsers.docx
    :members:
 
 
+textract.parsers.html
+---------------------
+
+.. automodule:: textract.parsers.html
+   :members:
+
+
 textract.parsers.pdf
 ---------------------
 

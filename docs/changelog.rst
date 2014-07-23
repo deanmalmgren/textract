@@ -9,6 +9,8 @@ track version numbers, where backwards incompatible changes
 latest
 ------
 
+* support for ``.html`` files (#7)
+
 
 0.3.0
 -----
