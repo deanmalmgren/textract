@@ -11,7 +11,8 @@ disallowed_parents = set([
 ])
 
 
-def visible(element):
+def _visible(element):
+    """Used to filter text elements that have invisible text on the page."""
     if element.parent.name in disallowed_parents:
         return False
     elif re.match(u'<!--.*-->', element):
@@ -20,7 +21,9 @@ def visible(element):
 
 
 def extract(filename, **kwargs):
-    """Extract text from html file using beautifulsoup4.
+    """Extract text from html file using beautifulsoup4. Filter text to
+    only show the visible parts of the page. Insipration from `here
+    <http://stackoverflow.com/a/1983219/564709>`_.
     """
     with open(filename) as stream:
         soup = BeautifulSoup(stream)
@@ -29,5 +32,5 @@ def extract(filename, **kwargs):
     # embedded javascript which isn't terribly useful for this use
     # case. inspiration from http://stackoverflow.com/a/1983219/564709
     texts = soup.find_all(text=True)
-    texts = [text.encode('utf-8') for text in filter(visible, texts)]
+    texts = [text.encode('utf-8') for text in filter(_visible, texts)]
     return '\n\n'.join(texts)

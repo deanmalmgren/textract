@@ -49,7 +49,9 @@ coverage.xml
 *.pot
 
 # Sphinx documentation
-docs/_build/
+docs/build/
+docs/textract/
+docs/python_package.rst
 
 # vagrant
 .vagrant
