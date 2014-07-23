@@ -48,8 +48,7 @@ validate_example () {
     echo running textract "${args[@]}"...
     textract "${args[@]}" -o dummy.txt
     update_status $? 'textract failed!'
-    cat dummy.txt
-    # set +x
+    # cat dummy.txt
     local_checksum=$(md5sum dummy.txt | awk '{print $1}')
     rm -f dummy.txt
 
@@ -76,6 +75,7 @@ validate_example -m pdfminer ${BASEDIR}/pdf/i_heart_pdfs.pdf d4377783e5fbde756d3
 validate_example ${BASEDIR}/txt/little_bo_peep.txt 1c5fb4478d84c3b3296746e491895ada
 validate_example ${BASEDIR}/html/snow-fall.html acc2d8c49094e56474006cab3d3768eb
 validate_example ${BASEDIR}/html/what-we-do.html 1fb0263bf62317365cb30246d9e094be
+validate_example ${BASEDIR}/eml/example.eml cb59a5fad8ed8b849e15d53449b1de3f
 
 # exit with the sum of the status
 exit ${EXIT_CODE}
