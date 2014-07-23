@@ -9,6 +9,11 @@ track version numbers, where backwards incompatible changes
 latest
 ------
 
+[will add changes here as they are made]
+
+0.4.0
+-----
+
 * support for ``.html`` files (#7)
 
 * support for ``.eml`` files (#4)
