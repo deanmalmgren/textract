@@ -39,6 +39,8 @@ Currently supporting
 
 * ``.docx`` via `python-docx <https://python-docx.readthedocs.org/en/latest/>`__
 
+* ``.eml`` via python builtins.
+
 * ``.html`` via `beautifulsoup4 <http://beautiful-soup-4.readthedocs.org/en/latest/>`__
 
 * ``.pptx`` via `python-pptx <https://python-pptx.readthedocs.org/en/latest/>`__

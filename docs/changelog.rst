@@ -11,6 +11,11 @@ latest
 
 * support for ``.html`` files (#7)
 
+* support for ``.eml`` files (#4)
+
+* automated the documentation for the python package using
+  sphinx-apidoc in docs/Makefile (#9)
+
 
 0.3.0
 -----
