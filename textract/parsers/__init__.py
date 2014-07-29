@@ -18,9 +18,15 @@ def process(filename, **kwargs):
     # is a relative import so the name of the package is necessary
     root, ext = os.path.splitext(filename)
     ext = ext.lower()
-    try:
-        filetype_module = importlib.import_module(ext, 'textract.parsers')
-    except ImportError, e:
-        raise exceptions.ExtensionNotSupported(ext)
+    # try:
+    print ext
+    if ext == '.json':
+        module = '.json2'
+    else:
+        module = ext
+      
+    filetype_module = importlib.import_module(module, 'textract.parsers')
+    # except ImportError, e:
+    # raise exceptions.ExtensionNotSupported(ext)
 
     return filetype_module.extract(filename, **kwargs)
