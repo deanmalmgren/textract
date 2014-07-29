@@ -75,6 +75,6 @@ Quick start
    <https://github.com/deanmalmgren/flo/blob/master/CONTRIBUTING.md>`__ and send
    pull requests; your help is greatly appreciated!
 
-.. |Build Status| image:: https://travis-ci.org/deanmalmgren/flo.png
-   :target: https://travis-ci.org/deanmalmgren/flo
+.. |Build Status| image:: https://travis-ci.org/deanmalmgren/textract.png
+   :target: https://travis-ci.org/deanmalmgren/textract
 
