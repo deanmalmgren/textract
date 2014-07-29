@@ -19,12 +19,9 @@ def process(filename, **kwargs):
     root, ext = os.path.splitext(filename)
     ext = ext.lower()
     # try:
-    print ext
-    if ext == '.json':
-        module = '.json2'
-    else:
-        module = ext
-      
+    # cannot call module json.py, conflicts with built-in json library
+    module = '.json_parser' if ext == '.json' else ext
+
     filetype_module = importlib.import_module(module, 'textract.parsers')
     # except ImportError, e:
     # raise exceptions.ExtensionNotSupported(ext)

@@ -1,5 +1,6 @@
 import json
 
+
 def extract(filename, **kwargs):
     f = open(filename, 'r')
     deserialized_json = json.load(f)
@@ -10,9 +11,9 @@ def get_text(deserialized_json):
     if isinstance(deserialized_json, dict):
         result = ''
         for key in deserialized_json:
-            result += ' ' + get_text(deserialized_json[key])
+            result += get_text(deserialized_json[key]) + ' '
         return result
-    
+
     if isinstance(deserialized_json, basestring):
         return deserialized_json
     else:
