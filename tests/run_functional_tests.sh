@@ -73,8 +73,7 @@ validate_example ${BASEDIR}/doc/i_heart_word.doc 8c6b87285e7d5498cff369fe4536a54
 validate_example ${BASEDIR}/pdf/i_heart_pdfs.pdf 06719d714211174a3851ac4cee880fe1
 validate_example -m pdfminer ${BASEDIR}/pdf/i_heart_pdfs.pdf d4377783e5fbde756d3a195bfd103be0
 validate_example ${BASEDIR}/txt/little_bo_peep.txt 1c5fb4478d84c3b3296746e491895ada
-#validate_example ${BASEDIR}/html/snow-fall.html acc2d8c49094e56474006cab3d3768eb
-validate_example ${BASEDIR}/html/snow-fall.html a90fa8b2bc9dc84673466ddc30fed497
+validate_example ${BASEDIR}/html/snow-fall.html acc2d8c49094e56474006cab3d3768eb
 validate_example ${BASEDIR}/html/what-we-do.html 1fb0263bf62317365cb30246d9e094be
 validate_example ${BASEDIR}/eml/example.eml cb59a5fad8ed8b849e15d53449b1de3f
 validate_example ${BASEDIR}/json/json_is_my_best_friend.json 82f7ab61b551abb274dd01511fe9ba08
