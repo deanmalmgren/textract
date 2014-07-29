@@ -14,6 +14,12 @@ def get_text(deserialized_json):
             result += get_text(deserialized_json[key]) + ' '
         return result
 
+    if isinstance(deserialized_json, list):
+        result = ''
+        for item in deserialized_json:
+            result += get_text(item) + ' '
+        return result
+
     if isinstance(deserialized_json, basestring):
         return deserialized_json
     else:

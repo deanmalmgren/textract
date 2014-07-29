@@ -18,7 +18,7 @@ def process(filename, **kwargs):
     # is a relative import so the name of the package is necessary
     root, ext = os.path.splitext(filename)
     ext = ext.lower()
-    
+
     # cannot call module json.py, conflicts with built-in json library
     module = '.json_parser' if ext == '.json' else ext
     try:
