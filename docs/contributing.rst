@@ -70,9 +70,9 @@ Quick start
    Current build status: |Build Status|
 
 4. Contribute! There are several `open issues
-   <https://github.com/deanmalmgren/flo/issues>`__ that provide good
+   <https://github.com/deanmalmgren/textract/issues>`__ that provide good
    places to dig in. Check out the `contribution guidelines
-   <https://github.com/deanmalmgren/flo/blob/master/CONTRIBUTING.md>`__ and send
+   <https://github.com/deanmalmgren/textract/blob/master/CONTRIBUTING.md>`__ and send
    pull requests; your help is greatly appreciated!
 
 .. |Build Status| image:: https://travis-ci.org/deanmalmgren/textract.png
