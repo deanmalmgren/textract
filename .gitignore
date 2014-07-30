@@ -51,7 +51,6 @@ coverage.xml
 # Sphinx documentation
 docs/build/
 docs/textract/
-docs/python_package.rst
 
 # vagrant
 .vagrant

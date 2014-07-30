@@ -15,3 +15,4 @@ install:
 script:
  - ./tests/run_functional_tests.sh
  - pep8 textract/ bin/textract
+ - cd docs && make html

@@ -54,11 +54,7 @@ clean:
 
 apidoc:
 	$(APIDOC) --force --no-toc ../textract --output-dir=./textract $(APIDOC_IGNORE)
-	@echo ".. _python-package:" > python_package.rst
-	@echo "" >> python_package.rst
-	@echo "Python package" >> python_package.rst
-	@echo "==============" >> python_package.rst
-	@echo "" >> python_package.rst
+	@cat python_package > python_package.rst
 	@grep -A8 " module" textract/textract.parsers.rst >> python_package.rst
 	@echo "" >> python_package.rst
 	@grep -A8 " module" textract/textract.rst >> python_package.rst

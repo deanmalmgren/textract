@@ -11,6 +11,10 @@ latest
 
 [will add changes here as they are made]
 
+* support for ``.json`` files (#13, @anthonygarvan)
+
+* cleaned up implementation of extension parsers.
+
 0.4.0
 -----
 

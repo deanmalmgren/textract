@@ -41,6 +41,8 @@ Currently supporting
 
 * ``.eml`` via python builtins.
 
+* ``.json`` via python builtins.
+
 * ``.html`` via `beautifulsoup4 <http://beautiful-soup-4.readthedocs.org/en/latest/>`__
 
 * ``.pptx`` via `python-pptx <https://python-pptx.readthedocs.org/en/latest/>`__
