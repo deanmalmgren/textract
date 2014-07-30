@@ -19,8 +19,10 @@ def process(filename, **kwargs):
     root, ext = os.path.splitext(filename)
     ext = ext.lower()
 
-    # cannot call module json.py, conflicts with built-in json library
-    module = '.json_parser' if ext == '.json' else ext
+    # to avoid conflicts with packages that are installed globally
+    # (e.g. python's json module), all extension parser modules have
+    # the _parser extension
+    module = ext + '_parser'
     try:
         filetype_module = importlib.import_module(module, 'textract.parsers')
     except ImportError, e:
