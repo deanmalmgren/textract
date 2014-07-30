@@ -12,11 +12,13 @@ def extract(filename, **kwargs):
 
 
 def get_text(deserialized_json):
-    """Recursively get text from subcomponents of a deserialized json.
+    """Recursively get text from subcomponents of a deserialized json. To
+    enforce the same order on the documents, make sure to read keys of
+    deserialized_json in a consistent (alphabetical) order.
     """
     if isinstance(deserialized_json, dict):
         result = ''
-        for key in deserialized_json:
+        for key in sorted(deserialized_json):
             result += get_text(deserialized_json[key]) + ' '
         return result
 
