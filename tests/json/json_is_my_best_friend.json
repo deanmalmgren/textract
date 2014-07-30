@@ -1,0 +1,11 @@
+{
+  "hey":"hello world this is some text from a json document", 
+  "should_ignore_this_number": 42, 
+  "should_extract_one_two_three": {
+    "1": "one",
+    "2": "two",
+    "3": "three",
+    "should_be_abcdef": ["a", "b", "c", ["d","e"], {"dict":"f"}]
+  },
+  "finished": "fine"
+}
