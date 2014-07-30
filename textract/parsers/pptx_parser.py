@@ -1,10 +1,9 @@
-from ..utils import non_local_import
+import pptx
 
 
 def extract(filename, **kwargs):
     """Extract text from pptx file using python-pptx
     """
-    pptx = non_local_import('pptx')
     presentation = pptx.Presentation(filename)
     text_runs = []
     for slide in presentation.slides:
