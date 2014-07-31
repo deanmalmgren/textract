@@ -1,4 +1,4 @@
-from ..MsgExtractor import Message
+from ..ExtractMsg import Message
 
 
 def extract(filename, **kwargs):
