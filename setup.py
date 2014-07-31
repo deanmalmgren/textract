@@ -36,6 +36,7 @@ setup(
     packages=[
         'textract',
         'textract.parsers',
+        'utilities
     ],
     install_requires=dependencies,
     zip_safe=False,
