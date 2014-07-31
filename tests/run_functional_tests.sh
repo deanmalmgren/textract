@@ -77,7 +77,7 @@ validate_example ${BASEDIR}/html/snow-fall.html acc2d8c49094e56474006cab3d3768eb
 validate_example ${BASEDIR}/html/what-we-do.html 1fb0263bf62317365cb30246d9e094be
 validate_example ${BASEDIR}/eml/example.eml cb59a5fad8ed8b849e15d53449b1de3f
 validate_example ${BASEDIR}/json/json_is_my_best_friend.json dc0503f1b5a213d67cc08829b12df99e
-validate_example ${BASEDIR}/msg/i_tolerate_outlook.msg 0711c4ba97025341ea5f4932e554d388
+validate_example ${BASEDIR}/msg/i_tolerate_outlook.msg d41d8cd98f00b204e9800998ecf8427e
 
 # exit with the sum of the status
 exit ${EXIT_CODE}
