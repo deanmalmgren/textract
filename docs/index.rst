@@ -92,6 +92,12 @@ textract from pypi.
     brew link libxml2 libxslt
     pip install textract
 
+.. note::
+
+    Depending on how you have python configured on your system with
+    homebrew, you may also need to install the python
+    development header files for textract to properly install.
+
 
 Don't see your operating system installation instructions here?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
