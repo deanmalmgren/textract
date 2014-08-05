@@ -57,6 +57,14 @@ textract.parsers.json_parser module
     :undoc-members:
     :show-inheritance:
 
+textract.parsers.odt_parser module
+----------------------------------
+
+.. automodule:: textract.parsers.odt_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 textract.parsers.pdf_parser module
 ----------------------------------
 
