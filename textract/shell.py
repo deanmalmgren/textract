@@ -15,6 +15,6 @@ def run(command):
 
     # if pipe is busted, raise an error (unlike Fabric)
     if pipe.returncode != 0:
-        raise exceptions.ShellError(pipe.returncode)
+        raise exceptions.ShellError(command, pipe.returncode)
 
     return pipe

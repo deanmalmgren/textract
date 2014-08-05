@@ -1,13 +1,23 @@
 from ..shell import run
-from ..exceptions import UnknownMethod
+from ..exceptions import UnknownMethod, ShellError
 
 
-def extract(filename, method=None, **kwargs):
+def extract(filename, method='', **kwargs):
     """Extract text from pdf files using ``method``.
     """
-    method = method or 'pdftotext'
-    if method == 'pdftotext':
-        return extract_pdftotext(filename)
+    if method == '' or method == 'pdftotext':
+        try:
+            return extract_pdftotext(filename)
+        except ShellError, e:
+
+            # if pdftotext isn't installed and the pdftotext method
+            # wasn't specified, then gracefully fallback to using
+            # pdfminer instead
+            if method == '' and e.is_uninstalled():
+                return extract_pdfminer(filename)
+            else:
+                raise e
+
     elif method == 'pdfminer':
         return extract_pdfminer(filename)
     else:

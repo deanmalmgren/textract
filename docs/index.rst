@@ -55,26 +55,6 @@ Please recommend other file types by either mentioning them on the
 `issue tracker <https://github.com/deanmalmgren/textract/issues>`__ or
 by :ref:`contributing <contributing>`
 
-Installation
-------------
-
-This package is built on top of several python packages and other
-source libraries. In particular, this package has a dependency on lxml
-that depends on `some other libraries to be installed
-<http://lxml.de/installation.html#requirements>`__. On Ubuntu/Debian,
-you will need to run:
-
-.. code-block:: bash
-
-    apt-get install python-dev libxml2-dev libxslt1-dev antiword poppler-utils
-
-before running:
-
-.. code-block:: bash
-
-    pip install textract
-
-
 
 Contents:
 
@@ -83,6 +63,7 @@ Contents:
 
    command_line_interface
    python_package
+   installation
    contributing
    changelog
 
