@@ -19,14 +19,10 @@ def process(filename, **kwargs):
     root, ext = os.path.splitext(filename)
     ext = ext.lower()
 
-    # if the extension is a known image type, use the tesseract parser
-    if(ext in ['.gif', '.png', '.jpg', '.jpeg']):
-        module = '.tesseract_parser'
-    else:
-        # to avoid conflicts with packages that are installed globally
-        # (e.g. python's json module), all extension parser modules have
-        # the _parser extension
-        module = ext + '_parser'
+    # to avoid conflicts with packages that are installed globally
+    # (e.g. python's json module), all extension parser modules have
+    # the _parser extension
+    module = ext + '_parser'
 
     try:
         filetype_module = importlib.import_module(module, 'textract.parsers')
