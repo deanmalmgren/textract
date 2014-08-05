@@ -39,17 +39,19 @@ Currently supporting
 
 * ``.docx`` via `python-docx <https://python-docx.readthedocs.org/en/latest/>`__
 
-* ``.eml`` via python builtins.
+* ``.eml`` via python builtins
 
-* ``.json`` via python builtins.
+* ``.json`` via python builtins
 
 * ``.html`` via `beautifulsoup4 <http://beautiful-soup-4.readthedocs.org/en/latest/>`__
+
+* ``.odt`` via python builtins
 
 * ``.pptx`` via `python-pptx <https://python-pptx.readthedocs.org/en/latest/>`__
 
 * ``.pdf`` via `pdftotext <http://poppler.freedesktop.org/>`__ (default) or `pdfminer <https://euske.github.io/pdfminer/>`__
 
-* ``.txt`` via python builtins.
+* ``.txt`` via python builtins
 
 Please recommend other file types by either mentioning them on the
 `issue tracker <https://github.com/deanmalmgren/textract/issues>`__ or
