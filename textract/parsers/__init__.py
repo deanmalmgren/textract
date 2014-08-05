@@ -23,7 +23,6 @@ def process(filename, **kwargs):
     # (e.g. python's json module), all extension parser modules have
     # the _parser extension
     module = ext + '_parser'
-
     try:
         filetype_module = importlib.import_module(module, 'textract.parsers')
     except ImportError, e:
