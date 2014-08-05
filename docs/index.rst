@@ -58,6 +58,30 @@ Please recommend other file types by either mentioning them on the
 by :ref:`contributing <contributing>`
 
 
+.. _related-projects:
+
+Related projects
+----------------
+
+Of course, textract isn't the first project with the aim to provide a
+simple interface for extracting text from any document. But this is,
+to the best of my knowledge, the only project that is written in
+python (a language commonly chosen by the natural language processing
+community) and is method agnostic about how content is extracted (more
+on this :ref:`here <contributing>`). Here is a small sample of similar
+projects (feel free to add to the list):
+
+* `Apache Tika <http://tika.apache.org/>`__ has `very similar, if not
+  identical, aims as textract
+  <https://github.com/deanmalmgren/textract/issues/12>`__. It has
+  impressive coverage of a wide range of file formats and is written
+  in java.
+
+* `textract (node.js) <https://github.com/dbashford/textract>`__ has
+  similar aims as this textract package (including an identical name!
+  great minds...). It is written in node.js.
+
+
 Contents:
 
 .. toctree::
