@@ -1,8 +1,8 @@
-# Using http://nullege.com/codes/show/src@o@p@openerp-server-5.0.0-3@bin@addons@document@content_index.py/25/odt2txt
+# Using https://github.com/odoo/odoo/blob/master/addons/document/odt2txt.py
 
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution   
+#    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
