@@ -19,8 +19,8 @@ class ExtensionNotSupported(CommandLineError):
     def __str__(self):
         return self.render((
             'The filename extension %(ext)s is not yet supported by\n'
-            'textract. Please suggest this filename extension here:\n'
-            '    https://github.com/deanmalmgren/textract/issues'
+            'textract. Please suggest this filename extension here:\n\n'
+            '    https://github.com/deanmalmgren/textract/issues\n'
         ))
 
 

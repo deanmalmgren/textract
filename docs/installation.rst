@@ -22,7 +22,7 @@ package manager before installing textract from pypi.
 
 .. code-block:: bash
 
-    apt-get install python-dev libxml2-dev libxslt1-dev antiword poppler-utils
+    apt-get install python-dev libxml2-dev libxslt1-dev antiword poppler-utils pstotext
     pip install textract
 
 
@@ -39,6 +39,11 @@ source code with homebrew and installing textract from pypi.
     brew install libxml2 libxslt antiword poppler
     brew link libxml2 libxslt
     pip install textract
+
+.. note::
+
+    ps2text is not currently a part of homebrew so ``.ps`` extraction
+    must be enabled by manually installing from source.
 
 .. note::
 
@@ -82,6 +87,9 @@ documenation about how to install the textract dependencies, please
     - `pdftotext <http://poppler.freedesktop.org/>`__ is *optionally*
       required by the ``.pdf`` parser (there is a pure python fallback
       that works if pdftotext isn't installed).
+
+    - `pstotext <http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm>`__
+      is required by the ``.ps`` parser.
 
 2. Add a requirements file to the `requirements directory
    <https://github.com/deanmalmgren/textract/tree/master/requirements>`__

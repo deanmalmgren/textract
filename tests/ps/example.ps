@@ -1,0 +1,62 @@
+%!PS-Adobe-1.0
+
+newpath  
+50  50      moveto
+50  300     lineto     % absolute coordinates
+400 300     lineto
+400  50     lineto  
+closepath  
+stroke     
+
+newpath  
+0.5 setgray
+100 100 moveto  
+100   0 rlineto         % relative coordinates 
+0   100 rlineto 
+-100  0 rlineto 
+closepath       
+fill                 
+
+/Times-Roman findfont  
+20 scalefont     
+setfont         
+
+newpath    
+0.0 setgray
+72 72 moveto     
+(How exciting!) show  
+
+gsave
+  200 200 moveto
+  0.5 1 scale       
+  (Narrow Text) show  
+grestore
+
+0 2 360 {   
+    newpath
+    gsave
+      rotate
+      300 300 moveto
+      100 0   rlineto
+      stroke
+    grestore
+} for
+
+gsave   
+/Times-Roman findfont 60 scalefont setfont
+72 72 moveto (Clipping) true charpath 
+clip     
+174 72 translate
+0 2 360 {                 % every 2. degree of 360 degrees
+    newpath
+    gsave
+      rotate               
+      0 0 moveto   
+      300 0 rlineto
+      stroke 
+    grestore
+  } for
+grestore 
+
+
+showpage 

@@ -81,6 +81,14 @@ textract.parsers.pptx_parser module
     :undoc-members:
     :show-inheritance:
 
+textract.parsers.ps_parser module
+---------------------------------
+
+.. automodule:: textract.parsers.ps_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 textract.parsers.txt_parser module
 ----------------------------------
 
