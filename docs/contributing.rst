@@ -40,6 +40,7 @@ Quick start
 
    .. code-block:: bash
 
+        vagrant plugin install iniparse
         vagrant up && vagrant provision
 
    On ``vagrant ssh``\ ing to the virtual machine, note that the
