@@ -83,6 +83,12 @@ projects (feel free to add to the list):
   similar aims as this textract package (including an identical name!
   great minds...). It is written in node.js.
 
+* `pandoc <http://johnmacfarlane.net/pandoc/>`__ is intended to be a
+  document conversion (a much more difficult task!), but it does have
+  `the ability to convert to plain text
+  <http://johnmacfarlane.net/pandoc/demos.html>`__. It is written in
+  Haskell.
+
 
 Contents:
 
