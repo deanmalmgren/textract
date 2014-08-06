@@ -60,7 +60,7 @@ Quick start
    LTS server, just like the virtual machine and the server that runs
    the travis-ci test suite. There are some other tests that have been
    added along the way in the `Travis configuration
-   <https://github.com/deanmalmgren/flo/blob/master/.travis.yml>`__. For your
+   <https://github.com/deanmalmgren/textract/blob/master/.travis.yml>`__. For your
    convenience, you can run all of these tests with:
 
    .. code-block:: bash
@@ -70,7 +70,7 @@ Quick start
    Current build status: |Build Status|
 
 4. Contribute! There are several `open issues
-   <https://github.com/deanmalmgren/flo/issues>`__ that provide good
+   <https://github.com/deanmalmgren/textract/issues>`__ that provide good
    places to dig in. Check out the `contribution guidelines
    <https://github.com/deanmalmgren/flo/blob/master/CONTRIBUTING.md>`__ and send
    pull requests; your help is greatly appreciated!
