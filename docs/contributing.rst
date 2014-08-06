@@ -79,3 +79,28 @@ Quick start
 .. |Build Status| image:: https://travis-ci.org/deanmalmgren/textract.png
    :target: https://travis-ci.org/deanmalmgren/textract
 
+
+Style guidelines
+----------------
+
+As a general rule of thumb, the goal of this package is to be as
+readable as possible to make it easy for novices and experts alike to
+contribute to the source code in meaningful ways. Pull requests that
+favor cleverness or optimization over readability are less likely to be
+incorporated.
+
+To make this notion of "readability" more concrete, here are a few
+stylistic guidelines that we recommend:
+
+-  write functions and methods that can `fit on a screen or two of a
+   standard
+   terminal <https://www.kernel.org/doc/Documentation/CodingStyle>`__
+   --- no more than approximately 40 lines.
+
+-  unless it makes code less readable, adhere to `PEP
+   8 <http://legacy.python.org/dev/peps/pep-0008/>`__ style
+   recommendations --- use an appropriate amount of whitespace.
+
+-  `code comments should be about *what* is being done, not *how* it is
+   being done <https://www.kernel.org/doc/Documentation/CodingStyle>`__
+   --- that should be self-evident from the code itself.
