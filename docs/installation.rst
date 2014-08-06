@@ -22,7 +22,7 @@ package manager before installing textract from pypi.
 
 .. code-block:: bash
 
-    apt-get install python-dev libxml2-dev libxslt1-dev antiword poppler-utils
+    apt-get install python-dev libxml2-dev libxslt1-dev antiword poppler-utils zlib1g-dev
     pip install textract
 
 
