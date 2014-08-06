@@ -15,6 +15,8 @@ latest changes in development
 
 * support for ``.odt`` files (`#29`_ via `@christomitov`_)
 
+* support for ``.ps`` files (`#25`_)
+
 * several bug fixes, including:
 
   * improved fallback handling in ``.pdf`` parser if the ``pdftotext``
@@ -85,6 +87,7 @@ latest changes in development
 .. _#9: https://github.com/deanmalmgren/textract/issues/9
 .. _#13: https://github.com/deanmalmgren/textract/issues/13
 .. _#21: https://github.com/deanmalmgren/textract/issues/21
+.. _#25: https://github.com/deanmalmgren/textract/issues/25
 .. _#26: https://github.com/deanmalmgren/textract/issues/26
 .. _#29: https://github.com/deanmalmgren/textract/issues/29
 
