@@ -76,7 +76,9 @@ validate_example ${BASEDIR}/txt/little_bo_peep.txt 1c5fb4478d84c3b3296746e491895
 validate_example ${BASEDIR}/html/snow-fall.html acc2d8c49094e56474006cab3d3768eb
 validate_example ${BASEDIR}/html/what-we-do.html 1fb0263bf62317365cb30246d9e094be
 validate_example ${BASEDIR}/eml/example.eml cb59a5fad8ed8b849e15d53449b1de3f
+validate_example ${BASEDIR}/ps/example.ps bdd41be3e24d7ded69be1e5732f7c8fc
 validate_example ${BASEDIR}/json/json_is_my_best_friend.json dc0503f1b5a213d67cc08829b12df99e
 validate_example ${BASEDIR}/odt/i_heart_odt.odt f64b15c1acf5cebb1a91896221696da7
+
 # exit with the sum of the status
 exit ${EXIT_CODE}

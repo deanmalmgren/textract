@@ -51,6 +51,8 @@ Currently supporting
 
 * ``.pdf`` via `pdftotext <http://poppler.freedesktop.org/>`__ (default) or `pdfminer <https://euske.github.io/pdfminer/>`__
 
+* ``.ps`` via `ps2text <http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm>`__
+
 * ``.txt`` via python builtins
 
 Please recommend other file types by either mentioning them on the
