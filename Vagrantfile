@@ -1,12 +1,15 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# if there are any problems with these required gems, vagrant
-# apparently has its own ruby environment (which makes sense). To
-# install these gems (iniparse, for example), you need to run
-# something like:
+# If there are any problems with the required gems, vagrant
+# has its own ruby environment. To install the gems (iniparse, 
+# for example), you need to run:
 #
-# [unix]$ vagrant package install iniparse
+# $ vagrant plugin install iniparse
+#
+# For more details, check out: 
+# https://docs.vagrantup.com/v2/cli/plugin.html
+
 require 'iniparse'
 
 Vagrant.configure("2") do |config|

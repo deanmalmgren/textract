@@ -40,6 +40,7 @@ Quick start
 
    .. code-block:: bash
 
+        vagrant plugin install iniparse
         vagrant up && vagrant provision
 
    On ``vagrant ssh``\ ing to the virtual machine, note that the
@@ -60,7 +61,7 @@ Quick start
    LTS server, just like the virtual machine and the server that runs
    the travis-ci test suite. There are some other tests that have been
    added along the way in the `Travis configuration
-   <https://github.com/deanmalmgren/flo/blob/master/.travis.yml>`__. For your
+   <https://github.com/deanmalmgren/textract/blob/master/.travis.yml>`__. For your
    convenience, you can run all of these tests with:
 
    .. code-block:: bash
@@ -70,11 +71,36 @@ Quick start
    Current build status: |Build Status|
 
 4. Contribute! There are several `open issues
-   <https://github.com/deanmalmgren/flo/issues>`__ that provide good
+   <https://github.com/deanmalmgren/textract/issues>`__ that provide good
    places to dig in. Check out the `contribution guidelines
-   <https://github.com/deanmalmgren/flo/blob/master/CONTRIBUTING.md>`__ and send
+   <https://github.com/deanmalmgren/textract/blob/master/CONTRIBUTING.md>`__ and send
    pull requests; your help is greatly appreciated!
 
 .. |Build Status| image:: https://travis-ci.org/deanmalmgren/textract.png
    :target: https://travis-ci.org/deanmalmgren/textract
 
+
+Style guidelines
+----------------
+
+As a general rule of thumb, the goal of this package is to be as
+readable as possible to make it easy for novices and experts alike to
+contribute to the source code in meaningful ways. Pull requests that
+favor cleverness or optimization over readability are less likely to be
+incorporated.
+
+To make this notion of "readability" more concrete, here are a few
+stylistic guidelines that we recommend:
+
+-  write functions and methods that can `fit on a screen or two of a
+   standard
+   terminal <https://www.kernel.org/doc/Documentation/CodingStyle>`__
+   --- no more than approximately 40 lines.
+
+-  unless it makes code less readable, adhere to `PEP
+   8 <http://legacy.python.org/dev/peps/pep-0008/>`__ style
+   recommendations --- use an appropriate amount of whitespace.
+
+-  `code comments should be about *what* is being done, not *how* it is
+   being done <https://www.kernel.org/doc/Documentation/CodingStyle>`__
+   --- that should be self-evident from the code itself.
