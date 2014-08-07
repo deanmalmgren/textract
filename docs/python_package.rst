@@ -41,10 +41,26 @@ textract.parsers.eml_parser module
     :undoc-members:
     :show-inheritance:
 
+textract.parsers.gif_parser module
+----------------------------------
+
+.. automodule:: textract.parsers.gif_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 textract.parsers.html_parser module
 -----------------------------------
 
 .. automodule:: textract.parsers.html_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+textract.parsers.jpg_parser module
+----------------------------------
+
+.. automodule:: textract.parsers.jpg_parser
     :members:
     :undoc-members:
     :show-inheritance:
@@ -73,6 +89,14 @@ textract.parsers.pdf_parser module
     :undoc-members:
     :show-inheritance:
 
+textract.parsers.png_parser module
+----------------------------------
+
+.. automodule:: textract.parsers.png_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 textract.parsers.pptx_parser module
 -----------------------------------
 
@@ -85,6 +109,14 @@ textract.parsers.ps_parser module
 ---------------------------------
 
 .. automodule:: textract.parsers.ps_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+textract.parsers.tesseract module
+---------------------------------
+
+.. automodule:: textract.parsers.tesseract
     :members:
     :undoc-members:
     :show-inheritance:

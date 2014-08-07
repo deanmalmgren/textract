@@ -17,6 +17,9 @@ latest changes in development
 
 * support for ``.ps`` files (`#25`_)
 
+* support for ``.gif``, ``.jpg``, ``.jpeg``, and ``.png`` files
+  (`#30`_ via `@christomitov`_)
+
 * several bug fixes, including:
 
   * improved fallback handling in ``.pdf`` parser if the ``pdftotext``
@@ -90,4 +93,5 @@ latest changes in development
 .. _#25: https://github.com/deanmalmgren/textract/issues/25
 .. _#26: https://github.com/deanmalmgren/textract/issues/26
 .. _#29: https://github.com/deanmalmgren/textract/issues/29
+.. _#30: https://github.com/deanmalmgren/textract/issues/30
 

@@ -35,29 +35,45 @@ or the :ref:`python package <python-package>`
 Currently supporting
 --------------------
 
-* ``.doc`` via `antiword <http://www.winfield.demon.nl/>`__
+* ``.doc`` via `antiword`_
 
-* ``.docx`` via `python-docx <https://python-docx.readthedocs.org/en/latest/>`__
+* ``.docx`` via `python-docx`_
 
 * ``.eml`` via python builtins
 
+* ``.gif`` via `tesseract-ocr`_
+
+* ``.jpg`` and ``.jpeg`` via `tesseract-ocr`_
+
 * ``.json`` via python builtins
 
-* ``.html`` via `beautifulsoup4 <http://beautiful-soup-4.readthedocs.org/en/latest/>`__
+* ``.html`` via `beautifulsoup4`_
 
 * ``.odt`` via python builtins
 
-* ``.pptx`` via `python-pptx <https://python-pptx.readthedocs.org/en/latest/>`__
+* ``.pptx`` via `python-pptx`_
 
-* ``.pdf`` via `pdftotext <http://poppler.freedesktop.org/>`__ (default) or `pdfminer <https://euske.github.io/pdfminer/>`__
+* ``.pdf`` via `pdftotext`_ (default) or `pdfminer`_
 
-* ``.ps`` via `ps2text <http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm>`__
+* ``.png`` via `tesseract-ocr`_
+
+* ``.ps`` via `ps2text`_
 
 * ``.txt`` via python builtins
 
 Please recommend other file types by either mentioning them on the
 `issue tracker <https://github.com/deanmalmgren/textract/issues>`__ or
 by :ref:`contributing <contributing>`
+
+.. this is a list of all the packages that textract uses for extraction
+.. _tesseract-ocr: https://code.google.com/p/tesseract-ocr/
+.. _python-docx: https://python-docx.readthedocs.org/en/latest/
+.. _antiword: http://www.winfield.demon.nl/
+.. _beautifulsoup4: http://beautiful-soup-4.readthedocs.org/en/latest/
+.. _python-pptx: https://python-pptx.readthedocs.org/en/latest/
+.. _pdftotext: http://poppler.freedesktop.org/
+.. _pdfminer: https://euske.github.io/pdfminer/
+.. _ps2text: http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm
 
 
 .. _related-projects:
