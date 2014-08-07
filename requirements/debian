@@ -12,3 +12,6 @@ tesseract-ocr
 
 # parse pdfs
 poppler-utils
+
+# parse postscript files
+pstotext
