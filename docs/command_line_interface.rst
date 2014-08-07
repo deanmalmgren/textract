@@ -15,9 +15,7 @@ on any :ref:`supported file type <supporting>`. Full documentation for
 the command line interface is available with the ``-h/--help`` command
 line option:
 
-.. code-block:: bash
-
-    textract -h
+.. command-output:: textract -h
 
 To make the command line interface as usable as possible,
 autocompletion of available options with textract is enabled by

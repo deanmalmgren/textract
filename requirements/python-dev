@@ -5,3 +5,4 @@ pep8
 # for documentation
 sphinx
 sphinx_rtd_theme
+sphinxcontrib-programoutput
