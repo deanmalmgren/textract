@@ -9,7 +9,10 @@ track version numbers, where backwards incompatible changes
 latest changes in development
 -----------------------------
 
-.. [will add changes here as they are made]
+[will add changes here as they are made]
+
+0.5.0
+-----
 
 * support for ``.json`` files (`#13`_ via `@anthonygarvan`_)
 
