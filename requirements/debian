@@ -7,6 +7,9 @@ libxslt1-dev
 # parse word documents
 antiword
 
+# parse image files
+tesseract-ocr
+
 # parse pdfs
 poppler-utils
 
