@@ -3,6 +3,11 @@ import importlib
 
 from .. import exceptions
 
+# Dictionary structure for synonymous file extension types
+EXTENSION_SYNONYMS = {
+    ".jpeg": ".jpg"
+}
+
 
 def process(filename, **kwargs):
     """This is the core function used for parsing. It routes the filename
@@ -19,10 +24,14 @@ def process(filename, **kwargs):
     root, ext = os.path.splitext(filename)
     ext = ext.lower()
 
+    # check the EXTENSION_SYNONYMS dictionary
+    ext = EXTENSION_SYNONYMS.get(ext, ext)
+
     # to avoid conflicts with packages that are installed globally
     # (e.g. python's json module), all extension parser modules have
     # the _parser extension
     module = ext + '_parser'
+
     try:
         filetype_module = importlib.import_module(module, 'textract.parsers')
     except ImportError, e:

@@ -78,5 +78,8 @@ validate_example ${BASEDIR}/html/what-we-do.html 1fb0263bf62317365cb30246d9e094b
 validate_example ${BASEDIR}/eml/example.eml cb59a5fad8ed8b849e15d53449b1de3f
 validate_example ${BASEDIR}/json/json_is_my_best_friend.json dc0503f1b5a213d67cc08829b12df99e
 validate_example ${BASEDIR}/odt/i_heart_odt.odt f64b15c1acf5cebb1a91896221696da7
+validate_example ${BASEDIR}/jpg/i_heart_jpegs.jpg 74b5fcffef2aa3e284dccc0cca577d47
+validate_example ${BASEDIR}/gif/i_heart_gifs.gif 0b37ec3f7b0f13d5897b93ef079a97c7
+validate_example ${BASEDIR}/png/i_heart_pngs.png 302242ffea5998b8456f596d35fc8150
 # exit with the sum of the status
 exit ${EXIT_CODE}
