@@ -1,3 +1,7 @@
+# install everything in the python requirements too. this may be
+# needed by readthedocs?!?!
+-r python
+
 # needed for tests/run.py script to read .travis.yml file
 PyYAML
 pep8
