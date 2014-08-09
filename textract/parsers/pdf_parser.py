@@ -26,11 +26,11 @@ def extract(filename, method='', **kwargs):
 
 def extract_pdftotext(filename):
     """Extract text from pdfs using the pdftotext command line utility."""
-    pipe = run('pdftotext %(filename)s -' % locals())
-    return pipe.stdout.read()
+    stdout, stderr = run('pdftotext %(filename)s -' % locals())
+    return stdout
 
 
 def extract_pdfminer(filename):
     """Extract text from pdfs using pdfminer."""
-    pipe = run('pdf2txt.py %(filename)s' % locals())
-    return pipe.stdout.read()
+    stdout, stderr = run('pdf2txt.py %(filename)s' % locals())
+    return stdout

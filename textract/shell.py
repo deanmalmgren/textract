@@ -11,10 +11,13 @@ def run(command):
         command, shell=True,
         stdout=subprocess.PIPE, stderr=subprocess.PIPE,
     )
-    pipe.wait()
+
+    # pipe.wait() ends up hanging on large files. using
+    # pipe.communicate appears to avoid this issue
+    stdout, stderr = pipe.communicate()
 
     # if pipe is busted, raise an error (unlike Fabric)
     if pipe.returncode != 0:
         raise exceptions.ShellError(command, pipe.returncode)
 
-    return pipe
+    return stdout, stderr

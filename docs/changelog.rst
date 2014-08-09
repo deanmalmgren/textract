@@ -11,6 +11,12 @@ latest changes in development
 
 [will add changes here as they are made]
 
+* several bug fixes, including:
+
+  * documentation fixes
+
+  * shell commands hanging on large files (`#33`_)
+
 0.5.0
 -----
 
