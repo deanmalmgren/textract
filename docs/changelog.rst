@@ -14,7 +14,7 @@ latest changes in development
 0.6.0
 -----
 
-* support for ``.epub`` files (`#40`_ via `@kokxx`)
+* support for ``.epub`` files (`#40`_ via `@kokxx`_)
 
 0.5.1
 -----
@@ -112,4 +112,6 @@ latest changes in development
 .. _#26: https://github.com/deanmalmgren/textract/issues/26
 .. _#29: https://github.com/deanmalmgren/textract/issues/29
 .. _#30: https://github.com/deanmalmgren/textract/issues/30
+.. _#33: https://github.com/deanmalmgren/textract/issues/33
+.. _#40: https://github.com/deanmalmgren/textract/issues/40
 
