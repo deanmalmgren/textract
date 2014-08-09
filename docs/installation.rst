@@ -8,7 +8,7 @@ start using textract (meaning that installation should be as quick and
 painless as possible). This package is built on top of several python
 packages and other source libraries. Assuming you are using ``pip`` or
 ``easy_install`` to install textract, the `python packages
-<https://github.com/deanmalmgren/textract/blob/master/requirements/python>`__
+<https://github.com/deanmalmgren/textract/blob/master/requirements/python>`_
 are all installed by default with textract. The source libraries are a
 separate matter though and largely depend on your operating system.
 
@@ -17,7 +17,7 @@ Ubuntu / Debian
 
 There are two steps required to run this package on
 Ubuntu/Debian. First you must install some system packages using the
-`apt-get <https://help.ubuntu.com/12.04/serverguide/apt-get.html>`__
+`apt-get <https://help.ubuntu.com/12.04/serverguide/apt-get.html>`_
 package manager before installing textract from pypi.
 
 .. code-block:: bash
@@ -30,9 +30,9 @@ OSX
 ---
 
 These steps rely on you having `homebrew <http://brew.sh/>`_ installed
-as well as the `cask <http://caskroom.io/>`__ plugin (``brew install
+as well as the `cask <http://caskroom.io/>`_ plugin (``brew install
 caskroom/cask/brew-cask``). The basic idea is to first install
-`XQuartz <https://xquartz.macosforge.org/landing/>`__ before
+`XQuartz <https://xquartz.macosforge.org/landing/>`_ before
 installing a bunch of system packages before installing textract from
 pypi.
 
@@ -47,8 +47,9 @@ pypi.
 
 .. note::
 
-    ps2text is not currently a part of homebrew so ``.ps`` extraction
-    must be enabled by manually installing from source.
+    `pstotext <http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm>`_ is
+    not currently a part of homebrew so ``.ps`` extraction must be
+    enabled by manually installing from source.
 
 .. note::
 
@@ -73,31 +74,31 @@ documenation about how to install the textract dependencies, please
    install the following libraries before running ``pip install
    textract``:
 
-    - `libxml2 2.6.21 or later <http://xmlsoft.org/downloads.html>`__
+    - `libxml2 2.6.21 or later <http://xmlsoft.org/downloads.html>`_
       is required by the ``.docx`` parser which uses `lxml
-      <http://lxml.de/installation.html#requirements>`__ via
+      <http://lxml.de/installation.html#requirements>`_ via
       python-docx.
 
     - `libxslt 1.1.15 or later
-      <http://xmlsoft.org/XSLT/downloads.html>`__ is required by the
+      <http://xmlsoft.org/XSLT/downloads.html>`_ is required by the
       ``.docx`` parser which users `lxml
-      <http://lxml.de/installation.html#requirements>`__ via
+      <http://lxml.de/installation.html#requirements>`_ via
       python-docx.
 
     - python header files are required for building lxml.
 
-    - `antiword <http://www.winfield.demon.nl/>`__ is required by the
+    - `antiword <http://www.winfield.demon.nl/>`_ is required by the
       ``.doc`` parser.
 
-    - `pdftotext <http://poppler.freedesktop.org/>`__ is *optionally*
+    - `pdftotext <http://poppler.freedesktop.org/>`_ is *optionally*
       required by the ``.pdf`` parser (there is a pure python fallback
       that works if pdftotext isn't installed).
 
-    - `pstotext <http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm>`__
+    - `pstotext <http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm>`_
       is required by the ``.ps`` parser.
 
 2. Add a requirements file to the `requirements directory
-   <https://github.com/deanmalmgren/textract/tree/master/requirements>`__
+   <https://github.com/deanmalmgren/textract/tree/master/requirements>`_
    of the project with the lower-cased name of your operating system
    (e.g. ``requirements/windows``) so we can try to keep these things
    up to date in the future.

@@ -27,15 +27,15 @@ statement etc, please fix it!
 Quick start
 -----------
 
-1. `Fork <https://github.com/deanmalmgren/textract/fork>`__ and clone the
+1. `Fork <https://github.com/deanmalmgren/textract/fork>`_ and clone the
    project:
 
    .. code-block:: bash
 
         git clone https://github.com/YOUR-USERNAME/textract.git
 
-2. Install `Vagrant <http://vagrantup.com/downloads>`__ and
-   `Virtualbox <https://www.virtualbox.org/wiki/Downloads>`__ and launch
+2. Install `Vagrant <http://vagrantup.com/downloads>`_ and
+   `Virtualbox <https://www.virtualbox.org/wiki/Downloads>`_ and launch
    the development virtual machine:
 
    .. code-block:: bash
@@ -46,7 +46,7 @@ Quick start
    On ``vagrant ssh``\ ing to the virtual machine, note that the
    ``PYTHONPATH`` and ``PATH`` `environment variables have been
    altered in this virtual machine
-   <https://github.com/deanmalmgren/textract/blob/master/provision/development.sh>`__
+   <https://github.com/deanmalmgren/textract/blob/master/provision/development.sh>`_
    so that any changes you make to textract in development are
    automatically incorporated into the command.
 
@@ -61,7 +61,7 @@ Quick start
    LTS server, just like the virtual machine and the server that runs
    the travis-ci test suite. There are some other tests that have been
    added along the way in the `Travis configuration
-   <https://github.com/deanmalmgren/textract/blob/master/.travis.yml>`__. For your
+   <https://github.com/deanmalmgren/textract/blob/master/.travis.yml>`_. For your
    convenience, you can run all of these tests with:
 
    .. code-block:: bash
@@ -71,9 +71,9 @@ Quick start
    Current build status: |Build Status|
 
 4. Contribute! There are several `open issues
-   <https://github.com/deanmalmgren/textract/issues>`__ that provide good
+   <https://github.com/deanmalmgren/textract/issues>`_ that provide good
    places to dig in. Check out the `contribution guidelines
-   <https://github.com/deanmalmgren/textract/blob/master/CONTRIBUTING.md>`__ and send
+   <https://github.com/deanmalmgren/textract/blob/master/CONTRIBUTING.md>`_ and send
    pull requests; your help is greatly appreciated!
 
 .. |Build Status| image:: https://travis-ci.org/deanmalmgren/textract.png
@@ -94,13 +94,13 @@ stylistic guidelines that we recommend:
 
 -  write functions and methods that can `fit on a screen or two of a
    standard
-   terminal <https://www.kernel.org/doc/Documentation/CodingStyle>`__
+   terminal <https://www.kernel.org/doc/Documentation/CodingStyle>`_
    --- no more than approximately 40 lines.
 
 -  unless it makes code less readable, adhere to `PEP
-   8 <http://legacy.python.org/dev/peps/pep-0008/>`__ style
+   8 <http://legacy.python.org/dev/peps/pep-0008/>`_ style
    recommendations --- use an appropriate amount of whitespace.
 
 -  `code comments should be about *what* is being done, not *how* it is
-   being done <https://www.kernel.org/doc/Documentation/CodingStyle>`__
+   being done <https://www.kernel.org/doc/Documentation/CodingStyle>`_
    --- that should be self-evident from the code itself.

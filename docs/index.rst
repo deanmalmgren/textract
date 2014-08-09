@@ -62,7 +62,7 @@ Currently supporting
 * ``.txt`` via python builtins
 
 Please recommend other file types by either mentioning them on the
-`issue tracker <https://github.com/deanmalmgren/textract/issues>`__ or
+`issue tracker <https://github.com/deanmalmgren/textract/issues>`_ or
 by :ref:`contributing <contributing>`
 
 .. this is a list of all the packages that textract uses for extraction
@@ -89,20 +89,20 @@ community) and is method agnostic about how content is extracted (more
 on this :ref:`here <contributing>`). Here is a small sample of similar
 projects (feel free to add to the list):
 
-* `Apache Tika <http://tika.apache.org/>`__ has `very similar, if not
+* `Apache Tika <http://tika.apache.org/>`_ has `very similar, if not
   identical, aims as textract
-  <https://github.com/deanmalmgren/textract/issues/12>`__. It has
+  <https://github.com/deanmalmgren/textract/issues/12>`_. It has
   impressive coverage of a wide range of file formats and is written
   in java.
 
-* `textract (node.js) <https://github.com/dbashford/textract>`__ has
+* `textract (node.js) <https://github.com/dbashford/textract>`_ has
   similar aims as this textract package (including an identical name!
   great minds...). It is written in node.js.
 
-* `pandoc <http://johnmacfarlane.net/pandoc/>`__ is intended to be a
+* `pandoc <http://johnmacfarlane.net/pandoc/>`_ is intended to be a
   document conversion (a much more difficult task!), but it does have
   `the ability to convert to plain text
-  <http://johnmacfarlane.net/pandoc/demos.html>`__. It is written in
+  <http://johnmacfarlane.net/pandoc/demos.html>`_. It is written in
   Haskell.
 
 
