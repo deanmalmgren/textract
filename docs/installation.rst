@@ -22,23 +22,28 @@ package manager before installing textract from pypi.
 
 .. code-block:: bash
 
-    apt-get install python-dev libxml2-dev libxslt1-dev antiword poppler-utils pstotext
+    apt-get install python-dev libxml2-dev libxslt1-dev antiword poppler-utils pstotext tesseract-ocr
     pip install textract
 
 
 OSX
 ---
 
-There are three steps required to run this package on OSX
-systems. First you must install some system packages using `homebrew
-<http://brew.sh/>`__ (or similar) package manager before linking the
-source code with homebrew and installing textract from pypi.
+These steps rely on you having `homebrew <http://brew.sh/>`_ installed
+as well as the `cask <http://caskroom.io/>`__ plugin (``brew install
+caskroom/cask/brew-cask``). The basic idea is to first install
+`XQuartz <https://xquartz.macosforge.org/landing/>`__ before
+installing a bunch of system packages before installing textract from
+pypi.
 
 .. code-block:: bash
 
-    brew install libxml2 libxslt antiword poppler
-    brew link libxml2 libxslt
+    brew cask install xquartz
+    brew install poppler antiword tesseract
     pip install textract
+
+..     brew install libxml2 libxslt antiword poppler tesseract
+..     brew link libxml2 libxslt
 
 .. note::
 
