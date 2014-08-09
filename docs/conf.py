@@ -35,6 +35,10 @@ os.environ['PATH'] = ':'.join((
 sys.path.append(
     '/var/build/user_builds/textract/envs/latest/lib/python2.7/site-packages'
 )
+os.environ['PYTHONPATH'] = ':'.join((
+    '/var/build/user_builds/textract/envs/latest/lib/python2.7/site-packages',
+    os.environ['PYTHONPATH'],
+))
 
 # -- General configuration ------------------------------------------------
 
