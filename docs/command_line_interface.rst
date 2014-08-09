@@ -3,17 +3,8 @@
 Command line interface
 ======================
 
-This package ships with the ``textract`` command, which embodies the
-entire command line interface for this package. This command can be
-run on any supported file by simply running
-
-.. code-block:: bash
-
-    textract path/to/some/file.extension
-
-on any :ref:`supported file type <supporting>`. Full documentation for
-the command line interface is available with the ``-h/--help`` command
-line option:
+textract
+--------
 
 .. argparse::
    :module: textract.cli
