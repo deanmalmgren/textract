@@ -11,6 +11,9 @@ latest changes in development
 
 [will add changes here as they are made]
 
+0.5.1
+-----
+
 * several bug fixes, including:
 
   * documentation fixes
