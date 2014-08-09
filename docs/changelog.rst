@@ -11,6 +11,11 @@ latest changes in development
 
 [will add changes here as they are made]
 
+0.6.0
+-----
+
+* support for ``.epub`` files (`#40`_ via `@kokxx`)
+
 0.5.1
 -----
 
@@ -88,6 +93,7 @@ latest changes in development
 
 .. _@anthonygarvan: https://github.com/anthonygarvan
 .. _@christomitov: https://github.com/christomitov
+.. _@kokxx: https://github.com/Kokxx
 
 
 .. list of issues that have been resolved. putting links here to make
