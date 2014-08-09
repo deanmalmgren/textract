@@ -29,6 +29,13 @@ os.environ['PATH'] = ':'.join((
     os.environ['PATH'],
 ))
 
+# manipulate sys.path to correctly point to the virtualenv that is
+# used on readthedocs (this is irrelevant in the development
+# environment)
+sys.path.append(
+    '/var/build/user_builds/textract/envs/latest/lib/python2.7/site-packages'
+)
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
