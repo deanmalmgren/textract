@@ -22,26 +22,12 @@ project_root = os.path.abspath(os.path.join(os.path.abspath('.'), '..'))
 sys.path.insert(0, project_root)
 import textract
 
-def insert_in_environ_list(VARIABLE, value):
-    if os.environ.get(VARIABLE):
-        os.environ[VARIABLE] = ':'.join((value, os.environ[VARIABLE]))
-    else:
-        os.environ[VARIABLE] = value
-
 # manipulate the python path to properly display the output of
 # textract -h in the command line documentation
-insert_in_environ_list('PATH', os.path.join(project_root, 'bin'))
-
-# manipulate sys.path to correctly point to the virtualenv that is
-# used on readthedocs (this is irrelevant in the development
-# environment)
-sys.path.append(
-    '/var/build/user_builds/textract/envs/latest/lib/python2.7/site-packages'
-)
-insert_in_environ_list(
-    'PYTHONPATH', 
-    '/var/build/user_builds/textract/envs/latest/lib/python2.7/site-packages',
-)
+os.environ['PATH'] = ':'.join((
+    os.path.join(project_root, 'bin'),
+    os.environ['PATH']
+))
 
 # -- General configuration ------------------------------------------------
 

@@ -5,7 +5,10 @@
 import sys
 import argparse
 
-import argcomplete
+try:
+    import argcomplete
+except ImportError:
+    pass
 
 from textract import VERSION
 from textract import process
