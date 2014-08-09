@@ -5,40 +5,16 @@
 import sys
 import argparse
 
-try:
-    import argcomplete
-except ImportError:
-    pass
+import argcomplete
 
-from textract import VERSION
+from textract.cli import get_parser
 from textract import process
-from textract.colors import red
 from textract.exceptions import CommandLineError
+from textract.colors import red
 
-
-# command line options here
-parser = argparse.ArgumentParser(
-    description='Command line tool for extracting text from any document'
-)
-parser.add_argument(
-    'filename', help='Filename to extract text.',
-).completer = argcomplete.completers.FilesCompleter
-parser.add_argument(
-    '-o', '--output', type=argparse.FileType('w'), default='-',
-    help='output raw text in this file',
-)
-parser.add_argument(
-    '-m', '--method', default='',
-    help='specify a method of extraction for formats that support it',
-)
-parser.add_argument(
-    '-v', '--version', action='version', version='%(prog)s '+VERSION,
-)
-
-# enable autocompletion with argcomplete
-argcomplete.autocomplete(parser)
 
 # extract text
+parser = get_parser()
 args = parser.parse_args()
 try:
     output = process(**vars(args))

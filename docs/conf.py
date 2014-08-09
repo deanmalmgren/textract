@@ -22,26 +22,6 @@ project_root = os.path.abspath(os.path.join(os.path.abspath('.'), '..'))
 sys.path.insert(0, project_root)
 import textract
 
-def insert_in_environ_list(VARIABLE, *values):
-    for value in values:
-        if os.environ.get(VARIABLE):
-            os.environ[VARIABLE] = ':'.join((value, os.environ[VARIABLE]))
-        else:
-            os.environ[VARIABLE] = value
-
-# manipulate the python path to properly display the output of
-# textract -h in the command line documentation
-insert_in_environ_list('PATH', os.path.join(project_root, 'bin'))
-
-# manipulate PYTHONPATH to correctly point to the virtualenv that is
-# used on readthedocs (this is irrelevant in the development
-# environment)
-insert_in_environ_list(
-    'PYTHONPATH',
-    project_root,
-    '/var/build/user_builds/textract/envs/latest/lib/python2.7/site-packages',
-)
-
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -54,7 +34,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
-    'sphinxcontrib.programoutput',
+    'sphinxarg.ext',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

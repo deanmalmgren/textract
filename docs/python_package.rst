@@ -131,6 +131,14 @@ textract.parsers.txt_parser module
 
 
 
+textract.cli module
+-------------------
+
+.. automodule:: textract.cli
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 textract.exceptions module
 --------------------------
 
