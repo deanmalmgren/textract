@@ -79,9 +79,9 @@ validate_example ${BASEDIR}/eml/example.eml cb59a5fad8ed8b849e15d53449b1de3f
 validate_example ${BASEDIR}/ps/example.ps bdd41be3e24d7ded69be1e5732f7c8fc
 validate_example ${BASEDIR}/json/json_is_my_best_friend.json dc0503f1b5a213d67cc08829b12df99e
 validate_example ${BASEDIR}/odt/i_heart_odt.odt f64b15c1acf5cebb1a91896221696da7
-validate_example ${BASEDIR}/jpg/i_heart_jpegs.jpg d41d8cd98f00b204e9800998ecf8427e
-validate_example ${BASEDIR}/gif/i_heart_gifs.gif d41d8cd98f00b204e9800998ecf8427e
-validate_example ${BASEDIR}/png/i_heart_pngs.png d41d8cd98f00b204e9800998ecf8427e
+validate_example ${BASEDIR}/jpg/i_heart_jpegs.jpg 3b33418991e825a180884844a507aeda
+validate_example ${BASEDIR}/gif/i_heart_gifs.gif 21c30eaf72d8756802e4f5f2ba20961d
+validate_example ${BASEDIR}/png/i_heart_pngs.png 283f78843ca4059a6aa9a3e401917b2d
 validate_example ${BASEDIR}/epub/testing_epub.epub 5df5b58494e4eb5dc298306611d0d3d1
 
 # exit with the sum of the status
