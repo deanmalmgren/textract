@@ -1,5 +1,6 @@
 import pptx
 
+
 def extract(filename, **kwargs):
     """Extract text from pptx file using python-pptx
     """

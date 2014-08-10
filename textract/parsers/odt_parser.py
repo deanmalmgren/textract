@@ -2,6 +2,7 @@ import zipfile
 import xml.dom.minidom
 import StringIO
 
+
 def extract(filename, **kwargs):
     """Extract text from open document files.
     """

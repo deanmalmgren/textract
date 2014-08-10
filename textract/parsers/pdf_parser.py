@@ -1,6 +1,7 @@
 from ..shell import run
 from ..exceptions import UnknownMethod, ShellError
 
+
 def extract(filename, method='', **kwargs):
     """Extract text from pdf files using ``method``.
     """
@@ -21,10 +22,12 @@ def extract(filename, method='', **kwargs):
     else:
         raise UnknownMethod(method)
 
+
 def extract_pdftotext(filename):
     """Extract text from pdfs using the pdftotext command line utility."""
     stdout, _ = run('pdftotext %(filename)s -' % locals())
     return stdout
+
 
 def extract_pdfminer(filename):
     """Extract text from pdfs using pdfminer."""

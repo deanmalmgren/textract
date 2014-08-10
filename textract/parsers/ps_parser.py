@@ -1,5 +1,6 @@
 from ..shell import run
 
+
 def extract(filename, **kwargs):
     """Extract text from postscript files using pstotext command.
     """
