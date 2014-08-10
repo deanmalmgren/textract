@@ -11,6 +11,9 @@ latest changes in development
 
 [will add changes here as they are made]
 
+* support for ``.epub`` files (`#40`_ via `@kokxx`_)
+
+
 0.5.1
 -----
 
@@ -19,6 +22,7 @@ latest changes in development
   * documentation fixes
 
   * shell commands hanging on large files (`#33`_)
+
 
 0.5.0
 -----
@@ -64,6 +68,7 @@ latest changes in development
 * fixed installation bug with not properly including requirements
   files in the manifest
 
+
 0.2.0
 -----
 
@@ -77,6 +82,7 @@ latest changes in development
 
   * fixing tests to make sure the work properly on travis-ci
 
+
 0.1.0
 -----
 
@@ -88,6 +94,7 @@ latest changes in development
 
 .. _@anthonygarvan: https://github.com/anthonygarvan
 .. _@christomitov: https://github.com/christomitov
+.. _@kokxx: https://github.com/Kokxx
 
 
 .. list of issues that have been resolved. putting links here to make
@@ -106,4 +113,6 @@ latest changes in development
 .. _#26: https://github.com/deanmalmgren/textract/issues/26
 .. _#29: https://github.com/deanmalmgren/textract/issues/29
 .. _#30: https://github.com/deanmalmgren/textract/issues/30
+.. _#33: https://github.com/deanmalmgren/textract/issues/33
+.. _#40: https://github.com/deanmalmgren/textract/issues/40
 

@@ -82,6 +82,7 @@ validate_example ${BASEDIR}/odt/i_heart_odt.odt f64b15c1acf5cebb1a91896221696da7
 validate_example ${BASEDIR}/jpg/i_heart_jpegs.jpg d41d8cd98f00b204e9800998ecf8427e
 validate_example ${BASEDIR}/gif/i_heart_gifs.gif d41d8cd98f00b204e9800998ecf8427e
 validate_example ${BASEDIR}/png/i_heart_pngs.png d41d8cd98f00b204e9800998ecf8427e
+validate_example ${BASEDIR}/epub/testing_epub.epub 5df5b58494e4eb5dc298306611d0d3d1
 
 # exit with the sum of the status
 exit ${EXIT_CODE}

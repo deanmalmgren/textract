@@ -30,11 +30,15 @@ def process(filename, **kwargs):
     # to avoid conflicts with packages that are installed globally
     # (e.g. python's json module), all extension parser modules have
     # the _parser extension
-    module = ext + '_parser'
+    rel_module = ext + '_parser'
+    module_name = rel_module[1:]
 
-    try:
-        filetype_module = importlib.import_module(module, 'textract.parsers')
-    except ImportError, e:
+    # if this module name doesn't exist in this directory it isn't
+    # currently supported
+    this_dir = os.path.dirname(os.path.abspath(__file__))
+    if not os.path.exists(os.path.join(this_dir, module_name + '.py')):
         raise exceptions.ExtensionNotSupported(ext)
 
+    # do the extraction
+    filetype_module = importlib.import_module(rel_module, 'textract.parsers')
     return filetype_module.extract(filename, **kwargs)

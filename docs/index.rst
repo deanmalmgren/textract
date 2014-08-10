@@ -41,6 +41,8 @@ Currently supporting
 
 * ``.eml`` via python builtins
 
+* ``.epub`` via `ebooklib`_
+
 * ``.gif`` via `tesseract-ocr`_
 
 * ``.jpg`` and ``.jpeg`` via `tesseract-ocr`_
@@ -74,7 +76,7 @@ by :ref:`contributing <contributing>`
 .. _pdftotext: http://poppler.freedesktop.org/
 .. _pdfminer: https://euske.github.io/pdfminer/
 .. _ps2text: http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm
-
+.. _ebooklib: https://github.com/aerkalov/ebooklib
 
 .. _related-projects:
 
