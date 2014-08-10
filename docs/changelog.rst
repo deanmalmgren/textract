@@ -13,6 +13,11 @@ latest changes in development
 
 * support for ``.epub`` files (`#40`_ via `@kokxx`_)
 
+* several bug fixes, including:
+
+  * concurrancy problems with tesseract (`#44`_ by `@ShawnMilo`_,
+    `#41`_ by `@christomitov`_)
+
 
 0.5.1
 -----
@@ -27,14 +32,14 @@ latest changes in development
 0.5.0
 -----
 
-* support for ``.json`` files (`#13`_ via `@anthonygarvan`_)
+* support for ``.json`` files (`#13`_ by `@anthonygarvan`_)
 
-* support for ``.odt`` files (`#29`_ via `@christomitov`_)
+* support for ``.odt`` files (`#29`_ by `@christomitov`_)
 
 * support for ``.ps`` files (`#25`_)
 
 * support for ``.gif``, ``.jpg``, ``.jpeg``, and ``.png`` files
-  (`#30`_ via `@christomitov`_)
+  (`#30`_ by `@christomitov`_)
 
 * several bug fixes, including:
 
@@ -95,6 +100,7 @@ latest changes in development
 .. _@anthonygarvan: https://github.com/anthonygarvan
 .. _@christomitov: https://github.com/christomitov
 .. _@kokxx: https://github.com/Kokxx
+.. _@ShawnMilo: https://github.com/ShawnMilo
 
 
 .. list of issues that have been resolved. putting links here to make
@@ -115,4 +121,6 @@ latest changes in development
 .. _#30: https://github.com/deanmalmgren/textract/issues/30
 .. _#33: https://github.com/deanmalmgren/textract/issues/33
 .. _#40: https://github.com/deanmalmgren/textract/issues/40
+.. _#41: https://github.com/deanmalmgren/textract/issues/41
+.. _#44: https://github.com/deanmalmgren/textract/issues/44
 
