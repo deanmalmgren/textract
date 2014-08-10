@@ -1,38 +1,37 @@
-
-import sys
 import zipfile
 import xml.dom.minidom
 import StringIO
 
-
 def extract(filename, **kwargs):
     """Extract text from open document files.
     """
-    s = StringIO.StringIO(file(filename).read())
-    odt = OpenDocumentTextFile(s)
-    return odt.toString().encode('ascii', 'replace')
+    obj = StringIO.StringIO(file(filename).read())
+    odt = OpenDocumentTextFile(obj)
+    return odt.to_string().encode('ascii', 'replace')
 
 
-class OpenDocumentTextFile:
-    # inspiration from
-    # https://github.com/odoo/odoo/blob/master/addons/document/odt2txt.py
+class OpenDocumentTextFile(object):
+    """
+    Inspiration from
+    https://github.com/odoo/odoo/blob/master/addons/document/odt2txt.py
+    """
     def __init__(self, filepath):
-        zip = zipfile.ZipFile(filepath)
-        self.content = xml.dom.minidom.parseString(zip.read("content.xml"))
+        obj = zipfile.ZipFile(filepath)
+        self.content = xml.dom.minidom.parseString(obj.read("content.xml"))
 
-    def toString(self):
+    def to_string(self):
         """ Converts the document to a string. """
-        buffer = u""
+        buff = u""
         for val in ["text:p", "text:h", "text:list"]:
             for paragraph in self.content.getElementsByTagName(val):
-                buffer += self.textToString(paragraph) + "\n"
-        return buffer
+                buff += self.text_to_string(paragraph) + "\n"
+        return buff
 
-    def textToString(self, element):
-        buffer = u""
+    def text_to_string(self, element):
+        buff = u""
         for node in element.childNodes:
             if node.nodeType == xml.dom.Node.TEXT_NODE:
-                buffer += node.nodeValue
+                buff += node.nodeValue
             elif node.nodeType == xml.dom.Node.ELEMENT_NODE:
-                buffer += self.textToString(node)
-        return buffer
+                buff += self.text_to_string(node)
+        return buff

@@ -1,3 +1,7 @@
+"""
+Use argparse to handle command-line arguments.
+"""
+
 import argparse
 
 import argcomplete

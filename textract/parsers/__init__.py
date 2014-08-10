@@ -1,3 +1,7 @@
+"""
+Route the request to the appropriate parser based on file type.
+"""
+
 import os
 import importlib
 
@@ -21,7 +25,7 @@ def process(filename, **kwargs):
     # get the filename extension, which is something like .docx for
     # example, and import the module dynamically using importlib. This
     # is a relative import so the name of the package is necessary
-    root, ext = os.path.splitext(filename)
+    _, ext = os.path.splitext(filename)
     ext = ext.lower()
 
     # check the EXTENSION_SYNONYMS dictionary
@@ -34,7 +38,7 @@ def process(filename, **kwargs):
 
     try:
         filetype_module = importlib.import_module(module, 'textract.parsers')
-    except ImportError, e:
+    except ImportError:
         raise exceptions.ExtensionNotSupported(ext)
 
     return filetype_module.extract(filename, **kwargs)

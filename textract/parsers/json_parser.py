@@ -1,15 +1,13 @@
 import json
 
-
 def extract(filename, **kwargs):
     """Extract all of the string values of a json file (no keys as those
     are, in some sense, markup). This is useful for parsing content
     from mongodb dumps, for example.
     """
-    f = open(filename, 'r')
-    deserialized_json = json.load(f)
+    with open(filename, 'r') as raw:
+        deserialized_json = json.load(raw)
     return get_text(deserialized_json)
-
 
 def get_text(deserialized_json):
     """Recursively get text from subcomponents of a deserialized json. To
