@@ -97,7 +97,7 @@ documenation about how to install the textract dependencies, please
     - `pstotext <http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm>`_
       is required by the ``.ps`` parser.
 
-    - `tesseract-ocr 3.03 or later <https://code.google.com/p/tesseract-ocr/>`_ 
+    - `tesseract-ocr <https://code.google.com/p/tesseract-ocr/>`_ 
       is required by the ``.jpg``, ``.png`` and ``.gif`` parser.
 
 2. Add a requirements file to the `requirements directory
