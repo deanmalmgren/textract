@@ -6,8 +6,8 @@ def extract(filename, **kwargs):
     are, in some sense, markup). This is useful for parsing content
     from mongodb dumps, for example.
     """
-    f = open(filename, 'r')
-    deserialized_json = json.load(f)
+    with open(filename, 'r') as raw:
+        deserialized_json = json.load(raw)
     return get_text(deserialized_json)
 
 
