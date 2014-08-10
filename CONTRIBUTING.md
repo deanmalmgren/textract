@@ -5,21 +5,21 @@ for the fork-branch-pull request model for github. Briefly, this means:
 
 1. Make sure your fork's `master` branch is up to date:
 
-	git remote add deanmalmgren https://github.com/deanmalmgren/textract.git
-    git checkout master
-    git pull deanmalmgren/master
+    	git remote add deanmalmgren https://github.com/deanmalmgren/textract.git
+        git checkout master
+        git pull deanmalmgren/master
 
 2. Start a feature branch with a descriptive name about what you're
    trying to accomplish:
 
-    git checkout -b csv-support
+        git checkout -b csv-support
 
 3. Make commits in a way that other people can understand with good
    commit messages to explain the changes you've made:
 
-    emacs -nw textract/parsers/csv_parser.py
-	git add textract/parsers/csv_parser.py
-	git commit -am 'added csv_parser'
+        emacs -nw textract/parsers/csv_parser.py
+	    git add textract/parsers/csv_parser.py
+	    git commit -am 'added csv_parser'
 
 4. If an issue already exists for the code you're contributing, use
    [issue2pr](http://issue2pr.herokuapp.com/) to attach your code to
