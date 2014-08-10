@@ -13,6 +13,7 @@ from textract import process
 from textract.exceptions import CommandLineError
 from textract.colors import red
 
+
 # extract text
 def main():
     """
