@@ -6,7 +6,7 @@ def extract(filename, **kwargs):
     # Tesseract can't output to console directly so you must first create
     # a dummy file to write to, read, and then delete
     stdout, stderr = run(
-        'tesseract %(filename)s tmpout && cat tmpout.txt && rm -f tmpout.txt'
+        'tesseract - - <%(filename)s'
         % locals()
     )
     return stdout
