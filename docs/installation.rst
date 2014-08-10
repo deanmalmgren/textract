@@ -25,6 +25,11 @@ package manager before installing textract from pypi.
     apt-get install python-dev libxml2-dev libxslt1-dev antiword poppler-utils pstotext tesseract-ocr
     pip install textract
 
+.. note::
+
+    It may also be necessary to install ``zlib1g-dev`` on Docker
+    instances of Ubuntu. See `issue #19
+    <https://github.com/deanmalmgren/textract/pull/19>`_ for details
 
 OSX
 ---
