@@ -8,6 +8,7 @@ RUN apt-get install python-pip -y
 RUN apt-get install libxml2-dev libxslt1-dev -y
 RUN apt-get install lib32z1-dev -y
 RUN apt-get install antiword tesseract-ocr -y
+RUN apt-get install pstotext -y
 RUN mkdir /textract
 RUN pip install lxml
 RUN pip install pdf2text
