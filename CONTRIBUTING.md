@@ -35,15 +35,14 @@ thought (thanks everybody!). To help new contributors, I thought I'd
 jot down some notes for one of the more common contributions---how to
 add support for hitherto unsupported file type `.abc123`:
 
-* write an `extract` function in `textract/parsers/abc123_parser.py`
+* write an `Parser` class in `textract/parsers/abc123_parser.py` that
+  inherits from `textract.parsers.utils.BaseParser` and implements the
+  `extract(self, filename, **kwargs)` method
 
 * add a test file in `tests/abc123/some_filename_that_you_like.abc123`
-
-* add your test file to the functional test suite in
-  `tests/run_functional_tests.sh` and make sure your test runs
-  correctly (you'll probably need to specify the correct md5 checksum,
-  which should be pretty obvious after you run the script the first
-  time).
+  and add it to the functional test suite in
+  `tests/run_functional_tests.sh`. After running this script the first
+  time, you'll see how you can correctly specify the md5 checksum.
 
 * if your package relies on any external sources, be sure to add them
   in either `requirements/python` (for python packages) or
@@ -55,7 +54,8 @@ add support for hitherto unsupported file type `.abc123`:
   the back by updating the changelog in `docs/changelog.rst`
 
 * finally, make sure the entire test suite passes by running
-  `./tests/run.py` and fix any lingering problems.
+  `./tests/run.py` and fix any lingering problems (usually PEP-8
+  nonsense).
 
 
 Style guidelines
