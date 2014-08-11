@@ -16,8 +16,8 @@ from textract.colors import red
 
 # extract text
 def main():
-    """
-    Process the command-line arguments.
+    """Interpret the command-line arguments, process the document and
+    raise errors accordingly (with traceback surpressed).
     """
     parser = get_parser()
     args = parser.parse_args()
@@ -28,4 +28,6 @@ def main():
     else:
         args.output.write(output)
         args.output.write('\n')
+
+
 main()
