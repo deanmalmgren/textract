@@ -4,10 +4,11 @@ from .utils import ShellParser
 
 
 class Parser(ShellParser):
+    """Extract text from pdf files using either the ``pdftotext`` method
+    (default) or the ``pdfminer`` method.
+    """
 
     def extract(self, filename, method='', **kwargs):
-        """Extract text from pdf files using ``method``.
-        """
         if method == '' or method == 'pdftotext':
             try:
                 return self.extract_pdftotext(filename)

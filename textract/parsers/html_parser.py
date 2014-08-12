@@ -6,8 +6,12 @@ from .utils import BaseParser
 
 
 class Parser(BaseParser):
+    """Extract text from html file using beautifulsoup4. Filter text to
+    only show the visible parts of the page. Insipration from `here
+    <http://stackoverflow.com/a/1983219/564709>`_.
+    """
 
-    disallowed_parents = set([
+    _disallowed_parents = set([
         'style',
         'script',
         '[document]',
@@ -18,17 +22,13 @@ class Parser(BaseParser):
     def _visible(self, element):
         """Used to filter text elements that have invisible text on the page.
         """
-        if element.parent.name in self.disallowed_parents:
+        if element.parent.name in self._disallowed_parents:
             return False
         elif re.match(u'<!--.*-->', element):
             return False
         return True
 
     def extract(self, filename, **kwargs):
-        """Extract text from html file using beautifulsoup4. Filter text to
-        only show the visible parts of the page. Insipration from `here
-        <http://stackoverflow.com/a/1983219/564709>`_.
-        """
         with open(filename) as stream:
             soup = BeautifulSoup(stream)
 

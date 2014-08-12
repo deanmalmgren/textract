@@ -6,10 +6,10 @@ from .utils import BaseParser
 
 
 class Parser(BaseParser):
+    """Extract text from open document files.
+    """
 
     def extract(self, filename, **kwargs):
-        """Extract text from open document files.
-        """
         # Inspiration from
         # https://github.com/odoo/odoo/blob/master/addons/document/odt2txt.py
         with open(filename) as stream:
