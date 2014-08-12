@@ -11,12 +11,20 @@ latest changes in development
 
 [will add changes here as they are made]
 
+* **standardized encoding of output with ``-e/--encoding`` option**
+  (`#39`_)
+
 * support for ``.epub`` files (`#40`_ via `@kokxx`_)
 
 * several bug fixes, including:
 
   * concurrancy problems with tesseract (`#44`_ by `@ShawnMilo`_,
     `#41`_ by `@christomitov`_)
+
+* several internal improvements, including:
+
+  * switching to using class-based parsers to abstract away the common
+    functionality between different parser classes (`#39`_)
 
 
 0.5.1
@@ -120,6 +128,7 @@ latest changes in development
 .. _#29: https://github.com/deanmalmgren/textract/issues/29
 .. _#30: https://github.com/deanmalmgren/textract/issues/30
 .. _#33: https://github.com/deanmalmgren/textract/issues/33
+.. _#39: https://github.com/deanmalmgren/textract/issues/39
 .. _#40: https://github.com/deanmalmgren/textract/issues/40
 .. _#41: https://github.com/deanmalmgren/textract/issues/41
 .. _#44: https://github.com/deanmalmgren/textract/issues/44

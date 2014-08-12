@@ -14,12 +14,13 @@ for the fork-branch-pull request model for github. Briefly, this means:
 
         git checkout -b csv-support
 
-3. Make commits in a way that other people can understand with good
-   commit messages to explain the changes you've made:
+3. Make commits to this feature branch (`csv-support`, in this case)
+   in a way that other people can understand with good commit messages
+   to explain the changes you've made:
 
-        emacs -nw textract/parsers/csv_parser.py
+        emacs textract/parsers/csv_parser.py
 	    git add textract/parsers/csv_parser.py
-	    git commit -am 'added csv_parser'
+	    git commit -m 'added csv_parser'
 
 4. If an issue already exists for the code you're contributing, use
    [issue2pr](http://issue2pr.herokuapp.com/) to attach your code to
@@ -35,8 +36,9 @@ thought (thanks everybody!). To help new contributors, I thought I'd
 jot down some notes for one of the more common contributions---how to
 add support for hitherto unsupported file type `.abc123`:
 
-* write an `Parser` class in `textract/parsers/abc123_parser.py` that
-  inherits from `textract.parsers.utils.BaseParser` and implements the
+* write a `Parser` class in `textract/parsers/abc123_parser.py` that
+  inherits from `textract.parsers.utils.BaseParser` or
+  `textract.parsers.utils.ShellParser` and implements the
   `extract(self, filename, **kwargs)` method
 
 * add a test file in `tests/abc123/some_filename_that_you_like.abc123`
@@ -68,7 +70,8 @@ favor cleverness or optimization over readability are less likely to be
 incorporated.
 
 To make this notion of "readability" more concrete, here are a few
-stylistic guidelines that we recommend:
+stylistic guidelines that are inspired by other projects and we
+generally recommend:
 
 -  write functions and methods that can `fit on a screen or two of a
    standard
