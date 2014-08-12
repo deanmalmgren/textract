@@ -16,5 +16,5 @@ class Parser(BaseParser):
                     continue
                 for paragraph in shape.textframe.paragraphs:
                     for run in paragraph.runs:
-                        text_runs.append(run.text.encode('utf-8'))
+                        text_runs.append(run.text)
         return '\n\n'.join(text_runs)
