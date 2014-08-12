@@ -30,14 +30,28 @@ class BaseParser(object):
     def process(self, filename, encoding, **kwargs):
         """Process ``filename`` and encode byte-string with ``encoding``.
         """
-        return self.encode(self.extract(filename, **kwargs), encoding)
+        # make a "unicode sandwich" to handle dealing with unknown
+        # input byte strings and converting them to a predictable
+        # output encoding
+        # http://nedbatchelder.com/text/unipain/unipain.html#35
+        byte_string = self.extract(filename, **kwargs)
+        unicode_string = self.decode(byte_string)
+        return self.encode(unicode_string, encoding)
 
     def decode(self, text):
         """Decode text using the chardet package
         """
-        max_confidence, max_encoding = 0.0, None
-        if not text:
+        # only decode byte strings into unicode if it hasn't already
+        # been done by a subclass
+        if isinstance(text, unicode):
             return text
+
+        # empty text? nothing to decode
+        if not text:
+            return u''
+
+        # use chardet to automatically detect the encoding text
+        max_confidence, max_encoding = 0.0, None
         result = chardet.detect(text)
         return text.decode(result['encoding'])
 
@@ -65,8 +79,6 @@ class ShellParser(BaseParser):
         if pipe.returncode != 0:
             raise exceptions.ShellError(command, pipe.returncode)
 
-        # decode the input and return the unicode result
-        stdout, stderr = self.decode(stdout), self.decode(stderr)
         return stdout, stderr
 
     def temp_filename(self):
