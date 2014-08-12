@@ -137,6 +137,14 @@ textract.parsers.txt_parser module
     :undoc-members:
     :show-inheritance:
 
+textract.parsers.utils module
+-----------------------------
+
+.. automodule:: textract.parsers.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 
 textract.cli module
@@ -151,14 +159,6 @@ textract.exceptions module
 --------------------------
 
 .. automodule:: textract.exceptions
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.shell module
----------------------
-
-.. automodule:: textract.shell
     :members:
     :undoc-members:
     :show-inheritance:

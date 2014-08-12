@@ -1,10 +1,14 @@
 import docx
 
+from .utils import BaseParser
 
-def extract(filename, **kwargs):
+
+class Parser(BaseParser):
     """Extract text from docx file using python-docx.
     """
-    document = docx.Document(filename)
-    return '\n\n'.join([
-        paragraph.text.encode('utf-8') for paragraph in document.paragraphs
-    ])
+
+    def extract(self, filename, **kwargs):
+        document = docx.Document(filename)
+        return '\n\n'.join([
+            paragraph.text for paragraph in document.paragraphs
+        ])

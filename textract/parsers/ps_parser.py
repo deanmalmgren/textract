@@ -1,8 +1,10 @@
-from ..shell import run
+from .utils import ShellParser
 
 
-def extract(filename, **kwargs):
-    """Extract text from postscript files using pstotext command.
-    """
-    stdout, _ = run('pstotext %(filename)s' % locals())
-    return stdout
+class Parser(ShellParser):
+
+    def extract(self, filename, **kwargs):
+        """Extract text from postscript files using pstotext command.
+        """
+        stdout, _ = self.run('pstotext %(filename)s' % locals())
+        return stdout

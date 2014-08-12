@@ -1,1 +1,1 @@
-from .tesseract import extract
+from .tesseract import Parser

@@ -3,6 +3,8 @@ reused in many of the other parser modules.
 """
 
 import subprocess
+import tempfile
+import os
 
 from .. import exceptions
 
@@ -26,7 +28,7 @@ class BaseParser(object):
     def process(self, filename, encoding, **kwargs):
         """Process ``filename`` and encode byte-string with ``encoding``.
         """
-        return self.encode(self.extract(filename, **kwargs), encoding)        
+        return self.encode(self.extract(filename, **kwargs), encoding)
 
 
 class ShellParser(BaseParser):
@@ -53,3 +55,10 @@ class ShellParser(BaseParser):
             raise exceptions.ShellError(command, pipe.returncode)
 
         return stdout, stderr
+
+    def temp_filename(self):
+        """Return a unique tempfile name.
+        """
+        handle, filename = tempfile.mkstemp()
+        os.close(handle)
+        return filename
