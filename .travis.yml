@@ -4,12 +4,12 @@ python:
 
 # install system dependencies here with apt-get. 
 before_install:
-  - ./provision/debian.sh
+  - ./requirements/debian.sh
 
 # install python dependencies including this package in the travis
 # virtualenv
 install:
-  - ./provision/python.sh
+  - ./requirements/python.sh
 
 # command to run tests, e.g. python setup.py test
 script:
