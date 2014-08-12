@@ -1,7 +1,7 @@
-FROM ubuntu:14.04
+FROM ubuntu:12.04
 MAINTAINER Shawn Milochik <shawn@milochik.com>
 ENV DEBIAN_FRONTEND noninteractive
-ENV REFRESHED_AT 2014-08-12
+ENV REFRESHED_AT 2014-08-12b
 RUN apt-get update
 RUN apt-get install python-pip -y
 ADD . /requirements

@@ -2,4 +2,4 @@
 
 # Run this to create an up-to-date Docker container and run tests.
 
-docker build -t milo/textract . && docker run -v $(pwd)/..:/textract/ milo/textract
+docker build -t textract/ubuntu12.04 . && docker run -v $(pwd)/..:/textract/ textract/ubuntu12.04
