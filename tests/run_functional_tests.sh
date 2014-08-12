@@ -10,15 +10,6 @@
 # http://stackoverflow.com/a/9107028/564709
 BASEDIR=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
 
-# annoying problem that md5 (OSX) and md5sum (Linux) are not the same
-# in coreutils
-which md5 > /dev/null
-if [ $? -ne 0 ]; then
-    md5 () {
-	md5sum $1 | awk '{print $1}'
-    }
-fi
-
 # formatting functions
 red () { 
     echo $'\033[31m'"$1"$'\033[0m'
