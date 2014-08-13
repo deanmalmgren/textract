@@ -11,6 +11,14 @@ latest changes in development
 
 [will add changes here as they are made]
 
+
+0.6.0
+-----
+
+* support for ``.xlsx`` files (`#42`_ via `@levivm`_)
+
+* support for ``.xls`` files (`#42`_ via `@levivm`_)
+
 0.5.1
 -----
 
@@ -88,6 +96,7 @@ latest changes in development
 
 .. _@anthonygarvan: https://github.com/anthonygarvan
 .. _@christomitov: https://github.com/christomitov
+.. _@levivm: https://github.com/levivm
 
 
 .. list of issues that have been resolved. putting links here to make
@@ -106,4 +115,5 @@ latest changes in development
 .. _#26: https://github.com/deanmalmgren/textract/issues/26
 .. _#29: https://github.com/deanmalmgren/textract/issues/29
 .. _#30: https://github.com/deanmalmgren/textract/issues/30
+.. _#42: https://github.com/deanmalmgren/textract/issues/42
 

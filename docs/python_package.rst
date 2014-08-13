@@ -129,14 +129,21 @@ textract.parsers.txt_parser module
     :undoc-members:
     :show-inheritance:
 
-+textract.parsers.ps_parser module
-+---------------------------------
-+
-+.. automodule:: textract.parsers.xlsx_parser.py
-+    :members:
-+    :undoc-members:
-+    :show-inheritance:
-+
+textract.parsers.xlsx_parser module
+-----------------------------------
+
+.. automodule:: textract.parsers.xlsx_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+textract.parsers.xls_parser module
+-----------------------------------
+
+.. automodule:: textract.parsers.xlsx_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 
 textract.cli module
