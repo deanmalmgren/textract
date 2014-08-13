@@ -73,16 +73,16 @@ validate_example ${BASEDIR}/doc/i_heart_word.doc 8c6b87285e7d5498cff369fe4536a54
 validate_example ${BASEDIR}/pdf/i_heart_pdfs.pdf 06719d714211174a3851ac4cee880fe1
 validate_example -m pdfminer ${BASEDIR}/pdf/i_heart_pdfs.pdf d4377783e5fbde756d3a195bfd103be0
 validate_example ${BASEDIR}/txt/little_bo_peep.txt 1c5fb4478d84c3b3296746e491895ada
-validate_example ${BASEDIR}/html/snow-fall.html acc2d8c49094e56474006cab3d3768eb
+validate_example ${BASEDIR}/html/snow-fall.html a90fa8b2bc9dc84673466ddc30fed497
 validate_example ${BASEDIR}/html/what-we-do.html 1fb0263bf62317365cb30246d9e094be
 validate_example ${BASEDIR}/eml/example.eml cb59a5fad8ed8b849e15d53449b1de3f
 validate_example ${BASEDIR}/ps/example.ps bdd41be3e24d7ded69be1e5732f7c8fc
 validate_example ${BASEDIR}/json/json_is_my_best_friend.json dc0503f1b5a213d67cc08829b12df99e
 validate_example ${BASEDIR}/odt/i_heart_odt.odt f64b15c1acf5cebb1a91896221696da7
-validate_example ${BASEDIR}/jpg/i_heart_jpegs.jpg 3b33418991e825a180884844a507aeda
-validate_example ${BASEDIR}/gif/i_heart_gifs.gif 21c30eaf72d8756802e4f5f2ba20961d
-validate_example ${BASEDIR}/png/i_heart_pngs.png 283f78843ca4059a6aa9a3e401917b2d
-validate_example ${BASEDIR}/xlsx/test.xlsx 0678324434c829ffab96a44c5cac3ac5
+validate_example ${BASEDIR}/jpg/i_heart_jpegs.jpg 74b5fcffef2aa3e284dccc0cca577d47
+validate_example ${BASEDIR}/gif/i_heart_gifs.gif 0b37ec3f7b0f13d5897b93ef079a97c7
+validate_example ${BASEDIR}/png/i_heart_pngs.png 302242ffea5998b8456f596d35fc8150
+validate_example ${BASEDIR}/xlsx/test.xlsx 5b3df3c382d4fd4ff87d8773ba16d54c
 
 # exit with the sum of the status
 exit ${EXIT_CODE}
