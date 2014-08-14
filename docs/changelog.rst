@@ -18,9 +18,10 @@ latest changes in development
   * removing tesseract version info from output of image parsers
     (`#48`_)
 
+  * problems with spaces in filenames (`#53`_)
+
   * concurrancy problems with tesseract (`#44`_ by `@ShawnMilo`_,
     `#41`_ by `@christomitov`_)
-
 
 0.5.1
 -----
@@ -127,4 +128,5 @@ latest changes in development
 .. _#41: https://github.com/deanmalmgren/textract/issues/41
 .. _#44: https://github.com/deanmalmgren/textract/issues/44
 .. _#48: https://github.com/deanmalmgren/textract/issues/48
+.. _#53: https://github.com/deanmalmgren/textract/issues/53
 
