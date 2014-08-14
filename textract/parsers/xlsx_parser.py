@@ -2,7 +2,7 @@ import xlrd
 
 
 def extract(filename, **kwargs):
-    """Extract text from docx file using python-docx.
+    """Extract text from Excel files(.xls/xlsx).
     """
 
     workbook = xlrd.open_workbook(filename)
@@ -15,11 +15,11 @@ def extract(filename, **kwargs):
 
         for curr_row in range(num_rows):
             row = worksheet.row(curr_row)
-            new_output = [unicode(
+            new_output = [
                 worksheet.cell_value(curr_row, index_col)
-            ).encode('utf-8') for index_col in range(num_cells)
+                for index_col in range(num_cells)
                 if worksheet.cell_value(curr_row, index_col)
             ]
             if new_output:
-                output += '|'.join(new_output) + '\n'
+                output += ' '.join(new_output) + '\n'
     return output

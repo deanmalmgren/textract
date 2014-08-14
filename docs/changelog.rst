@@ -112,12 +112,9 @@ latest changes in development
 
 .. _@anthonygarvan: https://github.com/anthonygarvan
 .. _@christomitov: https://github.com/christomitov
-<<<<<<< HEAD
 .. _@levivm: https://github.com/levivm
-=======
 .. _@kokxx: https://github.com/Kokxx
 .. _@ShawnMilo: https://github.com/ShawnMilo
->>>>>>> a9aae99de159f01825ae524aaa95fd7ab0fd0373
 
 
 .. list of issues that have been resolved. putting links here to make
@@ -136,13 +133,10 @@ latest changes in development
 .. _#26: https://github.com/deanmalmgren/textract/issues/26
 .. _#29: https://github.com/deanmalmgren/textract/issues/29
 .. _#30: https://github.com/deanmalmgren/textract/issues/30
-<<<<<<< HEAD
 .. _#42: https://github.com/deanmalmgren/textract/issues/42
-=======
 .. _#33: https://github.com/deanmalmgren/textract/issues/33
 .. _#40: https://github.com/deanmalmgren/textract/issues/40
 .. _#41: https://github.com/deanmalmgren/textract/issues/41
 .. _#44: https://github.com/deanmalmgren/textract/issues/44
 .. _#48: https://github.com/deanmalmgren/textract/issues/48
->>>>>>> a9aae99de159f01825ae524aaa95fd7ab0fd0373
 
