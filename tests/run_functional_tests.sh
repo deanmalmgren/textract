@@ -84,7 +84,7 @@ validate_example ${BASEDIR}/gif/i_heart_gifs.gif 0b37ec3f7b0f13d5897b93ef079a97c
 validate_example ${BASEDIR}/png/i_heart_pngs.png 302242ffea5998b8456f596d35fc8150
 validate_example ${BASEDIR}/xls/a_good_example.xls b3d50046311c740b14edd91a8320ff1c
 validate_example ${BASEDIR}/xlsx/another_good_example.xlsx 5b3df3c382d4fd4ff87d8773ba16d54c
-validate_example ${BASEDIR}/epub/testing_epub.epub 5df5b58494e4eb5dc298306611d0d3d1
+validate_example ${BASEDIR}/epub/testing_epub.epub d41d8cd98f00b204e9800998ecf8427e
 
 # exit with the sum of the status
 exit ${EXIT_CODE}
