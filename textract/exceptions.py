@@ -56,9 +56,11 @@ class ShellError(CommandLineError):
     """This error is raised when a shell.run returns a non-zero exit code
     (meaning the command failed).
     """
-    def __init__(self, command, exit_code):
+    def __init__(self, command, exit_code, stdout, stderr):
         self.command = command
         self.exit_code = exit_code
+        self.stdout = stdout
+        self.stderr = stderr
         self.executable = self.command.split()[0]
 
     def is_uninstalled(self):
@@ -75,7 +77,11 @@ class ShellError(CommandLineError):
 
     def failed_message(self):
         return (
-            "The command `%(command)s` failed with exit code %(exit_code)d"
+            "The command `%(command)s` failed with exit code %(exit_code)d\n"
+            "------------- stdout -------------\n"
+            "%(stdout)s"
+            "------------- stderr -------------\n"
+            "%(stderr)s"
         ) % vars(self)
 
     def __str__(self):

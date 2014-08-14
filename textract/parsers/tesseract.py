@@ -26,7 +26,7 @@ def extract(filename, **kwargs):
     # tesseract version information to standard output
     devnull = os.devnull
     command = (
-        'tesseract %(filename)s {0} > %(devnull)s && '
+        'tesseract "%(filename)s" {0} > %(devnull)s && '
         'cat {0}.txt && '
         'rm -f {0} {0}.txt'
     )
