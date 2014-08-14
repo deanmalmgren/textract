@@ -73,7 +73,7 @@ validate_example ${BASEDIR}/doc/i_heart_word.doc 8c6b87285e7d5498cff369fe4536a54
 validate_example ${BASEDIR}/pdf/i_heart_pdfs.pdf 06719d714211174a3851ac4cee880fe1
 validate_example -m pdfminer ${BASEDIR}/pdf/i_heart_pdfs.pdf d4377783e5fbde756d3a195bfd103be0
 validate_example ${BASEDIR}/txt/little_bo_peep.txt 1c5fb4478d84c3b3296746e491895ada
-validate_example ${BASEDIR}/html/snow-fall.html a90fa8b2bc9dc84673466ddc30fed497
+validate_example ${BASEDIR}/html/snow-fall.html acc2d8c49094e56474006cab3d3768eb
 validate_example ${BASEDIR}/html/what-we-do.html 1fb0263bf62317365cb30246d9e094be
 validate_example ${BASEDIR}/eml/example.eml cb59a5fad8ed8b849e15d53449b1de3f
 validate_example ${BASEDIR}/ps/example.ps bdd41be3e24d7ded69be1e5732f7c8fc
@@ -84,7 +84,7 @@ validate_example ${BASEDIR}/gif/i_heart_gifs.gif 0b37ec3f7b0f13d5897b93ef079a97c
 validate_example ${BASEDIR}/png/i_heart_pngs.png 302242ffea5998b8456f596d35fc8150
 validate_example ${BASEDIR}/xls/a_good_example.xls b3d50046311c740b14edd91a8320ff1c
 validate_example ${BASEDIR}/xlsx/another_good_example.xlsx 5b3df3c382d4fd4ff87d8773ba16d54c
-validate_example ${BASEDIR}/epub/testing_epub.epub d41d8cd98f00b204e9800998ecf8427e
+validate_example ${BASEDIR}/epub/testing_epub.epub 5df5b58494e4eb5dc298306611d0d3d1
 
 # exit with the sum of the status
 exit ${EXIT_CODE}
