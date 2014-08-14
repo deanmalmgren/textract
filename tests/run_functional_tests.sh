@@ -82,7 +82,8 @@ validate_example ${BASEDIR}/odt/i_heart_odt.odt f64b15c1acf5cebb1a91896221696da7
 validate_example ${BASEDIR}/jpg/i_heart_jpegs.jpg 74b5fcffef2aa3e284dccc0cca577d47
 validate_example ${BASEDIR}/gif/i_heart_gifs.gif 0b37ec3f7b0f13d5897b93ef079a97c7
 validate_example ${BASEDIR}/png/i_heart_pngs.png 302242ffea5998b8456f596d35fc8150
-validate_example ${BASEDIR}/xlsx/test.xlsx 5b3df3c382d4fd4ff87d8773ba16d54c
+validate_example ${BASEDIR}/xls/a_good_example.xls b3d50046311c740b14edd91a8320ff1c
+validate_example ${BASEDIR}/xlsx/another_good_example.xlsx 5b3df3c382d4fd4ff87d8773ba16d54c
 
 # exit with the sum of the status
 exit ${EXIT_CODE}
