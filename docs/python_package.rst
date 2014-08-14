@@ -41,6 +41,14 @@ textract.parsers.eml_parser module
     :undoc-members:
     :show-inheritance:
 
+textract.parsers.epub_parser module
+-----------------------------------
+
+.. automodule:: textract.parsers.epub_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 textract.parsers.gif_parser module
 ----------------------------------
 

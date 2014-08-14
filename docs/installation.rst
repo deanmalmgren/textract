@@ -25,6 +25,11 @@ package manager before installing textract from pypi.
     apt-get install python-dev libxml2-dev libxslt1-dev antiword poppler-utils pstotext tesseract-ocr
     pip install textract
 
+.. note::
+
+    It may also be necessary to install ``zlib1g-dev`` on Docker
+    instances of Ubuntu. See `issue #19
+    <https://github.com/deanmalmgren/textract/pull/19>`_ for details
 
 OSX
 ---
@@ -61,7 +66,7 @@ pypi.
 Don't see your operating system installation instructions here?
 ---------------------------------------------------------------
 
-My appologies! Installing system packages is a bit of a drag and its
+My apologies! Installing system packages is a bit of a drag and its
 hard to anticipate all of the different environments that need to be
 accomodated (wouldn't it be awesome if there were a system-agnostic
 package manager or, better yet, if python could install these system
@@ -96,6 +101,9 @@ documenation about how to install the textract dependencies, please
 
     - `pstotext <http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm>`_
       is required by the ``.ps`` parser.
+
+    - `tesseract-ocr <https://code.google.com/p/tesseract-ocr/>`_ 
+      is required by the ``.jpg``, ``.png`` and ``.gif`` parser.
 
 2. Add a requirements file to the `requirements directory
    <https://github.com/deanmalmgren/textract/tree/master/requirements>`_

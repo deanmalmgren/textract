@@ -12,12 +12,25 @@ latest changes in development
 [will add changes here as they are made]
 
 
+
 0.6.0
 -----
 
 * support for ``.xlsx`` files (`#42`_ via `@levivm`_)
 
 * support for ``.xls`` files (`#42`_ via `@levivm`_)
+
+* support for ``.epub`` files (`#40`_ via `@kokxx`_)
+
+* several bug fixes, including:
+
+  * removing tesseract version info from output of image parsers
+    (`#48`_)
+
+  * concurrancy problems with tesseract (`#44`_ by `@ShawnMilo`_,
+    `#41`_ by `@christomitov`_)
+
+
 
 0.5.1
 -----
@@ -28,17 +41,18 @@ latest changes in development
 
   * shell commands hanging on large files (`#33`_)
 
+
 0.5.0
 -----
 
-* support for ``.json`` files (`#13`_ via `@anthonygarvan`_)
+* support for ``.json`` files (`#13`_ by `@anthonygarvan`_)
 
-* support for ``.odt`` files (`#29`_ via `@christomitov`_)
+* support for ``.odt`` files (`#29`_ by `@christomitov`_)
 
 * support for ``.ps`` files (`#25`_)
 
 * support for ``.gif``, ``.jpg``, ``.jpeg``, and ``.png`` files
-  (`#30`_ via `@christomitov`_)
+  (`#30`_ by `@christomitov`_)
 
 * several bug fixes, including:
 
@@ -72,6 +86,7 @@ latest changes in development
 * fixed installation bug with not properly including requirements
   files in the manifest
 
+
 0.2.0
 -----
 
@@ -85,6 +100,7 @@ latest changes in development
 
   * fixing tests to make sure the work properly on travis-ci
 
+
 0.1.0
 -----
 
@@ -96,7 +112,12 @@ latest changes in development
 
 .. _@anthonygarvan: https://github.com/anthonygarvan
 .. _@christomitov: https://github.com/christomitov
+<<<<<<< HEAD
 .. _@levivm: https://github.com/levivm
+=======
+.. _@kokxx: https://github.com/Kokxx
+.. _@ShawnMilo: https://github.com/ShawnMilo
+>>>>>>> a9aae99de159f01825ae524aaa95fd7ab0fd0373
 
 
 .. list of issues that have been resolved. putting links here to make
@@ -115,5 +136,13 @@ latest changes in development
 .. _#26: https://github.com/deanmalmgren/textract/issues/26
 .. _#29: https://github.com/deanmalmgren/textract/issues/29
 .. _#30: https://github.com/deanmalmgren/textract/issues/30
+<<<<<<< HEAD
 .. _#42: https://github.com/deanmalmgren/textract/issues/42
+=======
+.. _#33: https://github.com/deanmalmgren/textract/issues/33
+.. _#40: https://github.com/deanmalmgren/textract/issues/40
+.. _#41: https://github.com/deanmalmgren/textract/issues/41
+.. _#44: https://github.com/deanmalmgren/textract/issues/44
+.. _#48: https://github.com/deanmalmgren/textract/issues/48
+>>>>>>> a9aae99de159f01825ae524aaa95fd7ab0fd0373
 

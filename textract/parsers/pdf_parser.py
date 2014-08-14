@@ -8,15 +8,14 @@ def extract(filename, method='', **kwargs):
     if method == '' or method == 'pdftotext':
         try:
             return extract_pdftotext(filename)
-        except ShellError, e:
-
-            # if pdftotext isn't installed and the pdftotext method
+        except ShellError as ex:
+            # If pdftotext isn't installed and the pdftotext method
             # wasn't specified, then gracefully fallback to using
-            # pdfminer instead
-            if method == '' and e.is_uninstalled():
+            # pdfminer instead.
+            if method == '' and ex.is_uninstalled():
                 return extract_pdfminer(filename)
             else:
-                raise e
+                raise ex
 
     elif method == 'pdfminer':
         return extract_pdfminer(filename)
@@ -26,11 +25,11 @@ def extract(filename, method='', **kwargs):
 
 def extract_pdftotext(filename):
     """Extract text from pdfs using the pdftotext command line utility."""
-    stdout, stderr = run('pdftotext %(filename)s -' % locals())
+    stdout, _ = run('pdftotext %(filename)s -' % locals())
     return stdout
 
 
 def extract_pdfminer(filename):
     """Extract text from pdfs using pdfminer."""
-    stdout, stderr = run('pdf2txt.py %(filename)s' % locals())
+    stdout, _ = run('pdf2txt.py %(filename)s' % locals())
     return stdout
