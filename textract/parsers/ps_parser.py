@@ -6,5 +6,5 @@ class Parser(ShellParser):
     """
 
     def extract(self, filename, **kwargs):
-        stdout, _ = self.run('pstotext %(filename)s' % locals())
+        stdout, _ = self.run('pstotext "%(filename)s"' % locals())
         return stdout

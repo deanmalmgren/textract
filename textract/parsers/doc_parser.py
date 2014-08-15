@@ -6,5 +6,5 @@ class Parser(ShellParser):
     """
 
     def extract(self, filename, **kwargs):
-        stdout, stderr = self.run('antiword %(filename)s' % locals())
+        stdout, stderr = self.run('antiword "%(filename)s"' % locals())
         return stdout

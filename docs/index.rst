@@ -63,6 +63,10 @@ Currently supporting
 
 * ``.txt`` via python builtins
 
+* ``.xlsx`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
+
+* ``.xls`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
+
 Please recommend other file types by either mentioning them on the
 `issue tracker <https://github.com/deanmalmgren/textract/issues>`_ or
 by :ref:`contributing <contributing>`

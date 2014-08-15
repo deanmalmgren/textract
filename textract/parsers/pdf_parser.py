@@ -28,10 +28,10 @@ class Parser(ShellParser):
 
     def extract_pdftotext(self, filename):
         """Extract text from pdfs using the pdftotext command line utility."""
-        stdout, _ = self.run('pdftotext %(filename)s -' % locals())
+        stdout, _ = self.run('pdftotext "%(filename)s" -' % locals())
         return stdout
 
     def extract_pdfminer(self, filename):
         """Extract text from pdfs using pdfminer."""
-        stdout, _ = self.run('pdf2txt.py %(filename)s' % locals())
+        stdout, _ = self.run('pdf2txt.py "%(filename)s"' % locals())
         return stdout

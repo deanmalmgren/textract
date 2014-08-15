@@ -24,8 +24,17 @@ for the fork-branch-pull request model for github. Briefly, this means:
 
 4. If an issue already exists for the code you're contributing, use
    [issue2pr](http://issue2pr.herokuapp.com/) to attach your code to
-   that issue. If the issue doesn't already exist, just send a pull
-   request in the usual way.
+   that issue:
+
+        git push origin csv-support
+		chrome http://issue2pr.herokuapp.com
+		# enter the issue URL, HEAD=yourusername:csv-support, Base=master
+
+   If the issue doesn't already exist, just send a pull
+   request in the usual way:
+
+        git push origin csv-support
+		chrome http://github.com/deanmalmgren/textract/compare
 
 
 Common contributions: support for new file type

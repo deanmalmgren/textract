@@ -77,7 +77,9 @@ class ShellParser(BaseParser):
 
         # if pipe is busted, raise an error (unlike Fabric)
         if pipe.returncode != 0:
-            raise exceptions.ShellError(command, pipe.returncode)
+            raise exceptions.ShellError(
+                command, pipe.returncode, stdout, stderr,
+            )
 
         return stdout, stderr
 
