@@ -23,9 +23,10 @@ class BaseParser(object):
         raise NotImplementedError('must be overridden by child classes')
 
     def encode(self, text, encoding):
-        """Encode the ``text`` in ``encoding`` byte-encoding.
+        """Encode the ``text`` in ``encoding`` byte-encoding. This ignores
+        code points that can't be encoded in byte-strings.
         """
-        return text.encode(encoding)
+        return text.encode(encoding, 'ignore')
 
     def process(self, filename, encoding, **kwargs):
         """Process ``filename`` and encode byte-string with ``encoding``.
