@@ -15,11 +15,13 @@ def extract(filename, **kwargs):
 
         for curr_row in range(num_rows):
             row = worksheet.row(curr_row)
-            new_output = [
-                worksheet.cell_value(curr_row, index_col)
-                for index_col in range(num_cells)
-                if worksheet.cell_value(curr_row, index_col)
-            ]
+            new_output = []
+            for index_col in xrange(num_cells):
+                value = worksheet.cell_value(curr_row, index_col)
+                if value:
+                    if isinstance(value, (int, float)):
+                        value = unicode(value)
+                    new_output.append(value)
             if new_output:
-                output += ' '.join(new_output) + '\n'
-    return output
+                output += u' '.join(new_output) + u'\n'
+    return output.encode('utf-8')
