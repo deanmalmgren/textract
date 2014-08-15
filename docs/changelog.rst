@@ -6,10 +6,8 @@ track version numbers, where backwards incompatible changes
 (highlighted in **bold**) bump the major version of the package.
 
 
-latest changes in development
------------------------------
-
-[will add changes here as they are made]
+latest changes in development for next release
+----------------------------------------------
 
 * support for ``.xls`` and ``.xlsx`` files (`#42`_ and `#55`_ by `@levivm`_)
 
