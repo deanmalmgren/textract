@@ -1,5 +1,3 @@
-# Running textract tests with Docker
-
 ## TL;DR;
 
 Just run `run.sh` and it should work.
