@@ -6,14 +6,19 @@ track version numbers, where backwards incompatible changes
 (highlighted in **bold**) bump the major version of the package.
 
 
-latest changes in development
------------------------------
+latest changes in development for next release
+----------------------------------------------
 
-[will add changes here as they are made]
+* support for ``.xls`` and ``.xlsx`` files (`#42`_ and `#55`_ by `@levivm`_)
 
-* support for ``.epub`` files (`#40`_ via `@kokxx`_)
+* support for ``.epub`` files (`#40`_ by `@kokxx`_)
 
 * several bug fixes, including:
+
+  * removing tesseract version info from output of image parsers
+    (`#48`_)
+
+  * problems with spaces in filenames (`#53`_)
 
   * concurrancy problems with tesseract (`#44`_ by `@ShawnMilo`_,
     `#41`_ by `@christomitov`_)
@@ -99,6 +104,7 @@ latest changes in development
 
 .. _@anthonygarvan: https://github.com/anthonygarvan
 .. _@christomitov: https://github.com/christomitov
+.. _@levivm: https://github.com/levivm
 .. _@kokxx: https://github.com/Kokxx
 .. _@ShawnMilo: https://github.com/ShawnMilo
 
@@ -122,5 +128,9 @@ latest changes in development
 .. _#33: https://github.com/deanmalmgren/textract/issues/33
 .. _#40: https://github.com/deanmalmgren/textract/issues/40
 .. _#41: https://github.com/deanmalmgren/textract/issues/41
+.. _#42: https://github.com/deanmalmgren/textract/issues/42
 .. _#44: https://github.com/deanmalmgren/textract/issues/44
+.. _#48: https://github.com/deanmalmgren/textract/issues/48
+.. _#53: https://github.com/deanmalmgren/textract/issues/53
+.. _#55: https://github.com/deanmalmgren/textract/issues/55
 
