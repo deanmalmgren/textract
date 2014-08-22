@@ -114,7 +114,7 @@ Developing with Docker container
    and follow the instructions under "If you'd like to try the latest
    version of Docker" to install Docker.
 
-4. Just run ``requirements/run_docker_tests.sh`` to run the full test suite.
+4. Just run ``tests/run_docker_tests.sh`` to run the full test suite.
    Current build status: |Build Status|
 
 

@@ -5,4 +5,4 @@
 
 cd $SRC
 python setup.py install
-./tests/run_functional_tests.sh
+./tests/run.py

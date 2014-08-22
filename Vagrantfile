@@ -50,16 +50,16 @@ Vagrant.configure("2") do |config|
     # http://docs.travis-ci.com/user/ci-environment/, which are built
     # using chef recipes from here
     # https://github.com/travis-ci/travis-cookbooks/
-    provision_script(server_config, "requirements/travis-mock.sh")
+    provision_script(server_config, "provision/travis-mock.sh")
 
     # these are the same provisioning steps that are done on travis-ci
     # as on the virtual machine
-    provision_script(server_config, "requirements/debian.sh")
-    provision_script(server_config, "requirements/python.sh")
+    provision_script(server_config, "provision/debian.sh")
+    provision_script(server_config, "provision/python.sh")
 
     # these provisioning steps are only done locally as a convenience
     # for setting up a useful development environment
-    provision_script(server_config, "requirements/development.sh")
+    provision_script(server_config, "provision/development.sh")
   end
 
 end
