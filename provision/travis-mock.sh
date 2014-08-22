@@ -8,5 +8,5 @@
 sudo apt-get update -qq
 sudo apt-get install -y python-pip python-dev build-essential
 
-# install pep8 for testing
-sudo pip install pep8
+# install pep8 and nose for testing
+sudo pip install pep8 nose
