@@ -13,6 +13,7 @@ install:
 
 # command to run tests, e.g. python setup.py test
 script:
+ - "python -c 'import xlrd'"
  - nosetests
  - pep8 textract/ bin/textract
  - cd docs && make html
