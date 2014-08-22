@@ -9,7 +9,7 @@ before_install:
 # install python dependencies including this package in the travis
 # virtualenv
 install:
-  - sudo ./provision/python.sh
+  - ./provision/python.sh
 
 # command to run tests, e.g. python setup.py test
 script:
