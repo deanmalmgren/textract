@@ -57,24 +57,28 @@ class BaseParserTestCase(object):
         return self.get_filename(self.unicode_text_filename_root,
                                  "unicode_text")
 
-    def test_raw_text(self):
-        """This tests an arbitrarily specified raw text file that is
-        contributed by the user
-        """
+    def test_raw_text_cli(self):
+        """Make sure raw text matches from the command line"""
         self.compare_cli_output(self.raw_text_filename)
+
+    def test_raw_text_python(self):
+        """Make sure raw text matches from python"""
         self.compare_python_output(self.raw_text_filename)
 
-    # def test_standardized_text(self):
-    #     """This tests a standardized text output that should be identical
-    #     across all filetypes (e.g., #49)
-    #     """
+    # def test_standardized_text_cli(self):
+    #     """Make sure standardized text matches from the command line"""
     #     self.compare_cli_output(self.standardized_text_filename)
+
+    # def test_standardized_text_python(self):
+    #     """Make sure standardized text matches from python"""
     #     self.compare_python_output(self.standardized_text_filename)
 
-    # def test_unicode_text(self):
-    #     """This tests a unicode text output
-    #     """
+    # def test_unicode_text_cli(self):
+    #     """Make sure unicode text matches from the command line"""
     #     self.compare_cli_output(self.unicode_text_filename)
+
+    # def test_unicode_text_python(self):
+    #     """Make sure unicode text matches from python"""
     #     self.compare_python_output(self.unicode_text_filename)
 
     def get_expected_filename(self, filename):
