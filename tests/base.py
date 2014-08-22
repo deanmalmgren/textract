@@ -107,7 +107,7 @@ class BaseParserTestCase(object):
         import textract
         result = textract.process(filename)
         with open(self.get_expected_filename(filename)) as stream:
-            self.assertEqual(result.strip(), stream.read().strip())
+            self.assertEqual(result, stream.read())
 
 
 class ShellParserTestCase(BaseParserTestCase):
