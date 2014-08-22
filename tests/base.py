@@ -1,6 +1,7 @@
 import os
 import subprocess
 import tempfile
+import shutil
 
 
 class BaseParserTestCase(object):
@@ -86,19 +87,21 @@ class BaseParserTestCase(object):
         return stream.name
 
     def assertSuccessfulCommand(self, command):
-        print "COMMAND", command
-        self.assertEqual(0, subprocess.call(command, shell=True))
+        self.assertEqual(
+            0, subprocess.call(command, shell=True),
+            "COMMAND FAILED: %(command)s" % locals()
+        )
 
     def compare_cli_output(self, filename):
         expected_filename = self.get_expected_filename(filename)
-        tmp_filename = self.get_temp_filename()
+        temp_filename = self.get_temp_filename()
         self.assertSuccessfulCommand(
-           "textract %(filename)s > %(tmp_filename)s" % locals()
+           "textract %(filename)s > %(temp_filename)s" % locals()
         )
         self.assertSuccessfulCommand(
-            "diff %(tmp_filename)s %(expected_filename)s" % locals()
+            "diff %(temp_filename)s %(expected_filename)s" % locals()
         )
-        os.remove(tmp_filename)
+        os.remove(temp_filename)
 
     def compare_python_output(self, filename):
         import textract
@@ -107,13 +110,22 @@ class BaseParserTestCase(object):
             self.assertEqual(result.strip(), stream.read().strip())
 
 
-
-
-
 class ShellParserTestCase(BaseParserTestCase):
     """This BaseParserTestCase object is used to collect a bunch of
     standardized tests that should be run for every ShellParser.
     """
 
     def test_filename_spaces(self):
-        raise NotImplementedError("do this")
+        spaced_filename = self.get_temp_filename()
+        spaced_filename += " a filename with spaces." + self.extension
+        shutil.copyfile(self.raw_text_filename, spaced_filename)
+        temp_filename = self.get_temp_filename()
+        expected_filename = self.get_expected_filename(self.raw_text_filename)
+        self.assertSuccessfulCommand(
+           "textract '%(spaced_filename)s' > %(temp_filename)s" % locals()
+        )
+        self.assertSuccessfulCommand(
+           "diff %(temp_filename)s %(expected_filename)s" % locals()
+        )
+        os.remove(spaced_filename)
+        os.remove(temp_filename)
