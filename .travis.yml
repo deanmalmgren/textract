@@ -13,8 +13,6 @@ install:
 
 # command to run tests, e.g. python setup.py test
 script:
-#49TODO
- - ./tests/run_functional_tests.sh
  - nosetests
  - pep8 textract/ bin/textract
  - cd docs && make html
