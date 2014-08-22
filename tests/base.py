@@ -96,21 +96,26 @@ class BaseParserTestCase(object):
             "COMMAND FAILED: %(command)s" % locals()
         )
 
-    def compare_cli_output(self, filename):
-        expected_filename = self.get_expected_filename(filename)
+    def compare_cli_output(self, filename, expected_filename=None):
+        if expected_filename is None:
+            expected_filename = self.get_expected_filename(filename)
+
         temp_filename = self.get_temp_filename()
         self.assertSuccessfulCommand(
-           "textract %(filename)s > %(temp_filename)s" % locals()
+           "textract '%(filename)s' > %(temp_filename)s" % locals()
         )
         self.assertSuccessfulCommand(
             "diff %(temp_filename)s %(expected_filename)s" % locals()
         )
         os.remove(temp_filename)
 
-    def compare_python_output(self, filename):
+    def compare_python_output(self, filename, expected_filename=None):
+        if expected_filename is None:
+            expected_filename = self.get_expected_filename(filename)
+
         import textract
         result = textract.process(filename)
-        with open(self.get_expected_filename(filename)) as stream:
+        with open(expected_filename) as stream:
             self.assertEqual(result, stream.read())
 
 
@@ -120,16 +125,12 @@ class ShellParserTestCase(BaseParserTestCase):
     """
 
     def test_filename_spaces(self):
+        """Make sure filenames with spaces work on the command line"""
         spaced_filename = self.get_temp_filename()
         spaced_filename += " a filename with spaces." + self.extension
         shutil.copyfile(self.raw_text_filename, spaced_filename)
-        temp_filename = self.get_temp_filename()
-        expected_filename = self.get_expected_filename(self.raw_text_filename)
-        self.assertSuccessfulCommand(
-           "textract '%(spaced_filename)s' > %(temp_filename)s" % locals()
-        )
-        self.assertSuccessfulCommand(
-           "diff %(temp_filename)s %(expected_filename)s" % locals()
+        self.compare_cli_output(
+            spaced_filename,
+            self.get_expected_filename(self.raw_text_filename),
         )
         os.remove(spaced_filename)
-        os.remove(temp_filename)

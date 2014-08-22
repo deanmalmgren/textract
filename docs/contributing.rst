@@ -61,14 +61,12 @@ Developing in a native Ubuntu environment
 
 .. _run-ubuntu-tests:
 
-#49TODO 
-
 4. On the virtual machine, make sure everything is working by running
    the suite of functional tests:
 
    .. code-block:: bash
 
-        ./tests/run_functional_tests.sh
+        nosetests
 
    These functional tests are designed to be run on an Ubuntu 12.04
    LTS server, just like the virtual machine and the server that runs
