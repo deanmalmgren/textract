@@ -2,23 +2,23 @@ import zipfile
 import xml.dom.minidom
 import StringIO
 
+from .utils import BaseParser
 
-def extract(filename, **kwargs):
+
+class Parser(BaseParser):
     """Extract text from open document files.
     """
-    obj = StringIO.StringIO(file(filename).read())
-    odt = OpenDocumentTextFile(obj)
-    return odt.to_string().encode('ascii', 'replace')
 
+    def extract(self, filename, **kwargs):
+        # Inspiration from
+        # https://github.com/odoo/odoo/blob/master/addons/document/odt2txt.py
+        with open(filename) as stream:
+            zip_stream = zipfile.ZipFile(stream)
+            self.content = xml.dom.minidom.parseString(
+                zip_stream.read("content.xml")
+            )
 
-class OpenDocumentTextFile(object):
-    """
-    Inspiration from
-    https://github.com/odoo/odoo/blob/master/addons/document/odt2txt.py
-    """
-    def __init__(self, filepath):
-        obj = zipfile.ZipFile(filepath)
-        self.content = xml.dom.minidom.parseString(obj.read("content.xml"))
+        return self.to_string()
 
     def to_string(self):
         """ Converts the document to a string. """

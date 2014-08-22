@@ -12,8 +12,13 @@ EXTENSION_SYNONYMS = {
     ".jpeg": ".jpg"
 }
 
+# default encoding that is returned by the process method. specify it
+# here so the default is used on both the process function and also by
+# the command line interface
+DEFAULT_ENCODING = 'utf_8'
 
-def process(filename, **kwargs):
+
+def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
     """This is the core function used for parsing. It routes the filename
     to the appropriate parser and returns the result.
     """
@@ -45,4 +50,5 @@ def process(filename, **kwargs):
 
     # do the extraction
     filetype_module = importlib.import_module(rel_module, 'textract.parsers')
-    return filetype_module.extract(filename, **kwargs)
+    parser = filetype_module.Parser()
+    return parser.process(filename, encoding, **kwargs)

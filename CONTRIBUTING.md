@@ -14,12 +14,13 @@ for the fork-branch-pull request model for github. Briefly, this means:
 
         git checkout -b csv-support
 
-3. Make commits in a way that other people can understand with good
-   commit messages to explain the changes you've made:
+3. Make commits to this feature branch (`csv-support`, in this case)
+   in a way that other people can understand with good commit messages
+   to explain the changes you've made:
 
-        emacs -nw textract/parsers/csv_parser.py
+        emacs textract/parsers/csv_parser.py
 	    git add textract/parsers/csv_parser.py
-	    git commit -am 'added csv_parser'
+	    git commit -m 'added csv_parser'
 
 4. If an issue already exists for the code you're contributing, use
    [issue2pr](http://issue2pr.herokuapp.com/) to attach your code to
@@ -44,15 +45,15 @@ thought (thanks everybody!). To help new contributors, I thought I'd
 jot down some notes for one of the more common contributions---how to
 add support for hitherto unsupported file type `.abc123`:
 
-* write an `extract` function in `textract/parsers/abc123_parser.py`
+* write a `Parser` class in `textract/parsers/abc123_parser.py` that
+  inherits from `textract.parsers.utils.BaseParser` or
+  `textract.parsers.utils.ShellParser` and implements the
+  `extract(self, filename, **kwargs)` method
 
 * add a test file in `tests/abc123/some_filename_that_you_like.abc123`
-
-* add your test file to the functional test suite in
-  `tests/run_functional_tests.sh` and make sure your test runs
-  correctly (you'll probably need to specify the correct md5 checksum,
-  which should be pretty obvious after you run the script the first
-  time).
+  and add it to the functional test suite in
+  `tests/run_functional_tests.sh`. After running this script the first
+  time, you'll see how you can correctly specify the md5 checksum.
 
 * if your package relies on any external sources, be sure to add them
   in either `requirements/python` (for python packages) or
@@ -64,7 +65,8 @@ add support for hitherto unsupported file type `.abc123`:
   the back by updating the changelog in `docs/changelog.rst`
 
 * finally, make sure the entire test suite passes by running
-  `./tests/run.py` and fix any lingering problems.
+  `./tests/run.py` and fix any lingering problems (usually PEP-8
+  nonsense).
 
 
 Style guidelines
@@ -77,7 +79,8 @@ favor cleverness or optimization over readability are less likely to be
 incorporated.
 
 To make this notion of "readability" more concrete, here are a few
-stylistic guidelines that we recommend:
+stylistic guidelines that are inspired by other projects and we
+generally recommend:
 
 -  write functions and methods that can `fit on a screen or two of a
    standard

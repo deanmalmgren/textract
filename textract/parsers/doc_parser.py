@@ -1,8 +1,10 @@
-from ..shell import run
+from .utils import ShellParser
 
 
-def extract(filename, **kwargs):
+class Parser(ShellParser):
     """Extract text from doc files using antiword.
     """
-    stdout, stderr = run('antiword "%(filename)s"' % locals())
-    return stdout
+
+    def extract(self, filename, **kwargs):
+        stdout, stderr = self.run('antiword "%(filename)s"' % locals())
+        return stdout
