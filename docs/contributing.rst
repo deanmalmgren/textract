@@ -34,23 +34,34 @@ Quick start
 
         git clone https://github.com/YOUR-USERNAME/textract.git
 
-2. Install `Vagrant <http://vagrantup.com/downloads>`_ and
-   `Virtualbox <https://www.virtualbox.org/wiki/Downloads>`_ and launch
-   the development virtual machine:
+2. Contribute! There are several `open issues
+   <https://github.com/deanmalmgren/textract/issues>`_ that provide good
+   places to dig in. Check out the `contribution guidelines
+   <https://github.com/deanmalmgren/textract/blob/master/CONTRIBUTING.md>`_ and send
+   pull requests; your help is greatly appreciated!
+
+Depending on your development preferences, there are lots of ways to
+get started developing with textract:
+
+Developing in a native Ubuntu environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+3. Install all the necessary system packages:
 
    .. code-block:: bash
 
-        vagrant plugin install iniparse
-        vagrant up && vagrant provision
+       ./provision/travis-mock.sh
+       ./provision/debian.sh
 
-   On ``vagrant ssh``\ ing to the virtual machine, note that the
-   ``PYTHONPATH`` and ``PATH`` `environment variables have been
-   altered in this virtual machine
-   <https://github.com/deanmalmgren/textract/blob/master/provision/development.sh>`_
-   so that any changes you make to textract in development are
-   automatically incorporated into the command.
+       # optionally run some of the steps in these scripts, but you
+       # may want to be selective about what you do as they alter global
+       # environment states
+       ./provision/python.sh
+       ./provision/development.sh
 
-3. On the virtual machine, make sure everything is working by running
+.. _run-ubuntu-tests:
+
+4. On the virtual machine, make sure everything is working by running
    the suite of functional tests:
 
    .. code-block:: bash
@@ -70,11 +81,43 @@ Quick start
 
    Current build status: |Build Status|
 
-4. Contribute! There are several `open issues
-   <https://github.com/deanmalmgren/textract/issues>`_ that provide good
-   places to dig in. Check out the `contribution guidelines
-   <https://github.com/deanmalmgren/textract/blob/master/CONTRIBUTING.md>`_ and send
-   pull requests; your help is greatly appreciated!
+
+Developing with Vagrant virtual machine
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+3. Install `Vagrant <http://vagrantup.com/downloads>`_ and
+   `Virtualbox <https://www.virtualbox.org/wiki/Downloads>`_ and launch
+   the development virtual machine:
+
+   .. code-block:: bash
+
+        vagrant plugin install iniparse
+        vagrant up && vagrant provision
+
+   On ``vagrant ssh``\ ing to the virtual machine, note that the
+   ``PYTHONPATH`` and ``PATH`` `environment variables have been
+   altered in this virtual machine
+   <https://github.com/deanmalmgren/textract/blob/master/provision/development.sh>`_
+   so that any changes you make to textract in development are
+   automatically incorporated into the command.
+
+4. See :ref:`step 4 <run-ubuntu-tests>` in the Ubuntu development environment.
+   Current build status: |Build Status|
+
+
+
+Developing with Docker container
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+3. Go to the `Docker
+   documentation <http://docs.docker.com/installation/ubuntulinux/>`_
+   and follow the instructions under "If you'd like to try the latest
+   version of Docker" to install Docker.
+
+4. Just run ``requirements/run_docker_tests.sh`` to run the full test suite.
+   Current build status: |Build Status|
+
 
 .. |Build Status| image:: https://travis-ci.org/deanmalmgren/textract.png
    :target: https://travis-ci.org/deanmalmgren/textract
+

@@ -94,15 +94,3 @@ generally recommend:
 -  `code comments should be about *what* is being done, not *how* it is
    being done <https://www.kernel.org/doc/Documentation/CodingStyle>`_
    --- that should be self-evident from the code itself.
-
-Testing with Docker
--------------------
-
-**TL;DR;**
-
-Just run `requirements/run_docker_tests.sh` and it should work.
-
-**Installing Docker on Ubuntu**
-
-Go to the [Docker documentation](http://docs.docker.com/installation/ubuntulinux/)
-and follow the instructions under "If you'd like to try the latest version of Docker:"
