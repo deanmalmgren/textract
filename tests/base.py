@@ -188,11 +188,12 @@ class ShellParserTestCase(BaseParserTestCase):
 
     def test_filename_spaces(self):
         """Make sure filenames with spaces work on the command line"""
-        spaced_filename = self.get_temp_filename()
+        temp_filename = spaced_filename = self.get_temp_filename()
         spaced_filename += " a filename with spaces." + self.extension
         shutil.copyfile(self.raw_text_filename, spaced_filename)
         self.compare_cli_output(
             spaced_filename,
             self.get_expected_filename(self.raw_text_filename),
         )
+        os.remove(temp_filename)
         os.remove(spaced_filename)

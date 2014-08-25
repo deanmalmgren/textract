@@ -9,8 +9,9 @@ class JpgTestCase(base.ShellParserTestCase, unittest.TestCase):
     extension = 'jpg'
 
     def get_jpeg_filename(self, contents_filename):
-        jpeg_filename = self.get_temp_filename()
-        jpeg_filename += ".jpeg"
+        temp_filename = self.get_temp_filename()
+        jpeg_filename = temp_filename + ".jpeg"
+        os.remove(temp_filename)
         shutil.copyfile(contents_filename, jpeg_filename)
         return jpeg_filename
 
