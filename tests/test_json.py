@@ -3,5 +3,5 @@ import unittest
 import base
 
 
-class JsonTestCase(unittest.TestCase, base.BaseParserTestCase):
+class JsonTestCase(base.BaseParserTestCase, unittest.TestCase):
     extension = 'json'

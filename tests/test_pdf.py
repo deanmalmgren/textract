@@ -26,8 +26,4 @@ class PdfTestCase(unittest.TestCase, base.ShellParserTestCase):
         )
 
         # make sure textract can successfully run
-        temp_filename = self.get_temp_filename()
-        self.assertSuccessfulCommand(
-            "textract '%(filename)s' > %(temp_filename)s" % locals()
-        )
-        os.remove(temp_filename)
+        self.assertSuccessfulTextract(filename)

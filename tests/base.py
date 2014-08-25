@@ -84,13 +84,27 @@ class BaseParserTestCase(object):
         """Make sure raw text matches from python"""
         self.compare_python_output(self.raw_text_filename)
 
-    # def test_standardized_text_cli(self):
-    #     """Make sure standardized text matches from the command line"""
-    #     self.compare_cli_output(self.standardized_text_filename)
+    def test_standardized_text_cli(self):
+        """Make sure standardized text matches from the command line"""
+        temp_filename = self.assertSuccessfulTextract(
+            self.standardized_text_filename,
+            cleanup=False,
+        )
+        with open(temp_filename) as stream:
+            self.assertEqual(
+                ''.join(stream.read().split()),
+                self.get_standardized_text(),
+            )
+        os.remove(temp_filename)
 
-    # def test_standardized_text_python(self):
-    #     """Make sure standardized text matches from python"""
-    #     self.compare_python_output(self.standardized_text_filename)
+    def test_standardized_text_python(self):
+        """Make sure standardized text matches from python"""
+        import textract
+        result = textract.process(self.standardized_text_filename)
+        self.assertEqual(
+            ''.join(result.split()),
+            self.get_standardized_text(),
+        )
 
     # def test_unicode_text_cli(self):
     #     """Make sure unicode text matches from the command line"""
@@ -111,28 +125,49 @@ class BaseParserTestCase(object):
         stream.close()
         return stream.name
 
+    def get_cli_options(self, **kwargs):
+        option = ''
+        for key, val in kwargs.iteritems():
+            option += '--%s=%s ' % (key, val)
+        return option
+
+    def get_standardized_text(self):
+        return "the quick brown fox jumps over the lazy dog".replace(' ','')
+
     def assertSuccessfulCommand(self, command):
         self.assertEqual(
             0, subprocess.call(command, shell=True),
             "COMMAND FAILED: %(command)s" % locals()
         )
 
-    def compare_cli_output(self, filename, expected_filename=None, **kwargs):
-        if expected_filename is None:
-            expected_filename = self.get_expected_filename(filename, **kwargs)
+    def assertSuccessfulTextract(self, filename, cleanup=True, **kwargs):
 
         # construct the option string
-        option = ''
-        for key, val in kwargs.iteritems():
-            option += '--%s=%s ' % (key, val)
+        option = self.get_cli_options()
 
         # run the command and make sure everything worked correctly
         temp_filename = self.get_temp_filename()
         self.assertSuccessfulCommand(
             "textract %(option)s '%(filename)s' > %(temp_filename)s" % locals()
         )
+        if cleanup:
+            os.remove(temp_filename)
+            return None
+        else:
+            return temp_filename
+
+    def compare_cli_output(self, filename, expected_filename=None, **kwargs):
+        if expected_filename is None:
+            expected_filename = self.get_expected_filename(filename, **kwargs)
+
+        # run the command and make sure everything worked correctly
+        temp_filename = self.assertSuccessfulTextract(
+            filename,
+            cleanup=False,
+            **kwargs
+        )
         self.assertSuccessfulCommand(
-            "diff %(temp_filename)s %(expected_filename)s" % locals()
+            "diff '%(temp_filename)s' '%(expected_filename)s'" % locals()
         )
         os.remove(temp_filename)
 
