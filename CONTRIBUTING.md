@@ -50,12 +50,20 @@ add support for hitherto unsupported file type `.abc123`:
   `textract.parsers.utils.ShellParser` and implements the
   `extract(self, filename, **kwargs)` method
 
-#49TODO 
+* add a test file in `tests/abc123/raw_text.abc123`, run textract on
+  it like this `textract tests/abc123/raw_text.abc123 >
+  tests/abc123/raw_text.txt`, and add the basic test suite by creating
+  a file called `tests/test_abc123.py` with content that looks
+  something like this:
 
-* add a test file in `tests/abc123/some_filename_that_you_like.abc123`
-  and add it to the functional test suite in
-  `tests/run_functional_tests.sh`. After running this script the first
-  time, you'll see how you can correctly specify the md5 checksum.
+  ```python
+  import unittest
+
+  import base
+
+  class Abc123TestCase(unittest.TestCase, base.BaseParserTestCase):
+      extension = 'abc123'
+  ```
 
 * if your package relies on any external sources, be sure to add them
   in either `requirements/python` (for python packages) or

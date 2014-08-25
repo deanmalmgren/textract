@@ -35,10 +35,10 @@ Quick start
         git clone https://github.com/YOUR-USERNAME/textract.git
 
 2. Contribute! There are several `open issues
-   <https://github.com/deanmalmgren/textract/issues>`_ that provide good
-   places to dig in. Check out the `contribution guidelines
-   <https://github.com/deanmalmgren/textract/blob/master/CONTRIBUTING.md>`_ and send
-   pull requests; your help is greatly appreciated!
+   <https://github.com/deanmalmgren/textract/issues>`_ that provide
+   good places to dig in. Check out the `contribution guidelines
+   <https://github.com/deanmalmgren/textract/blob/master/CONTRIBUTING.md>`_
+   and send pull requests; your help is greatly appreciated!
 
 Depending on your development preferences, there are lots of ways to
 get started developing with textract:
@@ -72,8 +72,8 @@ Developing in a native Ubuntu environment
    LTS server, just like the virtual machine and the server that runs
    the travis-ci test suite. There are some other tests that have been
    added along the way in the `Travis configuration
-   <https://github.com/deanmalmgren/textract/blob/master/.travis.yml>`_. For your
-   convenience, you can run all of these tests with:
+   <https://github.com/deanmalmgren/textract/blob/master/.travis.yml>`_. For
+   your convenience, you can run all of these tests with:
 
    .. code-block:: bash
 
