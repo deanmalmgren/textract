@@ -81,8 +81,10 @@ class BaseParserTestCase(object):
     #     """Make sure unicode text matches from python"""
     #     self.compare_python_output(self.unicode_text_filename)
 
-    def get_expected_filename(self, filename):
+    def get_expected_filename(self, filename, **kwargs):
         basename, extension = os.path.splitext(filename)
+        if kwargs.get('method'):
+            basename += '-m=' + kwargs.get('method')
         return basename + '.txt'
 
     def get_temp_filename(self):
@@ -96,25 +98,31 @@ class BaseParserTestCase(object):
             "COMMAND FAILED: %(command)s" % locals()
         )
 
-    def compare_cli_output(self, filename, expected_filename=None):
+    def compare_cli_output(self, filename, expected_filename=None, **kwargs):
         if expected_filename is None:
-            expected_filename = self.get_expected_filename(filename)
+            expected_filename = self.get_expected_filename(filename, **kwargs)
 
+        # construct the option string
+        option = ''
+        for key, val in kwargs.iteritems():
+            option += '--%s=%s ' % (key, val)
+
+        # run the command and make sure everything worked correctly
         temp_filename = self.get_temp_filename()
         self.assertSuccessfulCommand(
-           "textract '%(filename)s' > %(temp_filename)s" % locals()
+            "textract %(option)s '%(filename)s' > %(temp_filename)s" % locals()
         )
         self.assertSuccessfulCommand(
             "diff %(temp_filename)s %(expected_filename)s" % locals()
         )
         os.remove(temp_filename)
 
-    def compare_python_output(self, filename, expected_filename=None):
+    def compare_python_output(self, filename, expected_filename=None, **kwargs):
         if expected_filename is None:
-            expected_filename = self.get_expected_filename(filename)
+            expected_filename = self.get_expected_filename(filename, **kwargs)
 
         import textract
-        result = textract.process(filename)
+        result = textract.process(filename, **kwargs)
         with open(expected_filename) as stream:
             self.assertEqual(result, stream.read())
 
