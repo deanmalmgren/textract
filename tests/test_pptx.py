@@ -3,5 +3,5 @@ import unittest
 import base
 
 
-class PptxTestCase(unittest.TestCase, base.BaseParserTestCase):
+class PptxTestCase(base.BaseParserTestCase, unittest.TestCase):
     extension = 'pptx'

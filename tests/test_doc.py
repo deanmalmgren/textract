@@ -3,5 +3,5 @@ import unittest
 import base
 
 
-class DocTestCase(unittest.TestCase, base.ShellParserTestCase):
+class DocTestCase(base.ShellParserTestCase, unittest.TestCase):
     extension = 'doc'

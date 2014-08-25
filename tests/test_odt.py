@@ -3,5 +3,5 @@ import unittest
 import base
 
 
-class OdtTestCase(unittest.TestCase, base.BaseParserTestCase):
+class OdtTestCase(base.BaseParserTestCase, unittest.TestCase):
     extension = 'odt'

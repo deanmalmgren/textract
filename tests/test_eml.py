@@ -3,5 +3,5 @@ import unittest
 import base
 
 
-class EmlTestCase(unittest.TestCase, base.BaseParserTestCase):
+class EmlTestCase(base.BaseParserTestCase, unittest.TestCase):
     extension = 'eml'

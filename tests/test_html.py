@@ -3,5 +3,5 @@ import unittest
 import base
 
 
-class HtmlTestCase(unittest.TestCase, base.BaseParserTestCase):
+class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
     extension = 'html'

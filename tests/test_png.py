@@ -3,5 +3,5 @@ import unittest
 import base
 
 
-class PngTestCase(unittest.TestCase, base.ShellParserTestCase):
+class PngTestCase(base.ShellParserTestCase, unittest.TestCase):
     extension = 'png'

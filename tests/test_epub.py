@@ -3,5 +3,5 @@ import unittest
 import base
 
 
-class EpubTestCase(unittest.TestCase, base.BaseParserTestCase):
+class EpubTestCase(base.BaseParserTestCase, unittest.TestCase):
     extension = 'epub'

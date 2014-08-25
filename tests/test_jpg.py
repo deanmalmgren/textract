@@ -5,7 +5,7 @@ import os
 import base
 
 
-class JpgTestCase(unittest.TestCase, base.ShellParserTestCase):
+class JpgTestCase(base.ShellParserTestCase, unittest.TestCase):
     extension = 'jpg'
 
     def get_jpeg_filename(self, contents_filename):

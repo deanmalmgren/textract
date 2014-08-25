@@ -3,5 +3,5 @@ import unittest
 import base
 
 
-class TxtTestCase(unittest.TestCase, base.BaseParserTestCase):
+class TxtTestCase(base.BaseParserTestCase, unittest.TestCase):
     extension = 'txt'

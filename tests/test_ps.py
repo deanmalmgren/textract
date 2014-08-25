@@ -3,5 +3,5 @@ import unittest
 import base
 
 
-class PsTestCase(unittest.TestCase, base.ShellParserTestCase):
+class PsTestCase(base.ShellParserTestCase, unittest.TestCase):
     extension = 'ps'

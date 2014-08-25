@@ -4,7 +4,7 @@ import os
 import base
 
 
-class PdfTestCase(unittest.TestCase, base.ShellParserTestCase):
+class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
     extension = 'pdf'
 
     def test_pdfminer_python(self):
