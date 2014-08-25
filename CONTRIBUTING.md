@@ -51,15 +51,22 @@ add support for hitherto unsupported file type `.abc123`:
   `extract(self, filename, **kwargs)` method
 
 * add a test file in `tests/abc123/raw_text.abc123`, run textract on
-  it like this `textract tests/abc123/raw_text.abc123 >
-  tests/abc123/raw_text.txt`, and add the basic test suite by creating
+  it like this:
+
+  ```shell
+  textract tests/abc123/raw_text.abc123 > tests/abc123/raw_text.txt
+  ```
+
+  and add the basic test suite by creating
   a file called `tests/test_abc123.py` with content that looks
   something like this:
 
   ```python
+  # tests/test_abc123.py
   import unittest
 
   import base
+
 
   class Abc123TestCase(unittest.TestCase, base.BaseParserTestCase):
       extension = 'abc123'
