@@ -143,7 +143,7 @@ class BaseParserTestCase(object):
     def assertSuccessfulTextract(self, filename, cleanup=True, **kwargs):
 
         # construct the option string
-        option = self.get_cli_options()
+        option = self.get_cli_options(**kwargs)
 
         # run the command and make sure everything worked correctly
         temp_filename = self.get_temp_filename()
