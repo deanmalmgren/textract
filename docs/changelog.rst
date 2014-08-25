@@ -9,6 +9,11 @@ track version numbers, where backwards incompatible changes
 latest changes in development for next release
 ----------------------------------------------
 
+.. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
+
+1.0.0
+-----
+
 * **standardized encoding of output with ``-e/--encoding`` option**
   (`#39`_)
 
@@ -34,6 +39,8 @@ latest changes in development for next release
   * switching to using a python-based test suite and added
     standardized text tests to make sure output is consistent across
     file types (`#49`_)
+
+  * including support for Docker-based testing (`#46`_ by `@ShawnMilo`_)
 
 
 0.5.1
@@ -143,6 +150,7 @@ latest changes in development for next release
 .. _#41: https://github.com/deanmalmgren/textract/issues/41
 .. _#42: https://github.com/deanmalmgren/textract/issues/42
 .. _#44: https://github.com/deanmalmgren/textract/issues/44
+.. _#46: https://github.com/deanmalmgren/textract/issues/46
 .. _#48: https://github.com/deanmalmgren/textract/issues/48
 .. _#49: https://github.com/deanmalmgren/textract/issues/49
 .. _#53: https://github.com/deanmalmgren/textract/issues/53
