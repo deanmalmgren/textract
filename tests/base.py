@@ -3,6 +3,8 @@ import subprocess
 import tempfile
 import shutil
 
+import requests
+
 
 class BaseParserTestCase(object):
     """This BaseParserTestCase object is used to collect a bunch of
@@ -27,11 +29,16 @@ class BaseParserTestCase(object):
                 'need to specify `extension` class attribute on test case'
             )
 
+    def get_extension_directory(self):
+        return os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            self.extension,
+        )
+
     def get_filename(self, filename_root, default_filename_root):
         if filename_root:
             filename = os.path.join(
-                os.path.dirname(os.path.abspath(__file__)),
-                self.extension,
+                self.get_extension_directory(),
                 filename_root + '.' + self.extension,
             )
             if not os.path.exists(filename):
@@ -41,6 +48,18 @@ class BaseParserTestCase(object):
                 ) % locals())
             return filename
         return self.get_filename(default_filename_root, default_filename_root)
+
+    def download_file(self, url, filename):
+        if not os.path.exists(filename):
+
+            # stream the request to make sure it works correctly
+            # http://stackoverflow.com/a/16696317/564709
+            response = requests.get(url, stream=True)
+            with open(filename, 'wb') as stream:
+                for chunk in response.iter_content(chunk_size=1024): 
+                    if chunk: # filter out keep-alive new chunks
+                        stream.write(chunk)
+                        stream.flush()
         
     @property
     def raw_text_filename(self):

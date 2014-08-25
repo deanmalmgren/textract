@@ -54,3 +54,6 @@ docs/textract/
 
 # vagrant
 .vagrant
+
+# ignore big testing files that are dynamically downloaded
+tests/pdf/large.pdf
