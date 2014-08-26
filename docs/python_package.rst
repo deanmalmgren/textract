@@ -145,6 +145,14 @@ textract.parsers.utils module
     :undoc-members:
     :show-inheritance:
 
+textract.parsers.wav_parser module
+----------------------------------
+
+.. automodule:: textract.parsers.wav_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 textract.parsers.xls_parser module
 ----------------------------------
 

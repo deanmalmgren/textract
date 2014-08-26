@@ -70,7 +70,7 @@ file types by either mentioning them on the `issue tracker
 
 * ``.txt`` via python builtins
 
-* ``.wav`` via `SpeechRecognition <https://pypi.python.org/pypi/SpeechRecognition/>`_
+* ``.wav`` via `SpeechRecognition`_
 
 * ``.xlsx`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
 

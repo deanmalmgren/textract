@@ -11,6 +11,9 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+* support for ``.wav`` files (`#56`_ by `@arvindch`_)
+
+
 1.0.0
 -----
 
@@ -20,8 +23,6 @@ latest changes in development for next release
 * support for ``.xls`` and ``.xlsx`` files (`#42`_ and `#55`_ by `@levivm`_)
 
 * support for ``.epub`` files (`#40`_ by `@kokxx`_)
-
-* support for ``.wav`` files (`#35`_ by `@arvindch`_)
 
 * several bug fixes, including:
 
@@ -158,5 +159,5 @@ latest changes in development for next release
 .. _#49: https://github.com/deanmalmgren/textract/issues/49
 .. _#53: https://github.com/deanmalmgren/textract/issues/53
 .. _#55: https://github.com/deanmalmgren/textract/issues/55
-.. _#35: https://github.com/deanmalmgren/textract/issues/35
+.. _#56: https://github.com/deanmalmgren/textract/issues/56
 
