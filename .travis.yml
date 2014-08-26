@@ -19,4 +19,4 @@ script:
 
 # commands to run after the tests successfully complete
 after_success:
-  - coveralls debug
+  - coveralls
