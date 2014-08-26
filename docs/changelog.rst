@@ -21,6 +21,8 @@ latest changes in development for next release
 
 * support for ``.epub`` files (`#40`_ by `@kokxx`_)
 
+* support for ``.wav`` files (`#35`_ by `@arvindch`_)
+
 * several bug fixes, including:
 
   * removing tesseract version info from output of image parsers
@@ -126,6 +128,7 @@ latest changes in development for next release
 .. _@levivm: https://github.com/levivm
 .. _@kokxx: https://github.com/Kokxx
 .. _@ShawnMilo: https://github.com/ShawnMilo
+.. _@arvindch: https://github.com/arvindch
 
 
 .. list of issues that have been resolved. putting links here to make
@@ -155,4 +158,5 @@ latest changes in development for next release
 .. _#49: https://github.com/deanmalmgren/textract/issues/49
 .. _#53: https://github.com/deanmalmgren/textract/issues/53
 .. _#55: https://github.com/deanmalmgren/textract/issues/55
+.. _#35: https://github.com/deanmalmgren/textract/issues/35
 
