@@ -8,4 +8,4 @@ pdfminer==20140328
 beautifulsoup4
 xlrd
 EbookLib
-SpeechRecognition
+SpeechRecognition>=1.1.0
