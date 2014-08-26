@@ -17,7 +17,7 @@ class Parser(BaseParser):
 
         try:
             speech = r.recognize(audio)
-        except LookupError:
-            speech = 'Could not understand audio.'
+        except LookupError:  # audio is not understandable
+            speech = ''
 
         return speech
