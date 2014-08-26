@@ -4,7 +4,6 @@ import StringIO
 
 from .utils import BaseParser
 
-
 class Parser(BaseParser):
     """Extract text from open document files.
     """
@@ -23,9 +22,8 @@ class Parser(BaseParser):
     def to_string(self):
         """ Converts the document to a string. """
         buff = u""
-        for val in ["text:p", "text:h", "text:list"]:
-            for paragraph in self.content.getElementsByTagName(val):
-                buff += self.text_to_string(paragraph) + "\n"
+        for paragraph in self.content.getElementsByTagName("text:p"):
+            buff += self.text_to_string(paragraph) + "\n"
         return buff
 
     def text_to_string(self, element):
