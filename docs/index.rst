@@ -70,10 +70,15 @@ file types by either mentioning them on the `issue tracker
 
 * ``.txt`` via python builtins
 
-* ``.xls`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
+* ``.wav`` via `SpeechRecognition <https://pypi.python.org/pypi/SpeechRecognition/>`_
 
 * ``.xlsx`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
 
+* ``.xls`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
+
+Please recommend other file types by either mentioning them on the
+`issue tracker <https://github.com/deanmalmgren/textract/issues>`_ or
+by :ref:`contributing <contributing>`
 
 .. this is a list of all the packages that textract uses for extraction
 .. _tesseract-ocr: https://code.google.com/p/tesseract-ocr/
@@ -85,6 +90,7 @@ file types by either mentioning them on the `issue tracker
 .. _pdfminer: https://euske.github.io/pdfminer/
 .. _ps2text: http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm
 .. _ebooklib: https://github.com/aerkalov/ebooklib
+.. _SpeechRecognition: https://pypi.python.org/pypi/SpeechRecognition/
 
 .. _related-projects:
 
