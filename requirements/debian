@@ -16,6 +16,9 @@ poppler-utils
 # parse postscript files
 pstotext
 
+# parse audio files, with SpeechRecognition
+flac
+
 # ubuntu 14.04 requires this in addition to libxml2-dev and
 # libxslt1-dev for compiling lxml.
 # https://github.com/deanmalmgren/textract/issues/19
