@@ -4,6 +4,7 @@ import StringIO
 
 from .utils import BaseParser
 
+
 class Parser(BaseParser):
     """Extract text from open document files.
     """
