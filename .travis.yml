@@ -13,6 +13,10 @@ install:
 
 # command to run tests, e.g. python setup.py test
 script:
- - nosetests
- - pep8 textract/ bin/textract
- - cd docs && make html
+  - nosetests --with-coverage --cover-package=textract
+  - pep8 textract/ bin/textract
+  - cd docs && make html && cd -
+
+# commands to run after the tests successfully complete
+after_success:
+  - coveralls

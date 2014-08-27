@@ -5,7 +5,9 @@
 # needed for tests/run.py script to read .travis.yml file
 PyYAML
 pep8
+coveralls
 requests
+nose
 
 # for documentation
 sphinx

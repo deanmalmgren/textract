@@ -14,6 +14,9 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+* support for ``.wav`` files (`#56`_ by `@arvindch`_)
+
+
 1.0.0
 -----
 
@@ -129,6 +132,7 @@ latest changes in development for next release
 .. _@levivm: https://github.com/levivm
 .. _@kokxx: https://github.com/Kokxx
 .. _@ShawnMilo: https://github.com/ShawnMilo
+.. _@arvindch: https://github.com/arvindch
 
 
 .. list of issues that have been resolved. putting links here to make
@@ -158,4 +162,5 @@ latest changes in development for next release
 .. _#49: https://github.com/deanmalmgren/textract/issues/49
 .. _#53: https://github.com/deanmalmgren/textract/issues/53
 .. _#55: https://github.com/deanmalmgren/textract/issues/55
+.. _#56: https://github.com/deanmalmgren/textract/issues/56
 

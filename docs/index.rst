@@ -35,6 +35,13 @@ or the :ref:`python package <python-package>`
 Currently supporting
 --------------------
 
+textract supports a growing list of file types for text extraction. If
+you don't see your favorite file type here, Please recommend other
+file types by either mentioning them on the `issue tracker
+<https://github.com/deanmalmgren/textract/issues>`_ or by
+:ref:`contributing a pull request <contributing>`.
+
+
 * ``.doc`` via `antiword`_
 
 * ``.docx`` via `python-docx`_
@@ -63,9 +70,11 @@ Currently supporting
 
 * ``.txt`` via python builtins
 
-* ``.xls`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
+* ``.wav`` via `SpeechRecognition`_
 
 * ``.xlsx`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
+
+* ``.xls`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
 
 Please recommend other file types by either mentioning them on the
 `issue tracker <https://github.com/deanmalmgren/textract/issues>`_ or
@@ -81,6 +90,7 @@ by :ref:`contributing <contributing>`
 .. _pdfminer: https://euske.github.io/pdfminer/
 .. _ps2text: http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm
 .. _ebooklib: https://github.com/aerkalov/ebooklib
+.. _SpeechRecognition: https://pypi.python.org/pypi/SpeechRecognition/
 
 .. _related-projects:
 
@@ -91,14 +101,14 @@ Of course, textract isn't the first project with the aim to provide a
 simple interface for extracting text from any document. But this is,
 to the best of my knowledge, the only project that is written in
 python (a language commonly chosen by the natural language processing
-community) and is method agnostic about how content is extracted (more
-on this :ref:`here <contributing>`). Here is a small sample of similar
-projects (feel free to add to the list):
+community) and is :ref:`method agnostic about how content is extracted
+<contributing>`. I'm sure that there are other similar projects out
+there, but here is a small sample of similar projects:
 
 * `Apache Tika <http://tika.apache.org/>`_ has `very similar, if not
   identical, aims as textract
-  <https://github.com/deanmalmgren/textract/issues/12>`_. It has
-  impressive coverage of a wide range of file formats and is written
+  <https://github.com/deanmalmgren/textract/issues/12>`_ and has
+  impressive coverage of a wide range of file formats. It is written
   in java.
 
 * `textract (node.js) <https://github.com/dbashford/textract>`_ has
