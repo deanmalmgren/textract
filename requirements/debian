@@ -19,6 +19,9 @@ pstotext
 # parse audio files, with SpeechRecognition
 flac
 
+# convert audio files
+sox
+
 # ubuntu 14.04 requires this in addition to libxml2-dev and
 # libxslt1-dev for compiling lxml.
 # https://github.com/deanmalmgren/textract/issues/19
