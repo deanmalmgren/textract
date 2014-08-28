@@ -19,6 +19,11 @@ pstotext
 # parse audio files, with SpeechRecognition
 flac
 
+# filetype conversion libraries
+ffmpeg
+lame
+libmad0
+
 # convert audio files
 sox
 
