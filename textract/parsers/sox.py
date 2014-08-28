@@ -8,6 +8,9 @@ from .utils import ShellParser
 class Parser(ShellParser):
     """
     Convert file to .wav, for use with wav_parser
+    Note: for testing, use -
+    http://www.text2speech.org/,
+    with American Male 2 for best results
     """
 
     def extract(self, filename, **kwargs):
