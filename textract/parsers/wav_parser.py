@@ -6,7 +6,8 @@ from .utils import BaseParser
 class Parser(BaseParser):
     """
     Extract text (i.e. speech) from an audio file, using SpeechRecognition.
-    Only works with .wav files, for now.
+    SpeechRecognition expects a .wav file, with one channel
+    So the audio file has to be converted, if not compliant
     Note: for testing, use -
     http://www2.research.att.com/~ttsweb/tts/demo.php,
     with Rich (US English) for best results
