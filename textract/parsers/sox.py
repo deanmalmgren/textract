@@ -15,10 +15,10 @@ class Parser(ShellParser):
 
     def extract(self, filename, **kwargs):
         command = (
-            'sox -G -c 1 "{0}" {1}.wav && '
-            'textract {1}.wav && '
-            'rm -f {1}.wav'
+            'sox -G -c 1 "%(filename)s" {0}.wav && '
+            'textract {0}.wav && '
+            'rm -f {0}.wav'
         )
         temp_filename = self.temp_filename()
-        stdout, _ = self.run(command.format(filename, temp_filename))
+        stdout, _ = self.run(command.format(temp_filename) % locals())
         return stdout
