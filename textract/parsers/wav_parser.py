@@ -24,4 +24,7 @@ class Parser(BaseParser):
         except LookupError:  # audio is not understandable
             speech = ''
 
+        # add a newline, to make output cleaner
+        speech += '\n'
+
         return speech
