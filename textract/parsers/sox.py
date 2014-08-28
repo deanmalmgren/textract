@@ -12,7 +12,7 @@ class Parser(ShellParser):
 
     def extract(self, filename, **kwargs):
         command = (
-            'sox "{0}" {1}.wav channels 1 && '
+            'sox -G -c 1 "{0}" {1}.wav && '
             'textract {1}.wav && '
             'rm -f {1}.wav'
         )
