@@ -48,7 +48,7 @@ add support for hitherto unsupported file type `.abc123`:
 * write a `Parser` class in `textract/parsers/abc123_parser.py` that
   inherits from `textract.parsers.utils.BaseParser` or
   `textract.parsers.utils.ShellParser` and implements the
-  `extract(self, filename, **kwargs)` method
+  `extract(self, filename, **kwargs)` method.
 
 * add a test file in `tests/abc123/raw_text.abc123`, run textract on
   it like this:
@@ -71,6 +71,9 @@ add support for hitherto unsupported file type `.abc123`:
   class Abc123TestCase(unittest.TestCase, base.BaseParserTestCase):
       extension = 'abc123'
   ```
+
+  now you should be able to run tests on your parser with `nosetests
+  tests/test_abc123.py` or the tests for every parser with `nosetests`.
 
 * if your package relies on any external sources, be sure to add them
   in either `requirements/python` (for python packages) or
