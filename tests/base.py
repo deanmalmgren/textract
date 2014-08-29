@@ -6,7 +6,19 @@ import shutil
 import requests
 
 
-class BaseParserTestCase(object):
+class GenericUtilities(object):
+
+    def get_temp_filename(self, extension=None):
+        stream = tempfile.NamedTemporaryFile(delete=False)
+        stream.close()
+        filename = stream.name
+        if not extension is None:
+            filename += '.' + extension
+            shutil.move(stream.name, filename)
+        return filename
+
+
+class BaseParserTestCase(GenericUtilities):
     """This BaseParserTestCase object is used to collect a bunch of
     standardized tests that should be run for every BaseParser.
     """
@@ -119,11 +131,6 @@ class BaseParserTestCase(object):
         if kwargs.get('method'):
             basename += '-m=' + kwargs.get('method')
         return basename + '.txt'
-
-    def get_temp_filename(self):
-        stream = tempfile.NamedTemporaryFile(delete=False)
-        stream.close()
-        return stream.name
 
     def get_cli_options(self, **kwargs):
         option = ''

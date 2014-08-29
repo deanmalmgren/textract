@@ -25,6 +25,7 @@ def main():
         output = process(**vars(args))
     except CommandLineError as ex:
         sys.stderr.write(red(ex) + '\n')
+        sys.exit(1)
     else:
         args.output.write(output)
 
