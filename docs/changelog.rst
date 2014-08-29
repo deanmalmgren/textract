@@ -9,12 +9,13 @@ track version numbers, where backwards incompatible changes
 latest changes in development for next release
 ----------------------------------------------
 
-* odt parser bug fix (`#57`_ by `@levivm`_)
-
-
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
 * support for ``.wav`` files (`#56`_ by `@arvindch`_)
+
+* several bug fixes, including:
+
+  * odt parser bug fix (`#61`_ by `@levivm`_)
 
 
 1.0.0
@@ -162,5 +163,5 @@ latest changes in development for next release
 .. _#49: https://github.com/deanmalmgren/textract/issues/49
 .. _#53: https://github.com/deanmalmgren/textract/issues/53
 .. _#55: https://github.com/deanmalmgren/textract/issues/55
-.. _#56: https://github.com/deanmalmgren/textract/issues/56
+.. _#61: https://github.com/deanmalmgren/textract/issues/61
 
