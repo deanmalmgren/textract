@@ -42,6 +42,8 @@ file types by either mentioning them on the `issue tracker
 :ref:`contributing a pull request <contributing>`.
 
 
+* ``.csv`` via python builtins
+
 * ``.doc`` via `antiword`_
 
 * ``.docx`` via `python-docx`_
@@ -81,16 +83,16 @@ Please recommend other file types by either mentioning them on the
 by :ref:`contributing <contributing>`
 
 .. this is a list of all the packages that textract uses for extraction
-.. _tesseract-ocr: https://code.google.com/p/tesseract-ocr/
-.. _python-docx: https://python-docx.readthedocs.org/en/latest/
 .. _antiword: http://www.winfield.demon.nl/
 .. _beautifulsoup4: http://beautiful-soup-4.readthedocs.org/en/latest/
-.. _python-pptx: https://python-pptx.readthedocs.org/en/latest/
-.. _pdftotext: http://poppler.freedesktop.org/
-.. _pdfminer: https://euske.github.io/pdfminer/
-.. _ps2text: http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm
 .. _ebooklib: https://github.com/aerkalov/ebooklib
+.. _pdfminer: https://euske.github.io/pdfminer/
+.. _pdftotext: http://poppler.freedesktop.org/
+.. _ps2text: http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm
+.. _python-docx: https://python-docx.readthedocs.org/en/latest/
+.. _python-pptx: https://python-pptx.readthedocs.org/en/latest/
 .. _SpeechRecognition: https://pypi.python.org/pypi/SpeechRecognition/
+.. _tesseract-ocr: https://code.google.com/p/tesseract-ocr/
 
 .. _related-projects:
 

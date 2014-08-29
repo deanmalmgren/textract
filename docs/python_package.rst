@@ -17,6 +17,14 @@ For completeness, we also include here the documentation for specific
 file extension parsers as well as a few other essential bits in the
 ``textract.exceptions`` and ``textract.shell`` module.
 
+textract.parsers.csv_parser module
+----------------------------------
+
+.. automodule:: textract.parsers.csv_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 textract.parsers.doc_parser module
 ----------------------------------
 

@@ -13,6 +13,8 @@ latest changes in development for next release
 
 * support for ``.wav`` files (`#56`_ by `@arvindch`_)
 
+* support for ``.csv`` files (`#64`_)
+
 * several bug fixes, including:
 
   * odt parser bug fix (`#61`_ by `@levivm`_)
@@ -164,4 +166,4 @@ latest changes in development for next release
 .. _#53: https://github.com/deanmalmgren/textract/issues/53
 .. _#55: https://github.com/deanmalmgren/textract/issues/55
 .. _#61: https://github.com/deanmalmgren/textract/issues/61
-
+.. _#64: https://github.com/deanmalmgren/textract/issues/64
