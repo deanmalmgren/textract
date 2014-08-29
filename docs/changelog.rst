@@ -9,6 +9,9 @@ track version numbers, where backwards incompatible changes
 latest changes in development for next release
 ----------------------------------------------
 
+* odt parser bug fix (`#57`_ by `@levivm`_)
+
+
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
 * support for ``.wav`` files (`#56`_ by `@arvindch`_)
