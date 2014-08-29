@@ -6,6 +6,9 @@ import base
 
 
 class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
+    """This class contains a bunch of tests to make sure that textract
+    fails in expected ways.
+    """
 
     def test_unsupported_extension_cli(self):
         """Make sure unsupported extension exits with non-zero status"""
