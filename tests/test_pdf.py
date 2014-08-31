@@ -15,6 +15,11 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
         """make sure pdfminer command line output is correct"""
         self.compare_cli_output(self.raw_text_filename, method='pdfminer')
 
+    def test_tesseract_cli(self):
+        """make sure tesseract command line output is correct"""
+        filename = self.get_filename(self.raw_text_filename_root, "ocr_text")
+        self.compare_cli_output(filename, method='tesseract')
+
     def test_large_pdf(self):
         """Make sure extraction does not hang (issue #33)"""
 
