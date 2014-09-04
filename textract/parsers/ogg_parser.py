@@ -1,1 +1,1 @@
-from .sox import Parser
+from .speech_recog import Parser
