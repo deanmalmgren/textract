@@ -1,1 +1,1 @@
-from .speech_recog import Parser
+from .audio import Parser

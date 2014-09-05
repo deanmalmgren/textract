@@ -17,6 +17,14 @@ For completeness, we also include here the documentation for specific
 file extension parsers as well as a few other essential bits in the
 ``textract.exceptions`` and ``textract.shell`` module.
 
+textract.parsers.audio module
+-----------------------------
+
+.. automodule:: textract.parsers.audio
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 textract.parsers.csv_parser module
 ----------------------------------
 
@@ -69,6 +77,14 @@ textract.parsers.html_parser module
 -----------------------------------
 
 .. automodule:: textract.parsers.html_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+textract.parsers.image module
+-----------------------------
+
+.. automodule:: textract.parsers.image
     :members:
     :undoc-members:
     :show-inheritance:
@@ -141,22 +157,6 @@ textract.parsers.ps_parser module
 ---------------------------------
 
 .. automodule:: textract.parsers.ps_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.sox module
----------------------------
-
-.. automodule:: textract.parsers.sox
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.tesseract module
----------------------------------
-
-.. automodule:: textract.parsers.tesseract
     :members:
     :undoc-members:
     :show-inheritance:

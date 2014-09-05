@@ -1,1 +1,1 @@
-from .tesseract import Parser
+from .image import Parser
