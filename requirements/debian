@@ -19,6 +19,16 @@ pstotext
 # parse audio files, with SpeechRecognition
 flac
 
+# filetype conversion libs
+ffmpeg
+lame
+libmad0
+# debian-specific lib
+libsox-fmt-mp3
+
+# convert audio files
+sox
+
 # ubuntu 14.04 requires this in addition to libxml2-dev and
 # libxslt1-dev for compiling lxml.
 # https://github.com/deanmalmgren/textract/issues/19

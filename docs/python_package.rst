@@ -89,10 +89,26 @@ textract.parsers.json_parser module
     :undoc-members:
     :show-inheritance:
 
+textract.parsers.mp3_parser module
+----------------------------------
+
+.. automodule:: textract.parsers.mp3_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 textract.parsers.odt_parser module
 ----------------------------------
 
 .. automodule:: textract.parsers.odt_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+textract.parsers.ogg_parser module
+----------------------------------
+
+.. automodule:: textract.parsers.ogg_parser
     :members:
     :undoc-members:
     :show-inheritance:
@@ -125,6 +141,14 @@ textract.parsers.ps_parser module
 ---------------------------------
 
 .. automodule:: textract.parsers.ps_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+textract.parsers.sox module
+---------------------------
+
+.. automodule:: textract.parsers.sox
     :members:
     :undoc-members:
     :show-inheritance:

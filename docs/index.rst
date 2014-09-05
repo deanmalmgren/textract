@@ -60,7 +60,11 @@ file types by either mentioning them on the `issue tracker
 
 * ``.html`` via `beautifulsoup4`_
 
+* ``.mp3`` via `SpeechRecognition`_ and `sox`_
+
 * ``.odt`` via python builtins
+
+* ``.ogg`` via `SpeechRecognition`_ and `sox`_
 
 * ``.pdf`` via `pdftotext`_ (default) or `pdfminer`_
 
@@ -92,6 +96,7 @@ by :ref:`contributing <contributing>`
 .. _python-docx: https://python-docx.readthedocs.org/en/latest/
 .. _python-pptx: https://python-pptx.readthedocs.org/en/latest/
 .. _SpeechRecognition: https://pypi.python.org/pypi/SpeechRecognition/
+.. _sox: http://sox.sourceforge.net/
 .. _tesseract-ocr: https://code.google.com/p/tesseract-ocr/
 
 .. _related-projects:
