@@ -58,7 +58,7 @@ file types by either mentioning them on the `issue tracker
 
 * ``.json`` via python builtins
 
-* ``.html`` via `beautifulsoup4`_
+* ``.html`` and ``.htm`` via `beautifulsoup4`_
 
 * ``.mp3`` via `SpeechRecognition`_ and `sox`_
 
