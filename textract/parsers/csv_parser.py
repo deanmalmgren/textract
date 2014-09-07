@@ -15,10 +15,11 @@ class Parser(BaseParser):
             sniffer = csv.Sniffer()
 
             # detect csv dialect info
-            csv_sample = str(csv_file.readlines()[0:2])
+            lines = csv_file.xreadlines()
+            csv_sample = [next(lines) for _ in xrange(2)]
+            csv_file.seek(0)
             dialect = sniffer.sniff(str(csv_sample))
 
-            csv_file.seek(0)
             csv_reader = csv.reader(csv_file, dialect)
 
             # skip header line, if present
