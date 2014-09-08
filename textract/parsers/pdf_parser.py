@@ -4,7 +4,7 @@ from tempfile import mkdtemp, mkstemp
 from ..exceptions import UnknownMethod, ShellError
 
 from .utils import ShellParser
-from .tesseract import Parser as TesseractParser
+from .image import Parser as TesseractParser
 
 
 class Parser(ShellParser):
