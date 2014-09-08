@@ -12,8 +12,8 @@ cp tests/Dockerfile ./Dockerfile
 # Note: For speed, the image won't be automatically rebuilt. If the dependencies
 # change and the existing image is outdated, just delete it with:
 # docker rmi <image name>
-docker images | grep $image || docker build -t $image
-docker run --rm -v $base:/textract/ $image
+docker images | grep $image || docker build -t $image .
+docker run --rm -v $base:/home/textract/src $image
 
 rm ./Dockerfile
 
