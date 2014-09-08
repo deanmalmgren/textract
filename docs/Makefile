@@ -53,12 +53,12 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 apidoc:
-	$(APIDOC) --force --no-toc ../textract --output-dir=./textract $(APIDOC_IGNORE)
-	@cat python_package > python_package.rst
-	@grep -A8 " module" textract/textract.parsers.rst >> python_package.rst
-	@echo "" >> python_package.rst
-	@grep -A8 " module" textract/textract.rst >> python_package.rst
-	@rm -rf ./textract
+#	$(APIDOC) --force --no-toc ../textract --output-dir=./textract $(APIDOC_IGNORE)
+#	@cat python_package > python_package.rst
+#	@grep -A8 " module" textract/textract.parsers.rst >> python_package.rst
+#	@echo "" >> python_package.rst
+#	@grep -A8 " module" textract/textract.rst >> python_package.rst
+#	@rm -rf ./textract
 
 html: apidoc
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html

@@ -11,212 +11,63 @@ something like this::
     import textract
     text = textract.process('path/to/file.extension')
 
-to obtain text from a document.
+to obtain text from a document. You can also pass keyword arguments to
+``textract.process``, for example, to use a particular method for
+parsing a pdf like this::
 
-For completeness, we also include here the documentation for specific
-file extension parsers as well as a few other essential bits in the
-``textract.exceptions`` and ``textract.shell`` module.
+    import textract
+    text = textract.process('path/to/a.pdf', method='pdfminer')
 
-textract.parsers.audio module
------------------------------
+or to specify a particular output encoding (input encodings are
+inferred using `chardet <https://github.com/chardet/chardet>`_)::
 
-.. automodule:: textract.parsers.audio
+    import textract
+    text = textract.process('path/to/file.extension', encoding='ascii')
+
+
+A look under the hood
+---------------------
+
+When ``textract.process('path/to/file.extension')`` is called,
+``textract.process`` looks for a module called
+``textract.parsers.extension_parser`` that also contains a ``Parser``.
+
+
+.. autofunction:: textract.parsers.process
+
+Importantly, the ``textract.parsers.extension_parser.Parser`` class
+must inherit from ``textract.parsers.utils.BaseParser``.
+
+.. autoclass:: textract.parsers.utils.BaseParser
     :members:
     :undoc-members:
     :show-inheritance:
 
-textract.parsers.csv_parser module
-----------------------------------
+Many of the parsers rely on command line utilities to do some of the
+parsing. For convenience, the ``textract.parsers.utils.ShellParser``
+class includes some convenience methods for streamlining access to the
+command line.
 
-.. automodule:: textract.parsers.csv_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.doc_parser module
-----------------------------------
-
-.. automodule:: textract.parsers.doc_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.docx_parser module
------------------------------------
-
-.. automodule:: textract.parsers.docx_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.eml_parser module
-----------------------------------
-
-.. automodule:: textract.parsers.eml_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.epub_parser module
------------------------------------
-
-.. automodule:: textract.parsers.epub_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.gif_parser module
-----------------------------------
-
-.. automodule:: textract.parsers.gif_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.html_parser module
------------------------------------
-
-.. automodule:: textract.parsers.html_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.image module
------------------------------
-
-.. automodule:: textract.parsers.image
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.jpg_parser module
-----------------------------------
-
-.. automodule:: textract.parsers.jpg_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.json_parser module
------------------------------------
-
-.. automodule:: textract.parsers.json_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.mp3_parser module
-----------------------------------
-
-.. automodule:: textract.parsers.mp3_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.odt_parser module
-----------------------------------
-
-.. automodule:: textract.parsers.odt_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.ogg_parser module
-----------------------------------
-
-.. automodule:: textract.parsers.ogg_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.pdf_parser module
-----------------------------------
-
-.. automodule:: textract.parsers.pdf_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.png_parser module
-----------------------------------
-
-.. automodule:: textract.parsers.png_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.pptx_parser module
------------------------------------
-
-.. automodule:: textract.parsers.pptx_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.ps_parser module
----------------------------------
-
-.. automodule:: textract.parsers.ps_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.txt_parser module
-----------------------------------
-
-.. automodule:: textract.parsers.txt_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.utils module
------------------------------
-
-.. automodule:: textract.parsers.utils
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.wav_parser module
-----------------------------------
-
-.. automodule:: textract.parsers.wav_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.xls_parser module
-----------------------------------
-
-.. automodule:: textract.parsers.xls_parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-textract.parsers.xlsx_parser module
------------------------------------
-
-.. automodule:: textract.parsers.xlsx_parser
+.. autoclass:: textract.parsers.utils.ShellParser
     :members:
     :undoc-members:
     :show-inheritance:
 
 
+A few specific examples
+-----------------------
 
-textract.cli module
--------------------
+There are quite a few parsers included with ``textract``. Rather than
+elaborating all of them, here are a few that demonstrate how parsers
+work.
 
-.. automodule:: textract.cli
+.. autoclass:: textract.parsers.epub_parser.Parser
     :members:
     :undoc-members:
     :show-inheritance:
 
-textract.exceptions module
---------------------------
-
-.. automodule:: textract.exceptions
+.. autoclass:: textract.parsers.doc_parser.Parser
     :members:
     :undoc-members:
     :show-inheritance:
-
 
