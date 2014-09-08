@@ -15,11 +15,15 @@ latest changes in development for next release
 
 * support for ``.csv`` files (`#64`_)
 
+* support for scanned ``.pdf`` files with tesseract (`#66`_ by
+  `@pudo`_)
+
 * support for ``.htm`` files (`#69`_)
 
 * several bug fixes, including:
 
-  * ``.odt`` parser bug fix (`#61`_ by `@levivm`_)
+  * ``.odt`` parser now correctly extracts text in order (`#61`_ by
+    `@levivm`_)
 
 
 
@@ -134,11 +138,12 @@ latest changes in development for next release
    to make the text above relatively clean
 
 .. _@anthonygarvan: https://github.com/anthonygarvan
-.. _@christomitov: https://github.com/christomitov
-.. _@levivm: https://github.com/levivm
-.. _@kokxx: https://github.com/Kokxx
-.. _@ShawnMilo: https://github.com/ShawnMilo
 .. _@arvindch: https://github.com/arvindch
+.. _@christomitov: https://github.com/christomitov
+.. _@kokxx: https://github.com/Kokxx
+.. _@levivm: https://github.com/levivm
+.. _@pudo: https://github.com/pudo
+.. _@ShawnMilo: https://github.com/ShawnMilo
 
 
 .. list of issues that have been resolved. putting links here to make
@@ -170,8 +175,6 @@ latest changes in development for next release
 .. _#55: https://github.com/deanmalmgren/textract/issues/55
 .. _#56: https://github.com/deanmalmgren/textract/issues/56
 .. _#61: https://github.com/deanmalmgren/textract/issues/61
-<<<<<<< HEAD
-.. _#64: https://github.com/deanmalmgren/textract/issues/64
-=======
 .. _#62: https://github.com/deanmalmgren/textract/issues/62
->>>>>>> arvindch/more-audio-support
+.. _#64: https://github.com/deanmalmgren/textract/issues/64
+.. _#66: https://github.com/deanmalmgren/textract/issues/66
