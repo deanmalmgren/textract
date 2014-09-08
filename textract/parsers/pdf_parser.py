@@ -1,6 +1,10 @@
+import os
+from tempfile import mkdtemp, mkstemp
+
 from ..exceptions import UnknownMethod, ShellError
 
 from .utils import ShellParser
+from .tesseract import Parser as TesseractParser
 
 
 class Parser(ShellParser):
@@ -23,6 +27,8 @@ class Parser(ShellParser):
 
         elif method == 'pdfminer':
             return self.extract_pdfminer(filename)
+        elif method == 'tesseract':
+            return self.extract_tesseract(filename)
         else:
             raise UnknownMethod(method)
 
@@ -35,3 +41,16 @@ class Parser(ShellParser):
         """Extract text from pdfs using pdfminer."""
         stdout, _ = self.run('pdf2txt.py "%(filename)s"' % locals())
         return stdout
+
+    def extract_tesseract(self, filename):
+        """Extract text from pdfs using tesseract (per-page OCR)."""
+        temp_dir = mkdtemp()
+        base = os.path.join(temp_dir, 'conv')
+        stdout, _ = self.run('pdftoppm "%s" "%s"' % (filename, base))
+
+        contents = []
+        for page in os.listdir(temp_dir):
+            page_path = os.path.join(temp_dir, page)
+            page_content = TesseractParser().extract(page_path)
+            contents.append(page_content)
+        return '\n\n'.join(contents)
