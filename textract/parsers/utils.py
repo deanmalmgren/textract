@@ -12,15 +12,17 @@ from .. import exceptions
 
 
 class BaseParser(object):
-    """The BaseParser abstracts out some common functionality that is used
-    across all document formats. Specifically, it owns the
-    responsibility of handling all unicode and byte-encoding problems.
-
-    Inspiration from http://nedbatchelder.com/text/unipain.html
+    """The :class:`.BaseParser` abstracts out some common functionality
+    that is used across all document Parsers. In particular, it has
+    the responsibility of handling all unicode and byte-encoding.
     """
 
     def extract(self, filename, **kwargs):
-        raise NotImplementedError('must be overridden by child classes')
+        """This method must be overwritten by child classes to extract raw
+        text from a filename. This method can return either a
+        byte-encoded string or unicode.
+        """
+        raise NotImplementedError('must be overwritten by child classes')
 
     def encode(self, text, encoding):
         """Encode the ``text`` in ``encoding`` byte-encoding. This ignores
@@ -29,7 +31,11 @@ class BaseParser(object):
         return text.encode(encoding, 'ignore')
 
     def process(self, filename, encoding, **kwargs):
-        """Process ``filename`` and encode byte-string with ``encoding``.
+        """Process ``filename`` and encode byte-string with ``encoding``. This
+        method is called by :func:`textract.parsers.process` and wraps
+        the :meth:`.BaseParser.extract` method in `a delicious unicode
+        sandwich <http://nedbatchelder.com/text/unipain.html>`_.
+
         """
         # make a "unicode sandwich" to handle dealing with unknown
         # input byte strings and converting them to a predictable
@@ -40,7 +46,8 @@ class BaseParser(object):
         return self.encode(unicode_string, encoding)
 
     def decode(self, text):
-        """Decode text using the chardet package
+        """Decode ``text`` using the `chardet
+        <https://github.com/chardet/chardet>`_ package.
         """
         # only decode byte strings into unicode if it hasn't already
         # been done by a subclass
@@ -58,12 +65,15 @@ class BaseParser(object):
 
 
 class ShellParser(BaseParser):
-    """The ShellParser extends the BaseParser to make it easy to run
-    external programs from the command line with Fabric-like behavior.
+    """The :class:`.ShellParser` extends the :class:`.BaseParser` to make
+    it easy to run external programs from the command line with
+    `Fabric <http://www.fabfile.org/>`_-like behavior.
     """
 
     def run(self, command):
-        """Run ``command`` and return the subsequent ``stdout`` and ``stderr``.
+        """Run ``command`` and return the subsequent ``stdout`` and ``stderr``
+        as a tuple. If the command is not successful, this raises a
+        :exc:`textract.exceptions.ShellError`.
         """
 
         # run a subprocess and put the stdout and stderr on the pipe object
@@ -87,6 +97,10 @@ class ShellParser(BaseParser):
     def temp_filename(self):
         """Return a unique tempfile name.
         """
+        # TODO: it would be nice to get this to behave more like a
+        # context so we can make sure these temporary files are
+        # removed, regardless of whether an error occurs or the
+        # program is terminated.
         handle, filename = tempfile.mkstemp()
         os.close(handle)
         return filename

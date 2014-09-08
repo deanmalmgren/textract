@@ -20,8 +20,9 @@ DEFAULT_ENCODING = 'utf_8'
 
 
 def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
-    """This is the core function used for parsing. It routes the filename
-    to the appropriate parser and returns the result.
+    """This is the core function used for extracting text. It routes the
+    ``filename`` to the appropriate parser and returns the extracted
+    text as a byte-string encoded with ``encoding``.
     """
 
     # make sure the filename exists
