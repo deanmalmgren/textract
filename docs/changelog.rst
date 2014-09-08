@@ -22,7 +22,8 @@ latest changes in development for next release
 
 * several bug fixes, including:
 
-  * ``.odt`` parser bug fix (`#61`_ by `@levivm`_)
+  * ``.odt`` parser now correctly extracts text in order (`#61`_ by
+    `@levivm`_)
 
 
 
