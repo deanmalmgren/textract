@@ -18,9 +18,12 @@ latest changes in development for next release
 * support for scanned ``.pdf`` files with tesseract (`#66`_ by
   `@pudo`_)
 
+* support for ``.htm`` files (`#69`_)
+
 * several bug fixes, including:
 
-  * odt parser bug fix (`#61`_ by `@levivm`_)
+  * ``.odt`` parser bug fix (`#61`_ by `@levivm`_)
+
 
 
 1.0.0
