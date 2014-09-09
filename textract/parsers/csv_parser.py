@@ -12,22 +12,19 @@ class Parser(BaseParser):
 
         with open(filename, 'rb') as csv_file:
 
-            sniffer = csv.Sniffer()
+            # detect csv delimiter
+            delimiter = self.detect_delimiter(csv_file)
 
-            # prepare csv sample
-            lines = csv_file.xreadlines()
-            csv_sample = [next(lines) for _ in xrange(2)]
-            csv_file.seek(0)
+            csv_reader = csv.reader(csv_file, delimiter=delimiter)
 
-            # detect csv dialect
-            dialect = sniffer.sniff(str(csv_sample))
-
-            csv_reader = csv.reader(csv_file, dialect)
-
-            # detect header line, and skip
-            # TODO: header detection is not accurate enough
-            # fails on standardized_text.csv
+            # detect dialect and header line
+            # TODO: detection is not accurate enough
             '''
+            sniffer = csv.Sniffer()
+            csv_sample = csv_file.read(1024)
+            csv_file.seek(0)
+            dialect = sniffer.sniff(csv_sample)
+            csv_reader = csv.reader(csv_file, dialect)
             if sniffer.has_header(csv_sample):
                 next(csv_reader)
             '''
@@ -37,3 +34,19 @@ class Parser(BaseParser):
             output += '\n'  # make output cleaner
 
             return output
+
+    def detect_delimiter(self, csv_file):
+        """Simple, custom delimiter detection"""
+
+        delimiters = [',', ';', '|', '\t']
+
+        # use first line to detect delimiter
+        # assumes first column has no conflicting punctuation usage
+        line = next(csv_file.xreadlines())
+        csv_file.seek(0)
+
+        for c in line:
+            if c in delimiters:
+                return c
+        else:
+            return ''
