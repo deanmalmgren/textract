@@ -2,7 +2,7 @@
 # textract package in order for it to properly work
 argcomplete
 chardet
-python-pptx
+python-pptx>=0.5.1
 python-docx
 pdfminer==20140328
 beautifulsoup4
