@@ -1,20 +1,20 @@
 #!/bin/bash
 
-# this needs to work both for vagrant provisioning and for travis
-# builds in a python virtualenv. in the virtual machine provisioning,
-# we're passing the directory this should be run from. in travis-ci,
-# its run from the root of the repository.
-if [ "$#" -eq 1 ]; then
-    cd $1
-    base=$(pwd)
+# This needs to work both for Vagrant provisioning and for Travis
+# builds in a Python virtualenv, each of which have different current
+# working directories when this script is called. When run in Vagrant, the
+# script is copied to /tmp and executed from there, passing the original
+# path as the first argument. So deal with that.
+if [ "$1" == "" ]; then
+    # normal
+    cd $(dirname $0)/..
 else
-    # get the base directory name of this file so it works in
-    # travis-ci environment http://stackoverflow.com/a/11114547/564709
-    sudo apt-get install -y realpath
-    base=$(dirname $(realpath $0))/..
+    # run from /tmp by Vagrant.
+    cd $1
 fi
+base=$(pwd)
 
-# install all of the dependencies required in the examples
+# Install all of the dependencies required in the examples.
 # http://docs.travis-ci.com/user/installing-dependencies/#Installing-Ubuntu-packages
 apt-get update -qq
 sed 's/\(.*\)\#.*/\1/' < $base/requirements/debian | xargs apt-get install -y --fix-missing
