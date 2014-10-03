@@ -18,6 +18,10 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
     def test_tesseract_cli(self):
         """confirm pdf extraction with tesseract"""
         d = self.get_extension_directory()
+
+        import subprocess
+        subprocess.call('tesseract --version', shell=True)
+        
         self.compare_cli_output(
             os.path.join(d, "ocr_text.pdf"),
             expected_filename=os.path.join(d, "ocr_text.txt"),
