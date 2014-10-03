@@ -25,6 +25,11 @@ latest changes in development for next release
   * ``.odt`` parser now correctly extracts text in order (`#61`_ by
     `@levivm`_)
 
+  * improvements in the python documentation (`#70`_)
+
+  * fixed Docker development environment compatability with the
+    Vagrant VM environment (`#73`_ by `@ShawnMilo`_)
+
 
 
 1.0.0
@@ -178,3 +183,5 @@ latest changes in development for next release
 .. _#62: https://github.com/deanmalmgren/textract/issues/62
 .. _#64: https://github.com/deanmalmgren/textract/issues/64
 .. _#66: https://github.com/deanmalmgren/textract/issues/66
+.. _#70: https://github.com/deanmalmgren/textract/issues/70
+.. _#73: https://github.com/deanmalmgren/textract/issues/73
