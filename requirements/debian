@@ -6,7 +6,7 @@ libxslt1-dev
 
 # parse microsoft office formats
 antiword
-abiword
+ppthtml
 
 # parse image files
 tesseract-ocr
