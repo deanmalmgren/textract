@@ -6,5 +6,5 @@ class Parser(ShellParser):
     """
 
     def extract(self, filename, **kwargs):
-        stdout, stderr = self.run('catppt "%(filename)s"' % locals())
+        stdout, stderr = self.run('abiword --to=txt "%(filename)s"' % locals())
         return stdout
