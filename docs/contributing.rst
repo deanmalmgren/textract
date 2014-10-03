@@ -8,7 +8,10 @@ to extract raw text from any document for the purposes of most natural
 language processing tasks. In practice, this means that this project
 should preferentially provide tools that correctly produce output that
 has words in the correct order but that whitespace between words,
-formatting, etc is totally irrelevant.
+formatting, etc is totally irrelevant. As the various parsers mature,
+I fully expect the output to become more readable to support
+additional use cases, like `extracting text to appear in web pages
+<https://github.com/deanmalmgren/textract/pull/58#issuecomment-53697943>`_.
 
 Importantly, this project is committed to being as agnostic about how
 the content is extracted as it is about the means in which the text is
