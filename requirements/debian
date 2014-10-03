@@ -4,8 +4,9 @@ python-dev
 libxml2-dev
 libxslt1-dev
 
-# parse word documents
+# parse microsoft office formats
 antiword
+catdoc
 
 # parse image files
 tesseract-ocr
