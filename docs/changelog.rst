@@ -11,6 +11,10 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+
+1.1.0
+-----
+
 * support for ``.wav``, ``.mp3``, and ``.ogg`` files (`#56`_ and `#62`_ by `@arvindch`_)
 
 * support for ``.csv`` files (`#64`_)
