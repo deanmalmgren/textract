@@ -10,6 +10,8 @@ class Parser(BaseParser):
     """
 
     def extract(self, filename, **kwargs):
+        # Inspiration from
+-       # https://github.com/odoo/odoo/blob/master/addons/document/odt2txt.py
         with open(filename) as stream:
             zip_stream = zipfile.ZipFile(stream)
             self.content = ET.fromstring(zip_stream.read("content.xml"))
@@ -48,6 +50,7 @@ class Parser(BaseParser):
         return buff
 
     def qn(self, namespace):
+        """Connect tag prefix to longer namespace"""
         nsmap = {
             'text': 'urn:oasis:names:tc:opendocument:xmlns:text:1.0',
         }
