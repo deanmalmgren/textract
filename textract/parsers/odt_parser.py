@@ -41,7 +41,8 @@ class Parser(BaseParser):
                     buff += u" " * (int(child.get(self.qn('text:c'))) - 1)
                 if child.tail is not None:
                     buff += child.tail
-            buff += self.text_to_string(child)
+            else:
+                buff += self.text_to_string(child)
         if element.tail is not None:
             buff += element.tail
         return buff
