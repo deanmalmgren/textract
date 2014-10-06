@@ -28,21 +28,19 @@ class Parser(BaseParser):
 
     def text_to_string(self, element):
         buff = u""
-        if element.tag == self.qn('text:tab'):
-            buff = "\t"
-            if element.tail is not None:
-                buff += element.tail
-            return buff
-        if element.tag == self.qn('text:s'):
-            buff = u" "
-            if element.get(self.qn('text:c')) is not None:
-                buff *= int(element.get(self.qn('text:c')))
-            if element.tail is not None:
-                buff += element.tail
-            return buff
-        if element.text:
+        if element.text is not None:
             buff += element.text
         for child in element:
+            if child.tag == self.qn('text:tab'):
+                buff += "\t"
+                if child.tail is not None:
+                    buff += child.tail
+            elif child.tag == self.qn('text:s'):
+                buff += u" "
+                if child.get(self.qn('text:c')) is not None:
+                    buff += u" " * (int(child.get(self.qn('text:c'))) - 1)
+                if child.tail is not None:
+                    buff += child.tail
             buff += self.text_to_string(child)
         if element.tail is not None:
             buff += element.tail
