@@ -106,6 +106,7 @@ class BaseParserTestCase(GenericUtilities):
             self.assertEqual(
                 ''.join(stream.read().split()),
                 self.get_standardized_text(),
+                "standardized text fails for %s" % self.extension,
             )
         os.remove(temp_filename)
 
@@ -116,6 +117,7 @@ class BaseParserTestCase(GenericUtilities):
         self.assertEqual(
             ''.join(result.split()),
             self.get_standardized_text(),
+            "standardized text fails for %s" % self.extension,
         )
 
     # def test_unicode_text_cli(self):
