@@ -11,6 +11,11 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+* several bug fixes, including:
+
+  * correctly accounting for whitespace in ``.odt`` documents (`#79`_
+    by `@evfredericksen`_)
+
 
 1.1.0
 -----
@@ -155,6 +160,7 @@ latest changes in development for next release
 .. _@arvindch: https://github.com/arvindch
 .. _@christomitov: https://github.com/christomitov
 .. _@eiotec: https://github.com/eiotec
+.. _@evfredericksen: https://github.com/evfredericksen
 .. _@kokxx: https://github.com/Kokxx
 .. _@levivm: https://github.com/levivm
 .. _@pudo: https://github.com/pudo
@@ -196,3 +202,4 @@ latest changes in development for next release
 .. _#66: https://github.com/deanmalmgren/textract/issues/66
 .. _#70: https://github.com/deanmalmgren/textract/issues/70
 .. _#73: https://github.com/deanmalmgren/textract/issues/73
+.. _#79: https://github.com/deanmalmgren/textract/issues/79
