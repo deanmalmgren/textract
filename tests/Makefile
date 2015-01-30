@@ -20,6 +20,9 @@ tesseract:
 	tesseract jpg/raw_text.jpg jpg/raw_text > /dev/null
 	tesseract jpg/standardized_text.jpg jpg/standardized_text > /dev/null
 
+	tesseract tiff/raw_text.tiff tiff/raw_text > /dev/null
+	tesseract tiff/standardized_text.tiff tiff/standardized_text > /dev/null
+
 	# create OCR output for the multi-page pdf test
 	pdftoppm pdf/ocr_text.pdf /tmp/pdf-ocr-text
 	for x in /tmp/pdf-ocr-text*; do \

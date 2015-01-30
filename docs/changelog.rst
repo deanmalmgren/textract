@@ -11,6 +11,8 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+* support for ``.tiff`` files (`#81`_)
+
 * several bug fixes, including:
 
   * fix bug with doing OCR on multi-page pdfs and removing temporary directory

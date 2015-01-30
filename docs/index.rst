@@ -74,6 +74,8 @@ file types by either mentioning them on the `issue tracker
 
 * ``.ps`` via `ps2text`_
 
+* ``.tiff`` via `tesseract-ocr`_
+
 * ``.txt`` via python builtins
 
 * ``.wav`` via `SpeechRecognition`_
@@ -147,4 +149,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
