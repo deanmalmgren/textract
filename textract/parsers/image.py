@@ -11,7 +11,7 @@ class Parser(ShellParser):
 
     def extract(self, filename, **kwargs):
 
-        #if language given as argument, specify language for tesseract to use
+        # if language given as argument, specify language for tesseract to use
         if 'language' in kwargs:
             lang = '-l %s' % kwargs['language']
         else:

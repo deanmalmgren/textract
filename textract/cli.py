@@ -24,6 +24,7 @@ class AddToNamespaceAction(argparse.Action):
             ) % locals())
         setattr(namespace, key, val)
 
+
 # This function is necessary to enable autodocumentation of the script
 # output
 def get_parser():
@@ -56,7 +57,10 @@ def get_parser():
     )
     parser.add_argument(
         '-O', '--option', type=str, action=AddToNamespaceAction,
-        help='add arbitrary options to various parsers of the form KEYWORD=VALUE',
+        help=(
+            'add arbitrary options to various parsers of the form '
+            'KEYWORD=VALUE'
+        ),
     )
     parser.add_argument(
         '-v', '--version', action='version', version='%(prog)s '+VERSION,
