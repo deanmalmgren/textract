@@ -1,5 +1,6 @@
 import os
-from tempfile import mkdtemp, mkstemp
+import shutil
+from tempfile import mkdtemp
 
 from ..exceptions import UnknownMethod, ShellError
 
@@ -46,11 +47,14 @@ class Parser(ShellParser):
         """Extract text from pdfs using tesseract (per-page OCR)."""
         temp_dir = mkdtemp()
         base = os.path.join(temp_dir, 'conv')
-        stdout, _ = self.run('pdftoppm "%s" "%s"' % (filename, base))
-
         contents = []
-        for page in os.listdir(temp_dir):
-            page_path = os.path.join(temp_dir, page)
-            page_content = TesseractParser().extract(page_path)
-            contents.append(page_content)
-        return '\n\n'.join(contents)
+        try:
+            stdout, _ = self.run('pdftoppm "%s" "%s"' % (filename, base))
+            
+            for page in sorted(os.listdir(temp_dir)):
+                page_path = os.path.join(temp_dir, page)
+                page_content = TesseractParser().extract(page_path)
+                contents.append(page_content)
+            return '\n\n'.join(contents)
+        finally:
+            shutil.rmtree(temp_dir)
