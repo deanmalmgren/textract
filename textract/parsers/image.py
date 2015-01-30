@@ -11,11 +11,17 @@ class Parser(ShellParser):
 
     def extract(self, filename, **kwargs):
 
+        #if language given as argument, specify language for tesseract to use
+        if 'language' in kwargs:
+            lang = '-l %s' % kwargs['language']
+        else:
+            lang = ''
+
         # Tesseract can't output to console directly so you must first create
         # a dummy file to write to, read, and then delete
         devnull = os.devnull
         command = (
-            'tesseract "%(filename)s" {0} > %(devnull)s && '
+            'tesseract "%(filename)s" %(lang)s {0} > %(devnull)s && '
             'cat {0}.txt && '
             'rm -f {0} {0}.txt'
         )

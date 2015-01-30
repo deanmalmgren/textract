@@ -13,6 +13,11 @@ latest changes in development for next release
 
 * support for ``.tiff`` files (`#81`_)
 
+* added support for other languages for tesseract (`#76`_ by `@anderser`_)
+
+* added ``--option/-O`` flag to pass arbitrary arguments for things like
+  languages into textract
+
 * several bug fixes, including:
 
   * fix bug with doing OCR on multi-page pdfs and removing temporary directory
@@ -165,6 +170,7 @@ latest changes in development for next release
    to make the text above relatively clean
 
 .. _@anthonygarvan: https://github.com/anthonygarvan
+.. _@anderser: https://github.com/anderser
 .. _@arvindch: https://github.com/arvindch
 .. _@christomitov: https://github.com/christomitov
 .. _@eiotec: https://github.com/eiotec
@@ -210,6 +216,7 @@ latest changes in development for next release
 .. _#66: https://github.com/deanmalmgren/textract/issues/66
 .. _#70: https://github.com/deanmalmgren/textract/issues/70
 .. _#73: https://github.com/deanmalmgren/textract/issues/73
+.. _#76: https://github.com/deanmalmgren/textract/issues/76
 .. _#78: https://github.com/deanmalmgren/textract/issues/78
 .. _#79: https://github.com/deanmalmgren/textract/issues/79
 .. _#82: https://github.com/deanmalmgren/textract/issues/82

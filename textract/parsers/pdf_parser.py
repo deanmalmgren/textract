@@ -29,7 +29,7 @@ class Parser(ShellParser):
         elif method == 'pdfminer':
             return self.extract_pdfminer(filename)
         elif method == 'tesseract':
-            return self.extract_tesseract(filename)
+            return self.extract_tesseract(filename, **kwargs)
         else:
             raise UnknownMethod(method)
 
@@ -43,7 +43,8 @@ class Parser(ShellParser):
         stdout, _ = self.run('pdf2txt.py "%(filename)s"' % locals())
         return stdout
 
-    def extract_tesseract(self, filename):
+    def extract_tesseract(self, filename, **kwargs):
+
         """Extract text from pdfs using tesseract (per-page OCR)."""
         temp_dir = mkdtemp()
         base = os.path.join(temp_dir, 'conv')
@@ -53,7 +54,7 @@ class Parser(ShellParser):
 
             for page in sorted(os.listdir(temp_dir)):
                 page_path = os.path.join(temp_dir, page)
-                page_content = TesseractParser().extract(page_path)
+                page_content = TesseractParser().extract(page_path, **kwargs)
                 contents.append(page_content)
             return ''.join(contents)
         finally:
