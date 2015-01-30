@@ -19,6 +19,9 @@ latest changes in development for next release
   * correctly accounting for whitespace in ``.odt`` documents (`#79`_
     by `@evfredericksen`_)
 
+  * standardizing testing environment to be compatible with different versions
+    of third-party command line tools (`#78`_)
+
 
 1.1.0
 -----
@@ -205,5 +208,6 @@ latest changes in development for next release
 .. _#66: https://github.com/deanmalmgren/textract/issues/66
 .. _#70: https://github.com/deanmalmgren/textract/issues/70
 .. _#73: https://github.com/deanmalmgren/textract/issues/73
+.. _#78: https://github.com/deanmalmgren/textract/issues/78
 .. _#79: https://github.com/deanmalmgren/textract/issues/79
 .. _#82: https://github.com/deanmalmgren/textract/issues/82

@@ -50,11 +50,11 @@ class Parser(ShellParser):
         contents = []
         try:
             stdout, _ = self.run('pdftoppm "%s" "%s"' % (filename, base))
-            
+
             for page in sorted(os.listdir(temp_dir)):
                 page_path = os.path.join(temp_dir, page)
                 page_content = TesseractParser().extract(page_path)
                 contents.append(page_content)
-            return '\n\n'.join(contents)
+            return ''.join(contents)
         finally:
             shutil.rmtree(temp_dir)
