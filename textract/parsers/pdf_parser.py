@@ -49,8 +49,8 @@ class Parser(ShellParser):
         stdout, _ = self.run('pdftoppm "%s" "%s"' % (filename, base))
 
         contents = []
-        for page in os.listdir(temp_dir):
+        for page in sorted(os.listdir(temp_dir)):
             page_path = os.path.join(temp_dir, page)
             page_content = TesseractParser().extract(page_path)
             contents.append(page_content)
-        return '\n\n'.join(contents)
+        return ''.join(contents)

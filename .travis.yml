@@ -2,7 +2,7 @@ language: python
 python:
   - "2.7"
 
-# install system dependencies here with apt-get. 
+# install system dependencies here with apt-get.
 before_install:
   - sudo ./provision/debian.sh
 
@@ -11,8 +11,9 @@ before_install:
 install:
   - ./provision/python.sh
 
-# command to run tests, e.g. python setup.py test
+# commands to run the testing suite. if any of these fail, travic lets us know
 script:
+  - cd tests && make && cd -
   - nosetests --with-coverage --cover-package=textract
   - pep8 textract/ bin/textract
   - cd docs && make html && cd -
