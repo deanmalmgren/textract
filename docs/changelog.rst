@@ -13,6 +13,9 @@ latest changes in development for next release
 
 * several bug fixes, including:
 
+  * fix bug with doing OCR on multi-page pdfs and removing temporary directory
+    (`#82`_ by `@pudo`_)
+
   * correctly accounting for whitespace in ``.odt`` documents (`#79`_
     by `@evfredericksen`_)
 
@@ -203,3 +206,4 @@ latest changes in development for next release
 .. _#70: https://github.com/deanmalmgren/textract/issues/70
 .. _#73: https://github.com/deanmalmgren/textract/issues/73
 .. _#79: https://github.com/deanmalmgren/textract/issues/79
+.. _#82: https://github.com/deanmalmgren/textract/issues/82
