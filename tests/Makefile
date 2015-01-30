@@ -16,6 +16,11 @@ tesseract:
 	tesseract gif/raw_text.gif gif/raw_text > /dev/null
 	tesseract jpg/raw_text.jpg jpg/raw_text > /dev/null
 
+	# create OCR output for all of the standardized image tests
+	tesseract png/standardized_text.png png/standardized_text > /dev/null
+	tesseract gif/standardized_text.gif gif/standardized_text > /dev/null
+	tesseract jpg/standardized_text.jpg jpg/standardized_text > /dev/null
+
 	# create OCR output for the multi-page pdf test
 	pdftoppm pdf/ocr_text.pdf /tmp/pdf-ocr-text
 	for x in /tmp/pdf-ocr-text*; do \

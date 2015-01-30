@@ -68,11 +68,11 @@ class BaseParserTestCase(GenericUtilities):
             # http://stackoverflow.com/a/16696317/564709
             response = requests.get(url, stream=True)
             with open(filename, 'wb') as stream:
-                for chunk in response.iter_content(chunk_size=1024): 
+                for chunk in response.iter_content(chunk_size=1024):
                     if chunk: # filter out keep-alive new chunks
                         stream.write(chunk)
                         stream.flush()
-        
+
     @property
     def raw_text_filename(self):
         return self.get_filename(self.raw_text_filename_root,
@@ -141,7 +141,16 @@ class BaseParserTestCase(GenericUtilities):
         return option
 
     def get_standardized_text(self):
-        return "the quick brown fox jumps over the lazy dog".replace(' ','')
+        filename = os.path.join(
+            self.get_extension_directory(),
+            "standardized_text.txt" + '.' + self.extension,
+        )
+        if os.path.exists(filename):
+            with open(filename) as stream:
+                standardized_text = stream.read()
+        else:
+            standardized_text = "the quick brown fox jumps over the lazy dog"
+        return standardized_text.replace(' ','')
 
     def assertSuccessfulCommand(self, command):
         self.assertEqual(
