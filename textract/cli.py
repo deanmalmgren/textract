@@ -13,6 +13,17 @@ from . import VERSION
 from .parsers import DEFAULT_ENCODING
 
 
+class AddToNamespaceAction(argparse.Action):
+    """This adds KEY,VALUE arbitrary pairs to the argparse.Namespace object
+    """
+    def __call__(self, parser, namespace, values, option_string=None):
+        key, val = values.strip().split('=')
+        if hasattr(namespace, key):
+            parser.error((
+                'Duplicate specification of the key "%(key)s" with --option.'
+            ) % locals())
+        setattr(namespace, key, val)
+
 # This function is necessary to enable autodocumentation of the script
 # output
 def get_parser():
@@ -42,6 +53,10 @@ def get_parser():
     parser.add_argument(
         '-o', '--output', type=argparse.FileType('w'), default='-',
         help='output raw text in this file',
+    )
+    parser.add_argument(
+        '-O', '--option', type=str, action=AddToNamespaceAction,
+        help='add arbitrary options to various parsers of the form KEYWORD=VALUE',
     )
     parser.add_argument(
         '-v', '--version', action='version', version='%(prog)s '+VERSION,
