@@ -11,6 +11,10 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+
+1.2.0
+-----
+
 * support for ``.tiff`` files (`#81`_)
 
 * added support for other languages for tesseract (`#76`_ by `@anderser`_)
