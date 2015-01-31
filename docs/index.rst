@@ -84,10 +84,6 @@ file types by either mentioning them on the `issue tracker
 
 * ``.xls`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
 
-Please recommend other file types by either mentioning them on the
-`issue tracker <https://github.com/deanmalmgren/textract/issues>`_ or
-by :ref:`contributing <contributing>`
-
 .. this is a list of all the packages that textract uses for extraction
 .. _antiword: http://www.winfield.demon.nl/
 .. _beautifulsoup4: http://beautiful-soup-4.readthedocs.org/en/latest/
@@ -125,7 +121,7 @@ there, but here is a small sample of similar projects:
   great minds...). It is written in node.js.
 
 * `pandoc <http://johnmacfarlane.net/pandoc/>`_ is intended to be a
-  document conversion (a much more difficult task!), but it does have
+  document conversion tool (a much more difficult task!), but it does have
   `the ability to convert to plain text
   <http://johnmacfarlane.net/pandoc/demos.html>`_. It is written in
   Haskell.
