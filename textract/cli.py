@@ -49,17 +49,18 @@ def get_parser():
     )
     parser.add_argument(
         '-m', '--method', default='',
-        help='specify a method of extraction for formats that support it',
+        help='Specify a method of extraction for formats that support it',
     )
     parser.add_argument(
         '-o', '--output', type=argparse.FileType('w'), default='-',
-        help='output raw text in this file',
+        help='Output raw text in this file',
     )
     parser.add_argument(
         '-O', '--option', type=str, action=AddToNamespaceAction,
         help=(
-            'add arbitrary options to various parsers of the form '
-            'KEYWORD=VALUE'
+            'Add arbitrary options to various parsers of the form '
+            'KEYWORD=VALUE. A full list of available KEYWORD options is '
+            'available at http://bit.ly/textract-options'
         ),
     )
     parser.add_argument(

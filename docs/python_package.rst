@@ -24,6 +24,34 @@ inferred using `chardet <https://github.com/chardet/chardet>`_)::
     import textract
     text = textract.process('path/to/file.extension', encoding='ascii')
 
+.. _additional-options:
+
+Additional options
+------------------
+
+Some parsers also enable additional options which can be passed in as keyword
+arguments to the ``textract.process`` function. Here is a quick table of
+available options that are available to the different types of parsers:
+
+======  =========  ===========================================================
+parser  option     description
+======  =========  ===========================================================
+gif     language   Specify `the language`_ for OCR-ing text with tesseract
+jpg     language   Specify `the language`_ for OCR-ing text with tesseract
+png     language   Specify `the language`_ for OCR-ing text with tesseract
+pdf     language   For use when ``method='tesseract'``, specify `the language`_
+tiff    language   Specify `the language`_ for OCR-ing text with tesseract
+======  =========  ===========================================================
+
+As an example of using these additional options, you can extract text from a
+Norwegian PDF using Tesseract OCR like this::
+
+    text = textract.process(
+        'path/to/norwegian.pdf',
+        method='tesseract',
+        language='nor',
+    )
+
 
 A look under the hood
 ---------------------
@@ -71,3 +99,5 @@ work.
     :undoc-members:
     :show-inheritance:
 
+
+.. _the language: https://code.google.com/p/tesseract-ocr/downloads/list
