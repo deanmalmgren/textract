@@ -74,6 +74,8 @@ file types by either mentioning them on the `issue tracker
 
 * ``.ps`` via `ps2text`_
 
+* ``.rtf`` via `unrtf`_
+
 * ``.tiff`` via `tesseract-ocr`_
 
 * ``.txt`` via python builtins
@@ -93,6 +95,7 @@ file types by either mentioning them on the `issue tracker
 .. _ps2text: http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm
 .. _python-docx: https://python-docx.readthedocs.org/en/latest/
 .. _python-pptx: https://python-pptx.readthedocs.org/en/latest/
+.. _unrtf: http://www.gnu.org/software/unrtf/
 .. _SpeechRecognition: https://pypi.python.org/pypi/SpeechRecognition/
 .. _sox: http://sox.sourceforge.net/
 .. _tesseract-ocr: https://code.google.com/p/tesseract-ocr/
