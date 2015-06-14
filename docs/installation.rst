@@ -22,7 +22,7 @@ package manager before installing textract from pypi.
 
 .. code-block:: bash
 
-    apt-get install python-dev libxml2-dev libxslt1-dev antiword poppler-utils pstotext tesseract-ocr \
+    apt-get install python-dev libxml2-dev libxslt1-dev antiword unrtf poppler-utils pstotext tesseract-ocr \
     flac ffmpeg lame libmad0 libsox-fmt-mp3 sox
     pip install textract
 
@@ -45,7 +45,7 @@ pypi.
 .. code-block:: bash
 
     brew cask install xquartz
-    brew install poppler antiword tesseract
+    brew install poppler antiword unrtf tesseract
     pip install textract
 
 ..     brew install libxml2 libxslt antiword poppler tesseract
@@ -103,7 +103,7 @@ documenation about how to install the textract dependencies, please
     - `pstotext <http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm>`_
       is required by the ``.ps`` parser.
 
-    - `tesseract-ocr <https://code.google.com/p/tesseract-ocr/>`_ 
+    - `tesseract-ocr <https://code.google.com/p/tesseract-ocr/>`_
       is required by the ``.jpg``, ``.png`` and ``.gif`` parser.
 
     - `sox <http://sox.sourceforge.net/>`_
