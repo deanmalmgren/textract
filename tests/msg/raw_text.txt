@@ -1,0 +1,15 @@
+Test for TIF files
+
+This is a test email to experiment with the MS Outlook MSG Extractor
+
+
+-- 
+
+
+Kind regards
+
+
+
+
+Brian Zhou
+
