@@ -35,8 +35,13 @@ def _get_extension(filename):
 
     # if the extension doesn't exist, check the mimetype of the filename
     if not ext:
-        mimetype = magic.from_file(filename, mime=True)
+        try:
+            mimetype = magic.from_file(filename, mime=True)
+        except magic.MagicException:
+            raise exceptions.MimetypeNotDetected(filename)
         ext = mimetypes.guess_extension(mimetype)
+        if ext is None:
+            raise exceptions.UnknownMimetypeExtension(filename, mimetype)
 
     # check the EXTENSION_SYNONYMS dictionary and otherwise return the current
     # extension

@@ -24,6 +24,35 @@ class ExtensionNotSupported(CommandLineError):
         ))
 
 
+class MimetypeNotDetected(CommandLineError):
+    """This error is raised when the mimetype is not detected"""
+    def __init__(self, filename):
+        self.filename = filename
+
+    def __str__(self):
+        return self.render((
+            'The mimetype of the filename "%(filename)s" could not be\n'
+            'detected. Please try renaming the file to have an extension\n'
+            'that is supported by textract.\n'
+        ))
+
+
+class UnknownMimetypeExtension(CommandLineError):
+    """This error is raised when the mimetype can not be mapped to a file
+    extension
+    """
+    def __init__(self, filename, mimetype):
+        self.filename = filename
+        self.mimetype = mimetype
+
+    def __str__(self):
+        return self.render((
+            'The mimetype "%(mimetype)s of the filename "%(filename)s"\n'
+            'can not be matched to a known parser. Please try renaming\n'
+            'the file to have an extension that is supported by textract.\n'
+        ))
+
+
 class MissingFileError(CommandLineError):
     """This error is raised when the file can not be located at the
     specified path.
