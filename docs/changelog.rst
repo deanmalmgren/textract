@@ -11,6 +11,8 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+* support for ``.rtf`` files (`#84`_)
+
 
 1.2.0
 -----
@@ -224,3 +226,4 @@ latest changes in development for next release
 .. _#78: https://github.com/deanmalmgren/textract/issues/78
 .. _#79: https://github.com/deanmalmgren/textract/issues/79
 .. _#82: https://github.com/deanmalmgren/textract/issues/82
+.. _#84: https://github.com/deanmalmgren/textract/issues/84
