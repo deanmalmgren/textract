@@ -88,6 +88,18 @@ class BaseParserTestCase(GenericUtilities):
         return self.get_filename(self.unicode_text_filename_root,
                                  "unicode_text")
 
+    def test_extensionless_filename(self):
+        """test that extensionless filenames work properly"""
+        import textract
+        temp_filename = self.get_temp_filename()
+        shutil.copyfile(self.raw_text_filename, temp_filename)
+        self.assertEqual(
+            '.' + self.extension,
+            textract.parsers._get_extension(temp_filename),
+            "extensionless filename for '%s' does not work" % self.extension,
+        )
+        os.remove(temp_filename)
+
     def test_raw_text_cli(self):
         """Make sure raw text matches from the command line"""
         self.compare_cli_output(self.raw_text_filename)
