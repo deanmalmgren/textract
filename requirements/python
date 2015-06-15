@@ -1,11 +1,12 @@
 # This file contains all python dependencies that are required by the
 # textract package in order for it to properly work
 argcomplete
-chardet
-python-pptx>=0.5.1
-python-docx
-pdfminer==20140328
 beautifulsoup4
-xlrd
+chardet
 EbookLib
+pdfminer==20140328
+python-docx
+python-magic
+python-pptx>=0.5.1
 SpeechRecognition>=1.1.0
+xlrd

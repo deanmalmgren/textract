@@ -4,6 +4,8 @@ Route the request to the appropriate parser based on file type.
 
 import os
 import importlib
+import magic
+import mimetypes
 
 from .. import exceptions
 
@@ -34,6 +36,11 @@ def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
     # is a relative import so the name of the package is necessary
     _, ext = os.path.splitext(filename)
     ext = ext.lower()
+
+    # if the extension doesn't exist, check the mimetype of the filename
+    if not ext:
+        mimetype = magic.from_file(filename, mime=True)
+        ext = mimetypes.guess_extension(mimetype)
 
     # check the EXTENSION_SYNONYMS dictionary
     ext = EXTENSION_SYNONYMS.get(ext, ext)
