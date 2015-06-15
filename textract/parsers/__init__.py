@@ -9,27 +9,22 @@ import mimetypes
 
 from .. import exceptions
 
+# default encoding that is returned by the process method. specify it
+# here so the default is used on both the process function and also by
+# the command line interface
+DEFAULT_ENCODING = 'utf_8'
+
 # Dictionary structure for synonymous file extension types
 EXTENSION_SYNONYMS = {
     ".jpeg": ".jpg",
     ".htm": ".html",
 }
 
-# default encoding that is returned by the process method. specify it
-# here so the default is used on both the process function and also by
-# the command line interface
-DEFAULT_ENCODING = 'utf_8'
-
-
-def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
-    """This is the core function used for extracting text. It routes the
-    ``filename`` to the appropriate parser and returns the extracted
-    text as a byte-string encoded with ``encoding``.
+def _get_extension(filename):
+    """This function is used to get the extension of a filename, independent of
+    whether the filename has an extension and return it in a preditable format
+    (lower-case and always with a leading period).
     """
-
-    # make sure the filename exists
-    if not os.path.exists(filename):
-        raise exceptions.MissingFileError(filename)
 
     # get the filename extension, which is something like .docx for
     # example, and import the module dynamically using importlib. This
@@ -42,12 +37,27 @@ def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
         mimetype = magic.from_file(filename, mime=True)
         ext = mimetypes.guess_extension(mimetype)
 
-    # check the EXTENSION_SYNONYMS dictionary
-    ext = EXTENSION_SYNONYMS.get(ext, ext)
+    # check the EXTENSION_SYNONYMS dictionary and otherwise return the current
+    # extension
+    return EXTENSION_SYNONYMS.get(ext, ext)
+
+
+
+def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
+    """This is the core function used for extracting text. It routes the
+    ``filename`` to the appropriate parser and returns the extracted
+    text as a byte-string encoded with ``encoding``.
+    """
+
+    # make sure the filename exists
+    if not os.path.exists(filename):
+        raise exceptions.MissingFileError(filename)
+
 
     # to avoid conflicts with packages that are installed globally
     # (e.g. python's json module), all extension parser modules have
     # the _parser extension
+    ext = _get_extension(filename)
     rel_module = ext + '_parser'
     module_name = rel_module[1:]
 
