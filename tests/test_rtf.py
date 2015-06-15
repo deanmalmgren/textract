@@ -3,5 +3,5 @@ import unittest
 import base
 
 
-class DocTestCase(base.ShellParserTestCase, unittest.TestCase):
+class RtfTestCase(base.ShellParserTestCase, unittest.TestCase):
     extension = 'rtf'
