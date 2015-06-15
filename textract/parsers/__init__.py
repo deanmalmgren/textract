@@ -20,6 +20,7 @@ EXTENSION_SYNONYMS = {
     ".htm": ".html",
 }
 
+
 def _get_extension(filename):
     """This function is used to get the extension of a filename, independent of
     whether the filename has an extension and return it in a preditable format
@@ -42,7 +43,6 @@ def _get_extension(filename):
     return EXTENSION_SYNONYMS.get(ext, ext)
 
 
-
 def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
     """This is the core function used for extracting text. It routes the
     ``filename`` to the appropriate parser and returns the extracted
@@ -52,7 +52,6 @@ def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
     # make sure the filename exists
     if not os.path.exists(filename):
         raise exceptions.MissingFileError(filename)
-
 
     # to avoid conflicts with packages that are installed globally
     # (e.g. python's json module), all extension parser modules have
