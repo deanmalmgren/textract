@@ -13,6 +13,8 @@ latest changes in development for next release
 
 * support for ``.rtf`` files (`#84`_)
 
+* support for ``.msg`` files (`#87`_ and `#17`_ by `@anthonygarvan`_)
+
 
 1.2.0
 -----
@@ -198,6 +200,7 @@ latest changes in development for next release
 .. _#8: https://github.com/deanmalmgren/textract/issues/8
 .. _#9: https://github.com/deanmalmgren/textract/issues/9
 .. _#13: https://github.com/deanmalmgren/textract/issues/13
+.. _#17: https://github.com/deanmalmgren/textract/issues/17
 .. _#21: https://github.com/deanmalmgren/textract/issues/21
 .. _#25: https://github.com/deanmalmgren/textract/issues/25
 .. _#26: https://github.com/deanmalmgren/textract/issues/26
@@ -227,3 +230,4 @@ latest changes in development for next release
 .. _#79: https://github.com/deanmalmgren/textract/issues/79
 .. _#82: https://github.com/deanmalmgren/textract/issues/82
 .. _#84: https://github.com/deanmalmgren/textract/issues/84
+.. _#87: https://github.com/deanmalmgren/textract/issues/87
