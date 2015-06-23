@@ -14,8 +14,6 @@ install:
 # commands to run the testing suite. if any of these fail, travic lets us know
 script:
   - cd tests && make && cd -
-  - echo `pwd`
-  - which textract
   - nosetests --with-coverage --cover-package=textract
   - pep8 textract/ bin/textract
   - cd docs && make html && cd -
