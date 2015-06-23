@@ -11,6 +11,10 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+
+1.3.0
+-----
+
 * support for ``.rtf`` files (`#84`_)
 
 * support for ``.msg`` files (`#87`_ and `#17`_ by `@anthonygarvan`_)

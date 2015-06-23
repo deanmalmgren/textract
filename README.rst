@@ -1,6 +1,6 @@
 .. NOTES FOR CREATING A RELEASE:
 ..
-..   * bump the version number
+..   * bump the version number in textract.__init__.py
 ..   * update docs/changelog.rst
 ..   * git push
 ..   * python setup.py sdist upload
