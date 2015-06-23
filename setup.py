@@ -14,13 +14,18 @@ with open("README.rst") as stream:
 github_url='https://github.com/deanmalmgren/textract'
 
 # read in the dependencies from the virtualenv requirements file
-dependencies = []
+dependencies, dependency_links = [], []
 filename = os.path.join("requirements", "python")
 with open(filename, 'r') as stream:
     for line in stream:
-        package = line.strip().split('#')[0]
-        if package:
-            dependencies.append(package)
+        line = line.strip()
+        if line.startswith("http"):
+            dependency_links.append(line)
+        else:
+            package = line.split('#')[0]
+            if package:
+                dependencies.append(package)
+
 
 setup(
     name=textract.__name__,
@@ -38,5 +43,6 @@ setup(
         'textract.parsers',
     ],
     install_requires=dependencies,
+    dependency_links=dependency_links,
     zip_safe=False,
 )
