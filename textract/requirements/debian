@@ -1,0 +1,38 @@
+# these packages are required by python-docx, which depends on lxml
+# and requires these things
+python-dev
+libxml2-dev
+libxslt1-dev
+
+# parse word documents
+antiword
+
+# parse rtf documents
+unrtf
+
+# parse image files
+tesseract-ocr
+
+# parse pdfs
+poppler-utils
+
+# parse postscript files
+pstotext
+
+# parse audio files, with SpeechRecognition
+flac
+
+# filetype conversion libs
+ffmpeg
+lame
+libmad0
+# debian-specific lib
+libsox-fmt-mp3
+
+# convert audio files
+sox
+
+# ubuntu 14.04 requires this in addition to libxml2-dev and
+# libxslt1-dev for compiling lxml.
+# https://github.com/deanmalmgren/textract/issues/19
+zlib1g-dev

@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+# -*- mode: python -*-
+# PYTHON_ARGCOMPLETE_OK
+
+"""
+Command-line application.
+"""
+
+import sys
+
+from textract.cli import get_parser
+from textract import process
+from textract.exceptions import CommandLineError
+from textract.colors import red
+
+
+# extract text
+def main():
+    """Interpret the command-line arguments, process the document and
+    raise errors accordingly (with traceback surpressed).
+    """
+    parser = get_parser()
+    args = parser.parse_args()
+    try:
+        output = process(**vars(args))
+    except CommandLineError as ex:
+        sys.stderr.write(red(ex) + '\n')
+        sys.exit(1)
+    else:
+        args.output.write(output)
+
+main()

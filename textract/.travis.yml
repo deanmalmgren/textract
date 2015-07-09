@@ -1,0 +1,23 @@
+language: python
+python:
+  - "2.7"
+
+# install system dependencies here with apt-get.
+before_install:
+  - sudo ./provision/debian.sh
+
+# install python dependencies including this package in the travis
+# virtualenv
+install:
+  - ./provision/python.sh
+
+# commands to run the testing suite. if any of these fail, travic lets us know
+script:
+  - cd tests && make && cd -
+  - nosetests --with-coverage --cover-package=textract
+  - pep8 textract/ bin/textract
+  - cd docs && make html && cd -
+
+# commands to run after the tests successfully complete
+after_success:
+  - coveralls
