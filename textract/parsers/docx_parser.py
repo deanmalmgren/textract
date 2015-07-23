@@ -25,7 +25,7 @@ class Parser(BaseParser):
     def _parse_table(self, table, text):
         for row in table.rows:
             for cell in row.cells:
-                # For every cell in every row of the table, extract text from 
+                # For every cell in every row of the table, extract text from
                 # child paragraphs.
                 text += '\n\n'.join([
                     paragraph.text for paragraph in cell
