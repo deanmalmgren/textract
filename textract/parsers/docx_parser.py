@@ -17,10 +17,10 @@ class Parser(BaseParser):
         ])
         
         # Recursively extract text from root tables
-		for table in document.tables:
-			text += self._parse_table(table, text)
-			
-		return text
+	for table in document.tables:
+		text += self._parse_table(table, text)
+		
+	return text
         
     def _parse_table(self, table, text):
     	for row in table.rows:
