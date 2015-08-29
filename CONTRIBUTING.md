@@ -1,6 +1,6 @@
 Any and all contributions are welcome and appreciated. To make it easy
 to keep things organized, this project uses the
-[general guidelines](https://help.github.com/articles/using-pull-requests)
+[general guidelines](https://guides.github.com/introduction/flow/)
 for the fork-branch-pull request model for github. Briefly, this means:
 
 1. Make sure your fork's `master` branch is up to date:
