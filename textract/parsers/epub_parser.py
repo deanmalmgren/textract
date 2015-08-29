@@ -14,6 +14,6 @@ class Parser(BaseParser):
         for item in book.get_items():
             type = item.get_type()
             if type == ITEM_DOCUMENT:
-                soup = BeautifulSoup(item.content)
+                soup = BeautifulSoup(item.content, 'lxml')
                 result = result + soup.text
         return result

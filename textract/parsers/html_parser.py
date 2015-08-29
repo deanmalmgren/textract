@@ -125,7 +125,7 @@ class Parser(BaseParser):
 
     def extract(self, filename, **kwargs):
         with open(filename) as stream:
-            soup = BeautifulSoup(stream)
+            soup = BeautifulSoup(stream, 'lxml')
 
         # Convert tables to ASCII ones
         soup = self._replace_tables(soup)
