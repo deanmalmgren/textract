@@ -15,6 +15,14 @@ latest changes in development for next release
 
   * faster testing framework by only rebuilding test data when needed (`#90`_)
 
+  * fixed ``.html`` and ``.epub`` parsers to dealing with beautifulsoup4
+    upgrades
+
+  * using official ``msg-extractor`` now that it has a native ``setup.py``
+
+  * updated tests for ``.html``, ``.ogg``, ``.wav``, and ``.mp3`` file types to
+    be consistent with more recent versions of the underlying packages.
+
 1.3.0
 -----
 
