@@ -4,7 +4,7 @@ argcomplete
 chardet
 python-pptx>=0.5.1
 python-docx
-# pdfminer==20140328
+pdfminer3k
 beautifulsoup4
 xlrd
 EbookLib

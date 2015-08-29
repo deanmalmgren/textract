@@ -1,0 +1,173 @@
+Return-path: <from@example.com>
+Envelope-to: to@example.com
+Delivery-date: Sat, 27 Mar 2010 12:11:32 +0000
+Received: from mail by mail.example.com with local-bsmtp (Exim 4.69)
+	(envelope-from <from@example.com>)
+	id 1NvUrP-0002O1-C7
+	for to@example.com; Sat, 27 Mar 2010 12:11:32 +0000
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	mail.example.com
+X-Spam-Level:
+X-Spam-Status: No, score=-11.3 required=3.0 tests=ALL_TRUSTED,AWL,BAYES_00,
+	HTML_MESSAGE,MPART_ALT_DIFF autolearn=no version=3.2.5
+Received: from cpc1-mort1-0-0-cust399.croy.cable.virginmedia.com ([82.44.61.144] helo=spike)
+	by mail.example.com with esmtpsa (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.69)
+	(envelope-from <from@example.com>)
+	id 1NvUrP-0002Nw-6s
+	for to@example.com; Sat, 27 Mar 2010 12:11:27 +0000
+From: "Example" <from@example.com>
+To: <to@example.com>
+Subject: test
+Date: Sat, 27 Mar 2010 12:11:21 -0000
+Message-ID: <118CE886A86E491FBC9BF5A1474EACD4@spike>
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="----=_NextPart_000_006B_01CACDA6.A0401560"
+X-Mailer: Microsoft Office Outlook 11
+X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7600.16385
+Thread-Index: AcrNpp0Z+/nuAPz4TiOf1ZIdke/vzQ==
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_006B_01CACDA6.A0401560
+Content-Type: multipart/alternative;
+	boundary="----=_NextPart_001_006C_01CACDA6.A0401560"
+
+
+------=_NextPart_001_006C_01CACDA6.A0401560
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+test
+
+
+------=_NextPart_001_006C_01CACDA6.A0401560
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" =
+xmlns:o=3D"urn:schemas-microsoft-com:office:office" =
+xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns=3D"http://www.w3.org/TR/REC-html40">
+
+<head>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Dus-ascii">
+<meta name=3DGenerator content=3D"Microsoft Word 11 (filtered medium)">
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:Arial;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:Arial;
+	color:windowtext;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext=3D"edit">
+  <o:idmap v:ext=3D"edit" data=3D"1" />
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=3DEN-GB link=3Dblue vlink=3Dpurple>
+
+<div class=3DSection1>
+
+<p class=3DMsoNormal><font size=3D2 face=3DArial><span =
+style=3D'font-size:10.0pt'>test<o:p></o:p></span></font></p>
+
+</div>
+
+</body>
+
+</html>
+
+------=_NextPart_001_006C_01CACDA6.A0401560--
+
+------=_NextPart_000_006B_01CACDA6.A0401560
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment
+
+Received: from mail by mail.example.com with local-bsmtp (Exim 4.69)
+	(envelope-from <from@example.com>)
+	id 1NvUpr-0002NA-Sp
+	for from@example.com; Sat, 27 Mar 2010 12:09:54 +0000
+Received: from cpc1-mort1-0-0-cust399.croy.cable.virginmedia.com ([82.44.61.144] helo=spike)
+	by mail.example.com with esmtpsa (TLS1.0:RSA_AES_128_CBC_SHA1:16)
+	(Exim 4.69)
+	(envelope-from <from@example.com>)
+	id 1NvUpr-0002N7-Ob
+	for from@example.com; Sat, 27 Mar 2010 12:09:51 +0000
+Return-Path: <from@example.com>
+From: "Example" <from@example.com>
+To: <to@example.com>
+Subject: test
+Date: Sat, 27 Mar 2010 12:09:46 -0000
+Message-ID: <63850E3677964844B666AE60AFB35F6C@spike>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="----=_NextPart_000_0067_01CACDA6.A0401560"
+X-Mailer: Microsoft Office Outlook 11
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) onmail.example.com
+X-Spam-Level:
+X-Spam-Status: No, score=-10.5 required=3.0 tests=ALL_TRUSTED,AWL,BAYES_00,TVD_SPACE_RATIO autolearn=no version=3.2.5
+X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7600.16385
+Thread-Index: AcrNpjn33LNJQ9EnTDiluk/gD2wIxw==
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0067_01CACDA6.A0401560
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+test
+
+------=_NextPart_000_0067_01CACDA6.A0401560
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Dus-ascii">
+<META NAME=3D"Generator" CONTENT=3D"MS Exchange Server version =
+6.5.7036.0">
+<TITLE>test</TITLE>
+</HEAD>
+<BODY>
+<!-- Converted from text/plain format -->
+
+<P><FONT SIZE=3D2>test</FONT>
+</P>
+
+</BODY>
+</HTML>
+------=_NextPart_000_0067_01CACDA6.A0401560--
+
+------=_NextPart_000_006B_01CACDA6.A0401560--
+

@@ -1,0 +1,356 @@
+
+Category Function Description New? Help Topic Help
+Logical IFERROR Returns a different result if the first argument evaluates to an error 1 HA01231765 <More Info>
+Statistical AVERAGEIF Returns the average for the cells specified by a given criterion 1 HA10047433 <More Info>
+Statistical AVERAGEIFS Returns the average for the cells specified by multiple criteria 1 HA10047493 <More Info>
+Statistical COUNTIFS Counts the number of cells that meet multiple criteria 1 HA10047494 <More Info>
+Math & Trig SUMIFS Adds the cells specified by a multiple criteria 1 HA10047504 <More Info>
+Cube CUBEMEMBER Returns a member or tuple in a cube hierarchy 1 HA10083017 <More Info>
+Cube CUBEVALUE Returns an aggregated value from a cube 1 HA10083018 <More Info>
+Cube CUBESET Defines a calculated set of members or tuples by sending a set expression to the cube on the server 1 HA10083019 <More Info>
+Cube CUBERANKEDMEMBER Returns the nth, or ranked, member in a set 1 HA10083020 <More Info>
+Cube CUBEKPIMEMBER Returns a key performance indicator name, property, and measure, and displays the name and property in the cell. 1 HA10083021 <More Info>
+Cube CUBEMEMBERPROPERTY Returns the value of a member property in the cube 1 HA10083023 <More Info>
+Cube CUBESETCOUNT Returns the number of items in a set 1 HA10083024 <More Info>
+Database DAVERAGE Averages the values in a column of a list or database that match conditions you specify HP10062266 <More Info>
+Database DCOUNT Counts the cells that contain numbers in a column of a list or database that match conditions you specify HP10062267 <More Info>
+Database DCOUNTA Counts the nonblank cells in a column of a list or database that match conditions you specify HP10062268 <More Info>
+Database DGET Extracts a single value from a column of a list or database that matches conditions you specify HP10062269 <More Info>
+Database DMAX Returns the largest number in a column of a list or database that matches conditions you specify HP10062270 <More Info>
+Database DMIN Returns the smallest number in a column of a list or database that matches conditions you specify HP10062271 <More Info>
+Database DPRODUCT Multiplies the values in a column of a list or database that match conditions you specify HP10062272 <More Info>
+Database DSTDEV Estimates the standard deviation of a population based on a sample by using the numbers in a column of a list or database that match conditions you specify HP10062273 <More Info>
+Database DSTDEVP Calculates the standard deviation of a population based on the entire population, using the numbers in a column of a list or database that match conditions you specify HP10062274 <More Info>
+Database DSUM Adds the numbers in a column of a list or database that match conditions you specify HP10062275 <More Info>
+Database DVAR Estimates the variance of a population based on a sample by using the numbers in a column of a list or database that match conditions you specify HP10062276 <More Info>
+Database DVARP Calculates the variance of a population based on the entire population by using the numbers in a column of a list or database that match conditions you specify HP10062277 <More Info>
+Date & Time DATE Returns the serial number of a particular date HP10062283 <More Info>
+Date & Time DATEVALUE Converts a date in the form of text to a serial number HP10062284 <More Info>
+Date & Time DAY Converts a serial number to a day of the month HP10062285 <More Info>
+Date & Time DAYS360 Calculates the number of days between two dates, based on a 360-day year HP10062286 <More Info>
+Date & Time EDATE Returns the serial number of the date that is the indicated number of months before or after the start date HP10062287 <More Info>
+Date & Time EOMONTH Returns the serial number of the last day of the month before or after a specified number of months HP10062288 <More Info>
+Date & Time HOUR Converts a serial number to an hour HP10062289 <More Info>
+Date & Time MINUTE Converts a serial number to a minute HP10062290 <More Info>
+Date & Time MONTH Converts a serial number to a month HP10062291 <More Info>
+Date & Time NETWORKDAYS Returns the number of whole workdays between two dates HP10062292 <More Info>
+Date & Time NOW Returns the serial number of the current date and time HP10062293 <More Info>
+Date & Time SECOND Converts a serial number to a second HP10062294 <More Info>
+Date & Time TIME Returns the serial number of a particular time HP10062295 <More Info>
+Date & Time TIMEVALUE Converts a time in the form of text to a serial number HP10062296 <More Info>
+Date & Time TODAY Returns the serial number of today’s date HP10062297 <More Info>
+Date & Time WEEKDAY Converts a serial number to a day of the week HP10062298 <More Info>
+Date & Time WEEKNUM Returns the week number in the year HP10062299 <More Info>
+Date & Time WORKDAY Returns the serial number of the date before or after a specified number of workdays HP10062300 <More Info>
+Date & Time YEAR Converts a serial number to a year HP10062301 <More Info>
+Date & Time YEARFRAC Returns the year fraction representing the number of whole days between start_date and end_date HP10062302 <More Info>
+Engineering BESSELI Returns the modified Bessel function In(x) HP10062303 <More Info>
+Engineering BESSELJ Returns the Bessel function Jn(x) HP10062304 <More Info>
+Engineering BESSELK Returns the modified Bessel function Kn(x) HP10062305 <More Info>
+Engineering BESSELY Returns the Bessel function Yn(x) HP10062306 <More Info>
+Engineering BIN2DEC Converts a binary number to decimal HP10062307 <More Info>
+Engineering BIN2HEX Converts a binary number to hexadecimal HP10062308 <More Info>
+Engineering BIN2OCT Converts a binary number to octal HP10062309 <More Info>
+Engineering COMPLEX Converts real and imaginary coefficients into a complex number HP10062310 <More Info>
+Engineering CONVERT Converts a number from one measurement system to another HP10062311 <More Info>
+Engineering DEC2BIN Converts a decimal number to binary HP10062312 <More Info>
+Engineering DEC2HEX Converts a decimal number to hexadecimal HP10062313 <More Info>
+Engineering DEC2OCT Converts a decimal number to octal HP10062314 <More Info>
+Engineering DELTA Tests whether two values are equal HP10062315 <More Info>
+Engineering ERF Returns the error function HP10062316 <More Info>
+Engineering ERFC Returns the complementary error function HP10062317 <More Info>
+Engineering GESTEP Tests whether a number is greater than a threshold value HP10062318 <More Info>
+Engineering HEX2BIN Converts a hexadecimal number to binary HP10062319 <More Info>
+Engineering HEX2DEC Converts a hexadecimal number to decimal HP10062321 <More Info>
+Engineering HEX2OCT Converts a hexadecimal number to octal HP10062322 <More Info>
+Engineering IMABS Returns the absolute value (modulus) of a complex number HP10062323 <More Info>
+Engineering IMAGINARY Returns the imaginary coefficient of a complex number HP10062324 <More Info>
+Engineering IMARGUMENT Returns the argument theta, an angle expressed in radians HP10062325 <More Info>
+Engineering IMCONJUGATE Returns the complex conjugate of a complex number HP10062326 <More Info>
+Engineering IMCOS Returns the cosine of a complex number HP10062327 <More Info>
+Engineering IMDIV Returns the quotient of two complex numbers HP10062328 <More Info>
+Engineering IMEXP Returns the exponential of a complex number HP10062329 <More Info>
+Engineering IMLN Returns the natural logarithm of a complex number HP10062330 <More Info>
+Engineering IMLOG10 Returns the base-10 logarithm of a complex number HP10062331 <More Info>
+Engineering IMLOG2 Returns the base-2 logarithm of a complex number HP10062332 <More Info>
+Engineering IMPOWER Returns a complex number raised to an integer power HP10062333 <More Info>
+Engineering IMPRODUCT Returns the product of complex numbers HP10062334 <More Info>
+Engineering IMREAL Returns the real coefficient of a complex number HP10062335 <More Info>
+Engineering IMSIN Returns the sine of a complex number HP10062336 <More Info>
+Engineering IMSQRT Returns the square root of a complex number HP10062337 <More Info>
+Engineering IMSUB Returns the difference of two complex numbers HP10062338 <More Info>
+Engineering IMSUM Returns the sum of complex numbers HP10062339 <More Info>
+Engineering OCT2BIN Converts an octal number to binary HP10062340 <More Info>
+Engineering OCT2DEC Converts an octal number to decimal HP10062341 <More Info>
+Engineering OCT2HEX Converts an octal number to hexadecimal HP10062342 <More Info>
+Financial ACCRINT Returns the accrued interest for a security that pays periodic interest HP10062343 <More Info>
+Financial ACCRINTM Returns the accrued interest for a security that pays interest at maturity HP10062344 <More Info>
+Financial AMORDEGRC Returns the depreciation for each accounting period HP10062345 <More Info>
+Financial AMORLINC Returns the depreciation for each accounting period (the depreciation coefficient depends on the life of the assets) HP10062346 <More Info>
+Financial COUPDAYBS Returns the number of days from the beginning of the coupon period to the settlement date HP10062347 <More Info>
+Financial COUPDAYS Returns the number of days in the coupon period that contains the settlement date HP10062348 <More Info>
+Financial COUPDAYSNC Returns the number of days from the settlement date to the next coupon date HP10062349 <More Info>
+Financial COUPNCD Returns the next coupon date after the settlement date HP10062350 <More Info>
+Financial COUPNUM Returns the number of coupons payable between the settlement date and maturity date HP10062351 <More Info>
+Financial COUPPCD Returns the previous coupon date before the settlement date HP10062352 <More Info>
+Financial CUMIPMT Returns the cumulative interest paid between two periods HP10062353 <More Info>
+Financial CUMPRINC Returns the cumulative principal paid on a loan between two periods HP10062354 <More Info>
+Financial DB Returns the depreciation of an asset for a specified period, using the fixed-declining-balance method HP10062355 <More Info>
+Financial DDB Returns the depreciation of an asset for a specified period, using the double-declining-balance method or some other method that you specify HP10062356 <More Info>
+Financial DISC Returns the discount rate for a security HP10062357 <More Info>
+Financial DOLLARDE Converts a dollar price, expressed as a fraction, into a dollar price, expressed as a decimal number HP10062358 <More Info>
+Financial DOLLARFR Converts a dollar price, expressed as a decimal number, into a dollar price, expressed as a fraction HP10062359 <More Info>
+Financial DURATION Returns the annual duration of a security with periodic interest payments HP10062360 <More Info>
+Financial EFFECT Returns the effective annual interest rate HP10062361 <More Info>
+Financial FVSCHEDULE Returns the future value of an initial principal after applying a series of compound interest rates HP10062362 <More Info>
+Financial INTRATE Returns the interest rate for a fully invested security HP10062363 <More Info>
+Financial IPMT Returns the interest payment for an investment for a given period HP10062364 <More Info>
+Financial IRR Returns the internal rate of return for a series of cash flows HP10062365 <More Info>
+Financial ISPMT Returns the interest associated with a specific loan payment HP10062366 <More Info>
+Financial MDURATION Returns the Macauley modified duration for a security with an assumed par value of $100 HP10062367 <More Info>
+Financial MIRR Returns the internal rate of return where positive and negative cash flows are financed at different rates HP10062368 <More Info>
+Financial NOMINAL Returns the annual nominal interest rate HP10062369 <More Info>
+Financial NPER Returns the number of periods for an investment HP10062370 <More Info>
+Financial ODDFPRICE Returns the price per $100 face value of a security with an odd first period HP10062371 <More Info>
+Financial ODDFYIELD Returns the yield of a security with an odd first period HP10062372 <More Info>
+Financial ODDLPRICE Returns the price per $100 face value of a security with an odd last period HP10062373 <More Info>
+Financial ODDLYIELD Returns the yield of a security with an odd last period HP10062374 <More Info>
+Financial PRICE Returns the price per $100 face value of a security that pays periodic interest HP10062375 <More Info>
+Financial PRICEDISC Returns the price per $100 face value of a discounted security HP10062376 <More Info>
+Financial PRICEMAT Returns the price per $100 face value of a security that pays interest at maturity HP10062377 <More Info>
+Financial PV Returns the present value of an investment HP10062378 <More Info>
+Financial RATE Returns the interest rate per period of an annuity HP10062379 <More Info>
+Financial RECEIVED Returns the amount received at maturity for a fully invested security HP10062380 <More Info>
+Financial SLN Returns the straight-line depreciation of an asset for one period HP10062381 <More Info>
+Financial SYD Returns the sum-of-years’ digits depreciation of an asset for a specified period HP10062382 <More Info>
+Financial TBILLEQ Returns the bond-equivalent yield for a Treasury bill HP10062383 <More Info>
+Financial TBILLPRICE Returns the price per $100 face value for a Treasury bill HP10062384 <More Info>
+Financial TBILLYIELD Returns the yield for a Treasury bill HP10062385 <More Info>
+Financial VDB Returns the depreciation of an asset for a specified or partial period using a declining-balance method HP10062386 <More Info>
+Financial XIRR Returns the internal rate of return for a schedule of cash flows that is not necessarily periodic HP10062387 <More Info>
+Financial XNPV Returns the net present value for a schedule of cash flows that is not necessarily periodic HP10062388 <More Info>
+Financial YIELD Returns the yield on a security that pays periodic interest HP10062389 <More Info>
+Financial YIELDDISC Returns the annual yield for a discounted security, for example, a Treasury bill HP10062390 <More Info>
+Financial YIELDMAT Returns the annual yield of a security that pays interest at maturity HP10062391 <More Info>
+Information CELL Returns information about the formatting, location, or contents of a cell HP10062392 <More Info>
+Statistical COUNTBLANK Counts the number of blank cells in the argument range HP10062393 <More Info>
+Information ERROR.TYPE Returns a number corresponding to an error type HP10062394 <More Info>
+Information INFO Returns information about the current operating environment HP10062395 <More Info>
+Information ISEVEN Returns TRUE if the number is even HP10062396 <More Info>
+Information ISODD Returns TRUE if the number is odd HP10062397 <More Info>
+Information N Returns a value converted to a number HP10062398 <More Info>
+Information NA Returns the error value #N/A HP10062399 <More Info>
+Information TYPE Returns a number indicating the data type of a value HP10062400 <More Info>
+Logical Returns the logical value FALSE HP10062401 <More Info>
+Logical NOT Reverses the logic of its argument HP10062402 <More Info>
+Logical OR Returns TRUE if any argument is TRUE HP10062403 <More Info>
+Logical 1 Returns the logical value TRUE HP10062404 <More Info>
+Lookup & Reference ADDRESS Returns a reference as text to a single cell in a worksheet HP10062407 <More Info>
+Lookup & Reference AREAS Returns the number of areas in a reference HP10062408 <More Info>
+Lookup & Reference COLUMN Returns the column number of a reference HP10062409 <More Info>
+Lookup & Reference COLUMNS Returns the number of columns in a reference HP10062410 <More Info>
+Lookup & Reference HLOOKUP Searches for a value in the top column of a table and then returns a value in the same column from a row you specify in the table HP10062411 <More Info>
+Lookup & Reference HYPERLINK Creates a shortcut that opens a document on your hard drive, a server, or the Internet HP10062412 <More Info>
+Lookup & Reference INDIRECT Returns a reference indicated by a text value HP10062413 <More Info>
+Lookup & Reference MATCH Returns the relative position of an item in an array HP10062414 <More Info>
+Lookup & Reference OFFSET Returns a reference offset from a given reference HP10062415 <More Info>
+Lookup & Reference ROWS Returns the number of rows in a reference HP10062416 <More Info>
+Lookup & Reference RTD Returns real-time data from a program that supports COM automation HP10062417 <More Info>
+Math & Trig ABS Returns the absolute value of a number HP10062418 <More Info>
+Math & Trig ACOS Returns the arccosine of a number HP10062419 <More Info>
+Math & Trig ACOSH Returns the inverse hyperbolic cosine of a number HP10062420 <More Info>
+Math & Trig ASIN Returns the arcsine of a number HP10062421 <More Info>
+Math & Trig ASINH Returns the inverse hyperbolic sine of a number HP10062422 <More Info>
+Math & Trig ATAN Returns the arctangent of a number HP10062423 <More Info>
+Math & Trig ATAN2 Returns the arctangent from x and y coordinates HP10062424 <More Info>
+Math & Trig ATANH Returns the inverse hyperbolic tangent of a number HP10062425 <More Info>
+Math & Trig CEILING Rounds a number to the nearest integer or to the nearest multiple of significance HP10062426 <More Info>
+Math & Trig COMBIN Returns the number of combinations for a given number of objects HP10062427 <More Info>
+Math & Trig COS Returns the cosine of a number HP10062428 <More Info>
+Math & Trig COSH Returns the hyperbolic cosine of a number HP10062429 <More Info>
+Math & Trig DEGREES Converts radians to degrees HP10062430 <More Info>
+Math & Trig EVEN Rounds a number up to the nearest even integer HP10062431 <More Info>
+Math & Trig EXP Returns e raised to the power of a given number HP10062432 <More Info>
+Math & Trig FACT Returns the factorial of a number HP10062433 <More Info>
+Math & Trig FACTDOUBLE Returns the double factorial of a number HP10062434 <More Info>
+Math & Trig FLOOR Rounds a number down, toward 0 HP10062435 <More Info>
+Math & Trig GCD Returns the greatest common divisor HP10062436 <More Info>
+Math & Trig INT Rounds a number down to the nearest integer HP10062437 <More Info>
+Math & Trig LCM Returns the least common multiple HP10062438 <More Info>
+Math & Trig LN Returns the natural logarithm of a number HP10062439 <More Info>
+Math & Trig LOG Returns the logarithm of a number to a specified base HP10062440 <More Info>
+Math & Trig LOG10 Returns the base-10 logarithm of a number HP10062441 <More Info>
+Math & Trig MDETERM Returns the matrix determinant of an array HP10062442 <More Info>
+Math & Trig MOD Returns the remainder from division HP10062443 <More Info>
+Math & Trig MROUND Returns a number rounded to the desired multiple HP10062444 <More Info>
+Math & Trig MULTINOMIAL Returns the multinomial of a set of numbers HP10062445 <More Info>
+Math & Trig ODD Rounds a number up to the nearest odd integer HP10062446 <More Info>
+Math & Trig PI Returns the value of pi HP10062447 <More Info>
+Math & Trig POWER Returns the result of a number raised to a power HP10062448 <More Info>
+Math & Trig PRODUCT Multiplies its arguments HP10062449 <More Info>
+Math & Trig QUOTIENT Returns the integer portion of a division HP10062450 <More Info>
+Math & Trig RADIANS Converts degrees to radians HP10062451 <More Info>
+Math & Trig RAND Returns a random number between 0 and 1 HP10062452 <More Info>
+Math & Trig RANDBETWEEN Returns a random number between the numbers that you specify HP10062453 <More Info>
+Math & Trig ROMAN Converts an Arabic numeral to Roman, as text HP10062454 <More Info>
+Math & Trig ROUND Rounds a number to a specified number of digits HP10062455 <More Info>
+Math & Trig ROUNDDOWN Rounds a number down, toward 0 HP10062456 <More Info>
+Math & Trig ROUNDUP Rounds a number up, away from 0 HP10062457 <More Info>
+Math & Trig SERIESSUM Returns the sum of a power series based on the formula HP10062458 <More Info>
+Math & Trig SIGN Returns the sign of a number HP10062459 <More Info>
+Math & Trig SIN Returns the sine of the given angle HP10062460 <More Info>
+Math & Trig SQRT Returns a positive square root HP10062461 <More Info>
+Math & Trig SQRTPI Returns the square root of pi HP10062462 <More Info>
+Math & Trig SUBTOTAL Returns a subtotal in a list or database HP10062463 <More Info>
+Math & Trig SUM Adds its arguments HP10062464 <More Info>
+Math & Trig SUMIF Adds the cells specified by a given criteria HP10062465 <More Info>
+Math & Trig SUMPRODUCT Returns the sum of the products of corresponding array components HP10062466 <More Info>
+Math & Trig SUMSQ Returns the sum of the squares of the arguments HP10062467 <More Info>
+Math & Trig SUMX2MY2 Returns the sum of the difference of squares of corresponding values in two arrays HP10062468 <More Info>
+Math & Trig SUMX2PY2 Returns the sum of the sum of squares of corresponding values in two arrays HP10062469 <More Info>
+Math & Trig SUMXMY2 Returns the sum of squares of differences of corresponding values in two arrays HP10062470 <More Info>
+Math & Trig TAN Returns the tangent of a number HP10062471 <More Info>
+Math & Trig TANH Returns the hyperbolic tangent of a number HP10062472 <More Info>
+Math & Trig TRUNC Truncates a number (you specify the precision of the truncation) HP10062473 <More Info>
+Lookup & Reference GETPIVOTDATA Returns data stored in a PivotTable HP10062477 <More Info>
+Statistical AVEDEV Returns the average of the absolute deviations of data points from their mean HP10062481 <More Info>
+Statistical AVERAGE Returns the average of its arguments HP10062482 <More Info>
+Statistical AVERAGEA Returns the average of its arguments and includes evaluation of text and logical values HP10062483 <More Info>
+Statistical BETADIST Returns the cumulative beta probability density function HP10062484 <More Info>
+Statistical BETAINV Returns the inverse of the cumulative beta probability density function HP10062485 <More Info>
+Statistical BINOMDIST Returns the individual term binomial distribution probability HP10062486 <More Info>
+Statistical CHIDIST Returns the one-tailed probability of the chi-squared distribution HP10062487 <More Info>
+Statistical CHIINV Returns the inverse of the one-tailed probability of the chi-squared distribution HP10062488 <More Info>
+Statistical CHITEST Returns the test for independence HP10062489 <More Info>
+Statistical CONFIDENCE Returns the confidence interval for a population mean HP10062490 <More Info>
+Statistical CORREL Returns the correlation coefficient between two data sets HP10062491 <More Info>
+Statistical COUNT Counts how many numbers are in the list of arguments HP10062492 <More Info>
+Statistical COUNTA Counts how many values are in the list of arguments HP10062493 <More Info>
+Statistical COVAR Returns covariance, the average of the products of paired deviations HP10062494 <More Info>
+Statistical CRITBINOM Returns the smallest value for which the cumulative binomial distribution is less than or equal to a criterion value HP10062495 <More Info>
+Statistical DEVSQ Returns the sum of squares of deviations HP10062496 <More Info>
+Statistical EXPONDIST Returns the exponential distribution HP10062497 <More Info>
+Statistical FDIST Returns the F probability distribution HP10062498 <More Info>
+Statistical FINV Returns the inverse of the F probability distribution HP10062499 <More Info>
+Statistical FISHER Returns the Fisher transformation HP10062500 <More Info>
+Statistical FISHERINV Returns the inverse of the Fisher transformation HP10062501 <More Info>
+Statistical FORECAST Returns a value along a linear trend HP10062502 <More Info>
+Statistical FREQUENCY Returns a frequency distribution as a vertical array HP10062503 <More Info>
+Statistical FTEST Returns the result of an F-Test HP10062504 <More Info>
+Statistical GAMMADIST Returns the gamma distribution HP10062505 <More Info>
+Statistical GAMMAINV Returns the inverse of the gamma cumulative distribution HP10062506 <More Info>
+Statistical GAMMALN Returns the natural logarithm of the gamma function, G(x) HP10062507 <More Info>
+Statistical GEOMEAN Returns the geometric mean HP10062508 <More Info>
+Statistical GROWTH Returns values along an exponential trend HP10062509 <More Info>
+Statistical HARMEAN Returns the harmonic mean HP10062510 <More Info>
+Statistical HYPGEOMDIST Returns the hypergeometric distribution HP10062511 <More Info>
+Statistical INTERCEPT Returns the intercept of the linear regression line HP10062512 <More Info>
+Statistical KURT Returns the kurtosis of a data set HP10062513 <More Info>
+Statistical LARGE Returns the kth largest value in a data set HP10062514 <More Info>
+Statistical LOGINV Returns the inverse of the lognormal distribution HP10062515 <More Info>
+Statistical LOGNORMDIST Returns the cumulative lognormal distribution HP10062516 <More Info>
+Statistical MAX Returns the maximum value in a list of arguments, ignoring logical values and text HP10062517 <More Info>
+Statistical MAXA Returns the maximum value in a list of arguments, including logical values and text HP10062518 <More Info>
+Statistical MEDIAN Returns the median of the given numbers HP10062519 <More Info>
+Statistical MIN Returns the minimum value in a list of arguments, ignoring logical values and text HP10062520 <More Info>
+Statistical MINA Returns the minimum value in a list of arguments, including logical values and text HP10062521 <More Info>
+Statistical MODE Returns the most common value in a data set HP10062522 <More Info>
+Statistical NEGBINOMDIST Returns the negative binomial distribution HP10062523 <More Info>
+Statistical NORMDIST Returns the normal cumulative distribution HP10062524 <More Info>
+Statistical NORMINV Returns the inverse of the normal cumulative distribution HP10062525 <More Info>
+Statistical NORMSDIST Returns the standard normal cumulative distribution HP10062526 <More Info>
+Statistical NORMSINV Returns the inverse of the standard normal cumulative distribution HP10062527 <More Info>
+Statistical PEARSON Returns the Pearson product moment correlation coefficient HP10062528 <More Info>
+Statistical PERCENTILE Returns the kth percentile of values in a range HP10062529 <More Info>
+Statistical PERCENTRANK Returns the percentage rank of a value in a data set HP10062530 <More Info>
+Statistical PERMUT Returns the number of permutations for a given number of objects HP10062531 <More Info>
+Statistical POISSON Returns the Poisson distribution HP10062532 <More Info>
+Statistical PROB Returns the probability that values in a range are between two limits HP10062533 <More Info>
+Statistical QUARTILE Returns the quartile of a data set HP10062534 <More Info>
+Statistical RANK Returns the rank of a number in a list of numbers HP10062535 <More Info>
+Statistical RSQ Returns the square of the Pearson product moment correlation coefficient HP10062536 <More Info>
+Statistical SKEW Returns the skewness of a distribution HP10062537 <More Info>
+Statistical SLOPE Returns the slope of the linear regression line HP10062538 <More Info>
+Statistical SMALL Returns the kth smallest value in a data set HP10062539 <More Info>
+Statistical STANDARDIZE Returns a normalized value HP10062540 <More Info>
+Statistical STDEV Estimates standard deviation based on a sample, ignoring text and logical values HP10062541 <More Info>
+Statistical STDEVA Estimates standard deviation based on a sample, including text and logical values HP10062542 <More Info>
+Statistical STDEVP Calculates standard deviation based on the entire population, ignoring text and logical values HP10062543 <More Info>
+Statistical STDEVPA Calculates standard deviation based on the entire population, including text and logical values HP10062544 <More Info>
+Statistical STEYX Returns the standard error of the predicted y-value for each x in the regression HP10062545 <More Info>
+Statistical TDIST Returns the student’s t-distribution HP10062546 <More Info>
+Statistical TINV Returns the inverse of the student’s t-distribution HP10062547 <More Info>
+Statistical TREND Returns values along a linear trend HP10062548 <More Info>
+Statistical TRIMMEAN Returns the mean of the interior of a data set HP10062549 <More Info>
+Statistical TTEST Returns the probability associated with a student’s t-Test HP10062550 <More Info>
+Statistical VAR Estimates variance based on a sample, ignoring logical values and text HP10062551 <More Info>
+Statistical VARA Estimates variance based on a sample, including logical values and text HP10062552 <More Info>
+Statistical VARP Calculates variance based on the entire population, ignoring logical values and text HP10062553 <More Info>
+Statistical VARPA Calculates variance based on the entire population, including logical values and text HP10062554 <More Info>
+Statistical WEIBULL Returns the Weibull distribution HP10062555 <More Info>
+Statistical ZTEST Returns the two-tailed P-value of a z-test HP10062556 <More Info>
+Text BAHTTEXT Converts a number to Baht text HP10062558 <More Info>
+Text CHAR Returns the character specified by the code number HP10062559 <More Info>
+Text CLEAN Removes all nonprintable characters from text HP10062560 <More Info>
+Text CODE Returns a numeric code for the first character in a text string HP10062561 <More Info>
+Text CONCATENATE Joins several text items into one text item HP10062562 <More Info>
+Text DOLLAR Converts a number to text, using currency format HP10062563 <More Info>
+Text EXACT Checks to see whether two text values are identical HP10062564 <More Info>
+Text FIXED Formats a number as text with a fixed number of decimals HP10062565 <More Info>
+Text LEFT Returns the leftmost characters from a text value HP10062568 <More Info>
+Text LEN Returns the number of characters in a text string HP10062569 <More Info>
+Text LOWER Converts text to lowercase HP10062570 <More Info>
+Text MID Returns a specific number of characters from a text string, starting at the position you specify HP10062571 <More Info>
+Text PROPER Capitalizes the first letter in each word of a text value HP10062573 <More Info>
+Text REPLACE Replaces characters within text HP10062574 <More Info>
+Text REPT Repeats text a given number of times HP10062575 <More Info>
+Text RIGHT Returns the rightmost characters from a text value HP10062576 <More Info>
+Text SEARCH Finds one text value within another (not case sensitive) HP10062577 <More Info>
+Text SUBSTITUTE Substitutes new text for old text in a text string HP10062578 <More Info>
+Text T Returns the text referred to by value HP10062579 <More Info>
+Text TEXT Formats a number and converts it to text HP10062580 <More Info>
+Text TRIM Removes excess spaces from text HP10062581 <More Info>
+Text UPPER Converts text to uppercase HP10062582 <More Info>
+Text VALUE Converts a text argument to a number HP10062583 <More Info>
+Financial FV Returns the future value of an investment HP10069823 <More Info>
+Financial NPV Returns the net present value of an investment based on a series of periodic cash flows and a discount rate HP10069824 <More Info>
+Financial PMT Returns the periodic payment for an annuity HP10069825 <More Info>
+Financial PPMT Returns the payment on the principal for an investment for a given period HP10069826 <More Info>
+Information ISBLANK Returns TRUE if the value is blank HP10069827 <More Info>
+Information ISERR Returns TRUE if the value is any error value except #N/A HP10069827 <More Info>
+Information ISERROR Returns TRUE if the value is any error value HP10069827 <More Info>
+Information ISLOGICAL Returns TRUE if the value is a logical value HP10069827 <More Info>
+Information ISNA Returns TRUE if the value is the #N/A error value HP10069827 <More Info>
+Information ISNONTEXT Returns TRUE if the value is not text HP10069827 <More Info>
+Information ISNUMBER Returns TRUE if the value is a number HP10069827 <More Info>
+Information ISREF Returns TRUE if the value is a reference HP10069827 <More Info>
+Information ISTEXT Returns TRUE if the value is text HP10069827 <More Info>
+Logical AND Returns TRUE if all its arguments are TRUE HP10069828 <More Info>
+Logical IF Specifies a logical test to perform HP10069829 <More Info>
+Lookup & Reference CHOOSE Chooses a value from a list of values HP10069830 <More Info>
+Lookup & Reference INDEX Uses an index to choose a value from a reference or array HP10069831 <More Info>
+Lookup & Reference LOOKUP Returns a value either from a one-row or one-column range or from an array HP10069832 <More Info>
+Lookup & Reference ROW Returns the row number of a reference HP10069833 <More Info>
+Lookup & Reference TRANSPOSE Returns the transpose of an array HP10069834 <More Info>
+Lookup & Reference VLOOKUP Searches for a value in the leftmost column of a table and then returns a value in the same row from a column you specify in the table HP10069835 <More Info>
+Text FIND Finds one text value within another (case sensitive) HP10069836 <More Info>
+Statistical LINEST Returns the parameters of a linear trend HP10069838 <More Info>
+Statistical LOGEST Returns the parameters of an exponential trend HP10069839 <More Info>
+Statistical COUNTIF Counts the number of cells that meet the criteria you specify in the argument HP10069840 <More Info>
+Math & Trig MINVERSE Returns the matrix inverse of an array HP10069841 <More Info>
+Math & Trig MMULT Returns the matrix product of two arrays HP10069842 <More Info>
+Math & Trig SINH Returns the hyperbolic sine of a number HP10069843 <More Info>
+New (All)
+Row Labels Count of Function
+Statistical 83.0
+Math & Trig 60.0
+Financial 53.0
+Engineering 39.0
+Text 24.0
+Date & Time 20.0
+Lookup & Reference 18.0
+Information 17.0
+Database 12.0
+Cube 7.0
+Logical 7.0
+Grand Total 340.0

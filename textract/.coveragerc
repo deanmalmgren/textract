@@ -1,0 +1,6 @@
+[report]
+omit =
+    */python?.?/*
+    */site-packages/nose/*
+    textract/cli.py
+    textract/colors.py
