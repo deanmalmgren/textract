@@ -11,6 +11,9 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+* several bug fixes, including:
+
+  * faster testing framework by only rebuilding test data when needed (`#90`_)
 
 1.3.0
 -----
@@ -235,3 +238,4 @@ latest changes in development for next release
 .. _#82: https://github.com/deanmalmgren/textract/issues/82
 .. _#84: https://github.com/deanmalmgren/textract/issues/84
 .. _#87: https://github.com/deanmalmgren/textract/issues/87
+.. _#90: https://github.com/deanmalmgren/textract/issues/90

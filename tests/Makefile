@@ -7,26 +7,37 @@
 #
 # https://github.com/deanmalmgren/textract/issues/78
 
-all: tesseract
+TARGETS = pdf/ocr_text.txt \
+	png/raw_text.txt png/standardized_text.txt \
+	gif/raw_text.txt gif/standardized_text.txt \
+    jpg/raw_text.txt jpg/standardized_text.txt \
+    tiff/raw_text.txt tiff/standardized_text.txt
 
-# create OCR output from tesseract wherever it is used
-tesseract:
-	tesseract png/raw_text.png png/raw_text > /dev/null
-	tesseract png/standardized_text.png png/standardized_text > /dev/null
+all: $(TARGETS)
 
-	tesseract gif/raw_text.gif gif/raw_text > /dev/null
-	tesseract gif/standardized_text.gif gif/standardized_text > /dev/null
+clean:
+	rm -f $(TARGETS)
 
-	tesseract jpg/raw_text.jpg jpg/raw_text > /dev/null
-	tesseract jpg/standardized_text.jpg jpg/standardized_text > /dev/null
-
-	tesseract tiff/raw_text.tiff tiff/raw_text > /dev/null
-	tesseract tiff/standardized_text.tiff tiff/standardized_text > /dev/null
-
-	# create OCR output for the multi-page pdf test
-	pdftoppm pdf/ocr_text.pdf /tmp/pdf-ocr-text
+# create OCR output for the multi-page pdf test
+pdf/ocr_text.txt: pdf/ocr_text.pdf
+	pdftoppm $< /tmp/pdf-ocr-text
 	for x in /tmp/pdf-ocr-text*; do \
 		tesseract $$x $$(basename $$x .ppm) > /dev/null; \
 	done
-	cat pdf-ocr-text*.txt > pdf/ocr_text.txt
+	cat pdf-ocr-text*.txt > $@
 	rm -f pdf-ocr-text*
+
+# simple pattern rule for creating standard issue tesseract files for different
+# fileypes. the `g` shell variable is the path to the file without the
+# extension (e.g. g=png/raw_text)
+%.txt: %.png
+	f=$@; g=$${f%%.*}; tesseract $< $${g} > /dev/null
+
+%.txt: %.gif
+	f=$@; g=$${f%%.*}; tesseract $< $${g} > /dev/null
+
+%.txt: %.tiff
+	f=$@; g=$${f%%.*}; tesseract $< $${g} > /dev/null
+
+%.txt: %.jpg
+	f=$@; g=$${f%%.*}; tesseract $< $${g} > /dev/null

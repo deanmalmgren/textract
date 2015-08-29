@@ -62,7 +62,9 @@ tests/pdf/large.pdf
 tests/png/raw_text.txt
 tests/gif/raw_text.txt
 tests/jpg/raw_text.txt
+tests/tiff/raw_text.txt
 tests/png/standardized_text.txt
 tests/gif/standardized_text.txt
 tests/jpg/standardized_text.txt
+tests/tiff/standardized_text.txt
 tests/pdf/ocr_text.txt
