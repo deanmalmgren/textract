@@ -11,6 +11,9 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+* added simple support for extensionless filenames, treating them as plain
+  ``.txt`` files (`#85`_)
+
 * several bug fixes, including:
 
   * faster testing framework by only rebuilding test data when needed (`#90`_)
@@ -245,5 +248,6 @@ latest changes in development for next release
 .. _#79: https://github.com/deanmalmgren/textract/issues/79
 .. _#82: https://github.com/deanmalmgren/textract/issues/82
 .. _#84: https://github.com/deanmalmgren/textract/issues/84
+.. _#85: https://github.com/deanmalmgren/textract/issues/85
 .. _#87: https://github.com/deanmalmgren/textract/issues/87
 .. _#90: https://github.com/deanmalmgren/textract/issues/90

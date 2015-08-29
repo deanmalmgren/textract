@@ -11,6 +11,7 @@ from .. import exceptions
 EXTENSION_SYNONYMS = {
     ".jpeg": ".jpg",
     ".htm": ".html",
+    "": ".txt",
 }
 
 # default encoding that is returned by the process method. specify it
