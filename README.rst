@@ -17,9 +17,9 @@ Extract text from any document. No muss. No fuss.
 
 .. |Build Status| image:: https://travis-ci.org/deanmalmgren/textract.svg?branch=master
    :target: https://travis-ci.org/deanmalmgren/textract
-.. |Version| image:: https://pypip.in/v/textract/badge.png
+.. |Version| image:: https://img.shields.io/pypi/v/textract.svg
    :target: https://warehouse.python.org/project/textract/
-.. |Downloads| image:: https://pypip.in/d/textract/badge.png
+.. |Downloads| image:: https://img.shields.io/pypi/dm/textract.svg
    :target: https://warehouse.python.org/project/textract/
 .. |Test Coverage| image:: https://coveralls.io/repos/deanmalmgren/textract/badge.png
    :target: https://coveralls.io/r/deanmalmgren/textract
