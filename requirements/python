@@ -9,4 +9,4 @@ beautifulsoup4
 xlrd
 EbookLib
 SpeechRecognition>=1.1.0
-https://github.com/deanmalmgren/msg-extractor/zipball/pip-installable
+https://github.com/mattgwwalker/msg-extractor/zipball/master
