@@ -32,6 +32,7 @@ latest changes in development for next release
   * updated tests for ``.html``, ``.ogg``, ``.wav``, and ``.mp3`` file types to
     be consistent with more recent versions of the underlying packages.
 
+
 1.3.0
 -----
 

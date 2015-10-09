@@ -34,7 +34,7 @@ class Parser(ShellParser):
                 audio = r.record(source)
 
             try:
-                speech = r.recognize(audio)
+                speech = r.recognize_google(audio)
             except LookupError:  # audio is not understandable
                 speech = ''
 
