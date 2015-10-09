@@ -63,10 +63,10 @@ class ShellError(CommandLineError):
         self.stderr = stderr
         self.executable = self.command.split()[0]
 
-    def is_uninstalled(self):
+    def is_not_installed(self):
         return os.name == 'posix' and self.exit_code == 127
 
-    def uninstalled_message(self):
+    def not_installed_message(self):
         return (
             "The command `%(command)s` failed because the executable\n"
             "`%(executable)s` is not installed on your system. Please make\n"
@@ -85,7 +85,7 @@ class ShellError(CommandLineError):
         ) % vars(self)
 
     def __str__(self):
-        if self.is_uninstalled():
-            return self.uninstalled_message()
+        if self.is_not_installed():
+            return self.not_installed_message()
         else:
             return self.failed_message()

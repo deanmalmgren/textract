@@ -21,13 +21,13 @@ class Parser(ShellParser):
                 # If pdftotext isn't installed and the pdftotext method
                 # wasn't specified, then gracefully fallback to using
                 # pdfminer instead.
-                if method == '' and ex.is_uninstalled():
-                    return self.extract_pdfminer(filename)
+                if method == '' and ex.is_not_installed():
+                    return self.extract_pdfminer(filename, **kwargs)
                 else:
                     raise ex
 
         elif method == 'pdfminer':
-            return self.extract_pdfminer(filename)
+            return self.extract_pdfminer(filename, **kwargs)
         elif method == 'tesseract':
             return self.extract_tesseract(filename, **kwargs)
         else:
@@ -42,7 +42,7 @@ class Parser(ShellParser):
         stdout, _ = self.run('pdftotext %(layout)s "%(filename)s" -' % locals())
         return stdout
 
-    def extract_pdfminer(self, filename):
+    def extract_pdfminer(self, filename, **kwargs):
         """Extract text from pdfs using pdfminer."""
         stdout, _ = self.run('pdf2txt.py "%(filename)s"' % locals())
         return stdout
