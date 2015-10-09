@@ -44,7 +44,6 @@ class Parser(ShellParser):
         return stdout
 
     def extract_tesseract(self, filename, **kwargs):
-
         """Extract text from pdfs using tesseract (per-page OCR)."""
         temp_dir = mkdtemp()
         base = os.path.join(temp_dir, 'conv')
