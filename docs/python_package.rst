@@ -38,8 +38,9 @@ parser  option     description
 ======  =========  ===========================================================
 gif     language   Specify `the language`_ for OCR-ing text with tesseract
 jpg     language   Specify `the language`_ for OCR-ing text with tesseract
-png     language   Specify `the language`_ for OCR-ing text with tesseract
 pdf     language   For use when ``method='tesseract'``, specify `the language`_
+pdf     layout     Preserve the layout of the text as it appears in the pdf
+png     language   Specify `the language`_ for OCR-ing text with tesseract
 tiff    language   Specify `the language`_ for OCR-ing text with tesseract
 ======  =========  ===========================================================
 
