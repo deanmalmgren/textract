@@ -36,3 +36,8 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
 
         # make sure textract can successfully run
         self.assertSuccessfulTextract(filename)
+
+    def test_two_column(self):
+        """Preserve two column layout in extraction"""
+        filename = os.path.join(self.get_extension_directory(), 'two_column.pdf')
+        self.compare_python_output(filename, layout=True)
