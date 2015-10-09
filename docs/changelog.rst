@@ -11,6 +11,8 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+* added layout preservation option for pdf extractor (`#93`_ by @ankushshah89)
+
 * added simple support for extensionless filenames, treating them as plain
   ``.txt`` files (`#85`_)
 
@@ -251,3 +253,4 @@ latest changes in development for next release
 .. _#85: https://github.com/deanmalmgren/textract/issues/85
 .. _#87: https://github.com/deanmalmgren/textract/issues/87
 .. _#90: https://github.com/deanmalmgren/textract/issues/90
+.. _#93: https://github.com/deanmalmgren/textract/issues/93
