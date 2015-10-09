@@ -39,7 +39,9 @@ class Parser(ShellParser):
             layout = '-layout'
         else:
             layout = ''
-        stdout, _ = self.run('pdftotext %(layout)s "%(filename)s" -' % locals())
+        stdout, _ = self.run(
+            'pdftotext %(layout)s "%(filename)s" -' % locals()
+        )
         return stdout
 
     def extract_pdfminer(self, filename, **kwargs):
