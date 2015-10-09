@@ -11,7 +11,8 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
-* added layout preservation option for pdf extractor (`#93`_ by @ankushshah89)
+* added layout preservation option for pdftotext pdf extractor (`#93`_ by
+  @ankushshah89)
 
 * added simple support for extensionless filenames, treating them as plain
   ``.txt`` files (`#85`_)
