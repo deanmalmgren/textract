@@ -12,12 +12,15 @@ latest changes in development for next release
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
 * added layout preservation option for pdftotext pdf extractor (`#93`_ by
-  @ankushshah89)
+  `@ankushshah89`_)
 
 * added simple support for extensionless filenames, treating them as plain
   ``.txt`` files (`#85`_)
 
 * several bug fixes, including:
+
+  * now extracting the text in tables from docx files at the end of the text
+    extraction (`#92`_ by `@jsmith-mploir`_)
 
   * faster testing framework by only rebuilding test data when needed (`#90`_)
 
@@ -200,10 +203,12 @@ latest changes in development for next release
 
 .. _@anthonygarvan: https://github.com/anthonygarvan
 .. _@anderser: https://github.com/anderser
+.. _@ankushshah89: https://github.com/ankushshah89
 .. _@arvindch: https://github.com/arvindch
 .. _@christomitov: https://github.com/christomitov
 .. _@eiotec: https://github.com/eiotec
 .. _@evfredericksen: https://github.com/evfredericksen
+.. _@jsmith-mploir: https://github.com/jsmith-mploir
 .. _@kokxx: https://github.com/Kokxx
 .. _@levivm: https://github.com/levivm
 .. _@pudo: https://github.com/pudo
@@ -254,4 +259,5 @@ latest changes in development for next release
 .. _#85: https://github.com/deanmalmgren/textract/issues/85
 .. _#87: https://github.com/deanmalmgren/textract/issues/87
 .. _#90: https://github.com/deanmalmgren/textract/issues/90
+.. _#92: https://github.com/deanmalmgren/textract/issues/92
 .. _#93: https://github.com/deanmalmgren/textract/issues/93
