@@ -18,21 +18,21 @@ class Parser(BaseParser):
 
         # Recursively extract text from root tables.
         for table in document.tables:
-            text += self._parse_table(table, text)
+            text += '\n\n' + self._parse_table(table)
 
         return text
 
-    def _parse_table(self, table, text):
+    def _parse_table(self, table):
+        text = ''
         for row in table.rows:
             for cell in row.cells:
                 # For every cell in every row of the table, extract text from
                 # child paragraphs.
-                text += '\n\n'.join([
-                    paragraph.text for paragraph in cell
-                ])
+                for paragraph in cell.paragraphs:
+                    text += '\n\n' + paragraph.text
 
                 # Then recursively extract text from child tables.
                 for table in cell.tables:
-                    text += _parse_table(table, text)
+                    text += self._parse_table(table)
 
         return text
