@@ -98,7 +98,7 @@ latest changes in development for next release
 1.0.0
 -----
 
-* **standardized encoding of output with ``-e/--encoding`` option**
+* **standardized encoding of output with** ``-e/--encoding`` **option**
   (`#39`_)
 
 * support for ``.xls`` and ``.xlsx`` files (`#42`_ and `#55`_ by `@levivm`_)
@@ -253,11 +253,13 @@ latest changes in development for next release
 .. _#62: https://github.com/deanmalmgren/textract/issues/62
 .. _#64: https://github.com/deanmalmgren/textract/issues/64
 .. _#66: https://github.com/deanmalmgren/textract/issues/66
+.. _#69: https://github.com/deanmalmgren/textract/issues/69
 .. _#70: https://github.com/deanmalmgren/textract/issues/70
 .. _#73: https://github.com/deanmalmgren/textract/issues/73
 .. _#76: https://github.com/deanmalmgren/textract/issues/76
 .. _#78: https://github.com/deanmalmgren/textract/issues/78
 .. _#79: https://github.com/deanmalmgren/textract/issues/79
+.. _#81: https://github.com/deanmalmgren/textract/issues/81
 .. _#82: https://github.com/deanmalmgren/textract/issues/82
 .. _#84: https://github.com/deanmalmgren/textract/issues/84
 .. _#85: https://github.com/deanmalmgren/textract/issues/85
