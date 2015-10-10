@@ -11,6 +11,9 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+1.4.0
+-----
+
 * added layout preservation option for pdftotext pdf extractor (`#93`_ by
   `@ankushshah89`_)
 
