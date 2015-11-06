@@ -93,6 +93,10 @@ def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
                 filetype_module = importlib.import_module(rel_module, 'textract.parsers')
                 #print ("Processing : %s" % filetype_module)
                 parser = filetype_module.Parser()
-                return parser.process(filename, encoding, **kwargs)
+                ret = parser.process(filename, encoding, **kwargs)
+                if ret:
+                    return ret
+                else:
+                    continue
         else:
             raise exceptions.MimetypeNotDetected(filename)
