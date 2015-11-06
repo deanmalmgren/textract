@@ -94,3 +94,5 @@ def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
                 #print ("Processing : %s" % filetype_module)
                 parser = filetype_module.Parser()
                 return parser.process(filename, encoding, **kwargs)
+        else:
+            raise exceptions.MimetypeNotDetected(filename)
