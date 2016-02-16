@@ -1,5 +1,6 @@
 import os
 import shutil
+import six
 from tempfile import mkdtemp
 
 from ..exceptions import UnknownMethod, ShellError
@@ -61,6 +62,6 @@ class Parser(ShellParser):
                 page_path = os.path.join(temp_dir, page)
                 page_content = TesseractParser().extract(page_path, **kwargs)
                 contents.append(page_content)
-            return ''.join(contents)
+            return six.b('').join(contents)
         finally:
             shutil.rmtree(temp_dir)

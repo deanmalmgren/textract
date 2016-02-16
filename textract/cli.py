@@ -6,6 +6,7 @@ import argparse
 import encodings
 import os
 import pkgutil
+import sys
 
 import argcomplete
 
@@ -52,7 +53,8 @@ def get_parser():
         help='Specify a method of extraction for formats that support it',
     )
     parser.add_argument(
-        '-o', '--output', type=argparse.FileType('w'), default='-',
+        '-o', '--output', type=argparse.FileType('wb'),
+        default=sys.stdout.buffer,
         help='Output raw text in this file',
     )
     parser.add_argument(

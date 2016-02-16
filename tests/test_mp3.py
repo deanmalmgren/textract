@@ -1,6 +1,6 @@
 import unittest
 
-import base
+from . import base
 
 
 class Mp3TestCase(base.ShellParserTestCase, unittest.TestCase):

@@ -1,1 +1,1 @@
-from xlsx_parser import Parser
+from .xlsx_parser import Parser

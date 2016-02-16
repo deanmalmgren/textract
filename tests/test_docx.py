@@ -1,7 +1,7 @@
 import unittest
 import os
 
-import base
+from . import base
 
 
 class DocxTestCase(base.BaseParserTestCase, unittest.TestCase):

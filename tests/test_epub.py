@@ -1,6 +1,6 @@
 import unittest
 
-import base
+from . import base
 
 
 class EpubTestCase(base.BaseParserTestCase, unittest.TestCase):

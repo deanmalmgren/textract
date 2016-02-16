@@ -1,16 +1,19 @@
 import unittest
 import os
+import six
 
-import base
+from . import base
 
 
 class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
     extension = 'pdf'
 
+    @unittest.skipIf(six.PY3, 'pdfminer does not support Python 3')
     def test_pdfminer_python(self):
         """make sure pdfminer python output is correct"""
         self.compare_python_output(self.raw_text_filename, method='pdfminer')
 
+    @unittest.skipIf(six.PY3, 'pdfminer does not support Python 3')
     def test_pdfminer_cli(self):
         """make sure pdfminer command line output is correct"""
         self.compare_cli_output(self.raw_text_filename, method='pdfminer')

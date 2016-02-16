@@ -10,3 +10,4 @@ xlrd
 EbookLib
 SpeechRecognition>=3.1.0
 https://github.com/mattgwwalker/msg-extractor/zipball/master
+six

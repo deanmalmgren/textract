@@ -1,6 +1,6 @@
 import unittest
 
-import base
+from . import base
 
 
 class PsTestCase(base.ShellParserTestCase, unittest.TestCase):
