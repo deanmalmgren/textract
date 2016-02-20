@@ -18,6 +18,12 @@ class GenericUtilities(object):
             shutil.move(stream.name, filename)
         return filename
 
+    def clean_text(self, text):
+        lines = text.splitlines()
+        # Clean empty lines (fixes epub issue)
+        lines = [line for line in lines if line.strip()]  # Clean empty lines
+        return six.b('\n').join(lines)
+
 
 class BaseParserTestCase(GenericUtilities):
     """This BaseParserTestCase object is used to collect a bunch of
@@ -187,8 +193,9 @@ class BaseParserTestCase(GenericUtilities):
             cleanup=False,
             **kwargs
         )
+
         self.assertSuccessfulCommand(
-            "diff '%(temp_filename)s' '%(expected_filename)s'" % locals()
+            "diff --ignore-blank-lines '%(temp_filename)s' '%(expected_filename)s'" % locals()
         )
         os.remove(temp_filename)
 
@@ -199,7 +206,10 @@ class BaseParserTestCase(GenericUtilities):
         import textract
         result = textract.process(filename, **kwargs)
         with open(expected_filename, 'rb') as stream:
-            self.assertEqual(result, stream.read())
+            result = self.clean_text(result)
+            expected = self.clean_text(stream.read())
+            assert result == expected
+            self.assertEqual(result, expected)
 
 
 class ShellParserTestCase(BaseParserTestCase):
