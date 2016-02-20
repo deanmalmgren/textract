@@ -11,6 +11,14 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+1.4.1
+-----
+
+* added Python 3 support (by `@sirex`_)
+
+  * pdfminer_ is not supported on Python 3
+
+
 1.4.0
 -----
 
@@ -202,6 +210,9 @@ latest changes in development for next release
 * Initial release, support for ``.docx`` and ``.pptx``
 
 
+.. _pdfminer: https://github.com/euske/pdfminer
+
+
 .. list of contributors that are linked to above. putting links here
    to make the text above relatively clean
 
@@ -217,6 +228,7 @@ latest changes in development for next release
 .. _@levivm: https://github.com/levivm
 .. _@pudo: https://github.com/pudo
 .. _@ShawnMilo: https://github.com/ShawnMilo
+.. _@sirex: https://github.com/sirex
 
 
 .. list of issues that have been resolved. putting links here to make
