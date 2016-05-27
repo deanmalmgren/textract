@@ -12,6 +12,7 @@ EXTENSION_SYNONYMS = {
     ".jpeg": ".jpg",
     ".htm": ".html",
     "": ".txt",
+    ".tif": ".tiff",
 }
 
 # default encoding that is returned by the process method. specify it
