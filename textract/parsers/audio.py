@@ -51,9 +51,6 @@ class Parser(ShellParser):
         http://www.text2speech.org/,
         with American Male 2 for best results
         """
-        command = (
-            'sox -G -c 1 "%(filename)s" {0}'
-        )
         temp_filename = '{0}.wav'.format(self.temp_filename())
-        self.run(command.format(temp_filename) % locals())
+        self.run(['sox', '-G', '-c', '1', filename, temp_filename])
         return temp_filename

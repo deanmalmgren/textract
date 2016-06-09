@@ -40,13 +40,13 @@ class Parser(ShellParser):
         else:
             layout = ''
         stdout, _ = self.run(
-            'pdftotext %(layout)s "%(filename)s" -' % locals()
+            ['pdftotext', layout, filename, '-']
         )
         return stdout
 
     def extract_pdfminer(self, filename, **kwargs):
         """Extract text from pdfs using pdfminer."""
-        stdout, _ = self.run('pdf2txt.py "%(filename)s"' % locals())
+        stdout, _ = self.run(['pdf2txt.py', filename])
         return stdout
 
     def extract_tesseract(self, filename, **kwargs):
@@ -55,7 +55,7 @@ class Parser(ShellParser):
         base = os.path.join(temp_dir, 'conv')
         contents = []
         try:
-            stdout, _ = self.run('pdftoppm "%s" "%s"' % (filename, base))
+            stdout, _ = self.run(['pdftoppm', filename, base])
 
             for page in sorted(os.listdir(temp_dir)):
                 page_path = os.path.join(temp_dir, page)

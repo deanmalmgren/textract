@@ -17,14 +17,5 @@ class Parser(ShellParser):
         else:
             lang = ''
 
-        # Tesseract can't output to console directly so you must first create
-        # a dummy file to write to, read, and then delete
-        devnull = os.devnull
-        command = (
-            'tesseract "%(filename)s" %(lang)s {0} > %(devnull)s && '
-            'cat {0}.txt && '
-            'rm -f {0} {0}.txt'
-        )
-        temp_filename = self.temp_filename()
-        stdout, _ = self.run(command.format(temp_filename) % locals())
+        stdout, _ = self.run(['tesseract',filename,'stdout',lang])
         return stdout
