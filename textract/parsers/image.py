@@ -13,9 +13,9 @@ class Parser(ShellParser):
 
         # if language given as argument, specify language for tesseract to use
         if 'language' in kwargs:
-            lang = '-l %s' % kwargs['language']
+            args = ['tesseract', filename, 'stdout', '-l', kwargs['language'] ]
         else:
-            lang = ''
+            args = ['tesseract', filename, 'stdout']
 
-        stdout, _ = self.run(['tesseract',filename,'stdout',lang])
+        stdout, _ = self.run(args)
         return stdout
