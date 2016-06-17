@@ -11,7 +11,7 @@ antiword
 unrtf
 
 # parse image files
-tesseract-ocr=3.03.02-3
+tesseract-ocr=3.03\*
 
 # parse pdfs
 poppler-utils
