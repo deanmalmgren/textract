@@ -185,7 +185,7 @@ class BaseParserTestCase(GenericUtilities):
             **kwargs
         )
         self.assertSuccessfulCommand(
-            "diff -B '%(temp_filename)s' '%(expected_filename)s'" % locals()
+            "diff '%(temp_filename)s' '%(expected_filename)s'" % locals()
         )
         os.remove(temp_filename)
 
@@ -196,8 +196,8 @@ class BaseParserTestCase(GenericUtilities):
         import textract
         result = textract.process(filename, **kwargs)
         with open(expected_filename) as stream:
-            self.assertEqual(' '.join(result.split()), ' '.join(stream.read().split()))
-
+            self.assertEqual(result, stream.read())
+	#self.assertEqual(' '.join(result.split()), ' '.join(stream.read().split()))
 
 class ShellParserTestCase(BaseParserTestCase):
     """This BaseParserTestCase object is used to collect a bunch of

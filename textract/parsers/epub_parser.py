@@ -10,10 +10,12 @@ class Parser(BaseParser):
 
     def extract(self, filename, **kwargs):
         book = epub.read_epub(filename)
-        result = ""
-        for item in book.get_items():
-            type = item.get_type()
-            if type == ITEM_DOCUMENT:
-                soup = BeautifulSoup(item.content, 'lxml')
-                result = result + soup.text
+        result = ''
+        for id, _ in book.spine:
+            item = book.get_item_with_id(id)
+            soup = BeautifulSoup(item.content, 'lxml')
+            for child in soup.find_all(
+                ['title', 'p', 'div', 'h1', 'h2', 'h3', 'h4']
+            ):
+                result = result + child.text + '\n'
         return result
