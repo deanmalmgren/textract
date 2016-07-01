@@ -44,5 +44,13 @@ setup(
     ],
     install_requires=dependencies,
     dependency_links=dependency_links,
+    extras_require={
+        ':python_version=="2.7" or python_version=="2.6"': [
+            'pdfminer==20140328',
+        ],
+        ':python_version=="3.5"': [
+            'pdfminer.six',
+        ],
+    },
     zip_safe=False,
 )
