@@ -1,3 +1,4 @@
+import os
 import logging
 
 logger = logging.getLogger('textract')
@@ -1022,7 +1023,7 @@ def detect_filetype(filename, default='txt'):
         if not ext:
             ext = default
 
-    logger.info('Detected file as type {0}'.format(ext))
+    logger.info('Detected file {0} as type {1}'.format(filename, ext))
 
     # Use the extension synonyms dictionary to consolidate
     ext = ext.lower().strip('.')
