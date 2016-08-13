@@ -1008,11 +1008,11 @@ MIME_MAPPING = {
 }
 
 
-def detect_filetype(filename, default='txt'):
+def detect_filetype(filename, method=DETECT_METHOD, default='txt'):
     """
     Detect a file's type, using `default` if not found.
     """
-    if DETECT_METHOD == 'magic':
+    if method == 'magic':
         mime = magic.from_file(filename, mime=True)
         ext = MIME_MAPPING.get(mime, default)
     else:
