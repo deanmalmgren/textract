@@ -42,8 +42,12 @@ class BaseParserTestCase(GenericUtilities):
             )
 
     def get_extension_directory(self):
-        return os.path.join(
+        data_dir = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
+            'data'
+        )
+        return os.path.join(
+            data_dir,
             self.extension,
         )
 

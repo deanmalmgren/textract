@@ -25,7 +25,7 @@ def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
     if not os.path.exists(filename):
         raise exceptions.MissingFileError(filename)
 
-    ext = detect_filetype(filename, method='extension')
+    ext = detect_filetype(filename)
 
     # to avoid conflicts with packages that are installed globally
     # (e.g. python's json module), all extension parser modules have
