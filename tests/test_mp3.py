@@ -6,7 +6,7 @@ import base
 class Mp3TestCase(base.ShellParserTestCase, unittest.TestCase):
     extension = 'mp3'
 
-	def test_mp3(self):
+    def test_mp3(self):
         """make sure default audio method output is correct"""
         self.compare_python_output(self.raw_text_filename)
 
