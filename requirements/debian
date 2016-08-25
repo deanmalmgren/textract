@@ -1,3 +1,11 @@
+# required packages
+gcc
+libpulse-dev
+libjpeg62-dev
+build-essential
+git
+make
+
 # these packages are required by python-docx, which depends on lxml
 # and requires these things
 python-dev
