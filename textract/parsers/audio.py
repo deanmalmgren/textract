@@ -1,6 +1,7 @@
 import speech_recognition as sr
 import os
 
+from ..exceptions import UnknownMethod, ShellError
 from .utils import ShellParser
 
 
@@ -16,7 +17,7 @@ class Parser(ShellParser):
     with Rich (US English) for best results
     """
 
-    def extract(self, filename, **kwargs):
+    def extract(self, filename, engine=None, **kwargs):
         speech = ''
 
         # convert to wav, if not already .wav
@@ -24,7 +25,7 @@ class Parser(ShellParser):
         if ext != '.wav':
             temp_filename = self.convert_to_wav(filename)
             try:
-                speech = self.extract(temp_filename, **kwargs)
+                speech = self.extract(temp_filename, engine, **kwargs)
             finally:  # make sure temp_file is deleted
                 os.remove(temp_filename)
         else:
@@ -34,8 +35,17 @@ class Parser(ShellParser):
                 audio = r.record(source)
 
             try:
-                speech = r.recognize_google(audio)
+                if engine == 'google' or engine is None or engine == '':
+                    speech = r.recognize_google(audio)
+                elif engine == 'sphinx':
+                    speech = r.recognize_sphinx(audio)
+                else:
+                    raise UnknownMethod(engine)
             except LookupError:  # audio is not understandable
+                speech = ''
+            except sr.UnknownValueError:
+                speech = ''
+            except sr.RequestError as e:
                 speech = ''
 
             # add a newline, to make output cleaner

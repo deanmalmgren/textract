@@ -32,6 +32,9 @@ libsox-fmt-mp3
 # convert audio files
 sox
 
+# Sphinx Speech Recognition
+swig
+
 # ubuntu 14.04 requires this in addition to libxml2-dev and
 # libxslt1-dev for compiling lxml.
 # https://github.com/deanmalmgren/textract/issues/19
