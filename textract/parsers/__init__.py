@@ -10,9 +10,11 @@ from .. import exceptions
 # Dictionary structure for synonymous file extension types
 EXTENSION_SYNONYMS = {
     ".jpeg": ".jpg",
+	".tff": ".tiff",
+    ".tif": ".tiff",
     ".htm": ".html",
     "": ".txt",
-    ".tif": ".tiff",
+	".log": ".txt",
 }
 
 # default encoding that is returned by the process method. specify it
