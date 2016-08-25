@@ -102,6 +102,7 @@ file types by either mentioning them on the `issue tracker
 .. _SpeechRecognition: https://pypi.python.org/pypi/SpeechRecognition/
 .. _sox: http://sox.sourceforge.net/
 .. _tesseract-ocr: https://code.google.com/p/tesseract-ocr/
+.. _pocketsphinx: https://github.com/cmusphinx/pocketsphinx/
 
 .. _related-projects:
 
