@@ -1,7 +1,7 @@
 # required packages
 gcc
 libpulse-dev
-libjpeg62-dev
+libjpeg-dev
 build-essential
 git
 make
