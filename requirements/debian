@@ -12,6 +12,7 @@ unrtf
 
 # parse image files
 tesseract-ocr=3.03\*
+libjpeg-dev
 
 # parse pdfs
 poppler-utils
