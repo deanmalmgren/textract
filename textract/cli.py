@@ -6,6 +6,8 @@ import argparse
 import encodings
 import os
 import pkgutil
+import sys
+import six
 
 import argcomplete
 
@@ -23,6 +25,17 @@ class AddToNamespaceAction(argparse.Action):
                 'Duplicate specification of the key "%(key)s" with --option.'
             ) % locals())
         setattr(namespace, key, val)
+
+
+# Fix FileType to honor 'b' flag, see: https://bugs.python.org/issue14156
+class FileType(argparse.FileType):
+    def __call__(self, string):
+        if string == '-' and six.PY3:
+            if 'r' in self._mode:
+                string = sys.stdin.fileno()
+            elif 'w' in self._mode:
+                string = sys.stdout.fileno()
+        return super(FileType, self).__call__(string)
 
 
 # This function is necessary to enable autodocumentation of the script
@@ -52,7 +65,7 @@ def get_parser():
         help='Specify a method of extraction for formats that support it',
     )
     parser.add_argument(
-        '-o', '--output', type=argparse.FileType('w'), default='-',
+        '-o', '--output', type=FileType('wb'), default='-',
         help='Output raw text in this file',
     )
     parser.add_argument(

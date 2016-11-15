@@ -1,5 +1,6 @@
 import glob
 import os
+import sys
 from setuptools import setup
 
 import textract
@@ -11,7 +12,7 @@ scripts = glob.glob("bin/*")
 with open("README.rst") as stream:
     long_description = stream.read()
 
-github_url='https://github.com/deanmalmgren/textract'
+github_url = 'https://github.com/deanmalmgren/textract'
 
 # read in the dependencies from the virtualenv requirements file
 dependencies, dependency_links = [], []

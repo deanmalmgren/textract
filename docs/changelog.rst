@@ -14,14 +14,19 @@ latest changes in development for next release
 1.5.0
 -----
 
+* Added python 3 support, including pdfminer (`#104`_ by `@sirex`_ via `#126`_)
+
+* Python 3 support for ``pdfminer`` using ``pdfminer.six`` (`#116`_ by
+  `@jaraco`_ via `#126`_)
+
 * fixed security vulnerability by properly using subprocess.call (`#114`_ by
   `@pierre-ernst`_)
 
-* adding a `.tif` synonym for `.tiff` files (`#113`_ by `@onionradish`_)
+* adding a ``.tif`` synonym for ``.tiff`` files (`#113`_ by `@onionradish`_)
 
 * several bug fixes, including:
 
-  * including all requirements for `Pillow` (`#119`_ by `@akoumjian`_)
+  * including all requirements for ``Pillow`` (`#119`_ by `@akoumjian`_)
 
 1.4.0
 -----
@@ -225,6 +230,7 @@ latest changes in development for next release
 .. _@christomitov: https://github.com/christomitov
 .. _@eiotec: https://github.com/eiotec
 .. _@evfredericksen: https://github.com/evfredericksen
+.. _@jaraco: https://github.com/jaraco
 .. _@jsmith-mploir: https://github.com/jsmith-mploir
 .. _@kokxx: https://github.com/Kokxx
 .. _@levivm: https://github.com/levivm
@@ -232,6 +238,7 @@ latest changes in development for next release
 .. _@pierre-ernst: https://github.com/pierre-ernst
 .. _@pudo: https://github.com/pudo
 .. _@ShawnMilo: https://github.com/ShawnMilo
+.. _@sirex: https://github.com/sirex
 
 
 .. list of issues that have been resolved. putting links here to make
@@ -282,6 +289,9 @@ latest changes in development for next release
 .. _#90: https://github.com/deanmalmgren/textract/issues/90
 .. _#92: https://github.com/deanmalmgren/textract/issues/92
 .. _#93: https://github.com/deanmalmgren/textract/issues/93
+.. _#104: https://github.com/deanmalmgren/textract/issues/104
 .. _#113: https://github.com/deanmalmgren/textract/issues/113
 .. _#114: https://github.com/deanmalmgren/textract/issues/114
+.. _#116: https://github.com/deanmalmgren/textract/issues/116
 .. _#119: https://github.com/deanmalmgren/textract/issues/119
+.. _#126: https://github.com/deanmalmgren/textract/issues/126

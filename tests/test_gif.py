@@ -1,6 +1,6 @@
 import unittest
 
-import base
+from . import base
 
 
 class GifTestCase(base.ShellParserTestCase, unittest.TestCase):

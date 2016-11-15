@@ -2,7 +2,7 @@ import unittest
 import os
 import subprocess
 
-import base
+from . import base
 
 
 class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):

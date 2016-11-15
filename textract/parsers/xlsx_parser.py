@@ -1,4 +1,7 @@
 import xlrd
+import six
+
+from six.moves import xrange
 
 from .utils import BaseParser
 
@@ -23,7 +26,7 @@ class Parser(BaseParser):
                     value = worksheet.cell_value(curr_row, index_col)
                     if value:
                         if isinstance(value, (int, float)):
-                            value = unicode(value)
+                            value = six.text_type(value)
                         new_output.append(value)
                 if new_output:
                     output += u' '.join(new_output) + u'\n'

@@ -1,6 +1,6 @@
 import unittest
 
-import base
+from . import base
 
 
 class EmlTestCase(base.BaseParserTestCase, unittest.TestCase):

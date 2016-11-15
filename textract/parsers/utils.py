@@ -6,6 +6,7 @@ import subprocess
 import tempfile
 import os
 
+import six
 import chardet
 
 from .. import exceptions
@@ -51,7 +52,7 @@ class BaseParser(object):
         """
         # only decode byte strings into unicode if it hasn't already
         # been done by a subclass
-        if isinstance(text, unicode):
+        if isinstance(text, six.text_type):
             return text
 
         # empty text? nothing to decode

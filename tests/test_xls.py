@@ -1,6 +1,6 @@
 import unittest
 
-import base
+from . import base
 
 
 class XlsTestCase(base.BaseParserTestCase, unittest.TestCase):

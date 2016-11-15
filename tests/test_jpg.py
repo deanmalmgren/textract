@@ -2,7 +2,7 @@ import unittest
 import shutil
 import os
 
-import base
+from . import base
 
 
 class JpgTestCase(base.ShellParserTestCase, unittest.TestCase):
@@ -32,4 +32,4 @@ class JpgTestCase(base.ShellParserTestCase, unittest.TestCase):
             self.get_expected_filename(self.raw_text_filename),
         )
         os.remove(jpeg_filename)
-        
+

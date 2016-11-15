@@ -2,7 +2,7 @@ import unittest
 import shutil
 import os
 
-import base
+from . import base
 
 
 class TxtTestCase(base.BaseParserTestCase, unittest.TestCase):

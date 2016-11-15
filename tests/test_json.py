@@ -1,6 +1,6 @@
 import unittest
 
-import base
+from . import base
 
 
 class JsonTestCase(base.BaseParserTestCase, unittest.TestCase):
