@@ -17,6 +17,8 @@ latest changes in development for next release
 * fixed security vulnerability by properly using subprocess.call (`#114`_ by
   `@pierre-ernst`_)
 
+* adding a `.tif` synonym for `.tiff` files (`#113`_ by `@onionradish`_)
+
 * several bug fixes, including:
 
   * including all requirements for `Pillow` (`#119`_ by `@akoumjian`_)
@@ -226,6 +228,7 @@ latest changes in development for next release
 .. _@jsmith-mploir: https://github.com/jsmith-mploir
 .. _@kokxx: https://github.com/Kokxx
 .. _@levivm: https://github.com/levivm
+.. _@onionradish: https://github.com/onionradish
 .. _@pierre-ernst: https://github.com/pierre-ernst
 .. _@pudo: https://github.com/pudo
 .. _@ShawnMilo: https://github.com/ShawnMilo
@@ -279,4 +282,6 @@ latest changes in development for next release
 .. _#90: https://github.com/deanmalmgren/textract/issues/90
 .. _#92: https://github.com/deanmalmgren/textract/issues/92
 .. _#93: https://github.com/deanmalmgren/textract/issues/93
+.. _#113: https://github.com/deanmalmgren/textract/issues/113
 .. _#114: https://github.com/deanmalmgren/textract/issues/114
+.. _#119: https://github.com/deanmalmgren/textract/issues/119

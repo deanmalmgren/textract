@@ -78,7 +78,7 @@ file types by either mentioning them on the `issue tracker
 
 * ``.rtf`` via `unrtf`_
 
-* ``.tiff`` via `tesseract-ocr`_
+* ``.tiff`` and ``.tif`` via `tesseract-ocr`_
 
 * ``.txt`` via python builtins
 
