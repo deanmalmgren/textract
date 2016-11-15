@@ -11,6 +11,12 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+1.5.0
+-----
+
+* fixed security vulnerability by properly using subprocess.call (`#114`_ by
+  `@pierre-ernst`_)
+
 1.4.0
 -----
 
@@ -27,7 +33,7 @@ latest changes in development for next release
 
   * faster testing framework by only rebuilding test data when needed (`#90`_)
 
-  * fixed ``.html`` and ``.epub`` parsers to dealing with beautifulsoup4
+  * fixed ``.html`` and ``.epub`` parsers to deal with beautifulsoup4
     upgrades
 
   * using official ``msg-extractor`` now that it has a native ``setup.py``
@@ -215,6 +221,7 @@ latest changes in development for next release
 .. _@jsmith-mploir: https://github.com/jsmith-mploir
 .. _@kokxx: https://github.com/Kokxx
 .. _@levivm: https://github.com/levivm
+.. _@pierre-ernst: https://github.com/pierre-ernst
 .. _@pudo: https://github.com/pudo
 .. _@ShawnMilo: https://github.com/ShawnMilo
 
@@ -267,3 +274,4 @@ latest changes in development for next release
 .. _#90: https://github.com/deanmalmgren/textract/issues/90
 .. _#92: https://github.com/deanmalmgren/textract/issues/92
 .. _#93: https://github.com/deanmalmgren/textract/issues/93
+.. _#114: https://github.com/deanmalmgren/textract/issues/114
