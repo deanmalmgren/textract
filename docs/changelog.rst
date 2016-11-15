@@ -26,6 +26,8 @@ latest changes in development for next release
 
 * adding a ``.tif`` synonym for ``.tiff`` files (`#113`_ by `@onionradish`_)
 
+* improved ``.docx`` support using ``docx2txt`` (`#100`_ by `@ankushshah89`_)
+
 * several bug fixes, including:
 
   * including all requirements for ``Pillow`` (`#119`_ by `@akoumjian`_)
@@ -291,6 +293,7 @@ latest changes in development for next release
 .. _#90: https://github.com/deanmalmgren/textract/issues/90
 .. _#92: https://github.com/deanmalmgren/textract/issues/92
 .. _#93: https://github.com/deanmalmgren/textract/issues/93
+.. _#100: https://github.com/deanmalmgren/textract/issues/100
 .. _#104: https://github.com/deanmalmgren/textract/issues/104
 .. _#113: https://github.com/deanmalmgren/textract/issues/113
 .. _#114: https://github.com/deanmalmgren/textract/issues/114
