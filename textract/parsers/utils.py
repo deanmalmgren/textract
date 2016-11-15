@@ -70,7 +70,7 @@ class ShellParser(BaseParser):
     `Fabric <http://www.fabfile.org/>`_-like behavior.
     """
 
-    def run(self, command):
+    def run(self, args):
         """Run ``command`` and return the subsequent ``stdout`` and ``stderr``
         as a tuple. If the command is not successful, this raises a
         :exc:`textract.exceptions.ShellError`.
@@ -78,7 +78,7 @@ class ShellParser(BaseParser):
 
         # run a subprocess and put the stdout and stderr on the pipe object
         pipe = subprocess.Popen(
-            command, shell=True,
+            args,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
         )
 
@@ -89,7 +89,7 @@ class ShellParser(BaseParser):
         # if pipe is busted, raise an error (unlike Fabric)
         if pipe.returncode != 0:
             raise exceptions.ShellError(
-                command, pipe.returncode, stdout, stderr,
+                ' '.join(args), pipe.returncode, stdout, stderr,
             )
 
         return stdout, stderr

@@ -143,14 +143,14 @@ class BaseParserTestCase(GenericUtilities):
     def get_standardized_text(self):
         filename = os.path.join(
             self.get_extension_directory(),
-            "standardized_text.txt" + '.' + self.extension,
+            "standardized_text.txt"
         )
         if os.path.exists(filename):
             with open(filename) as stream:
                 standardized_text = stream.read()
         else:
             standardized_text = "the quick brown fox jumps over the lazy dog"
-        return standardized_text.replace(' ','')
+        return ''.join(standardized_text.split())
 
     def assertSuccessfulCommand(self, command):
         self.assertEqual(
@@ -197,7 +197,7 @@ class BaseParserTestCase(GenericUtilities):
         result = textract.process(filename, **kwargs)
         with open(expected_filename) as stream:
             self.assertEqual(result, stream.read())
-
+	#self.assertEqual(' '.join(result.split()), ' '.join(stream.read().split()))
 
 class ShellParserTestCase(BaseParserTestCase):
     """This BaseParserTestCase object is used to collect a bunch of
