@@ -22,6 +22,8 @@ latest changes in development for next release
 * fixed security vulnerability by properly using subprocess.call (`#114`_ by
   `@pierre-ernst`_)
 
+* updating to ``tesseract`` 3.03 (`#127`_)
+
 * adding a ``.tif`` synonym for ``.tiff`` files (`#113`_ by `@onionradish`_)
 
 * several bug fixes, including:
@@ -295,3 +297,4 @@ latest changes in development for next release
 .. _#116: https://github.com/deanmalmgren/textract/issues/116
 .. _#119: https://github.com/deanmalmgren/textract/issues/119
 .. _#126: https://github.com/deanmalmgren/textract/issues/126
+.. _#127: https://github.com/deanmalmgren/textract/issues/127
