@@ -17,7 +17,7 @@ Ubuntu / Debian
 
 There are two steps required to run this package on
 Ubuntu/Debian. First you must install some system packages using the
-`apt-get <https://help.ubuntu.com/12.04/serverguide/apt-get.html>`_
+`apt-get <https://help.ubuntu.com/14.04/serverguide/apt-get.html>`_
 package manager before installing textract from pypi.
 
 .. code-block:: bash

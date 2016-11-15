@@ -2,21 +2,21 @@
 # vi: set ft=ruby :
 
 # If there are any problems with the required gems, vagrant
-# has its own ruby environment. To install the gems (iniparse, 
+# has its own ruby environment. To install the gems (iniparse,
 # for example), you need to run:
 #
 # $ vagrant plugin install iniparse
 #
-# For more details, check out: 
+# For more details, check out:
 # https://docs.vagrantup.com/v2/cli/plugin.html
 
 require 'iniparse'
 
 Vagrant.configure("2") do |config|
-  
+
   # preliminaries
   root_dir = File.dirname(__FILE__)
-  
+
   #################################################### VIRTUALBOX PROVIDER SETUP
   # global configuration on the virtualbox provider. for all available
   # options, see http://www.virtualbox.org/manual/ch08.html
@@ -24,13 +24,17 @@ Vagrant.configure("2") do |config|
   config.vm.provider :virtualbox do |vb, override_config|
     vb.gui = false
     # http://stackoverflow.com/a/17126363/892506
-    vb.customize ["modifyvm", :id, "--ioapic", "on"] 
+    vb.customize ["modifyvm", :id, "--ioapic", "on"]
     vb.customize ["modifyvm", :id, "--cpus", "2"]
     vb.customize ["modifyvm", :id, "--memory", "2048"]
-    override_config.vm.box = "precise64"
-    override_config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    # override_config.vm.box = "precise64"
+    # override_config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    override_config.vm.box = "trusty64"
+    override_config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+    # override_config.vm.box = "trusty64"
+    # override_config.vm.box_url = "http://files.vagrantup.com/trusty64.box"
   end
- 
+
   # steps for provisioning so that these provisioning steps are
   # properly executed in this virtual machine and also on travis-ci
   def provision_script(config, script_path)
