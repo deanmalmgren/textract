@@ -11,12 +11,10 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
-1.4.1
+1.5.0
 -----
 
-* added Python 3 support (by `@sirex`_)
-
-  * pdfminer_ is not supported on Python 3
+* added Python 3 support (`#104`_ by `@sirex`_ and `#116`_ by `@jaraco`_)
 
 
 1.4.0
@@ -223,6 +221,7 @@ latest changes in development for next release
 .. _@christomitov: https://github.com/christomitov
 .. _@eiotec: https://github.com/eiotec
 .. _@evfredericksen: https://github.com/evfredericksen
+.. _@jaraco: https://github.com/jaraco
 .. _@jsmith-mploir: https://github.com/jsmith-mploir
 .. _@kokxx: https://github.com/Kokxx
 .. _@levivm: https://github.com/levivm
@@ -279,3 +278,5 @@ latest changes in development for next release
 .. _#90: https://github.com/deanmalmgren/textract/issues/90
 .. _#92: https://github.com/deanmalmgren/textract/issues/92
 .. _#93: https://github.com/deanmalmgren/textract/issues/93
+.. _#104: https://github.com/deanmalmgren/textract/issues/104
+.. _#116: https://github.com/deanmalmgren/textract/issues/116
