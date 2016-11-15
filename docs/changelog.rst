@@ -17,6 +17,10 @@ latest changes in development for next release
 * fixed security vulnerability by properly using subprocess.call (`#114`_ by
   `@pierre-ernst`_)
 
+* several bug fixes, including:
+
+  * including all requirements for `Pillow` (`#119`_ by `@akoumjian`_)
+
 1.4.0
 -----
 
@@ -211,6 +215,7 @@ latest changes in development for next release
 .. list of contributors that are linked to above. putting links here
    to make the text above relatively clean
 
+.. _@akoumjian: https://github.com/akoumjian
 .. _@anthonygarvan: https://github.com/anthonygarvan
 .. _@anderser: https://github.com/anderser
 .. _@ankushshah89: https://github.com/ankushshah89

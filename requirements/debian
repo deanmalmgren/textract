@@ -27,7 +27,6 @@ flac
 ffmpeg
 lame
 libmad0
-# debian-specific lib
 libsox-fmt-mp3
 
 # convert audio files

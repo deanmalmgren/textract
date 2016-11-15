@@ -23,7 +23,7 @@ package manager before installing textract from pypi.
 .. code-block:: bash
 
     apt-get install python-dev libxml2-dev libxslt1-dev antiword unrtf poppler-utils pstotext tesseract-ocr \
-    flac ffmpeg lame libmad0 libsox-fmt-mp3 sox
+    flac ffmpeg lame libmad0 libsox-fmt-mp3 sox libjpeg-dev
     pip install textract
 
 .. note::
