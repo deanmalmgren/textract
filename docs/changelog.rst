@@ -208,9 +208,6 @@ latest changes in development for next release
 * Initial release, support for ``.docx`` and ``.pptx``
 
 
-.. _pdfminer: https://github.com/euske/pdfminer
-
-
 .. list of contributors that are linked to above. putting links here
    to make the text above relatively clean
 
