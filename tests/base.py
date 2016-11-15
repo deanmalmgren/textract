@@ -159,7 +159,7 @@ class BaseParserTestCase(GenericUtilities):
             standardized_text = six.b(
                 "the quick brown fox jumps over the lazy dog"
             )
-        return standardized_text.replace(six.b(' '), six.b(''))
+        return six.b('').join(standardized_text.split())
 
     def assertSuccessfulCommand(self, command):
         self.assertEqual(
