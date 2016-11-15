@@ -68,7 +68,7 @@ file types by either mentioning them on the `issue tracker
 
 * ``.ogg`` via `SpeechRecognition`_ and `sox`_
 
-* ``.pdf`` via `pdftotext`_ (default) or `pdfminer`_
+* ``.pdf`` via `pdftotext`_ (default) or `pdfminer.six`_
 
 * ``.png`` via `tesseract-ocr`_
 
@@ -93,7 +93,7 @@ file types by either mentioning them on the `issue tracker
 .. _beautifulsoup4: http://beautiful-soup-4.readthedocs.org/en/latest/
 .. _ebooklib: https://github.com/aerkalov/ebooklib
 .. _msg-extractor: https://github.com/mattgwwalker/msg-extractor
-.. _pdfminer: https://euske.github.io/pdfminer/
+.. _pdfminer.six: https://github.com/goulu/pdfminer
 .. _pdftotext: http://poppler.freedesktop.org/
 .. _ps2text: http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm
 .. _python-docx: https://python-docx.readthedocs.org/en/latest/
