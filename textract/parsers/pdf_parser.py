@@ -47,10 +47,6 @@ class Parser(ShellParser):
 
     def extract_pdfminer(self, filename, **kwargs):
         """Extract text from pdfs using pdfminer."""
-        import sys
-        print >> sys.stderr, self.run('echo $PATH')
-        print >> sys.stderr, self.run('which pdf2txt.py')
-        print >> sys.stderr, self.run('locate pdf2txt.py')
         stdout, _ = self.run('pdf2txt.py "%(filename)s"' % locals())
         return stdout
 
