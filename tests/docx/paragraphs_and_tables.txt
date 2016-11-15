@@ -2,14 +2,6 @@ This is the paragraph before the table. It should appear first.
 
 
 
-
-
-
-
-This is the paragraph after the table. It should appear last.
-
-
-
 Row 1, Column 1
 
 Row 1, Column 2
@@ -34,8 +26,6 @@ INNER TABLE!
 
 
 
-
-
 Inner 1,1
 
 Inner 1,2
@@ -44,3 +34,12 @@ Inner 2,1
 
 Inner 1,2
 
+
+
+
+
+
+
+
+
+This is the paragraph after the table. It should appear last.
