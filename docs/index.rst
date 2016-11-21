@@ -46,7 +46,7 @@ file types by either mentioning them on the `issue tracker
 
 * ``.doc`` via `antiword`_
 
-* ``.docx`` via `python-docx`_
+* ``.docx`` via `python-docx2txt`_
 
 * ``.eml`` via python builtins
 
@@ -96,7 +96,7 @@ file types by either mentioning them on the `issue tracker
 .. _pdfminer.six: https://github.com/goulu/pdfminer
 .. _pdftotext: http://poppler.freedesktop.org/
 .. _ps2text: http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm
-.. _python-docx: https://python-docx.readthedocs.org/en/latest/
+.. _python-docx2txt: https://github.com/ankushshah89/python-docx2txt
 .. _python-pptx: https://python-pptx.readthedocs.org/en/latest/
 .. _unrtf: http://www.gnu.org/software/unrtf/
 .. _SpeechRecognition: https://pypi.python.org/pypi/SpeechRecognition/
