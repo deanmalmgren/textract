@@ -11,6 +11,11 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+* several bug fixes, including:
+
+  * checking for the importability of a parser rather than the presense of the
+    file (`#136`_ by `@AusIV`_)
+
 1.5.0
 -----
 
@@ -231,6 +236,7 @@ latest changes in development for next release
 .. _@anderser: https://github.com/anderser
 .. _@ankushshah89: https://github.com/ankushshah89
 .. _@arvindch: https://github.com/arvindch
+.. _@AusIV: https://github.com/AusIV
 .. _@christomitov: https://github.com/christomitov
 .. _@eiotec: https://github.com/eiotec
 .. _@evfredericksen: https://github.com/evfredericksen
@@ -301,3 +307,4 @@ latest changes in development for next release
 .. _#119: https://github.com/deanmalmgren/textract/issues/119
 .. _#126: https://github.com/deanmalmgren/textract/issues/126
 .. _#127: https://github.com/deanmalmgren/textract/issues/127
+.. _#136: https://github.com/deanmalmgren/textract/issues/136
