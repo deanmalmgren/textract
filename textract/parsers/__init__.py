@@ -44,15 +44,16 @@ def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
     # (e.g. python's json module), all extension parser modules have
     # the _parser extension
     rel_module = ext + '_parser'
-    module_name = rel_module[1:]
 
-    # if this module name doesn't exist in this directory it isn't
-    # currently supported
-    this_dir = os.path.dirname(os.path.abspath(__file__))
-    if not os.path.exists(os.path.join(this_dir, module_name + '.py')):
+    # If we can't import the module, the file extension isn't currently
+    # supported
+    try:
+        filetype_module = importlib.import_module(
+            rel_module, 'textract.parsers')
+    except ImportError:
         raise exceptions.ExtensionNotSupported(ext)
 
     # do the extraction
-    filetype_module = importlib.import_module(rel_module, 'textract.parsers')
+
     parser = filetype_module.Parser()
     return parser.process(filename, encoding, **kwargs)
