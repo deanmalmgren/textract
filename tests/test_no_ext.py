@@ -12,5 +12,5 @@ print(text)
 
 myfile = os.path.join(current_dir, "tests/docx/paragraphs_and_tables")
 # pass the file without extension and provide the extension as a parameter
-text = textract.process(myfile, extension='.docx')
+text = textract.process(myfile, extension='docx')
 print(text)
