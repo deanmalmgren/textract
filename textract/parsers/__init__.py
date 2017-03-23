@@ -40,6 +40,8 @@ def process(filename, encoding=DEFAULT_ENCODING, extension=DEFAULT_EXTENSION, **
         ext = ext.lower()
     else:# use the passed extension (useful for files without extension)
         ext = extension
+    if not ext[0] == '.':# if the extension has not the leading . , add it to the ext variable
+        ext = '.' + ext
     # check the EXTENSION_SYNONYMS dictionary
     ext = EXTENSION_SYNONYMS.get(ext, ext)
 
@@ -59,4 +61,4 @@ def process(filename, encoding=DEFAULT_ENCODING, extension=DEFAULT_EXTENSION, **
     # do the extraction
 
     parser = filetype_module.Parser()
-    return parser.process(filename, encoding, extension, **kwargs)
+    return parser.process(filename, encoding, **kwargs)

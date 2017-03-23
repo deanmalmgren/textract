@@ -31,7 +31,7 @@ class BaseParser(object):
         """
         return text.encode(encoding, 'ignore')
 
-    def process(self, filename, encoding, extension, **kwargs):
+    def process(self, filename, encoding, **kwargs):
         """Process ``filename`` and encode byte-string with ``encoding``. This
         method is called by :func:`textract.parsers.process` and wraps
         the :meth:`.BaseParser.extract` method in `a delicious unicode
