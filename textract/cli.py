@@ -61,6 +61,10 @@ def get_parser():
         help='Specify the encoding of the output.',
     )
     parser.add_argument(
+        '--extension', type=str, default='',
+        help='Specify the extension of the file.',
+    )
+    parser.add_argument(
         '-m', '--method', default='',
         help='Specify a method of extraction for formats that support it',
     )
