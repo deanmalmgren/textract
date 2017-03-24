@@ -60,13 +60,13 @@ file types by either mentioning them on the `issue tracker
 
 * ``.html`` and ``.htm`` via `beautifulsoup4`_
 
-* ``.mp3`` via `SpeechRecognition`_ and `sox`_
+* ``.mp3`` via `sox`_, `SpeechRecognition`_, and `pocketsphinx`_
 
 * ``.msg`` via `msg-extractor`_
 
 * ``.odt`` via python builtins
 
-* ``.ogg`` via `SpeechRecognition`_ and `sox`_
+* ``.ogg`` via `sox`_, `SpeechRecognition`_, and `pocketsphinx`_
 
 * ``.pdf`` via `pdftotext`_ (default) or `pdfminer.six`_
 
@@ -82,7 +82,7 @@ file types by either mentioning them on the `issue tracker
 
 * ``.txt`` via python builtins
 
-* ``.wav`` via `SpeechRecognition`_
+* ``.wav`` via `SpeechRecognition`_ and `pocketsphinx`_
 
 * ``.xlsx`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
 
@@ -95,14 +95,14 @@ file types by either mentioning them on the `issue tracker
 .. _msg-extractor: https://github.com/mattgwwalker/msg-extractor
 .. _pdfminer.six: https://github.com/goulu/pdfminer
 .. _pdftotext: http://poppler.freedesktop.org/
+.. _pocketsphinx: https://github.com/cmusphinx/pocketsphinx/
 .. _ps2text: http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm
 .. _python-docx2txt: https://github.com/ankushshah89/python-docx2txt
 .. _python-pptx: https://python-pptx.readthedocs.org/en/latest/
-.. _unrtf: http://www.gnu.org/software/unrtf/
 .. _SpeechRecognition: https://pypi.python.org/pypi/SpeechRecognition/
 .. _sox: http://sox.sourceforge.net/
 .. _tesseract-ocr: https://code.google.com/p/tesseract-ocr/
-.. _pocketsphinx: https://github.com/cmusphinx/pocketsphinx/
+.. _unrtf: http://www.gnu.org/software/unrtf/
 
 .. _related-projects:
 
