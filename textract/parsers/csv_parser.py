@@ -10,36 +10,43 @@ class Parser(BaseParser):
 
     def extract(self, filename, **kwargs):
 
-        # TODO: it would be pretty awesome to not have to specify the
-        # dialect (delimiters) for the CSV and be able to sniff the
-        # dialect using the csv.Sniffer, but this doesn't work on the
-        # raw_text.csv test at the moment...
+        with open(filename, 'rb') as csv_file:
 
-        # # sniff the dialect using python's csv.Sniffer. takes
-        # # inspiration from http://www.dotnetperls.com/csv
-        # with open(filename) as stream:
+            # detect csv delimiter
+            delimiter = self.detect_delimiter(csv_file)
 
-        #     # get a sample of the text from the stream and then go
-        #     # back to the beginning of the stream
-        #     sample = ''
-        #     for i, line in enumerate(stream):
-        #         sample += line
-        #         if i==10: break
-        #     stream.seek(0)
+            csv_reader = csv.reader(csv_file, delimiter=delimiter)
 
-        #     # use csv.Sniffer to determine the dialect (what
-        #     # delimiters are used) and to determine if the file has a
-        #     # header row
-        #     sniffer = csv.Sniffer()
-        #     dialect = sniffer.sniff(sample)
-        #     if sniffer.has_header(sample):
-        #         stream.readline()
+            # detect dialect and header line
+            # TODO: detection is not accurate enough
+            '''
+            sniffer = csv.Sniffer()
+            csv_sample = csv_file.read(1024)
+            csv_file.seek(0)
+            dialect = sniffer.sniff(csv_sample)
+            csv_reader = csv.reader(csv_file, dialect)
+            if sniffer.has_header(csv_sample):
+                next(csv_reader)
+            '''
 
-        #     # assemble the result
-        #     reader = csv.reader(stream, dialect)
-        #     return '\n'.join(['\t'.join(row) for row in reader])
+            rows = ['\t'.join(row) for row in csv_reader]
+            output = '\n'.join(rows)
+            output += '\n'  # make output cleaner
 
-        # quick 'n dirty solution for the time being
-        with open(filename) as stream:
-            reader = csv.reader(stream)
-            return '\n'.join(['\t'.join(row) for row in reader])
+            return output
+
+    def detect_delimiter(self, csv_file):
+        """Simple, custom delimiter detection"""
+
+        delimiters = [',', ';', '|', '\t']
+
+        # use first line to detect delimiter
+        # assumes first column has no conflicting punctuation usage
+        line = next(csv_file.xreadlines())
+        csv_file.seek(0)
+
+        for c in line:
+            if c in delimiters:
+                return c
+        else:
+            return ''
