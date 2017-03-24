@@ -5,6 +5,7 @@ reused in many of the other parser modules.
 import subprocess
 import tempfile
 import os
+import errno
 
 import six
 import chardet
@@ -78,10 +79,18 @@ class ShellParser(BaseParser):
         """
 
         # run a subprocess and put the stdout and stderr on the pipe object
-        pipe = subprocess.Popen(
-            args,
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-        )
+        try:
+            pipe = subprocess.Popen(
+                args,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            )
+        except OSError as e:
+            if e.errno == errno.ENOENT:
+                # File not found.
+                # This is equivalent to getting exitcode 127 from sh
+                raise exceptions.ShellError(
+                    ' '.join(args), 127, '', '',
+                )
 
         # pipe.wait() ends up hanging on large files. using
         # pipe.communicate appears to avoid this issue
