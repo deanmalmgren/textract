@@ -16,6 +16,8 @@ latest changes in development for next release
   * checking for the importability of a parser rather than the presense of the
     file (`#136`_ by `@AusIV`_)
 
+  * properly reporting on missing external dependencies (`#139`_ by `@AusIV`_)
+
 1.5.0
 -----
 
@@ -308,3 +310,4 @@ latest changes in development for next release
 .. _#126: https://github.com/deanmalmgren/textract/issues/126
 .. _#127: https://github.com/deanmalmgren/textract/issues/127
 .. _#136: https://github.com/deanmalmgren/textract/issues/136
+.. _#139: https://github.com/deanmalmgren/textract/issues/139
