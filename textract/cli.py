@@ -62,7 +62,8 @@ def get_parser():
     )
     parser.add_argument(
         '--extension', type=str, default='',
-        help='Specify the extension of the file (e.g., docx or pdf / .docx or .pdf)',
+        help='Specify the extension of the file (e.g., docx or pdf). Extension can be also passed with the '
+             'leading . (e.g., .docx or .pdf).',
     )
     parser.add_argument(
         '-m', '--method', default='',

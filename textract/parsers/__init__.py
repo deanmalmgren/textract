@@ -19,10 +19,10 @@ EXTENSION_SYNONYMS = {
 # here so the default is used on both the process function and also by
 # the command line interface
 DEFAULT_ENCODING = 'utf_8'
-DEFAULT_EXTENSION = None
 
 
-def process(filename, encoding=DEFAULT_ENCODING, extension=DEFAULT_EXTENSION, **kwargs):
+
+def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
     """This is the core function used for extracting text. It routes the
     ``filename`` to the appropriate parser and returns the extracted
     text as a byte-string encoded with ``encoding``.
@@ -35,12 +35,16 @@ def process(filename, encoding=DEFAULT_ENCODING, extension=DEFAULT_EXTENSION, **
     # get the filename extension, which is something like .docx for
     # example, and import the module dynamically using importlib. This
     # is a relative import so the name of the package is necessary
-    if not extension:# if no extension passed, extract the extension from the file
+    # if no extension passed, extract the extension from the file
+    # else use the passed extension (useful for files without extension)
+    if 'extension' in kwargs:
+        ext = kwargs['extension']
+        print('ext:', ext)
+    else:
         _, ext = os.path.splitext(filename)
         ext = ext.lower()
-    else:# use the passed extension (useful for files without extension)
-        ext = extension
-    if not ext[0] == '.':# if the extension has not the leading . , add it to the ext variable
+    # if the extension has not the leading . , add it to the ext variable
+    if not ext[0] == '.':
         ext = '.' + ext
     # check the EXTENSION_SYNONYMS dictionary
     ext = EXTENSION_SYNONYMS.get(ext, ext)
