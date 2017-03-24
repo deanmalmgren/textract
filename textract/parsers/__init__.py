@@ -42,7 +42,7 @@ def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
         _, ext = os.path.splitext(filename)
         ext = ext.lower()
     # if the extension has not the leading . , add it to the ext variable
-    if not ext[0] == '.':
+    if not ext.startswith('.'):
         ext = '.' + ext
     # check the EXTENSION_SYNONYMS dictionary
     ext = EXTENSION_SYNONYMS.get(ext, ext)
