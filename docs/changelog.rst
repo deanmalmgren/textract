@@ -11,6 +11,8 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+* Added ability to parse audio with ``pocketsphinx`` (`#122`_ by `@barrust`_)
+
 * several bug fixes, including:
 
   * checking for the importability of a parser rather than the presense of the
@@ -238,6 +240,7 @@ latest changes in development for next release
 .. _@anderser: https://github.com/anderser
 .. _@ankushshah89: https://github.com/ankushshah89
 .. _@arvindch: https://github.com/arvindch
+.. _@barrust: https://github.com/barrust
 .. _@AusIV: https://github.com/AusIV
 .. _@christomitov: https://github.com/christomitov
 .. _@eiotec: https://github.com/eiotec
@@ -308,6 +311,7 @@ latest changes in development for next release
 .. _#116: https://github.com/deanmalmgren/textract/issues/116
 .. _#119: https://github.com/deanmalmgren/textract/issues/119
 .. _#126: https://github.com/deanmalmgren/textract/issues/126
+.. _#122: https://github.com/deanmalmgren/textract/issues/122
 .. _#127: https://github.com/deanmalmgren/textract/issues/127
 .. _#136: https://github.com/deanmalmgren/textract/issues/136
 .. _#139: https://github.com/deanmalmgren/textract/issues/139
