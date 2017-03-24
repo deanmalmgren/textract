@@ -1,6 +1,7 @@
 import unittest
 import os
 import subprocess
+import uuid
 
 from . import base
 
@@ -49,7 +50,7 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
         parser = utils.ShellParser()
         try:
             # There shouldn't be a command on the path matching a random uuid
-            parser.run([str(uuid4())])
+            parser.run([str(uuid.uuid4())])
         except exceptions.ShellError as e:
             self.assertTrue(e.is_not_installed())
         else:
