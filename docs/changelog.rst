@@ -20,6 +20,9 @@ latest changes in development for next release
 
   * properly reporting on missing external dependencies (`#139`_ by `@AusIV`_)
 
+  * pin `chardet` to version 2.1.1 to avoid decode errors (`107`_)
+
+
 1.5.0
 -----
 
@@ -306,6 +309,7 @@ latest changes in development for next release
 .. _#93: https://github.com/deanmalmgren/textract/issues/93
 .. _#100: https://github.com/deanmalmgren/textract/issues/100
 .. _#104: https://github.com/deanmalmgren/textract/issues/104
+.. _#107: https://github.com/deanmalmgren/textract/issues/107
 .. _#113: https://github.com/deanmalmgren/textract/issues/113
 .. _#114: https://github.com/deanmalmgren/textract/issues/114
 .. _#116: https://github.com/deanmalmgren/textract/issues/116

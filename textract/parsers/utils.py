@@ -61,7 +61,6 @@ class BaseParser(object):
             return u''
 
         # use chardet to automatically detect the encoding text
-        max_confidence, max_encoding = 0.0, None
         result = chardet.detect(text)
         return text.decode(result['encoding'])
 
