@@ -9,6 +9,7 @@ docx2txt
 beautifulsoup4
 xlrd
 EbookLib
+pocketsphinx
 SpeechRecognition>=3.1.0
 https://github.com/mattgwwalker/msg-extractor/zipball/master
 six
