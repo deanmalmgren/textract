@@ -17,7 +17,7 @@ class Parser(ShellParser):
     with Rich (US English) for best results
     """
 
-    def extract(self, filename, engine=None, **kwargs):
+    def extract(self, filename, method='', **kwargs):
         speech = ''
 
         # convert to wav, if not already .wav
@@ -25,7 +25,7 @@ class Parser(ShellParser):
         if ext != '.wav':
             temp_filename = self.convert_to_wav(filename)
             try:
-                speech = self.extract(temp_filename, engine, **kwargs)
+                speech = self.extract(temp_filename, method, **kwargs)
             finally:  # make sure temp_file is deleted
                 os.remove(temp_filename)
         else:
@@ -35,12 +35,12 @@ class Parser(ShellParser):
                 audio = r.record(source)
 
             try:
-                if engine == 'google' or engine is None or engine == '':
+                if method == 'google' or method == '':
                     speech = r.recognize_google(audio)
-                elif engine == 'sphinx':
+                elif method == 'sphinx':
                     speech = r.recognize_sphinx(audio)
                 else:
-                    raise UnknownMethod(engine)
+                    raise UnknownMethod(method)
             except LookupError:  # audio is not understandable
                 speech = ''
             except sr.UnknownValueError:
