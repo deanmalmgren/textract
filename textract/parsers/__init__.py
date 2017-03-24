@@ -39,7 +39,6 @@ def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
     # else use the passed extension (useful for files without extension)
     if 'extension' in kwargs:
         ext = kwargs['extension']
-        print('ext:', ext)
     else:
         _, ext = os.path.splitext(filename)
         ext = ext.lower()
