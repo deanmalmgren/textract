@@ -20,7 +20,7 @@ latest changes in development for next release
 
   * properly reporting on missing external dependencies (`#139`_ by `@AusIV`_)
 
-  * pin `chardet` to version 2.1.1 to avoid decode errors (`107`_)
+  * pin `chardet` to version 2.1.1 to avoid decode errors (`#107`_)
 
 
 1.5.0
