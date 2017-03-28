@@ -11,6 +11,9 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+* Let the user provide file extension as an argument when the file name
+has no extension (`#134`_ and `#138`_ by `@motazsaad`_)
+
 * Added ability to parse audio with ``pocketsphinx`` (`#122`_ by `@barrust`_)
 
 * several bug fixes, including:
