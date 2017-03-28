@@ -1,0 +1,11 @@
+update: all
+branch: master
+schedule: "every two weeks on Thursday"
+pin: True
+requirements:
+  - requirements/python:
+      updates: all
+  - requirements/python-dev:
+      updates: all
+assignees:
+  - deanmalmgren
