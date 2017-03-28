@@ -13,7 +13,8 @@ Extract text from any document. No muss. No fuss.
 
 `Full documentation <http://textract.readthedocs.org>`__.
 
-|Build Status| |Version| |Downloads| |Test Coverage| |Documentation Status| |Updates|
+|Build Status| |Version| |Downloads| |Test Coverage| |Documentation Status|
+|Updates| |Stars| |Forks|
 
 .. |Build Status| image:: https://travis-ci.org/deanmalmgren/textract.svg?branch=master
    :target: https://travis-ci.org/deanmalmgren/textract
@@ -32,3 +33,9 @@ Extract text from any document. No muss. No fuss.
 
 .. |Updates| image:: https://pyup.io/repos/github/deanmalmgren/textract/shield.svg
     :target: https://pyup.io/repos/github/deanmalmgren/textract/
+
+.. |Stars| image:: https://img.shields.io/github/stars/deanmalmgren/textract.svg
+    :target: https://github.com/deanmalmgren/textract/stargazers
+
+.. |Forks| image:: https://img.shields.io/github/forks/deanmalmgren/textract.svg
+    :target: https://github.com/deanmalmgren/textract/network
