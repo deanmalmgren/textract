@@ -21,10 +21,9 @@ EXTENSION_SYNONYMS = {
 # here so the default is used on both the process function and also by
 # the command line interface
 DEFAULT_ENCODING = 'utf_8'
-DEFAULT_EXT = None
 
 
-def process(filename, encoding=DEFAULT_ENCODING, extension=DEFAULT_EXT, **kwargs):
+def process(filename, encoding=DEFAULT_ENCODING, extension=None, **kwargs):
     """This is the core function used for extracting text. It routes the
     ``filename`` to the appropriate parser and returns the extracted
     text as a byte-string encoded with ``encoding``.

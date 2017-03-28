@@ -13,7 +13,6 @@ import argcomplete
 
 from . import VERSION
 from .parsers import DEFAULT_ENCODING
-from .parsers import DEFAULT_EXT
 
 
 class AddToNamespaceAction(argparse.Action):
@@ -62,7 +61,7 @@ def get_parser():
         help='Specify the encoding of the output.',
     )
     parser.add_argument(
-        '--extension', type=str, default=DEFAULT_EXT,
+        '--extension', type=str, default=None,
         choices=_get_available_encodings(),
         help='Specify the extension of the file (e.g., docx or pdf). '
              'Extension can be also passed with the '
