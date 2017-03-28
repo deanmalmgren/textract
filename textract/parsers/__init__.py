@@ -41,12 +41,13 @@ def process(filename, encoding=DEFAULT_ENCODING, extension=None, **kwargs):
     # extension as an argument
     if extension:
         ext = extension
+        # check if the extension has the leading .
+        if not ext.startswith('.'):
+            ext = '.' + ext
+        ext = ext.lower()
     else:
         _, ext = os.path.splitext(filename)
-    ext = ext.lower()
-    # check if the extension has the leading .
-    if not ext.startswith('.'):
-        ext = '.' + ext
+        ext = ext.lower()
 
     # check the EXTENSION_SYNONYMS dictionary
     ext = EXTENSION_SYNONYMS.get(ext, ext)
