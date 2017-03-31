@@ -11,6 +11,9 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
 
+* Let the user provide file extension as an argument when the file name has no
+  extension (`#148`_ by `@motazsaad`_)
+
 * Added ability to parse audio with ``pocketsphinx`` (`#122`_ by `@barrust`_)
 
 * several bug fixes, including:
@@ -238,7 +241,7 @@ latest changes in development for next release
 
 
 .. list of contributors that are linked to above. putting links here
-   to make the text above relatively clean
+.. to make the text above relatively clean
 
 .. _@akoumjian: https://github.com/akoumjian
 .. _@anthonygarvan: https://github.com/anthonygarvan
@@ -254,6 +257,7 @@ latest changes in development for next release
 .. _@jsmith-mploir: https://github.com/jsmith-mploir
 .. _@kokxx: https://github.com/Kokxx
 .. _@levivm: https://github.com/levivm
+.. _@motazsaad: https://github.com/motazsaad
 .. _@onionradish: https://github.com/onionradish
 .. _@pierre-ernst: https://github.com/pierre-ernst
 .. _@pudo: https://github.com/pudo
@@ -263,7 +267,7 @@ latest changes in development for next release
 
 
 .. list of issues that have been resolved. putting links here to make
-   the text above relatively clean
+.. the text above relatively clean
 
 .. _#2: https://github.com/deanmalmgren/textract/issues/2
 .. _#3: https://github.com/deanmalmgren/textract/issues/3
@@ -323,3 +327,4 @@ latest changes in development for next release
 .. _#136: https://github.com/deanmalmgren/textract/issues/136
 .. _#139: https://github.com/deanmalmgren/textract/issues/139
 .. _#147: https://github.com/deanmalmgren/textract/issues/147
+.. _#148: https://github.com/deanmalmgren/textract/issues/148
