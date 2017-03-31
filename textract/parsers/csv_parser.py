@@ -4,8 +4,7 @@ from .utils import BaseParser
 
 
 class Parser(BaseParser):
-    """Extract text from .csv files. Whenever possible, this ignores
-    header lines (which is considered markup for the csv).
+    """Extract text from comma separated values files (.csv).
     """
 
     delimiter = ','
