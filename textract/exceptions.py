@@ -16,11 +16,19 @@ class ExtensionNotSupported(CommandLineError):
     def __init__(self, ext):
         self.ext = ext
 
+        from .parsers import _get_available_extensions
+        available_extensions = []
+        for e in _get_available_extensions():
+            if e.startswith('.'):
+                available_extensions.append(e)
+        self.available_extensions_str = ', '.join(available_extensions)
+
     def __str__(self):
         return self.render((
             'The filename extension %(ext)s is not yet supported by\n'
             'textract. Please suggest this filename extension here:\n\n'
-            '    https://github.com/deanmalmgren/textract/issues\n'
+            '    https://github.com/deanmalmgren/textract/issues\n\n'
+            'Available extensions include: %(available_extensions_str)s\n'
         ))
 
 
