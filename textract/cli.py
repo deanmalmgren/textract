@@ -61,6 +61,13 @@ def get_parser():
         help='Specify the encoding of the output.',
     )
     parser.add_argument(
+        '--extension', type=str, default=None,
+        choices=_get_available_encodings(),
+        help='Specify the extension of the file (e.g., docx or pdf). '
+             'Extension can be also passed with the '
+             'leading . (e.g., .docx or .pdf).',
+    )
+    parser.add_argument(
         '-m', '--method', default='',
         help='Specify a method of extraction for formats that support it',
     )

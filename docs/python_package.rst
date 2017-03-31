@@ -24,6 +24,12 @@ inferred using `chardet <https://github.com/chardet/chardet>`_)::
     import textract
     text = textract.process('path/to/file.extension', encoding='ascii')
 
+When the file name has no extension, you specify the file's extension as an argument
+to ``textract.process`` like this::
+
+    import textract
+    text = textract.process('path/to/file', extension='docx')
+
 .. _additional-options:
 
 Additional options
