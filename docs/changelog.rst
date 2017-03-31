@@ -22,6 +22,8 @@ latest changes in development for next release
 
   * pin `chardet` to version 2.1.1 to avoid decode errors (`#107`_)
 
+  * avoid unicode decode error with html parser (`#147`_ by `@suned`_)
+
 
 1.5.0
 -----
@@ -257,6 +259,7 @@ latest changes in development for next release
 .. _@pudo: https://github.com/pudo
 .. _@ShawnMilo: https://github.com/ShawnMilo
 .. _@sirex: https://github.com/sirex
+.. _@suned: https://github.com/suned
 
 
 .. list of issues that have been resolved. putting links here to make
@@ -319,3 +322,4 @@ latest changes in development for next release
 .. _#127: https://github.com/deanmalmgren/textract/issues/127
 .. _#136: https://github.com/deanmalmgren/textract/issues/136
 .. _#139: https://github.com/deanmalmgren/textract/issues/139
+.. _#147: https://github.com/deanmalmgren/textract/issues/147
