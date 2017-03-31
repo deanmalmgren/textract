@@ -36,9 +36,16 @@ def process(filename, encoding=DEFAULT_ENCODING, **kwargs):
     # get the filename extension, which is something like .docx for
     # example, and import the module dynamically using importlib. This
     # is a relative import so the name of the package is necessary
-    _, ext = os.path.splitext(filename)
-    ext = ext.lower()
-
+    # if no extension passed, extract the extension from the file
+    # else use the passed extension (useful for files without extension)
+    if 'extension' in kwargs:
+        ext = kwargs['extension']
+    else:
+        _, ext = os.path.splitext(filename)
+        ext = ext.lower()
+    # if the extension has not the leading . , add it to the ext variable
+    if not ext.startswith('.'):
+        ext = '.' + ext
     # check the EXTENSION_SYNONYMS dictionary
     ext = EXTENSION_SYNONYMS.get(ext, ext)
 

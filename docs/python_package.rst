@@ -24,6 +24,13 @@ inferred using `chardet <https://github.com/chardet/chardet>`_)::
     import textract
     text = textract.process('path/to/file.extension', encoding='ascii')
 
+to obtain text from a document that has no extension. You can pass keyword arguments to
+``textract.process`` which specifies the extension of the file, like this::
+
+    import textract
+    text = textract.process('path/to/file', extension='docx')
+
+
 .. _additional-options:
 
 Additional options
