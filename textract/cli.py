@@ -8,11 +8,13 @@ import os
 import pkgutil
 import sys
 import six
+import re
+import glob
 
 import argcomplete
 
 from . import VERSION
-from .parsers import DEFAULT_ENCODING
+from .parsers import DEFAULT_ENCODING, _get_available_extensions
 
 
 class AddToNamespaceAction(argparse.Action):
@@ -62,10 +64,8 @@ def get_parser():
     )
     parser.add_argument(
         '--extension', type=str, default=None,
-        choices=_get_available_encodings(),
-        help='Specify the extension of the file (e.g., docx or pdf). '
-             'Extension can be also passed with the '
-             'leading . (e.g., .docx or .pdf).',
+        choices=_get_available_extensions(),
+        help='Specify the extension of the file.',
     )
     parser.add_argument(
         '-m', '--method', default='',

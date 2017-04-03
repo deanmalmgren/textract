@@ -4,6 +4,8 @@ Route the request to the appropriate parser based on file type.
 
 import os
 import importlib
+import glob
+import re
 
 from .. import exceptions
 
@@ -21,6 +23,9 @@ EXTENSION_SYNONYMS = {
 # here so the default is used on both the process function and also by
 # the command line interface
 DEFAULT_ENCODING = 'utf_8'
+
+# filename format
+_FILENAME_SUFFIX = '_parser'
 
 
 def process(filename, encoding=DEFAULT_ENCODING, extension=None, **kwargs):
@@ -55,13 +60,14 @@ def process(filename, encoding=DEFAULT_ENCODING, extension=None, **kwargs):
     # to avoid conflicts with packages that are installed globally
     # (e.g. python's json module), all extension parser modules have
     # the _parser extension
-    rel_module = ext + '_parser'
+    rel_module = ext + _FILENAME_SUFFIX
 
     # If we can't import the module, the file extension isn't currently
     # supported
     try:
         filetype_module = importlib.import_module(
-            rel_module, 'textract.parsers')
+            rel_module, 'textract.parsers'
+        )
     except ImportError:
         raise exceptions.ExtensionNotSupported(ext)
 
@@ -69,3 +75,28 @@ def process(filename, encoding=DEFAULT_ENCODING, extension=None, **kwargs):
 
     parser = filetype_module.Parser()
     return parser.process(filename, encoding, **kwargs)
+
+
+def _get_available_extensions():
+    """Get a list of available file extensions to make it easy for
+    tab-completion and exception handling.
+    """
+    extensions = []
+
+    # from filenames
+    parsers_dir = os.path.join(os.path.dirname(__file__))
+    glob_filename = os.path.join(parsers_dir, "*" + _FILENAME_SUFFIX + ".py")
+    ext_re = re.compile(glob_filename.replace('*', "(?P<ext>\w+)"))
+    for filename in glob.glob(glob_filename):
+        ext_match = ext_re.match(filename)
+        ext = ext_match.groups()[0]
+        extensions.append(ext)
+        extensions.append('.' + ext)
+
+    # from relevant synonyms (don't use the '' synonym)
+    for ext in EXTENSION_SYNONYMS.keys():
+        if ext:
+            extensions.append(ext)
+            extensions.append(ext.replace('.', '', 1))
+    extensions.sort()
+    return extensions

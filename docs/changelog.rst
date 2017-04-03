@@ -32,6 +32,7 @@ latest changes in development for next release
 
   * avoid unicode decode error with html parser (`#147`_ by `@suned`_)
 
+  * enabling autocomplete and improving error handling (`#149`_)
 
 1.5.0
 -----
@@ -335,3 +336,4 @@ latest changes in development for next release
 .. _#146: https://github.com/deanmalmgren/textract/issues/146
 .. _#147: https://github.com/deanmalmgren/textract/issues/147
 .. _#148: https://github.com/deanmalmgren/textract/issues/148
+.. _#149: https://github.com/deanmalmgren/textract/issues/149
