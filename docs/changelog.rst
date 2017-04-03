@@ -9,7 +9,7 @@ track version numbers, where backwards incompatible changes
 latest changes in development for next release
 ----------------------------------------------
 
-.. THANKS FOR CONTRIBUTING; MENTION WHAT YOU DID IN THIS SECTION HERE!
+.. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
 
 * Let the user provide file extension as an argument when the file name has no
   extension (`#148`_ by `@motazsaad`_)
@@ -20,6 +20,9 @@ latest changes in development for next release
 
   * checking for the importability of a parser rather than the presense of the
     file (`#136`_ by `@AusIV`_)
+
+  * manage versions with `bumpversion <https://pypi.python.org/pypi/bumpversion>`_
+    (`#146`_)
 
   * properly reporting on missing external dependencies (`#139`_ by `@AusIV`_)
 
@@ -326,5 +329,6 @@ latest changes in development for next release
 .. _#127: https://github.com/deanmalmgren/textract/issues/127
 .. _#136: https://github.com/deanmalmgren/textract/issues/136
 .. _#139: https://github.com/deanmalmgren/textract/issues/139
+.. _#146: https://github.com/deanmalmgren/textract/issues/146
 .. _#147: https://github.com/deanmalmgren/textract/issues/147
 .. _#148: https://github.com/deanmalmgren/textract/issues/148
