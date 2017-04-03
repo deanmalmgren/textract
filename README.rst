@@ -1,8 +1,8 @@
 .. NOTES FOR CREATING A RELEASE:
 ..
-..   * bump the version number in textract.__init__.py
+..   * bumpversion {major|minor|patch}
 ..   * update docs/changelog.rst
-..   * git push
+..   * git push && git push --tags
 ..   * python setup.py sdist upload
 ..   * create a release https://github.com/deanmalmgren/textract/releases
 
