@@ -30,7 +30,7 @@ with open(filename, 'r') as stream:
 
 setup(
     name=textract.__name__,
-    version="1.5.0",
+    version="1.6.0",
     description="extract text from any document. no muss. no fuss.",
     long_description=long_description,
     url=github_url,

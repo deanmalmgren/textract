@@ -10,6 +10,8 @@ latest changes in development for next release
 ----------------------------------------------
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
+1.6.0
+-------------------
 
 * Let the user provide file extension as an argument when the file name has no
   extension (`#148`_ by `@motazsaad`_)
