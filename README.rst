@@ -3,7 +3,7 @@
 ..   * bumpversion {major|minor|patch}
 ..   * git push && git push --tags
 ..   * python setup.py sdist upload
-..   * create a release https://github.com/deanmalmgren/textract/releases
+..   * convert into release https://github.com/deanmalmgren/textract/releases
 
 textract
 ========
