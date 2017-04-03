@@ -16,6 +16,8 @@ latest changes in development for next release
 
 * Added ability to parse audio with ``pocketsphinx`` (`#122`_ by `@barrust`_)
 
+* Added ability to parse ``.psv`` and ``.tsv`` files (`#141`_)
+
 * several bug fixes, including:
 
   * checking for the importability of a parser rather than the presense of the
@@ -329,6 +331,7 @@ latest changes in development for next release
 .. _#127: https://github.com/deanmalmgren/textract/issues/127
 .. _#136: https://github.com/deanmalmgren/textract/issues/136
 .. _#139: https://github.com/deanmalmgren/textract/issues/139
+.. _#141: https://github.com/deanmalmgren/textract/issues/141
 .. _#146: https://github.com/deanmalmgren/textract/issues/146
 .. _#147: https://github.com/deanmalmgren/textract/issues/147
 .. _#148: https://github.com/deanmalmgren/textract/issues/148
