@@ -14,22 +14,31 @@ with open("README.rst") as stream:
 
 github_url = 'https://github.com/deanmalmgren/textract'
 
-# read in the dependencies from the requirements files
-dependencies, dependency_links = [], []
-filenames = [
-    os.path.join("requirements", "python"),
-    os.path.join("requirements", "python+compile"),
-]
-for filename in filenames:
-    with open(filename, 'r') as stream:
+
+def parse_requirements(requirements_filename):
+    """read in the dependencies from the requirements files
+    """
+    dependencies, dependency_links = [], []
+    requirements_dir = os.path.dirname(requirements_filename)
+    with open(requirements_filename, 'r') as stream:
         for line in stream:
             line = line.strip()
-            if line.startswith("http"):
+            if line.startswith("-r"):
+                filename = os.path.join(requirements_dir, line[2:].strip())
+                _dependencies, _dependency_links = parse_requirements(filename)
+                dependencies.extend(_dependencies)
+                dependency_links.extend(_dependency_links)
+            elif line.startswith("http"):
                 dependency_links.append(line)
             else:
                 package = line.split('#')[0]
                 if package:
                     dependencies.append(package)
+    return dependencies, dependency_links
+
+
+requirements_filename = os.path.join("requirements", "python+compile")
+dependencies, dependency_links = parse_requirements(requirements_filename)
 
 
 setup(
