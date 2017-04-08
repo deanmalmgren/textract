@@ -11,6 +11,10 @@ latest changes in development for next release
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
 
+* several bug fixes, including:
+
+  * fixing the readthedocs build (`#150`_)
+
 
 1.6.0
 -------------------
@@ -341,3 +345,4 @@ latest changes in development for next release
 .. _#147: https://github.com/deanmalmgren/textract/issues/147
 .. _#148: https://github.com/deanmalmgren/textract/issues/148
 .. _#149: https://github.com/deanmalmgren/textract/issues/149
+.. _#150: https://github.com/deanmalmgren/textract/issues/150
