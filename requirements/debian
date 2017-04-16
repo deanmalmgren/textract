@@ -12,8 +12,9 @@ python-dev
 libxml2-dev
 libxslt1-dev
 
-# parse word documents
+# parse microsoft office formats
 antiword
+ppthtml
 
 # parse rtf documents
 unrtf
