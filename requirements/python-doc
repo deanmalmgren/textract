@@ -1,5 +1,5 @@
-# install everything that is required for the documentation build on
-# readthedocs
+# this only includes packages that are needed for documentation build. 
 
--r python
--r python-dev
+sphinx==1.5.3
+sphinx_rtd_theme==0.2.4
+sphinx-argparse==0.1.17

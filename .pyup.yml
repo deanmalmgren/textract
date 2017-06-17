@@ -1,13 +1,13 @@
 update: all
 branch: master
-schedule: "every two weeks on Thursday"
+schedule: "every two weeks"
 pin: True
 requirements:
   - requirements/python:
       updates: all
   - requirements/python-dev:
       updates: all
-  - requirements/python+compile:
+  - requirements/python-doc:
       updates: all
 assignees:
   - deanmalmgren
