@@ -12,8 +12,5 @@ fi
 pip install -U pip
 
 # Install the requirements for this package as well as this module.
-pip install -r requirements/python+compile
-pip install .
-
-# Install the requirements for this package in development
 pip install -r requirements/python-dev
+pip install .

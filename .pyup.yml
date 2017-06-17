@@ -7,7 +7,7 @@ requirements:
       updates: all
   - requirements/python-dev:
       updates: all
-  - requirements/python+compile:
+  - requirements/python-doc:
       updates: all
 assignees:
   - deanmalmgren

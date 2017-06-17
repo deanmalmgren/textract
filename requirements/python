@@ -1,3 +1,8 @@
+# This file contains all python dependencies that are required by the textract
+# package in order for it to properly work. As much as possible, these
+# dependencies should be placed in requirements/python. Things that are
+# separately listed in this file are NOT included in the readthedocs build
+
 argcomplete==1.8.2
 chardet==2.3.0
 python-pptx==0.6.5
@@ -10,3 +15,4 @@ EbookLib==0.15
 SpeechRecognition==3.6.3
 https://github.com/mattgwwalker/msg-extractor/zipball/master
 six==1.10.0
+pocketsphinx==0.1.3
