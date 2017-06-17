@@ -1,6 +1,6 @@
 update: all
 branch: master
-schedule: "every two weeks on Thursday"
+schedule: "every two weeks"
 pin: True
 requirements:
   - requirements/python:
