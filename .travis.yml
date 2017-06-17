@@ -14,6 +14,7 @@ before_install:
 # virtualenv
 install:
   - ./provision/python.sh
+  - pip install .
 
 # commands to run the testing suite. if any of these fail, travic lets us know
 script:
