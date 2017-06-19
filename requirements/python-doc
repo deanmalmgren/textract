@@ -2,4 +2,4 @@
 
 sphinx==1.6.2
 sphinx_rtd_theme==0.2.4
-sphinx-argparse==0.1.17
+sphinx-argparse==0.2.1
