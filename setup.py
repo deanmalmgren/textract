@@ -1,6 +1,6 @@
 import glob
 import os
-import sys
+import subprocess
 from setuptools import setup
 
 import textract
@@ -40,6 +40,13 @@ def parse_requirements(requirements_filename):
 requirements_filename = os.path.join("requirements", "python")
 dependencies, dependency_links = parse_requirements(requirements_filename)
 
+try:
+    subprocess.call(["swig", "-version"])
+except OSError:
+    # swig is required by pocketsphinx which is used in some cases for the audio extract feature
+    # if it's not installed, we remove the pocketsphinx dependency
+    # that way only when you try to use the audio extract feature it will fail
+    dependencies = [d for d in dependencies if not d.startswith("pocketsphinx")]
 
 setup(
     name=textract.__name__,
