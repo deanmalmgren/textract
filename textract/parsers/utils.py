@@ -62,7 +62,7 @@ class BaseParser(object):
 
         # use chardet to automatically detect the encoding text
         result = chardet.detect(text)
-        return text.decode(result['encoding'])
+        return text.decode(result['encoding'], errors="replace")
 
 
 class ShellParser(BaseParser):
