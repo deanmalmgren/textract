@@ -30,7 +30,7 @@ class Parser(ShellParser):
 
         self.run(['abiword','--to=txt','-o',temp_filename, filename])
         txt = None
-        with open(temp_filename,'r') as f:
+        with open(temp_filename,'r',encoding='utf-8') as f:
             txt = f.read()
         try:
             os.remove(temp_filename)
