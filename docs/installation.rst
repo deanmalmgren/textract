@@ -32,6 +32,13 @@ package manager before installing textract from pypi.
     instances of Ubuntu. See `issue #19
     <https://github.com/deanmalmgren/textract/pull/19>`_ for details
 
+.. note::
+
+    Swig dependency is required by pocketsphinx which might be a problem to install in some environments.
+    In that case, you can run the fake pocketsphinx provision script before installing textract.
+    E.g. :code:`provision/fake-pocketsphinx.sh && pip install textract`
+    See `issue #159 <https://github.com/deanmalmgren/textract/issues/159>`_ for details.
+
 OSX
 ---
 

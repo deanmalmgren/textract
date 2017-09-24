@@ -1,0 +1,11 @@
+# this Dockerfile is used to test installation of textract without swig dependency
+# see provision/fake-pocketsphinx.sh for more details
+
+# this is an existing image in Docker hub which has textract 1.5.0 installed
+FROM clue/textract:7244906dd213
+
+RUN apt-get remove swig
+RUN pip install --upgrade pip
+
+COPY provision/fake-pocketsphinx.sh /provision/fake-pocketsphinx.sh
+COPY /requirements /requirements
