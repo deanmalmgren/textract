@@ -12,9 +12,9 @@
 # TEMPDIR is used as the fake pocketsphinx package directory, it will be removed
 TEMPDIR=`mktemp -d`
 
-# fake pocketsphinx version, we get it from requirements files
-VERSION="${FAKE_POCKETSPHINX_VERSION:-`cat requirements/* | grep 'pocketsphinx==' | cut -c15-`}"
-
+# fake pocketsphinx version
+# TODO: update the pocketsphinx dependency version automatically
+VERSION="${FAKE_POCKETSPHINX_VERSION:-0.1.3}"
 
 # create a fake setup.py and install it
 echo "from setuptools import setup; setup(\
