@@ -1,6 +1,6 @@
 import glob
 import os
-import sys
+
 from setuptools import setup
 
 import textract
@@ -32,7 +32,9 @@ def parse_requirements(requirements_filename):
                 dependency_links.append(line)
             else:
                 package = line.split('#')[0]
-                if package:
+                # Ebooklib is licensed under the AGPL, so it won't be installed unless
+                # explictly required through the corresponding feature
+                if package and not package.startswith("EbookLib"):
                     dependencies.append(package)
     return dependencies, dependency_links
 
@@ -58,5 +60,8 @@ setup(
     ],
     install_requires=dependencies,
     dependency_links=dependency_links,
+    extras_require={
+        'EbookLib': ["EbookLib"]
+    },
     zip_safe=False,
 )
