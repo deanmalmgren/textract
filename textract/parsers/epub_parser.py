@@ -1,4 +1,3 @@
-from ebooklib import epub, ITEM_DOCUMENT
 from bs4 import BeautifulSoup
 
 from .utils import BaseParser
@@ -9,6 +8,11 @@ class Parser(BaseParser):
     """
 
     def extract(self, filename, **kwargs):
+        try:
+            from ebooklib import epub, ITEM_DOCUMENT
+        except ImportError:
+            raise ImportError("You need to install textract with the EbookLib"
+                              " feature to extract text from epub files")
         book = epub.read_epub(filename)
         result = ''
         for id, _ in book.spine:
