@@ -45,7 +45,7 @@ class Parser(ShellParser):
 
     def extract_pdfminer(self, filename, **kwargs):
         """Extract text from pdfs using pdfminer."""
-        stdout, _ = self.run(['pdf2txt.py', filename])
+        stdout, _ = self.run(['python', 'pdf2txt.py', filename])
         return stdout
 
     def extract_tesseract(self, filename, **kwargs):
