@@ -1,16 +1,16 @@
 # This file contains all python dependencies that are required by the textract
 # package in order for it to properly work.
 
-argcomplete==1.8.2
+argcomplete==1.9.4
 chardet==3.0.4
-python-pptx==0.6.6
+python-pptx==0.6.10
 #pdfminer.six <-- go back to this after the shebang fix is released (see https://github.com/goulu/pdfminer/issues/27)
 https://github.com/goulu/pdfminer/zipball/e6ad15af79a26c31f4e384d8427b375c93b03533#egg=pdfminer.six
-docx2txt==0.6
+docx2txt==0.7
 beautifulsoup4==4.6.0
-xlrd==1.0.0
+xlrd==1.1.0
 EbookLib==0.16
-SpeechRecognition==3.7.1
+SpeechRecognition==3.8.1
 https://github.com/mattgwwalker/msg-extractor/zipball/master
-six==1.10.0
-pocketsphinx==0.1.3
+six==1.11.0
+pocketsphinx==0.1.15

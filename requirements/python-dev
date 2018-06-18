@@ -7,9 +7,9 @@
 
 # needed for tests/run.py script to read .travis.yml file
 PyYAML==3.12
-pep8==1.7.0
-coveralls==1.1
-requests==2.18.1
+pep8==1.7.1
+coveralls==1.3.0
+requests==2.19.1
 nose==1.3.7
 
 # needed for managing versions
