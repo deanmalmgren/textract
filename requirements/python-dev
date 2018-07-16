@@ -6,7 +6,7 @@
 -r python-doc
 
 # needed for tests/run.py script to read .travis.yml file
-PyYAML==3.12
+PyYAML==3.13
 pep8==1.7.0
 coveralls==1.1
 requests==2.18.1
