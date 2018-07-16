@@ -13,4 +13,4 @@ EbookLib
 SpeechRecognition
 https://github.com/mattgwwalker/msg-extractor/zipball/master
 six
-pocketsphinx
+#pocketsphinx  # keeps failing: pulse/pulseaudio.h: No such file or directory
