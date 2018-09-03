@@ -1,7 +1,7 @@
 # This file contains all python dependencies that are required by the textract
 # package in order for it to properly work.
 
-argcomplete==1.8.2
+argcomplete==1.9.4
 chardet==3.0.4
 python-pptx==0.6.6
 #pdfminer.six <-- go back to this after the shebang fix is released (see https://github.com/goulu/pdfminer/issues/27)
