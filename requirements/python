@@ -10,7 +10,7 @@ docx2txt==0.7
 beautifulsoup4==4.6.3
 xlrd==1.1.0
 EbookLib==0.17
-SpeechRecognition==3.7.1
+SpeechRecognition==3.8.1
 https://github.com/mattgwwalker/msg-extractor/zipball/master
 six==1.10.0
 pocketsphinx==0.1.3
