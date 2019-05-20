@@ -12,5 +12,5 @@ xlrd==1.2.0
 EbookLib==0.17.1
 SpeechRecognition==3.8.1
 https://github.com/mattgwwalker/msg-extractor/zipball/master
-six==1.10.0
+six==1.12.0
 pocketsphinx==0.1.3
