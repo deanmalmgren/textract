@@ -1,6 +1,5 @@
 import glob
 import os
-import sys
 from setuptools import setup
 
 import textract
@@ -57,6 +56,9 @@ setup(
         'textract.parsers',
     ],
     install_requires=dependencies,
+    extras_require={
+        "pocketsphinx": ["pocketsphinx>=0.1.15"],
+    },
     dependency_links=dependency_links,
     zip_safe=False,
 )
