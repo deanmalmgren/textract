@@ -71,3 +71,4 @@ tests/pdf/ocr_text.txt
 
 .idea/
 .vscode/
+.venv/
