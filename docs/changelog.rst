@@ -16,6 +16,14 @@ latest changes in development for next release
   * fixing dependency declarations (`#162`_ by `@lillypad`_)
 
 
+1.6.2
+-------------------
+
+* Fixed a character encoding error for.
+
+* Removed audio parsers.
+
+
 1.6.1
 -------------------
 

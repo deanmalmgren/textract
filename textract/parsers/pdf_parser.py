@@ -54,7 +54,7 @@ class Parser(ShellParser):
         base = os.path.join(temp_dir, 'conv')
         contents = []
         try:
-            stdout, _ = self.run(['pdftoppm', filename, base])
+            stdout, _ = self.run(['pdftoppm', '-r', '300', filename, base])
 
             for page in sorted(os.listdir(temp_dir)):
                 page_path = os.path.join(temp_dir, page)

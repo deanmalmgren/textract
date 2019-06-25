@@ -1,6 +1,5 @@
 # required packages
 gcc
-libpulse-dev
 libjpeg-dev
 build-essential
 git
@@ -27,21 +26,6 @@ poppler-utils
 
 # parse postscript files
 pstotext
-
-# parse audio files, with SpeechRecognition
-flac
-
-# filetype conversion libs
-ffmpeg
-lame
-libmad0
-libsox-fmt-mp3
-
-# convert audio files
-sox
-
-# Sphinx Speech Recognition
-swig
 
 # ubuntu 14.04 requires this in addition to libxml2-dev and
 # libxslt1-dev for compiling lxml.
