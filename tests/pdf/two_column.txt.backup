@@ -4,61 +4,61 @@
 
 
 LETTERS
-The role of mentorship in protégé performance
-R. Dean Malmgren1,2, Julio M. Ottino1,3 & Luı́s A. Nunes Amaral1,3,4
+The role of mentorship in prote´ge´ performance
+R. Dean Malmgren1,2, Julio M. Ottino1,3 & Luı´s A. Nunes Amaral1,3,4
 
 
-The role of mentorship in protégé performance is a matter of import-                   remains an open question. Indeed, we are unaware of any studies that
+The role of mentorship in prote´ge´ performance is a matter of import-                   remains an open question. Indeed, we are unaware of any studies that
 ance to academic, business and governmental organizations.                               systematically track mentorship success over the entire career of a
-Although the benefits of mentorship for protégés, mentors and their                    mentor, so the validity of the rising-star hypothesis has yet to be fully
-organizations are apparent1–9, the extent to which protégés mimic                      explored. Here we investigate whether protégés acquire the mentor-
+Although the benefits of mentorship for prote´ge´s, mentors and their                    mentor, so the validity of the rising-star hypothesis has yet to be fully
+organizations are apparent1–9, the extent to which prote´ge´s mimic                      explored. Here we investigate whether prote´ge´s acquire the mentor-
 their mentors’ career choices and acquire their mentorship skills is                     ship skills of their mentors, by studying mentorship fecundity, that is,
-unclear10–16. The importance of a science, technology, engineering                       the number of protégés that a mentor trains over the course of their
+unclear10–16. The importance of a science, technology, engineering                       the number of prote´ge´s that a mentor trains over the course of their
 and mathematics workforce to economic growth and the role of                             career. This measure is advantageous as it directly measures an out-
 effective mentorship in maintaining a ‘healthy’ such workforce                           come of the mentorship process that is relevant to sustained mentor-
 demand the study of the role of mentorship in academia. Here we                          ship, allowing us to quantify the degree to which mentor fecundity
-investigate one aspect of mentor emulation by studying mentorship                        determines protégé fecundity.
-fecundity—the number of protégés a mentor trains—using data                                Scientific mentorship offers a unique opportunity to study this
+investigate one aspect of mentor emulation by studying mentorship                        determines prote´ge´ fecundity.
+fecundity—the number of prote´ge´s a mentor trains—using data                                Scientific mentorship offers a unique opportunity to study this
 from the Mathematics Genealogy Project17, which tracks the mentor-                       question because there is a structured mentorship environment
 ship record of thousands of mathematicians over several centuries.                       between advisor and student that is, in principle, readily accessible18,19.
 We demonstrate that fecundity among academic mathematicians is                           We study a prototypical mentorship network collected from the
 correlated with other measures of academic success. We also find                         Mathematics Genealogy Project17, which aggregates the graduation
-that the average fecundity of mentors remains stable over 60 years of                    date, mentor and protégés of 114,666 mathematicians from as early
+that the average fecundity of mentors remains stable over 60 years of                    date, mentor and prote´ge´s of 114,666 mathematicians from as early
 recorded mentorship. We further discover three significant correla-                      as 1637. This database is unique in its scope and coverage, tracking the
 tions in mentorship fecundity. First, mentors with low mentorship                        career-long mentorship record of a large population of mentors in a
-fecundities train protégés that go on to have mentorship fecundities                   single discipline (see the MPACT Project (http://ils.unc.edu/mpact/)
+fecundities train prote´ge´s that go on to have mentorship fecundities                   single discipline (see the MPACT Project (http://ils.unc.edu/mpact/)
 37% higher than expected. Second, in the first third of their careers,                   for a smaller database of theses on information and library sciences
-mentors with high fecundities train protégés that go on to have                        and references therein). From this information, we construct a net-
+mentors with high fecundities train prote´ge´s that go on to have                        and references therein). From this information, we construct a net-
 fecundities 29% higher than expected. Finally, in the last third of                      work in which links are formed from a mentor to each of his k pro-
-their careers, mentors with high fecundities train protégés that go on                 tégés, where k denotes mentorship fecundity. We focus here on the
+their careers, mentors with high fecundities train prote´ge´s that go on                 te´ge´s, where k denotes mentorship fecundity. We focus here on the
 to have fecundities 31% lower than expected.                                             7,259 mathematicians who graduated between 1900 and 1960, because
-    A large literature supports the hypothesis that protégés and mentors               their mentorship record is the most reliable (Methods).
-benefit from the mentoring relationship1,2. Protégés that receive career                   Although the mentorship records gathered from the Mathematics
+    A large literature supports the hypothesis that prote´ge´s and mentors               their mentorship record is the most reliable (Methods).
+benefit from the mentoring relationship1,2. Prote´ge´s that receive career                   Although the mentorship records gathered from the Mathematics
 coaching and social support, for instance, are reportedly more likely to                 Genealogy Project provide the most comprehensive data source avail-
 have high performance ratings, a higher salary and receive promo-                        able for the study of academic performance throughout a mathemati-
 tions1,3. In return, mentors receive fulfilment not only by altruistically               cian’s career, there are obviously other plausible metrics for evaluating
-improving the welfare of their protégés, but also by improving their own               academic performance20–22. We have also compared the mentorship
-welfare4,5,10. Organizations benefit as well, because protégés are more                data against a list of publications for 4,447 mathematicians and a list of
+improving the welfare of their prote´ge´s, but also by improving their own               academic performance20–22. We have also compared the mentorship
+welfare4,5,10. Organizations benefit as well, because prote´ge´s are more                data against a list of publications for 4,447 mathematicians and a list of
 likely to be committed to their organization6,7 and to exhibit organiza-                 269 inductees into the US National Academy of Sciences (NAS;
 tional citizenship behaviour6. These benefits are not obtained only                      Methods). We find that mentorship fecundity is much larger for
-through the traditional dyadic mentor–protégé relationship, but also                   NAS members than for non-NAS members (Fig. 1a). We further find
-through peer relationships that supplement protégé development8,9.                     that the number of publications is strongly correlated with fecundity,
+through the traditional dyadic mentor–prote´ge´ relationship, but also                   NAS members than for non-NAS members (Fig. 1a). We further find
+through peer relationships that supplement prote´ge´ development8,9.                     that the number of publications is strongly correlated with fecundity,
     The benefits of mentorship underscore the importance of under-                       regardless of whether or not a mathematician is an NAS member
 standing how mentors were in turn trained to foster the development                      (Fig. 1b). These results demonstrate that although fecundity is not a
-of outstanding mentors. It might be suspected that protégés learn                      typical measure of academic performance, it is closely related to other
+of outstanding mentors. It might be suspected that prote´ge´s learn                      typical measure of academic performance, it is closely related to other
 managerial approaches and motivational techniques from their men-                        measures of academic success. Thus, even though our investigation
-tors and, as a result, emulate their mentorship methodologies; this                      concerns how fecundity is correlated between mentor and protégé, our
+tors and, as a result, emulate their mentorship methodologies; this                      concerns how fecundity is correlated between mentor and prote´ge´, our
 suggests that outstanding mentors are trained by other outstanding                       results also address questions in the academic evaluation literature
 mentors. This possibility is sometimes formalized as the rising-star                     concerning the success of a mathematician.
 hypothesis11,12; it postulates that mentors select up-and-coming pro-                        We first investigate whether it is possible to predict the fecundity of
-tégés on the basic of their perceived ability and potential and past                   a mathematician by modelling the empirical fecundity distribution,
+te´ge´s on the basic of their perceived ability and potential and past                   a mathematician by modelling the empirical fecundity distribution,
 performance10,13,14, including promotion history and proactive career                    p(kjt), as a function of graduation year, t. Considering that some
-behaviours12. Rising-star protégés are reportedly more likely to                       mathematicians remain in academia throughout their careers whereas
+behaviours12. Rising-star prote´ge´s are reportedly more likely to                       mathematicians remain in academia throughout their careers whereas
 intend to mentor, resulting in a ‘perpetual cycle’ of rising-star pro-                   others spend only a portion of their careers in academia, it might be
-tégés that emulate their mentors by seeking other rising stars as their                expected that there are two types of individual when it comes to
-protégés15.                                                                            academic mentorship fecundity—‘haves’ and ‘have-nots’—in the
+te´ge´s that emulate their mentors by seeking other rising stars as their                expected that there are two types of individual when it comes to
+prote´ge´s15.                                                                            academic mentorship fecundity—‘haves’ and ‘have-nots’—in the
     However, there is conflicting evidence concerning the rising-star                    sense that mathematicians from these types respectively have or have
-hypothesis16, so the extent to which protégés mimic their mentors                      not had the opportunity to mentor students throughout their career.
+hypothesis16, so the extent to which prote´ge´s mimic their mentors                      not had the opportunity to mentor students throughout their career.
 1
   Department of Chemical and Biological Engineering, Northwestern University, Evanston, Illinois 60208, USA. 2Datascope Analytics, Evanston, Illinois 60201, USA. 3Northwestern
 Institute on Complex Systems, Northwestern University, Evanston, Illinois 60208, USA. 4Howard Hughes Medical Institute, Northwestern University, Evanston, Illinois 60208, USA.
@@ -128,9 +128,9 @@ mentorship fecundity, for NAS members (red) and non-NAS members
 non-NAS members for all fecundity levels. Error bars, 1 s.e.
                                                                                                                                                     0.0
                                                                                                                                                      1900               1920            1940           1960             1980         2000
-If each mentor chooses to train a new academic protégé with                                                                                                                            Graduation year, t
+If each mentor chooses to train a new academic prote´ge´ with                                                                                                                            Graduation year, t
 
-probability jh or jhn, and stops training academic protégés otherwise,                                                 Figure 2 | Evolution of the fecundity distribution. a–c, Cumulative
+probability jh or jhn, and stops training academic prote´ge´s otherwise,                                                 Figure 2 | Evolution of the fecundity distribution. a–c, Cumulative
 depending on whether they are a ‘have’ or, respectively, a ‘have-not’,                                                   distribution of the fecundity of mathematicians that graduated during 1910
 then we would expect that the resulting fecundity distribution is a                                                      (a), 1930 (b) and 1950 (c) (symbols), compared with the best-estimate
 mixture of two discrete exponential distributions                                                                        predictions of a mixture of two discrete exponentials (lines). Monte Carlo
@@ -151,7 +151,7 @@ rejected as a candidate description of the fecundity distribution p(kjt)        
 Discussion and Supplementary Fig. 1.
     As might be expected, the probability, ph, that an individual is a                                                   generated from uncorrelated branching processes in our investigation
 ‘have’ experiences drastic changes over time as a result of historical                                                   of the mathematician genealogy network. Here graduation date is
-events, such as the First and Second World Wars, the beginning of the                                                    equivalent to birth date and mentors and protégés are equivalent to
+events, such as the First and Second World Wars, the beginning of the                                                    equivalent to birth date and mentors and prote´ge´s are equivalent to
 Cold War and considerable increases in academic funding (Fig. 2d).                                                       parents and children, respectively.
 In contrast, the average fecundities of ‘haves’ and ‘have-nots’ do not                                                      In a branching process24, a parent p, born at time tp, has kp children.
 exhibit systematic historical changes, suggesting that these quantities                                                  Child c of parent p is born at time tc and subsequently has kc children.
@@ -170,8 +170,8 @@ lighted a fundamental property of mentorship among mathematicians,              
 it is not predictive of the behaviour of individual mathematicians in the                                                age difference, tc 2 tp, as parent–child pairs in the empirical network
 sense that fecundity, according to this model, is a random variable                                                      (Fig. 3c). All other attributes of these networks are randomized using a
 drawn from the distribution in equation (1). We next test whether                                                        link-switching algorithm25,26 (Methods), so neither of these random-
-protégés mimic the mentorship fecundity of their mentors, by com-                                                      network ensembles introduces correlations between parent fecundity
-paring protégé fecundity with a suitable null model that does not                                                      and child fecundity or temporal correlations in fecundity. They there-
+prote´ge´s mimic the mentorship fecundity of their mentors, by com-                                                      network ensembles introduces correlations between parent fecundity
+paring prote´ge´ fecundity with a suitable null model that does not                                                      and child fecundity or temporal correlations in fecundity. They there-
 introduce correlations in fecundity. As in the study of genealogical                                                     fore provide a suitable basis for comparison with the mathematician
 trees, we perform comparisons of the empirical data with networks                                                        genealogy network.
                                                                                                                                                                                                                                      623
@@ -191,7 +191,7 @@ trees, we perform comparisons of the empirical data with networks               
                                     W. Tollmien                                                      the regressions between the Ækcæ z-score (Methods) and tc 2 tp deviate
                                                                                                      significantly (Fig. 4c and Supplementary Fig. 4c) from this expectation
                                                                                                      for both random ensembles, to reveal three distinct features. First,
-                                    H. D. Kloosterman                                                mentors with kp , 3 train protégés that go on to have mentorship
+                                    H. D. Kloosterman                                                mentors with kp , 3 train prote´ge´s that go on to have mentorship
            b                                                                                         fecundities 37% higher than expected throughout their careers.
                                                                                                      Second, in the first third of their careers, mentors with kp $ 10 train
            Generating ensemble I
@@ -199,13 +199,13 @@ trees, we perform comparisons of the empirical data with networks               
 
 
 
-                                                                                                     protégés that go on to have fecundities 29% higher than expected.
+                                                                                                     prote´ge´s that go on to have fecundities 29% higher than expected.
                                                                                                      Finally, in the last third of their careers, mentors with kp $ 10 train
-                                                                                                     protégés that go on to have fecundities 31% lower than expected.
-                                                                                                         The fact that mentors with k , 3 train protégés with higher-than-
+                                                                                                     prote´ge´s that go on to have fecundities 31% lower than expected.
+                                                                                                         The fact that mentors with k , 3 train prote´ge´s with higher-than-
                                                                                                      expected fecundities throughout their careers is somewhat counter-
                                                                                                      intuitive. From the rising-star hypothesis11,12, it might be expected
-                                                                                                     that protégés trained by mentors with k , 3 are likely to mimic their
+                                                                                                     that prote´ge´s trained by mentors with k , 3 are likely to mimic their
                                                                                                      mentors and therefore have lower-than-expected fecundities. Our
                                                                                                      results demonstrate that this is not the case. One possible explanation
             c
@@ -216,23 +216,23 @@ trees, we perform comparisons of the empirical data with networks               
 
 
 
-                                                                                                     torship experience for their protégés. An alternative hypothesis is that
-                                                                                                     mentors with k , 3 select for, or are selected by, protégés that have a
+                                                                                                     torship experience for their prote´ge´s. An alternative hypothesis is that
+                                                                                                     mentors with k , 3 select for, or are selected by, prote´ge´s that have a
                                                                                                      greater aptitude for mentorship.
                                                                                                          The striking temporal correlations for mentors with kp $ 10 are
                                                                                                      also intriguing. Because mentors with kp $ 10 represent the upper
                                                                                                      echelon of mentors in mathematics, these mentors were probably
                                                                                                      ‘rising stars’ early in their academic careers. The fact that these men-
-                                                                                                     tors train protégés with high fecundities early in their careers sup-
+                                                                                                     tors train prote´ge´s with high fecundities early in their careers sup-
                      1920              1930        1940       1950      1960     1970                ports the rising-star hypothesis.
-                                                  Graduation year, t                                     By the end of these mentors’ careers, however, their protégés have
+                                                  Graduation year, t                                     By the end of these mentors’ careers, however, their prote´ge´s have
                                                                                                      lower-than-expected fecundities. Perhaps mentors, who ultimately
 Figure 3 | Branching process null models. a, Subset of the mathematician                             have high fecundities, spend fewer and fewer resources training each
 genealogy network. Mentors/parents (black circles) are connected to each of
-                                                                                                     of their protégés as their careers progress. Alternatively, protégés with
-their protégés/children (white circles). The horizontal positions of
+                                                                                                     of their prote´ge´s as their careers progress. Alternatively, prote´ge´s with
+their prote´ge´s/children (white circles). The horizontal positions of
 mathematicians represent their graduation/birth dates, t. The bottom two                             high mentorship fecundity aspirations might court prolific mentors
-parents were born in 1924, the top two parents were born in 1937, and all                            early in their mentors’ careers whereas protégés with low fecundity
+parents were born in 1924, the top two parents were born in 1937, and all                            early in their mentors’ careers whereas prote´ge´s with low fecundity
 four parents have a child born in 1958. From a parent’s perspective, three                           aspirations might court prolific mentors later in their mentors’ careers.
 essential features of the empirical network must be preserved in random                              Our findings therefore reveal interesting nuances to the rising-star
 networks generated from the two branching process null models: the birth                             hypothesis.
@@ -242,8 +242,8 @@ lines highlight the links in the empirical network whose end points can be
 randomized. Dashed red lines illustrate one of the possible randomization
                                                                                                      Anecdotally, mathematicians are thought to perform their best work
 moves after switching the corresponding pair of links. We note that the age                          at a young age27, a perception that may influence how mentors and
-difference between parent and child is not preserved. c, Random networks                             protégés choose each other. Perceptions in other domains, however,
-from ensemble II preserve the three essential features as well as the age                            may differ and subsequently influence mentor and protégé selection in
+difference between parent and child is not preserved. c, Random networks                             prote´ge´s choose each other. Perceptions in other domains, however,
+from ensemble II preserve the three essential features as well as the age                            may differ and subsequently influence mentor and prote´ge´ selection in
 difference between parent and child. Solid blue lines of the same colour                             different ways. As data for other academic disciplines18,19, business and
 highlight the links in the empirical network whose end points can be                                 the government becomes available, it will be important to determine
 randomized. Dashed blue lines illustrate one of the possible randomization                           whether temporal correlations in fecundity are a general consequence
@@ -251,17 +251,17 @@ moves after switching the corresponding pair of links. Random networks for      
 each ensemble are generated by attempting 100 switches per link (Methods).
                                                                                                      mathematicians in academia.
    To explore the influence of mentor fecundity and age difference on                                    Regardless, our results offer another means of judging academic
-protégé fecundity, we partition protégés according to the fecundity of                           impact in science as well as the impact of managers on their employ-
-their mentors and the age difference between mentor and protégé,                                   ees, both of which are notoriously complicated and risky affairs.
+prote´ge´ fecundity, we partition prote´ge´s according to the fecundity of                           impact in science as well as the impact of managers on their employ-
+their mentors and the age difference between mentor and prote´ge´,                                   ees, both of which are notoriously complicated and risky affairs.
 tc 2 tp. Given our findings (Supplementary Discussion and Sup-                                       These assessments are multidimensional, metrics and expectations
 plementary Figs 2 and 3), it is clear that age differences affect fecundity                          are domain dependent, and placement of creative output, timescales
-in a nonrandom manner for protégés whose mentors have kp , 3. We                                   of impact and recognition vary significantly from field to field.
-partition the remaining protégés, whose mentors have kp $ 3, into two                              Ultimately, the assessment of individuals for awards and promotion
-groups: protégés whose mentors are below-average ‘haves’                                           is based on painstaking individual analysis by selection committees
-(3 # kp , 10) and protégés whose mentors are above-average ‘haves’                                 and peers. Although these committees may have varying goals and
-(kp $ 10). We then partition these three groups of protégés according                              incentives, it is important that collective arguments—the kind of
+in a nonrandom manner for prote´ge´s whose mentors have kp , 3. We                                   of impact and recognition vary significantly from field to field.
+partition the remaining prote´ge´s, whose mentors have kp $ 3, into two                              Ultimately, the assessment of individuals for awards and promotion
+groups: prote´ge´s whose mentors are below-average ‘haves’                                           is based on painstaking individual analysis by selection committees
+(3 # kp , 10) and prote´ge´s whose mentors are above-average ‘haves’                                 and peers. Although these committees may have varying goals and
+(kp $ 10). We then partition these three groups of prote´ge´s according                              incentives, it is important that collective arguments—the kind of
 to when they graduated during their mentors’ careers. Specifically,                                  arguments we are making here—be based on sound quantitative
-we split each group of protégés into terciles, the most fine-grained                               analysis. Although the extent to which our findings extrapolate to
+we split each group of prote´ge´s into terciles, the most fine-grained                               analysis. Although the extent to which our findings extrapolate to
 grouping that still gives us sufficient power to examine the statistical                             other domains may vary, we are confident that the kind of analysis
 624
                                                                        ©2010 Macmillan Publishers Limited. All rights reserved
@@ -323,8 +323,8 @@ grouping that still gives us sufficient power to examine the statistical        
                                                                   –0.1           0.0         0.1             –0.1      0.0         0.1          –0.1           0.0         0.1
                                                                                                                       Slope
 
-Figure 4 | Effect of age difference between mentor and protégé, tc 2 tp, on                                                 black line; slope and intercept as shown). The regression lines for networks
-protégé fecundity. a, Fecundity distribution of children born during the                                                    from our null model (grey lines) vary around the expectation of our null
+Figure 4 | Effect of age difference between mentor and prote´ge´, tc 2 tp, on                                                 black line; slope and intercept as shown). The regression lines for networks
+prote´ge´ fecundity. a, Fecundity distribution of children born during the                                                    from our null model (grey lines) vary around the expectation of our null
 1910s (for which the average fecundity was 1.4) to parents with kp , 3,                                                       model (dashed black line). c, Significance of linear regressions in b. We
 3 # kp , 10 and kp $ 10, compared with the expectation from ensemble I                                                        compare the slope and intercept of the empirical regression (black circle)
 (grey line). We separate children into terciles (early, middle, late) according                                               with the distribution of the slope and intercept of the same quantities
@@ -344,7 +344,7 @@ managerial impact.                                                              
                                                                                                                               mixture of discrete exponential distributions that has finite variance. Given a set
 METHODS SUMMARY                                                                                                               of child fecundities, Kc 5 {kc}, we quantify how significantly a subset of these
 Data acquisition. We use data from the Mathematics Genealogy Project17 to                                                     child fecundities, Kc* , Kc, deviates from Kc by measuring the z-score of Ækcæ, the
-identify the 7,259 protégé mathematicians that are in the giant component28 and                                             average child fecundity of all nodes within the subset Kc*, compared with Ækcæs,
+identify the 7,259 prote´ge´ mathematicians that are in the giant component28 and                                             average child fecundity of all nodes within the subset Kc*, compared with Ækcæs,
 graduated between 1900 and 1960, of which 4,447 have linked publication                                                       the average child fecundity computed for children within a subset equivalent to
 records through the American Mathematical Society’s research database                                                         Kc* in the synthetic networks. That is, we compute z 5 (Ækcæ 2 m)/s, where m is
 MathSciNet. We use a text-matching algorithm29 to semi-automatically match                                                    the ensemble average of {Ækcæs} and s is the standard deviation of the ensemble
@@ -389,9 +389,9 @@ link in the class25,26.                                                         
       537–562 (1995).
 12.   Singh, R., Ragins, B. R. & Tharenou, P. Who gets a mentor? A longitudinal                  Supplementary Information is linked to the online version of the paper at
       assessment of the rising star hypothesis. J. Vocat. Behav. 74, 11–17 (2009).               www.nature.com/nature.
-13.   Allen, T. D., Poteet, M. L. & Russell, J. E. A. Protégé selection by mentors: what
-      makes the difference? J. Organ. Behav. 21, 271–282 (2000).                                 Acknowledgements We thank R. Guimerà, P. McMullen, A. Pah, M. Sales-Pardo,
-14.   Allen, T. D. Protégé selection by mentors: contributing individual and                   E. N. Sawardecker, D. B. Stouffer and M. J. Stringer for comments and suggestions.
+13.   Allen, T. D., Poteet, M. L. & Russell, J. E. A. Prote´ge´ selection by mentors: what
+      makes the difference? J. Organ. Behav. 21, 271–282 (2000).                                 Acknowledgements We thank R. Guimera`, P. McMullen, A. Pah, M. Sales-Pardo,
+14.   Allen, T. D. Prote´ge´ selection by mentors: contributing individual and                   E. N. Sawardecker, D. B. Stouffer and M. J. Stringer for comments and suggestions.
       organizational factors. J. Vocat. Behav. 65, 469–483 (2004).                               L.A.N.A. gratefully acknowledges the support of US National Science Foundation
 15.   Ragins, B. R. & Scandura, T. A. Burden or blessing? Expected costs and benefits of         awards SBE 0830388 and IIS 0838564. All figures were generated using
       being a mentor. J. Organ. Behav. 20, 493–509 (1999).                                       PYGRACE (http://pygrace.sourceforge.net) with colour schemes from
@@ -420,11 +420,11 @@ Mathematics Genealogy Project data. We study a prototypical mentorship          
 network collected from the Mathematics Genealogy Project17, which aggregates             bution, p(kjt). Next, we generate a synthetic fecundity distribution, ps(k), from
 the graduation dates, mentors and advisees of 114,666 mathematicians from as             model M(Ht) using the best-estimate parameters, ht, and we treat the synthetic
 early as 1637. From this information, we construct a mathematician genealogy             data exactly the same as we treated the empirical data: first, we calculate the best-
-network in which links are formed from a mentor to each of his or her k protégés.      estimate parameters, Hs, for model M from maximum-likelihood estimation;
+network in which links are formed from a mentor to each of his or her k prote´ge´s.      estimate parameters, Hs, for model M from maximum-likelihood estimation;
    The data collected by the Mathematics Genealogy Project are self-reported, so         second, we compute the test statistic, Ss, between the model M(Hs) and the
 there is no guarantee that the observed genealogy network is a complete descrip-         synthetic fecundity distribution, ps(k). We generate synthetic fecundity distribu-
 tion of the mentorship network. In fact, 16,147 mathematicians do not have a             tions and their corresponding synthetic test statistics until we accumulate an
-recorded mentor and, of these, 8,336 do not have any recorded protégés. To             ensemble of 1,000 Monte Carlo test statistics, {Ss}. Finally, we calculate a two-
+recorded mentor and, of these, 8,336 do not have any recorded prote´ge´s. To             ensemble of 1,000 Monte Carlo test statistics, {Ss}. Finally, we calculate a two-
 avoid having these mathematicians distort our analysis, we restrict our analysis         tailed P value with a precision of 0.001. As is customary in hypothesis testing, we
 to the 90,211 mathematicians that comprise the giant component28 of the net-             reject the model M at time t if the P value is less than a threshold value. We select a
 work; that is, we restrict our analysis to the largest set of connected mathema-         P-value threshold of 0.05; that is, if less than 5% of the synthetic data sets exhibit
@@ -436,9 +436,9 @@ records are representative of the evolution of the network. For example, before 
 Furthermore, because mathematicians often have mentorship careers lasting                statistic whereby we bin p(kjt) such that each bin has at least one expected
 50 years or more, we are not guaranteed to have complete mentorship records              observation according to the model M(Ht). This binning prevents observations
 for mathematicians who graduated after 1960. We therefore restrict our analysis          that are exceptionally rare from dominating our statistical test and skewing our
-to the 7,259 protégé mathematicians who graduated between 1900 and 1960, for           results.
+to the 7,259 prote´ge´ mathematicians who graduated between 1900 and 1960, for           results.
 whom we believe that the graduation and mentorship record is the most reliable.          Random-network generation. We use the Markov chain Monte Carlo algo-
-MathSciNet data. Of the 7,259 protégé mathematicians that graduated between            rithm25,26 to build random networks from the mathematician genealogy net-
+MathSciNet data. Of the 7,259 prote´ge´ mathematicians that graduated between            rithm25,26 to build random networks from the mathematician genealogy net-
 1900 and 1960, 4,447 of them have linked MathSciNet publication records,                 work. The standard version of this algorithm inherently preserves the
 which are used in our analysis.                                                          fecundity of each individual, but it does not preserve the chronology of child
 US National Academy of Science data. The US National Academy of Science                  births, {tc}, for each parent. To obtain random networks belonging to ensemble I
