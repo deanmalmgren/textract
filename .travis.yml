@@ -4,7 +4,7 @@ dist: bionic
 language: python
 python:
   - "2.7"
-  - "3.5"
+  - "3.7"
 
 # install system dependencies here with apt-get.
 before_install:
