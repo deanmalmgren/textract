@@ -14,14 +14,14 @@ before_install:
 # virtualenv
 install:
   - ./provision/python.sh
-  - pip install .
+  - pip install .[pocketsphinx]
 
 # commands to run the testing suite. if any of these fail, travic lets us know
 script:
   - cd tests && make && cd -
   - nosetests --with-coverage --cover-package=textract
   - pep8 textract/ bin/textract
-  - cd docs && make html && cd -
+  - if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]]; then cd docs && make html && cd -; fi
 
 # commands to run after the tests successfully complete
 after_success:
