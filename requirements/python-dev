@@ -3,7 +3,7 @@
 # documentation builds (python-doc)
 
 -r python
--r python-doc
+# -r python-doc
 
 # needed for tests/run.py script to read .travis.yml file
 coveralls==1.8.1
