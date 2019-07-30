@@ -19,7 +19,7 @@ antiword
 unrtf
 
 # parse image files
-tesseract-ocr=3.03\*
+tesseract-ocr
 libjpeg-dev
 
 # parse pdfs
