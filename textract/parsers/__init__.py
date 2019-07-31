@@ -86,7 +86,7 @@ def _get_available_extensions():
     # from filenames
     parsers_dir = os.path.join(os.path.dirname(__file__))
     glob_filename = os.path.join(parsers_dir, "*" + _FILENAME_SUFFIX + ".py")
-    ext_re = re.compile(glob_filename.replace('*', "(?P<ext>\w+)"))
+    ext_re = re.compile(glob_filename.replace('*', r"(?P<ext>\w+)"))
     for filename in glob.glob(glob_filename):
         ext_match = ext_re.match(filename)
         ext = ext_match.groups()[0]
