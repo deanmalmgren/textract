@@ -1,3 +1,3 @@
 from .parsers import process
 
-VERSION = "1.6.1"
+VERSION = "1.6.3"
