@@ -12,4 +12,4 @@ fi
 pip install -U pip
 
 # Install the requirements for this package as well as this module.
-pip install -r requirements/python-dev
+pip install -r requirements/python-dev2
