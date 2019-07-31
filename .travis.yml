@@ -14,8 +14,12 @@ before_install:
 # virtualenv
 install:
 
-  - [[ if $TRAVIS_PYTHON_VERSION == 3.7 ]]; then ./provision/python3.sh; fi
-  - [[ if $TRAVIS_PYTHON_VERSION == 2.7 ]]; then ./provision/python2.sh; fi
+  - if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]];
+        then ./provision/python3.sh;
+        fi
+  - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]];
+        then ./provision/python2.sh;
+        fi
   - pip install .[pocketsphinx]
 
 # commands to run the testing suite. if any of these fail, travic lets us know
@@ -24,7 +28,9 @@ script:
   - nosetests --with-coverage --cover-package=textract
   - cd tests && pytest
   - pep8 textract/ bin/textract
-  - if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]]; then cd docs && make html && cd -; fi
+  - if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]];
+        then cd docs && make html && cd -;
+        fi
 
 # commands to run after the tests successfully complete
 after_success:
