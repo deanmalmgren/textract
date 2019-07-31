@@ -13,7 +13,9 @@ before_install:
 # install python dependencies including this package in the travis
 # virtualenv
 install:
-  - ./provision/python.sh
+
+  - [[ if $TRAVIS_PYTHON_VERSION == 3.7 ]]; then ./provision/python3.sh; fi
+  - [[ if $TRAVIS_PYTHON_VERSION == 2.7 ]]; then ./provision/python2.sh; fi
   - pip install .[pocketsphinx]
 
 # commands to run the testing suite. if any of these fail, travic lets us know
