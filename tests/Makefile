@@ -11,7 +11,8 @@ TARGETS = pdf/ocr_text.txt \
 	png/raw_text.txt png/standardized_text.txt \
 	gif/raw_text.txt gif/standardized_text.txt \
     jpg/raw_text.txt jpg/standardized_text.txt \
-    tiff/raw_text.txt tiff/standardized_text.txt
+    tiff/raw_text.txt tiff/standardized_text.txt \
+	ps/raw_text.txt
 
 all: $(TARGETS)
 
@@ -26,6 +27,9 @@ pdf/ocr_text.txt: pdf/ocr_text.pdf
 	done
 	cat pdf-ocr-text*.txt > $@
 	rm -f pdf-ocr-text*
+
+ps/raw_text.txt: ps/raw_text.ps
+	ps2ascii $< > $@
 
 # simple pattern rule for creating standard issue tesseract files for different
 # fileypes. the `g` shell variable is the path to the file without the
