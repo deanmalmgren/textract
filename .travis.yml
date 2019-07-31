@@ -27,7 +27,7 @@ script:
   - cd tests && make && cd -
   - nosetests --with-coverage --cover-package=textract
   - cd tests && pytest && cd -
-  - pep8 textract/ bin/textract
+  - pycodestyle textract/ bin/textract
   - if [[ $TRAVIS_PYTHON_VERSION == 3.7 ]];
         then cd docs && make html && cd -;
         fi
