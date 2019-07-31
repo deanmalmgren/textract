@@ -1,6 +1,7 @@
 # required packages
 gcc
 libpulse-dev
+libasound2-dev
 libjpeg-dev
 build-essential
 git
@@ -9,6 +10,7 @@ make
 # these packages are required by python-docx, which depends on lxml
 # and requires these things
 python-dev
+python-pip
 libxml2-dev
 libxslt1-dev
 
