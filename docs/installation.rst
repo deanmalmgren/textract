@@ -36,8 +36,7 @@ OSX
 ---
 
 These steps rely on you having `homebrew <http://brew.sh/>`_ installed
-as well as the `cask <http://caskroom.io/>`_ plugin (``brew install
-caskroom/cask/brew-cask``). The basic idea is to first install
+as well as the `cask <http://caskroom.io/>`_ plugin (``brew tap caskroom/cask``). The basic idea is to first install
 `XQuartz <https://xquartz.macosforge.org/landing/>`_ before
 installing a bunch of system packages before installing textract from
 pypi.
