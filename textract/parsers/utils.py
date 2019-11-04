@@ -32,7 +32,7 @@ class BaseParser(object):
         """
         return text.encode(encoding, 'ignore')
 
-    def process(self, filename, encoding, **kwargs):
+    def process(self, filename, input_encoding, output_encoding="utf8", **kwargs):
         """Process ``filename`` and encode byte-string with ``encoding``. This
         method is called by :func:`textract.parsers.process` and wraps
         the :meth:`.BaseParser.extract` method in `a delicious unicode
@@ -44,10 +44,10 @@ class BaseParser(object):
         # output encoding
         # http://nedbatchelder.com/text/unipain/unipain.html#35
         byte_string = self.extract(filename, **kwargs)
-        unicode_string = self.decode(byte_string)
-        return self.encode(unicode_string, encoding)
+        unicode_string = self.decode(byte_string, input_encoding)
+        return self.encode(unicode_string, output_encoding)
 
-    def decode(self, text):
+    def decode(self, text, input_encoding=None):
         """Decode ``text`` using the `chardet
         <https://github.com/chardet/chardet>`_ package.
         """
@@ -60,7 +60,11 @@ class BaseParser(object):
         if not text:
             return u''
 
-        # use chardet to automatically detect the encoding text
+        # use the provided encoding
+        if input_encoding:
+            return text.decode(input_encoding)
+
+        # use chardet to automatically detect the encoding text if no encoding is provided
         result = chardet.detect(text)
         return text.decode(result['encoding'])
 
