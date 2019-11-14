@@ -1,3 +1,4 @@
+import inspect
 import xlrd
 import six
 
@@ -11,7 +12,11 @@ class Parser(BaseParser):
     """
 
     def extract(self, filename, **kwargs):
-        workbook = xlrd.open_workbook(filename)
+        open_workbook_kwargs = {}
+        for arg in inspect.getfullargspec(xlrd.open_workbook).args:
+            if arg in kwargs:
+                open_workbook_kwargs[arg] = kwargs[arg]
+        workbook = xlrd.open_workbook(filename, **open_workbook_kwargs)
         sheets_name = workbook.sheet_names()
         output = "\n"
         for names in sheets_name:
