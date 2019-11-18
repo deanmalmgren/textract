@@ -6,11 +6,26 @@ import subprocess
 import tempfile
 import os
 import errno
+import inspect
 
 import six
 import chardet
 
 from .. import exceptions
+
+
+def _call_with_kwargs(extraction_function, stream, **kwargs):
+    """
+    Pass arguments from kwargs to calling function
+    :param extraction_function: function to extract text from file. Usually some external library function
+    :param stream: stream or filename
+    :return: result of extraction
+    """
+    func_kwargs = {}
+    for arg in inspect.getfullargspec(extraction_function).args:
+        if arg in kwargs:
+            func_kwargs[arg] = kwargs[arg]
+    return extraction_function(stream, **func_kwargs)
 
 
 class BaseParser(object):
@@ -117,3 +132,4 @@ class ShellParser(BaseParser):
         handle, filename = tempfile.mkstemp()
         os.close(handle)
         return filename
+
