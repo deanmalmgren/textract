@@ -3,15 +3,14 @@ import six
 
 from six.moves import xrange
 
-from .utils import BaseParser
+from .utils import BaseParser, _call_with_kwargs
 
 
 class Parser(BaseParser):
     """Extract text from Excel files (.xls/xlsx).
     """
-
     def extract(self, filename, **kwargs):
-        workbook = xlrd.open_workbook(filename)
+        workbook = _call_with_kwargs(xlrd.open_workbook, filename, **kwargs)
         sheets_name = workbook.sheet_names()
         output = "\n"
         for names in sheets_name:

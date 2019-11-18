@@ -1,7 +1,7 @@
 from ebooklib import epub, ITEM_DOCUMENT
 from bs4 import BeautifulSoup
 
-from .utils import BaseParser
+from .utils import BaseParser, _call_with_kwargs
 
 
 class Parser(BaseParser):
@@ -9,7 +9,7 @@ class Parser(BaseParser):
     """
 
     def extract(self, filename, **kwargs):
-        book = epub.read_epub(filename)
+        book = _call_with_kwargs(epub.read_epub, filename, **kwargs)
         result = ''
         for id, _ in book.spine:
             item = book.get_item_with_id(id)

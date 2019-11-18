@@ -1,7 +1,7 @@
 import zipfile
 import xml.etree.ElementTree as ET
 
-from .utils import BaseParser
+from .utils import BaseParser, _call_with_kwargs
 
 
 class Parser(BaseParser):
@@ -12,8 +12,8 @@ class Parser(BaseParser):
         # Inspiration from
         # https://github.com/odoo/odoo/blob/master/addons/document/odt2txt.py
         with open(filename, 'rb') as stream:
-            zip_stream = zipfile.ZipFile(stream)
-            self.content = ET.fromstring(zip_stream.read("content.xml"))
+            zip_stream = _call_with_kwargs(zipfile.ZipFile, stream, **kwargs)
+            self.content = _call_with_kwargs(ET.fromstring, zip_stream.read("content.xml"), **kwargs)
         return self.to_string()
 
     def to_string(self):

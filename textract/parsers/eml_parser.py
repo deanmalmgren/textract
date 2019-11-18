@@ -1,6 +1,6 @@
 from email.parser import Parser as EmailParser
 
-from .utils import BaseParser
+from .utils import BaseParser, _call_with_kwargs
 
 
 class Parser(BaseParser):
@@ -18,7 +18,7 @@ class Parser(BaseParser):
 
         with open(filename) as stream:
             parser = EmailParser()
-            message = parser.parse(stream)
+            message = _call_with_kwargs(parser.parse, stream, **kwargs)
 
         text_content = []
         for part in message.walk():

@@ -1,7 +1,7 @@
 import json
 import six
 
-from .utils import BaseParser
+from .utils import BaseParser, _call_with_kwargs
 
 
 class Parser(BaseParser):
@@ -12,7 +12,7 @@ class Parser(BaseParser):
 
     def extract(self, filename, **kwargs):
         with open(filename, 'r') as raw:
-            deserialized_json = json.load(raw)
+            deserialized_json = _call_with_kwargs(json.load, raw, **kwargs)
         return self.get_text(deserialized_json)
 
     def get_text(self, deserialized_json):

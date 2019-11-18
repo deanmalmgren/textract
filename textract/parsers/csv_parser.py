@@ -1,6 +1,6 @@
 import csv
 
-from .utils import BaseParser
+from .utils import BaseParser, _call_with_kwargs
 
 
 class Parser(BaseParser):
@@ -13,5 +13,6 @@ class Parser(BaseParser):
 
         # quick 'n dirty solution for the time being
         with open(filename) as stream:
-            reader = csv.reader(stream, delimiter=self.delimiter)
+            kwargs['delimiter'] = self.delimiter
+            reader = _call_with_kwargs(csv.reader, stream, **kwargs)
             return '\n'.join(['\t'.join(row) for row in reader])

@@ -3,7 +3,7 @@ import six
 
 from bs4 import BeautifulSoup
 
-from .utils import BaseParser
+from .utils import BaseParser, _call_with_kwargs
 
 
 class Parser(BaseParser):
@@ -125,8 +125,9 @@ class Parser(BaseParser):
         return soup
 
     def extract(self, filename, **kwargs):
+        kwargs['features'] = 'lxml'
         with open(filename, "rb") as stream:
-            soup = BeautifulSoup(stream, 'lxml')
+            soup = _call_with_kwargs(BeautifulSoup, stream, **kwargs)
 
         # Convert tables to ASCII ones
         soup = self._replace_tables(soup)

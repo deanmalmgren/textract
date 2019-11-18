@@ -1,6 +1,6 @@
 import pptx
 
-from .utils import BaseParser
+from .utils import BaseParser, _call_with_kwargs
 
 
 class Parser(BaseParser):
@@ -8,7 +8,7 @@ class Parser(BaseParser):
     """
 
     def extract(self, filename, **kwargs):
-        presentation = pptx.Presentation(filename)
+        presentation = _call_with_kwargs(pptx.Presentation, filename, **kwargs)
         text_runs = []
         for slide in presentation.slides:
             for shape in slide.shapes:
