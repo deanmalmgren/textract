@@ -17,22 +17,23 @@ class Parser(ShellParser):
     def extract(self, filename, method='', **kwargs):
         if method == '' or method == 'pdftotext':
             try:
-                return self.extract_pdftotext(filename, **kwargs)
+                text = self.extract_pdftotext(filename, **kwargs)
             except ShellError as ex:
                 # If pdftotext isn't installed and the pdftotext method
                 # wasn't specified, then gracefully fallback to using
                 # pdfminer instead.
                 if method == '' and ex.is_not_installed():
-                    return self.extract_pdfminer(filename, **kwargs)
+                    text = self.extract_pdfminer(filename, **kwargs)
                 else:
                     raise ex
 
         elif method == 'pdfminer':
-            return self.extract_pdfminer(filename, **kwargs)
+            text = self.extract_pdfminer(filename, **kwargs)
         elif method == 'tesseract':
-            return self.extract_tesseract(filename, **kwargs)
+            text = self.extract_tesseract(filename, **kwargs)
         else:
             raise UnknownMethod(method)
+        return text if text.strip() else self.extract_tesseract(filename, **kwargs)
 
     def extract_pdftotext(self, filename, **kwargs):
         """Extract text from pdfs using the pdftotext command line utility."""

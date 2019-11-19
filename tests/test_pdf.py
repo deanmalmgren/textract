@@ -25,6 +25,13 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
             method='tesseract',
         )
 
+    def test_tesseract_cli(self):
+        """confirm fallback to pdf extraction with tesseract if no text is found"""
+        d = self.get_extension_directory()
+        self.compare_cli_output(
+            os.path.join(d, "ocr_text.pdf"),
+            expected_filename=os.path.join(d, "ocr_text.txt")
+        )
     def test_large_pdf(self):
         """Make sure extraction does not hang (issue #33)"""
 
