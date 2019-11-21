@@ -44,6 +44,8 @@ file types by either mentioning them on the `issue tracker
 
 * ``.csv`` via python builtins
 
+* ``.tsv`` and ``.tab`` via python builtins
+
 * ``.doc`` via `antiword`_
 
 * ``.docx`` via `python-docx2txt`_

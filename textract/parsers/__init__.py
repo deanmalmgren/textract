@@ -17,6 +17,7 @@ EXTENSION_SYNONYMS = {
     ".htm": ".html",
     "": ".txt",
     ".log": ".txt",
+    ".tab": ".tsv",
 }
 
 # default encoding that is returned by the process method. specify it
