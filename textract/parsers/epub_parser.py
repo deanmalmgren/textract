@@ -13,6 +13,10 @@ class Parser(BaseParser):
         result = ''
         for id, _ in book.spine:
             item = book.get_item_with_id(id)
+            # Don't fail with some AttributeError exception when the item is of NoneType
+            # (i.e. at the last position).
+            if item is None:
+                continue
             soup = BeautifulSoup(item.content, 'lxml')
             for child in soup.find_all(
                 ['title', 'p', 'div', 'h1', 'h2', 'h3', 'h4']
