@@ -1,0 +1,36 @@
+# required packages
+audio/pulseaudio
+devel/git
+
+# these packages are required by python-docx, which depends on lxml
+# and requires these things
+lang/python38
+devel/py-pippython-pip
+textproc/libxml2
+textproc/libxslt
+
+# parse word documents
+textproc/antiword
+
+# parse rtf documents
+textproc/unrtf
+
+# parse image files
+graphics/tesseract
+graphics/jpeg-turbo
+
+# parse pdfs
+graphics/poppler
+
+# parse postscript files
+print/pstotext
+
+# parse audio files, with SpeechRecognition
+audio/flac 
+
+# filetype conversion libs
+multimedia/ffmpeg
+audio/lame
+
+# convert audio files
+audio/sox
