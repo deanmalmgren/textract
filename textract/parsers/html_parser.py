@@ -7,8 +7,8 @@ from .utils import BaseParser
 
 
 HTML_TAG_RE = re.compile(r'(<[^>]+>)')
-HTML_SPACE_SQUASH_RE = re.compile(r'\s+')
-HTML_SPACE_RE = re.compile(r'\s')
+SPACE_SQUASH_RE = re.compile(r'\s+')
+SPACE_RE = re.compile(r'\s')
 
 
 class Parser(BaseParser):
@@ -59,13 +59,11 @@ class Parser(BaseParser):
         text = ''
         if tag is not None:
             text = six.text_type(tag)
-            text = re.sub(r'(<[^>]+>)', '', text)
-            text = re.sub(r'\s', ' ', text)
             text = re.sub(HTML_TAG_RE, '', text)
             if squash_spaces:
-                text = re.sub(HTML_SPACE_SQUASH_RE, ' ', text)
+                text = re.sub(SPACE_SQUASH_RE, ' ', text)
             else:
-                text = re.sub(HTML_SPACE_RE, ' ', text)
+                text = re.sub(SPACE_RE, ' ', text)
             text = text.strip()
         return text
 
