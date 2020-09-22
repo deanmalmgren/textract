@@ -6,10 +6,22 @@ from bs4 import BeautifulSoup
 from .utils import BaseParser
 
 
+HTML_TAG_RE = re.compile(r'(<[^>]+>)')
+SPACE_SQUASH_RE = re.compile(r'\s+')
+SPACE_RE = re.compile(r'\s')
+
+
 class Parser(BaseParser):
     """Extract text from html file using beautifulsoup4. Filter text to
     only show the visible parts of the page. Insipration from `here
     <http://stackoverflow.com/a/1983219/564709>`_.
+    By default it preserves spaces and tries to render tables with ASCII
+    symbols '|' and '-'. It may be useless if you want to, for example,
+    extract text and put it to some full text search engine.
+    To replace several spaces with single one add option
+    `squash_html_spaces=True` to `textract.process` function.
+    To not render tables (just extract text) add an argument
+    `strip_html_tables=True` to `textract.process`.
     """
 
     _disallowed_names = [
@@ -41,18 +53,21 @@ class Parser(BaseParser):
             return True
         return False
 
-    def _find_any_text(self, tag):
+    def _find_any_text(self, tag, squash_spaces=False):
         """Looks for any possible text within given tag.
         """
         text = ''
         if tag is not None:
             text = six.text_type(tag)
-            text = re.sub(r'(<[^>]+>)', '', text)
-            text = re.sub(r'\s', ' ', text)
+            text = re.sub(HTML_TAG_RE, '', text)
+            if squash_spaces:
+                text = re.sub(SPACE_SQUASH_RE, ' ', text)
+            else:
+                text = re.sub(SPACE_RE, ' ', text)
             text = text.strip()
         return text
 
-    def _parse_tables(self, soup):
+    def _parse_tables(self, soup, squash_spaces):
         """Returns array containing basic informations about tables for ASCII
         replacement (look: _replace_tables()).
         """
@@ -66,7 +81,9 @@ class Parser(BaseParser):
                     tds = tr.find_all('th') + tr.find_all('td')
                     if len(tds) > 0:
                         for i, td in enumerate(tds):
-                            td_text = self._find_any_text(td)
+                            td_text = self._find_any_text(
+                                td, squash_spaces=squash_spaces
+                            )
                             length = len(td_text)
                             if i in t_dict['col_width']:
                                 t_dict['col_width'][i] = max(
@@ -85,10 +102,21 @@ class Parser(BaseParser):
                 tables.append(t_dict)
         return tables
 
-    def _replace_tables(self, soup, v_separator=' | ', h_separator='-'):
+    def _strip_tables(self, soup, squash_spaces=False):
+        tables = self._parse_tables(soup, squash_spaces)
+        for t in tables:
+            html = ''
+            for tr in t['trs']:
+                html += u'{0}\n'.format(u' '.join(td['text'] for td in tr))
+            new_table = soup.new_tag('div')
+            new_table.string = html
+            t['table'].replace_with(new_table)
+        return soup
+
+    def _replace_tables(self, soup, squash_spaces=False, v_separator=' | ', h_separator='-'):
         """Replaces <table> elements with its ASCII equivalent.
         """
-        tables = self._parse_tables(soup)
+        tables = self._parse_tables(soup, squash_spaces)
         v_sep_len = len(v_separator)
         v_left_sep = v_separator.lstrip()
         for t in tables:
@@ -124,12 +152,21 @@ class Parser(BaseParser):
                 elem.unwrap()
         return soup
 
-    def extract(self, filename, **kwargs):
+    def extract(
+        self,
+        filename,
+        strip_html_tables=False,
+        squash_html_spaces=False,
+        **kwargs
+    ):
         with open(filename, "rb") as stream:
             soup = BeautifulSoup(stream, 'lxml')
 
         # Convert tables to ASCII ones
-        soup = self._replace_tables(soup)
+        if strip_html_tables:
+            soup = self._strip_tables(soup, squash_spaces=squash_html_spaces)
+        else:
+            soup = self._replace_tables(soup, squash_spaces=squash_html_spaces)
 
         # Join inline elements
         soup = self._join_inlines(soup)
@@ -141,7 +178,9 @@ class Parser(BaseParser):
         for elem in elements:
             string = elem.string
             if string is None:
-                string = self._find_any_text(elem)
+                string = self._find_any_text(
+                    elem, squash_spaces=squash_html_spaces
+                )
             string = string.strip()
             if len(string) > 0:
                 html += "\n" + string + "\n"
