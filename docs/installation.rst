@@ -43,7 +43,7 @@ pypi.
 
 .. code-block:: bash
 
-    brew cask install xquartz
+    brew install --cask xquartz
     brew install poppler antiword unrtf tesseract swig
     pip install textract
 
