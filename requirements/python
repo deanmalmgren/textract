@@ -3,7 +3,7 @@
 
 argcomplete==1.12.3
 beautifulsoup4==4.9.3
-chardet==3.0.4
+chardet==4.0.0
 docx2txt==0.8
 EbookLib==0.17.1
 extract-msg==0.23.1
