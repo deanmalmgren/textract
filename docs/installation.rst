@@ -62,6 +62,18 @@ pypi.
     homebrew, you may also need to install the python
     development header files for textract to properly install.
 
+FreeBSD
+-------
+
+Setting up this package on FreeBSD pretty much follows the steps for
+Ubuntu / Debian while using ``pkg`` as package manager.
+
+.. code-block:: bash
+
+    pkg install lang/python38 devel/py-pip textproc/libxml2 textproc/libxslt textproc/antiword textproc/unrtf \
+    graphics/poppler print/pstotext graphics/tesseract audio/flac multimedia/ffmpeg audio/lame audio/sox \
+    graphics/jpeg-turbo
+    pip install textract
 
 Don't see your operating system installation instructions here?
 ---------------------------------------------------------------
