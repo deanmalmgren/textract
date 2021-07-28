@@ -9,6 +9,6 @@ EbookLib==0.17.1
 extract-msg==0.23.1
 pdfminer.six==20181108
 python-pptx==0.6.18
-six==1.12.0
+six>=1.12.0
 SpeechRecognition==3.8.1
 xlrd==1.2.0
