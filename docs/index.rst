@@ -6,7 +6,7 @@
 textract
 ================================
 
-As undesireable as it might be, more often than not there is extremely
+As undesirable as it might be, more often than not there is extremely
 useful information embedded in Word documents, PowerPoint
 presentations, PDFs, etc---so-called "dark data"---that would be
 valuable for further textual analysis and visualization. While
