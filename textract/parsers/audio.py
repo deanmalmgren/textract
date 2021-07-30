@@ -45,8 +45,6 @@ class Parser(ShellParser):
                 speech = ''
             except sr.UnknownValueError:
                 speech = ''
-            except sr.RequestError as e:
-                speech = ''
 
             # add a newline, to make output cleaner
             speech += '\n'
