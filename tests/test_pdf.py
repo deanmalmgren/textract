@@ -25,19 +25,6 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
             method='tesseract',
         )
 
-    def test_large_pdf(self):
-        """Make sure extraction does not hang (issue #33)"""
-
-        # download the file
-        filename = os.path.join(self.get_extension_directory(), "large.pdf")
-        self.download_file(
-            "https://openknowledge.worldbank.org/bitstream/handle/10986/16091/9780821399378.pdf",
-            filename,
-        )
-
-        # make sure textract can successfully run
-        self.assertSuccessfulTextract(filename)
-
     def test_two_column(self):
         """Preserve two column layout in extraction"""
         filename = os.path.join(self.get_extension_directory(), 'two_column.pdf')
