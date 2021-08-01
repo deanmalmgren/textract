@@ -94,6 +94,7 @@ class ShellParser(BaseParser):
                 raise exceptions.ShellError(
                     ' '.join(args), 127, '', '',
                 )
+            else: raise #Reraise the last exception unmodified
 
         # pipe.wait() ends up hanging on large files. using
         # pipe.communicate appears to avoid this issue
