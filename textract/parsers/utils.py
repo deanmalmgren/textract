@@ -65,8 +65,8 @@ class BaseParser(object):
             return text.decode(input_encoding)
 
         # use chardet to automatically detect the encoding text if no encoding is provided
-        result = chardet.detect(text)
-        return text.decode(result['encoding'])
+        encoding = chardet.detect(text)['encoding'] if input_encoding == None else input_encoding
+        return text.decode(encoding)
 
 
 class ShellParser(BaseParser):
