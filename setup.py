@@ -1,6 +1,5 @@
 import glob
 import os
-import sys
 from setuptools import setup
 
 import textract
@@ -43,7 +42,7 @@ dependencies, dependency_links = parse_requirements(requirements_filename)
 
 setup(
     name=textract.__name__,
-    version="1.6.1",
+    version="1.6.3",
     description="extract text from any document. no muss. no fuss.",
     long_description=long_description,
     url=github_url,
@@ -57,6 +56,9 @@ setup(
         'textract.parsers',
     ],
     install_requires=dependencies,
+    extras_require={
+        "pocketsphinx": ["pocketsphinx==0.1.15"]
+    },
     dependency_links=dependency_links,
     zip_safe=False,
 )

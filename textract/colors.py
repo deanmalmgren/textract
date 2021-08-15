@@ -12,6 +12,7 @@ def _wrap_with(code, bold=False):
         return "\033[%sm%s\033[0m" % (c, text)
     return inner
 
+
 red = _wrap_with('31')
 green = _wrap_with('32')
 yellow = _wrap_with('33')
@@ -32,4 +33,4 @@ bold_white = _wrap_with('37', True)
 # regular expression to omit colorcodes
 def colorless(text):
     """Remove color from the text"""
-    return re.sub("\033\[(1;)?[\d]+m", '', text)
+    return re.sub(r"\033\[(1;)?[\d]+m", '', text)

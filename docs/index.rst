@@ -6,7 +6,7 @@
 textract
 ================================
 
-As undesireable as it might be, more often than not there is extremely
+As undesirable as it might be, more often than not there is extremely
 useful information embedded in Word documents, PowerPoint
 presentations, PDFs, etc---so-called "dark data"---that would be
 valuable for further textual analysis and visualization. While
@@ -74,7 +74,7 @@ file types by either mentioning them on the `issue tracker
 
 * ``.pptx`` via `python-pptx`_
 
-* ``.ps`` via `ps2text`_
+* ``.ps`` via `ps2ascii`_
 
 * ``.rtf`` via `unrtf`_
 
@@ -96,7 +96,7 @@ file types by either mentioning them on the `issue tracker
 .. _pdfminer.six: https://github.com/goulu/pdfminer
 .. _pdftotext: http://poppler.freedesktop.org/
 .. _pocketsphinx: https://github.com/cmusphinx/pocketsphinx/
-.. _ps2text: http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm
+.. _ps2ascii: https://www.ghostscript.com/doc/current/Use.htm
 .. _python-docx2txt: https://github.com/ankushshah89/python-docx2txt
 .. _python-pptx: https://python-pptx.readthedocs.org/en/latest/
 .. _SpeechRecognition: https://pypi.python.org/pypi/SpeechRecognition/

@@ -24,8 +24,8 @@ Extract text from any document. No muss. No fuss.
 .. |Downloads| image:: https://img.shields.io/pypi/dm/textract.svg
    :target: https://warehouse.python.org/project/textract/
 
-.. |Test Coverage| image:: https://coveralls.io/repos/deanmalmgren/textract/badge.png
-   :target: https://coveralls.io/r/deanmalmgren/textract
+.. |Test Coverage| image:: https://coveralls.io/repos/github/deanmalmgren/textract/badge.svg?branch=master
+    :target: https://coveralls.io/github/deanmalmgren/textract?branch=master
 
 .. |Documentation Status| image:: https://readthedocs.org/projects/textract/badge/?version=latest
    :target: https://readthedocs.org/projects/textract/?badge=latest

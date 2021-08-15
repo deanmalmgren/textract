@@ -22,13 +22,14 @@ EXTENSION_SYNONYMS = {
 # default encoding that is returned by the process method. specify it
 # here so the default is used on both the process function and also by
 # the command line interface
+DEFAULT_OUTPUT_ENCODING = 'utf_8'
 DEFAULT_ENCODING = 'utf_8'
 
 # filename format
 _FILENAME_SUFFIX = '_parser'
 
 
-def process(filename, encoding=DEFAULT_ENCODING, extension=None, **kwargs):
+def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODING, extension=None, **kwargs):
     """This is the core function used for extracting text. It routes the
     ``filename`` to the appropriate parser and returns the extracted
     text as a byte-string encoded with ``encoding``.
@@ -74,7 +75,7 @@ def process(filename, encoding=DEFAULT_ENCODING, extension=None, **kwargs):
     # do the extraction
 
     parser = filetype_module.Parser()
-    return parser.process(filename, encoding, **kwargs)
+    return parser.process(filename, input_encoding, output_encoding, **kwargs)
 
 
 def _get_available_extensions():
@@ -86,7 +87,9 @@ def _get_available_extensions():
     # from filenames
     parsers_dir = os.path.join(os.path.dirname(__file__))
     glob_filename = os.path.join(parsers_dir, "*" + _FILENAME_SUFFIX + ".py")
-    ext_re = re.compile(glob_filename.replace('*', "(?P<ext>\w+)"))
+    # escape backslashes for python 3.6+
+    glob_filename = glob_filename.replace("//", "////")
+    ext_re = re.compile(glob_filename.replace('*', r"(?P<ext>\w+)"))
     for filename in glob.glob(glob_filename):
         ext_match = ext_re.match(filename)
         ext = ext_match.groups()[0]

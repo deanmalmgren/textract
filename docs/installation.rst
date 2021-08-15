@@ -36,15 +36,14 @@ OSX
 ---
 
 These steps rely on you having `homebrew <http://brew.sh/>`_ installed
-as well as the `cask <http://caskroom.io/>`_ plugin (``brew install
-caskroom/cask/brew-cask``). The basic idea is to first install
+as well as the `cask <http://caskroom.io/>`_ plugin (``brew tap caskroom/cask``). The basic idea is to first install
 `XQuartz <https://xquartz.macosforge.org/landing/>`_ before
 installing a bunch of system packages before installing textract from
 pypi.
 
 .. code-block:: bash
 
-    brew cask install xquartz
+    brew install --cask xquartz
     brew install poppler antiword unrtf tesseract swig
     pip install textract
 
@@ -63,6 +62,18 @@ pypi.
     homebrew, you may also need to install the python
     development header files for textract to properly install.
 
+FreeBSD
+-------
+
+Setting up this package on FreeBSD pretty much follows the steps for
+Ubuntu / Debian while using ``pkg`` as package manager.
+
+.. code-block:: bash
+
+    pkg install lang/python38 devel/py-pip textproc/libxml2 textproc/libxslt textproc/antiword textproc/unrtf \
+    graphics/poppler print/pstotext graphics/tesseract audio/flac multimedia/ffmpeg audio/lame audio/sox \
+    graphics/jpeg-turbo
+    pip install textract
 
 Don't see your operating system installation instructions here?
 ---------------------------------------------------------------
