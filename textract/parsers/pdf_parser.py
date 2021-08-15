@@ -48,13 +48,14 @@ class Parser(ShellParser):
         #Nested try/except loops? Not great
         #Try the normal pdf2txt, if that fails try the python3
         # pdf2txt, if that fails try the python2 pdf2txt
+        pdf2txt_path = shutil.which('pdf2txt.py')
         try:
             stdout, _ = self.run(['pdf2txt.py', filename])
         except OSError:
             try:
-                stdout, _ = self.run(['python3','pdf2txt.py', filename])
+                stdout, _ = self.run(['python3',pdf2txt_path, filename])
             except ShellError:
-                stdout, _ = self.run(['python2','pdf2txt.py', filename])
+                stdout, _ = self.run(['python2',pdf2txt_path, filename])
         return stdout
 
     def extract_tesseract(self, filename, **kwargs):
