@@ -45,7 +45,14 @@ class Parser(ShellParser):
 
     def extract_pdfminer(self, filename, **kwargs):
         """Extract text from pdfs using pdfminer."""
-        stdout, _ = self.run(['pdf2txt.py', filename])
+        #Nested try/except loops? Not great
+        try:
+            stdout, _ = self.run(['pdf2txt.py', filename])
+        except OSError:
+            try:
+                stdout, _ = self.run(['python3','pdf2txt.py', filename])
+            except OSError:
+                stdout, _ = self.run(['python2','pdf2txt.py', filename])
         return stdout
 
     def extract_tesseract(self, filename, **kwargs):
