@@ -62,7 +62,7 @@ class BaseParser(object):
 
         # use the provided encoding
         if input_encoding:
-            return text.decode(input_encoding)
+            return text.decode(input_encoding, errors="replace")
 
         # use chardet to automatically detect the encoding text if no encoding is provided
         result = chardet.detect(text)
