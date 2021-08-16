@@ -8,7 +8,11 @@ import os
 import errno
 
 import six
-import chardet
+
+try:
+    import chardet
+except ImportError:
+    import charset_normalizer as chardet
 
 from .. import exceptions
 
@@ -48,8 +52,11 @@ class BaseParser(object):
         return self.encode(unicode_string, output_encoding)
 
     def decode(self, text, input_encoding=None):
-        """Decode ``text`` using the `chardet
-        <https://github.com/chardet/chardet>`_ package.
+        """Decode ``text`` using the predefined encoding if any,
+         then fallback to `charset-normalizer
+        <https://github.com/Ousret/charset_normalizer>`_ package to guess the encoding.
+        If you still use Python 2, the `chardet
+        <https://github.com/chardet/chardet>`_ package will be used instead.
         """
         # only decode byte strings into unicode if it hasn't already
         # been done by a subclass
@@ -64,9 +71,10 @@ class BaseParser(object):
         if input_encoding:
             return text.decode(input_encoding, errors="replace")
 
-        # use chardet to automatically detect the encoding text if no encoding is provided
+        # use charset detection to automatically detect the encoding text if no encoding is provided
         result = chardet.detect(text)
-        encoding = result['encoding'] if result['confidence'] > 0.80 else 'utf8'
+        encoding = result['encoding'] if result['encoding'] else 'utf_8'
+
         return text.decode(encoding, errors="replace")
 
 

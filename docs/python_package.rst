@@ -19,7 +19,7 @@ parsing a pdf like this::
     text = textract.process('path/to/a.pdf', method='pdfminer')
 
 or to specify a particular output encoding (input encodings are
-inferred using `chardet <https://github.com/chardet/chardet>`_)::
+inferred using `charset-normalizer <https://github.com/Ousret/charset_normalizer>`_)::
 
     import textract
     text = textract.process('path/to/file.extension', encoding='ascii')
