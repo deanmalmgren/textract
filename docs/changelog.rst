@@ -16,10 +16,7 @@ latest changes in development for next release
   * fixing dependency declarations (`#162`_ by `@lillypad`_)
 
 * Use `charset-normalizer <https://github.com/Ousret/charset_normalizer>`_ instead
-  of `chardet <https://github.com/chardet/chardet>`_ for the fallback
-  charset detection on Python 3. chardet is still used on Python 2.
-
-* Pin the `chardet` dependency to the latest 4.0.0 when using Python 2.
+  of `chardet <https://github.com/chardet/chardet>`_ for the charset detection.
 
 1.6.1
 -------------------

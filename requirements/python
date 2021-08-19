@@ -3,8 +3,7 @@
 
 argcomplete~=1.10.0
 beautifulsoup4~=4.8.0
-chardet==4.0.0; python_version < "3"
-charset-normalizer~=2.0.0; python_version >= "3"
+charset-normalizer~=2.0.0
 docx2txt~=0.8
 EbookLib==0.*
 extract-msg<=0.29.* #Last with python2 support

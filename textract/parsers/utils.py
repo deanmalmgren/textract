@@ -6,15 +6,15 @@ import subprocess
 import tempfile
 import os
 import errno
+import warnings
 
 import six
 
-try:
-    import chardet
-except ImportError:
-    import charset_normalizer as chardet
+from charset_normalizer import from_bytes
 
 from .. import exceptions
+
+warnings.filterwarnings('ignore', 'Trying to detect', module='charset_normalizer')
 
 
 class BaseParser(object):
@@ -53,10 +53,9 @@ class BaseParser(object):
 
     def decode(self, text, input_encoding=None):
         """Decode ``text`` using the predefined encoding if any,
-         then fallback to `charset-normalizer
-        <https://github.com/Ousret/charset_normalizer>`_ package to guess the encoding.
-        If you still use Python 2, the `chardet
-        <https://github.com/chardet/chardet>`_ package will be used instead.
+         then to whatever `charset-normalizer
+        <https://github.com/Ousret/charset_normalizer>`_ package guess and
+        finally fallback to utf_8 if there is no results from the charset detector.
         """
         # only decode byte strings into unicode if it hasn't already
         # been done by a subclass
@@ -72,10 +71,12 @@ class BaseParser(object):
             return text.decode(input_encoding, errors="replace")
 
         # use charset detection to automatically detect the encoding text if no encoding is provided
-        result = chardet.detect(text)
-        encoding = result['encoding'] if result['encoding'] else 'utf_8'
+        best_guess = from_bytes(text).best()
 
-        return text.decode(encoding, errors="replace")
+        if best_guess:
+            return str(best_guess)
+
+        return text.decode('utf_8', errors="replace")
 
 
 class ShellParser(BaseParser):
