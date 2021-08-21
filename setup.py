@@ -42,7 +42,7 @@ dependencies, dependency_links = parse_requirements(requirements_filename)
 
 setup(
     name=textract.__name__,
-    version="1.6.3",
+    version="1.6.4",
     description="extract text from any document. no muss. no fuss.",
     long_description=long_description,
     url=github_url,
