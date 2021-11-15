@@ -5,7 +5,7 @@ argcomplete==1.12.3
 beautifulsoup4==4.10.0
 chardet==4.0.0
 docx2txt~=0.8
-EbookLib==0.*
+EbookLib==0.17.1
 extract-msg<=0.29.* #Last with python2 support
 pdfminer.six==20191110 #Last with python2 support
 python-pptx~=0.6.18
