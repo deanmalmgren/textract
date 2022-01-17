@@ -2,7 +2,7 @@
 # package in order for it to properly work.
 
 argcomplete==2.0.0
-beautifulsoup4~=4.8.0
+beautifulsoup4==4.10.0
 chardet==3.*
 docx2txt~=0.8
 EbookLib==0.*
