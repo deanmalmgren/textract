@@ -5,8 +5,6 @@ argcomplete~=1.10.0
 beautifulsoup4~=4.8.0
 chardet==3.*
 docx2txt~=0.8
-epubfile==0.0.8
-  voussoirkit==0.0.70  # Breaking changes are introduced in 0.0.71
 extract-msg<=0.29.* #Last with python2 support
 pdfminer.six==20191110 #Last with python2 support
 python-pptx~=0.6.18
