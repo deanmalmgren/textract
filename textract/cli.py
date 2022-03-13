@@ -14,7 +14,7 @@ import glob
 import argcomplete
 
 from . import VERSION
-from .parsers import DEFAULT_ENCODING, _get_available_extensions
+from .parsers import DEFAULT_OUTPUT_ENCODING, _get_available_extensions
 
 
 class AddToNamespaceAction(argparse.Action):
@@ -58,7 +58,7 @@ def get_parser():
         'filename', help='Filename to extract text.',
     ).completer = argcomplete.completers.FilesCompleter
     parser.add_argument(
-        '-e', '--encoding', type=str, default=DEFAULT_ENCODING,
+        '-e', '--encoding', type=str, default=DEFAULT_OUTPUT_ENCODING,
         choices=_get_available_encodings(),
         help='Specify the encoding of the output.',
     )

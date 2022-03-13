@@ -6,6 +6,7 @@ import os
 import importlib
 import glob
 import re
+import pkgutil
 
 from .. import exceptions
 
@@ -64,17 +65,24 @@ def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODI
     # the _parser extension
     rel_module = ext + _FILENAME_SUFFIX
 
-    # If we can't import the module, the file extension isn't currently
-    # supported
+    # check if we can import the parser module related to the file extension
     try:
-        filetype_module = importlib.import_module(
-            rel_module, 'textract.parsers'
-        )
-    except ImportError:
-        raise exceptions.ExtensionNotSupported(ext)
+        # check if the module exists in the system
+        is_module = pkgutil.find_loader('textract.parsers'+rel_module)
+
+        if is_module is not None:
+            filetype_module = importlib.import_module(
+                rel_module, 'textract.parsers'
+            )
+        else:
+            # If we can't import the module, the file extension isn't currently
+            # supported
+            raise exceptions.ExtensionNotSupported(ext)
+    except ImportError as e:
+        # Raise the exception of the import failure
+        raise exceptions.MissingModuleError(e)
 
     # do the extraction
-
     parser = filetype_module.Parser()
     return parser.process(filename, input_encoding, output_encoding, **kwargs)
 
