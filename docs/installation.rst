@@ -80,10 +80,10 @@ Don't see your operating system installation instructions here?
 
 My apologies! Installing system packages is a bit of a drag and its
 hard to anticipate all of the different environments that need to be
-accomodated (wouldn't it be awesome if there were a system-agnostic
+accommodated (wouldn't it be awesome if there were a system-agnostic
 package manager or, better yet, if python could install these system
 dependencies for you?!?!). If you're operating system doesn't have
-documenation about how to install the textract dependencies, please
+documentation about how to install the textract dependencies, please
 :ref:`contribute a pull request <contributing>` with:
 
 1. A new section in here with the appropriate details about how to
