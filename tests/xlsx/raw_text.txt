@@ -1,17 +1,17 @@
 
 Category Function Description New? Help Topic Help
-Logical IFERROR Returns a different result if the first argument evaluates to an error 1 HA01231765 <More Info>
-Statistical AVERAGEIF Returns the average for the cells specified by a given criterion 1 HA10047433 <More Info>
-Statistical AVERAGEIFS Returns the average for the cells specified by multiple criteria 1 HA10047493 <More Info>
-Statistical COUNTIFS Counts the number of cells that meet multiple criteria 1 HA10047494 <More Info>
-Math & Trig SUMIFS Adds the cells specified by a multiple criteria 1 HA10047504 <More Info>
-Cube CUBEMEMBER Returns a member or tuple in a cube hierarchy 1 HA10083017 <More Info>
-Cube CUBEVALUE Returns an aggregated value from a cube 1 HA10083018 <More Info>
-Cube CUBESET Defines a calculated set of members or tuples by sending a set expression to the cube on the server 1 HA10083019 <More Info>
-Cube CUBERANKEDMEMBER Returns the nth, or ranked, member in a set 1 HA10083020 <More Info>
-Cube CUBEKPIMEMBER Returns a key performance indicator name, property, and measure, and displays the name and property in the cell. 1 HA10083021 <More Info>
-Cube CUBEMEMBERPROPERTY Returns the value of a member property in the cube 1 HA10083023 <More Info>
-Cube CUBESETCOUNT Returns the number of items in a set 1 HA10083024 <More Info>
+Logical IFERROR Returns a different result if the first argument evaluates to an error True HA01231765 <More Info>
+Statistical AVERAGEIF Returns the average for the cells specified by a given criterion True HA10047433 <More Info>
+Statistical AVERAGEIFS Returns the average for the cells specified by multiple criteria True HA10047493 <More Info>
+Statistical COUNTIFS Counts the number of cells that meet multiple criteria True HA10047494 <More Info>
+Math & Trig SUMIFS Adds the cells specified by a multiple criteria True HA10047504 <More Info>
+Cube CUBEMEMBER Returns a member or tuple in a cube hierarchy True HA10083017 <More Info>
+Cube CUBEVALUE Returns an aggregated value from a cube True HA10083018 <More Info>
+Cube CUBESET Defines a calculated set of members or tuples by sending a set expression to the cube on the server True HA10083019 <More Info>
+Cube CUBERANKEDMEMBER Returns the nth, or ranked, member in a set True HA10083020 <More Info>
+Cube CUBEKPIMEMBER Returns a key performance indicator name, property, and measure, and displays the name and property in the cell. True HA10083021 <More Info>
+Cube CUBEMEMBERPROPERTY Returns the value of a member property in the cube True HA10083023 <More Info>
+Cube CUBESETCOUNT Returns the number of items in a set True HA10083024 <More Info>
 Database DAVERAGE Averages the values in a column of a list or database that match conditions you specify HP10062266 <More Info>
 Database DCOUNT Counts the cells that contain numbers in a column of a list or database that match conditions you specify HP10062267 <More Info>
 Database DCOUNTA Counts the nonblank cells in a column of a list or database that match conditions you specify HP10062268 <More Info>
@@ -144,7 +144,7 @@ Information TYPE Returns a number indicating the data type of a value HP10062400
 Logical Returns the logical value FALSE HP10062401 <More Info>
 Logical NOT Reverses the logic of its argument HP10062402 <More Info>
 Logical OR Returns TRUE if any argument is TRUE HP10062403 <More Info>
-Logical 1 Returns the logical value TRUE HP10062404 <More Info>
+Logical True Returns the logical value TRUE HP10062404 <More Info>
 Lookup & Reference ADDRESS Returns a reference as text to a single cell in a worksheet HP10062407 <More Info>
 Lookup & Reference AREAS Returns the number of areas in a reference HP10062408 <More Info>
 Lookup & Reference COLUMN Returns the column number of a reference HP10062409 <More Info>
@@ -342,15 +342,15 @@ Math & Trig MMULT Returns the matrix product of two arrays HP10069842 <More Info
 Math & Trig SINH Returns the hyperbolic sine of a number HP10069843 <More Info>
 New (All)
 Row Labels Count of Function
-Statistical 83.0
-Math & Trig 60.0
-Financial 53.0
-Engineering 39.0
-Text 24.0
-Date & Time 20.0
-Lookup & Reference 18.0
-Information 17.0
-Database 12.0
-Cube 7.0
-Logical 7.0
-Grand Total 340.0
+Statistical 83
+Math & Trig 60
+Financial 53
+Engineering 39
+Text 24
+Date & Time 20
+Lookup & Reference 18
+Information 17
+Database 12
+Cube 7
+Logical 7
+Grand Total 340

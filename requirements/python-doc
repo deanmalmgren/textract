@@ -1,5 +1,7 @@
 # this only includes packages that are needed for documentation build.
 
+jinja2<3.1
 sphinx==2.1.2
 sphinx_rtd_theme==0.4.3
 sphinx-argparse==0.2.5
+pocketsphinx==0.1.15

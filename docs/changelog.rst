@@ -10,6 +10,11 @@ latest changes in development for next release
 ----------------------------------------------
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
+1.7.0
+-------------------
+
+* Dropped python2 support
+
 1.6.5
 -------------------
 
