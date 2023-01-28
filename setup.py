@@ -1,3 +1,5 @@
+# FYI: This file is kept for reference, but not used
+
 import glob
 import os
 from setuptools import setup

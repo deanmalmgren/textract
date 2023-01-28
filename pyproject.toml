@@ -1,0 +1,37 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
+
+[tool.poetry]
+authors = ["Dean Malmgren <dean.malmgren@datascopeanalytics.com>"]
+description = "Minimally maintained fork of deanmalmgren/textract to remove '*' dependencies"
+license = "MIT"
+name = "textract-py3"
+packages = [{include = "textract"}]
+readme = "README.md"
+repository = "https://github.com/KyleKing/textract-py3"
+version = "2.0.0"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+SpeechRecognition = ">=3.8.1"
+argcomplete = ">=1.10.0"
+beautifulsoup4 = ">=4.8.0"
+chardet = ">=3"
+docx2txt = ">=0.8"
+extract-msg = ">=0.30.11"
+"pdfminer.six" = ">=20221105"
+python-pptx = ">=0.6.18"
+six = ">=1.16.0"
+xlrd = ">=1.2.0"
+
+[tool.poetry.extras]
+pocketsphinx = ["pocketsphinx>=0.1.15"]
+
+[tool.poetry.group.dev.dependencies]
+bumpversion = ">=0.6.0"
+nose = ">=1.3.7"
+pytest = ">=7.2.1"
+
+[tool.poetry.scripts]
+textract = "textract.bin.textract:main"

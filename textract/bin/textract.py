@@ -1,17 +1,13 @@
-#!/usr/bin/env python
-# -*- mode: python -*-
-# PYTHON_ARGCOMPLETE_OK
-
 """
 Command-line application.
 """
 
 import sys
 
-from textract.cli import get_parser
-from textract import process
-from textract.exceptions import CommandLineError
-from textract.colors import red
+from ..cli import get_parser
+from .. import process
+from ..exceptions import CommandLineError
+from ..colors import red
 
 
 # extract text
@@ -29,5 +25,3 @@ def main():
     else:
         args.output.write(output)
 
-
-main()
