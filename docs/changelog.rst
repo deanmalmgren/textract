@@ -10,6 +10,16 @@ latest changes in development for next release
 ----------------------------------------------
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
+2.0.1
+-------------------
+
+* Fix package version and changelog
+
+2.0.0
+-------------------
+
+* Switch to poetry and relax all dependency constraints
+
 1.6.5
 -------------------
 
