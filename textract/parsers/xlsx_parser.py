@@ -1,5 +1,6 @@
-import xlrd
+import openpyxl as xl
 import six
+import datetime
 
 from six.moves import xrange
 
@@ -11,22 +12,24 @@ class Parser(BaseParser):
     """
 
     def extract(self, filename, **kwargs):
-        workbook = xlrd.open_workbook(filename)
-        sheets_name = workbook.sheet_names()
+        workbook = xl.load_workbook(filename, data_only=True)
+        sheets_name = workbook.sheetnames
         output = "\n"
         for names in sheets_name:
-            worksheet = workbook.sheet_by_name(names)
-            num_rows = worksheet.nrows
-            num_cells = worksheet.ncols
+            worksheet = workbook[names]
+            num_rows = worksheet.max_row
+            num_cells = worksheet.max_column
 
-            for curr_row in range(num_rows):
-                row = worksheet.row(curr_row)
+            for curr_row, row in enumerate(worksheet.rows):
                 new_output = []
                 for index_col in xrange(num_cells):
-                    value = worksheet.cell_value(curr_row, index_col)
+                    value = worksheet.cell(curr_row+1, index_col+1)
+                    value = value.value
                     if value:
                         if isinstance(value, (int, float)):
                             value = six.text_type(value)
+                        if isinstance(value, datetime.datetime):
+                            value = value.strftime("%m/%d/%Y, %H:%M:%S")
                         new_output.append(value)
                 if new_output:
                     output += u' '.join(new_output) + u'\n'
