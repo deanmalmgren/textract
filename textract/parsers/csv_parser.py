@@ -12,6 +12,6 @@ class Parser(BaseParser):
     def extract(self, filename, **kwargs):
 
         # quick 'n dirty solution for the time being
-        with open(filename) as stream:
+        with open(filename, encoding='latin-1') as stream:
             reader = csv.reader(stream, delimiter=self.delimiter)
             return '\n'.join(['\t'.join(row) for row in reader])
