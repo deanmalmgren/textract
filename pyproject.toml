@@ -5,6 +5,7 @@ description = "Extract text from any document. No muss. No fuss."
 authors = ["Dean Malmgren <dean.malmgren@datascopeanalytics.com>"]
 license = "MIT"
 readme = "README.md"
+packages = [{include = "textract"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
