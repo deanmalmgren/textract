@@ -17,6 +17,7 @@ pdfminer = "^20191125"
 python-pptx = "^0.6.23"
 speechrecognition = "^3.10.0"
 xlrd = "^2.0.1"
+six = "^1.16.0"
 
 
 [build-system]
