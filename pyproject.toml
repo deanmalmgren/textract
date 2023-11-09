@@ -8,7 +8,7 @@ readme = "README.md"
 packages = [{include = "textract"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 argcomplete = "^3.1.4"
 beautifulsoup4 = "^4.12.2"
 chardet = "^5.2.0"
@@ -19,7 +19,6 @@ python-pptx = "^0.6.23"
 speechrecognition = "^3.10.0"
 xlrd = "^2.0.1"
 six = "^1.16.0"
-
 
 [build-system]
 requires = ["poetry-core"]
