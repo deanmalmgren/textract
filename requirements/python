@@ -2,7 +2,7 @@
 # package in order for it to properly work.
 
 argcomplete==3.1.6
-beautifulsoup4~=4.8.0
+beautifulsoup4==4.12.2
 chardet==3.*
 docx2txt~=0.8
 extract-msg<=0.29.* #Last with python2 support
