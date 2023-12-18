@@ -9,5 +9,5 @@ extract-msg==0.47.0 #Last with python2 support
 pdfminer.six==20221105 #Last with python2 support
 python-pptx~=0.6.18
 six==1.16.0
-SpeechRecognition~=3.8.1
+SpeechRecognition==3.10.1
 xlrd~=1.2.0
