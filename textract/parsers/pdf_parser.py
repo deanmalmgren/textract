@@ -52,7 +52,7 @@ class Parser(ShellParser):
         pdf2txt_path = find_executable('pdf2txt.py')
         try:
             stdout, _ = self.run(['pdf2txt.py', filename])
-        except OSError:
+        except (OSError, ShellError):
             try:
                 stdout, _ = self.run(['python3',pdf2txt_path, filename])
             except ShellError:
