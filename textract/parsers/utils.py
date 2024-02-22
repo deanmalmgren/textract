@@ -66,7 +66,8 @@ class BaseParser(object):
 
         # use chardet to automatically detect the encoding text if no encoding is provided
         result = chardet.detect(text)
-        return text.decode(result['encoding'])
+        encoding = result['encoding'] if result['confidence'] > 0.80 else 'utf8'
+        return text.decode(encoding, errors="replace")
 
 
 class ShellParser(BaseParser):
@@ -94,6 +95,7 @@ class ShellParser(BaseParser):
                 raise exceptions.ShellError(
                     ' '.join(args), 127, '', '',
                 )
+            else: raise #Reraise the last exception unmodified
 
         # pipe.wait() ends up hanging on large files. using
         # pipe.communicate appears to avoid this issue

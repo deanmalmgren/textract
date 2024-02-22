@@ -10,7 +10,6 @@ make
 # these packages are required by python-docx, which depends on lxml
 # and requires these things
 python-dev
-python-pip
 libxml2-dev
 libxslt1-dev
 

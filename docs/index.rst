@@ -6,7 +6,7 @@
 textract
 ================================
 
-As undesireable as it might be, more often than not there is extremely
+As undesirable as it might be, more often than not there is extremely
 useful information embedded in Word documents, PowerPoint
 presentations, PDFs, etc---so-called "dark data"---that would be
 valuable for further textual analysis and visualization. While
@@ -43,6 +43,8 @@ file types by either mentioning them on the `issue tracker
 
 
 * ``.csv`` via python builtins
+
+* ``.tsv`` and ``.tab`` via python builtins
 
 * ``.doc`` via `antiword`_
 

@@ -68,18 +68,6 @@ class BaseParserTestCase(GenericUtilities):
             return filename
         return self.get_filename(default_filename_root, default_filename_root)
 
-    def download_file(self, url, filename):
-        if not os.path.exists(filename):
-
-            # stream the request to make sure it works correctly
-            # http://stackoverflow.com/a/16696317/564709
-            response = requests.get(url, stream=True)
-            with open(filename, 'wb') as stream:
-                for chunk in response.iter_content(chunk_size=1024):
-                    if chunk: # filter out keep-alive new chunks
-                        stream.write(chunk)
-                        stream.flush()
-
     @property
     def raw_text_filename(self):
         return self.get_filename(self.raw_text_filename_root,

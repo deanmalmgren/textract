@@ -1,7 +1,7 @@
 update: all
 branch: master
 schedule: "every two weeks"
-pin: True
+pin: False
 requirements:
   - requirements/python:
       updates: all

@@ -10,6 +10,14 @@ latest changes in development for next release
 ----------------------------------------------
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
+1.6.5
+-------------------
+
+* switched epub parsing to MIT license compatible package (`#411`_ by
+  `@jhale1805`_)
+
+1.6.4
+-------------------
 
 * several bug fixes, including:
 
@@ -276,6 +284,7 @@ latest changes in development for next release
 .. _@eiotec: https://github.com/eiotec
 .. _@evfredericksen: https://github.com/evfredericksen
 .. _@jaraco: https://github.com/jaraco
+.. _@jhale1805: https://github.com/jhale1805
 .. _@jsmith-mploir: https://github.com/jsmith-mploir
 .. _@kokxx: https://github.com/Kokxx
 .. _@levivm: https://github.com/levivm
@@ -356,3 +365,4 @@ latest changes in development for next release
 .. _#149: https://github.com/deanmalmgren/textract/issues/149
 .. _#150: https://github.com/deanmalmgren/textract/issues/150
 .. _#162: https://github.com/deanmalmgren/textract/issues/162
+.. _#411: https://github.com/deanmalmgren/textract/issues/411

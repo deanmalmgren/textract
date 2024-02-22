@@ -17,12 +17,14 @@ EXTENSION_SYNONYMS = {
     ".htm": ".html",
     "": ".txt",
     ".log": ".txt",
+    ".tab": ".tsv",
 }
 
 # default encoding that is returned by the process method. specify it
 # here so the default is used on both the process function and also by
 # the command line interface
 DEFAULT_OUTPUT_ENCODING = 'utf_8'
+DEFAULT_ENCODING = 'utf_8'
 
 # filename format
 _FILENAME_SUFFIX = '_parser'
