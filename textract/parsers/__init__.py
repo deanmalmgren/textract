@@ -16,6 +16,9 @@ EXTENSION_SYNONYMS = {
     ".tif": ".tiff",
     ".htm": ".html",
     "": ".txt",
+    ".md": ".txt",
+    ".mdown": ".txt",
+    ".markdown": ".txt",
     ".log": ".txt",
     ".tab": ".tsv",
 }
