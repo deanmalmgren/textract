@@ -8,7 +8,10 @@ from ..exceptions import UnknownMethod, ShellError
 from .utils import ShellParser
 from .image import Parser as TesseractParser
 
-from distutils.spawn import find_executable
+try:
+    from shutil import which
+except ImportError:
+    from distutils.spawn import find_executable as which
 
 class Parser(ShellParser):
     """Extract text from pdf files using either the ``pdftotext`` method
@@ -49,7 +52,7 @@ class Parser(ShellParser):
         #Nested try/except loops? Not great
         #Try the normal pdf2txt, if that fails try the python3
         # pdf2txt, if that fails try the python2 pdf2txt
-        pdf2txt_path = find_executable('pdf2txt.py')
+        pdf2txt_path = which("pdf2txt.py")
         try:
             stdout, _ = self.run(['pdf2txt.py', filename])
         except OSError:
