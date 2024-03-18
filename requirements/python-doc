@@ -1,5 +1,5 @@
 # this only includes packages that are needed for documentation build.
 
-sphinx==2.1.2
-sphinx_rtd_theme==0.4.3
-sphinx-argparse==0.2.5
+sphinx==7.2.6
+sphinx_rtd_theme==2.0.0
+sphinx-argparse==0.4.0
