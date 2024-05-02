@@ -12,8 +12,15 @@ Extract text from any document. No muss. No fuss.
 
 `Full documentation <http://textract.readthedocs.org>`__.
 
+Originally written by @deanmalmgren. Maintained by the good people at
+@jazzband |Jazz Band|
+
 |Build Status| |Version| |Downloads| |Test Coverage| |Documentation Status|
 |Updates| |Stars| |Forks|
+
+.. |Jazz Band| image:: https://jazzband.co/static/img/badge.svg
+   :target: https://jazzband.co/
+   :alt: Jazzband
 
 .. |Build Status| image:: https://travis-ci.org/deanmalmgren/textract.svg?branch=master
    :target: https://travis-ci.org/deanmalmgren/textract
