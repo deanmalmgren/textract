@@ -8,6 +8,6 @@ docx2txt~=0.8
 extract-msg<=0.29.* #Last with python2 support
 pdfminer.six==20191110 #Last with python2 support
 python-pptx~=0.6.18
-six~=1.12.0
+six~=1.16.0
 SpeechRecognition~=3.8.1
 xlrd~=1.2.0
