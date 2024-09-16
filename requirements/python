@@ -7,7 +7,7 @@ chardet==5.2.0
 docx2txt~=0.8
 extract-msg==0.49.0 #Last with python2 support
 pdfminer.six==20240706 #Last with python2 support
-python-pptx~=0.6.18
+python-pptx==1.0.2
 six~=1.12.0
 SpeechRecognition~=3.8.1
 xlrd~=1.2.0
