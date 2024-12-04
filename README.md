@@ -13,4 +13,5 @@ This fork has been migrated to `poetry` and does not have CI/CD. For local testi
 ```sh
 poetry install --sync
 poetry run bumpversion minor
+poetry publish --build
 ```
