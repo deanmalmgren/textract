@@ -4,7 +4,7 @@ requires = ["poetry-core"]
 
 [tool.poetry]
 authors = ["Dean Malmgren <dean.malmgren@datascopeanalytics.com>"]
-description = "Minimally maintained fork of deanmalmgren/textract to remove '*' dependencies"
+description = "Minimally maintained fork of deanmalmgren/textract to replace '*' dependencies "
 license = "MIT"
 name = "textract-py3"
 packages = [{include = "textract"}]
@@ -24,9 +24,10 @@ extract-msg = ">=0.30.11"
 python-pptx = ">=0.6.18"
 six = ">=1.16.0"
 xlrd = ">=1.2.0"
+pocketsphinx = {version = ">=0.1.15", optional = true}
 
 [tool.poetry.extras]
-pocketsphinx = ["pocketsphinx>=0.1.15"]
+pocketsphinx = ["pocketsphinx"]
 
 [tool.poetry.group.dev.dependencies]
 bumpversion = ">=0.6.0"
