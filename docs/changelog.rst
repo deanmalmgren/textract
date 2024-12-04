@@ -10,6 +10,12 @@ latest changes in development for next release
 ----------------------------------------------
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
+
+2.1.0
+-------------------
+
+* Merge minor bugfixes from upstream PRs and update documentation
+
 2.0.1
 -------------------
 
