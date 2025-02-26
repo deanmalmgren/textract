@@ -10,7 +10,7 @@ name = "textract-py3"
 packages = [{include = "textract"}]
 readme = "README.md"
 repository = "https://github.com/KyleKing/textract-py3"
-version = "2.1.0"
+version = "2.1.1"
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -23,7 +23,7 @@ extract-msg = ">=0.30.11"
 "pdfminer.six" = ">=20221105"
 python-pptx = ">=0.6.18"
 six = ">=1.16.0"
-xlrd = ">=1.2.0"
+xlrd = ">=1.2.0,<2.0.0"  # v2 drops support for xlsx. Requires openpyxl or alternative to support xlsx if upgrading xlrd. See: https://github.com/deanmalmgren/textract/pull/543#issuecomment-2684619988
 pocketsphinx = {version = ">=0.1.15", optional = true}
 
 [tool.poetry.extras]
