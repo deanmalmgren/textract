@@ -8,10 +8,10 @@ Install with `asdf plugin add textract-py3 https://github.com/amrox/asdf-pyapp.g
 
 ## Development
 
-This fork has been migrated to `poetry` and does not have CI/CD. For local testing and release, use:
+This fork has been migrated to `poetry` and does not have CI/CD. To run locally and release:
 
 ```sh
-poetry install --sync
+poetry sync
 poetry run bumpversion minor
 poetry publish --build
 ```
