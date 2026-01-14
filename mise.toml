@@ -12,3 +12,6 @@ run = """
 uv run --group docs sphinx-build -b html docs docs/build/html
 python -m http.server -d docs/build/html 8000
 """
+
+[tools]
+python = "3.14"
