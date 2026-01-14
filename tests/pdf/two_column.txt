@@ -75,12 +75,7 @@ Institute on Complex Systems, Northwestern University, Evanston, Illinois 60208,
 
 
                                                                                                                           Cumulative distribution
-                                                          Number of publications
-Cumulative distribution
-
-
-
-
+Cumulative distribution                                   Number of publications
                           10–1                                                                                                                      10–1
                                                                                    102
 
@@ -91,38 +86,22 @@ Cumulative distribution
                                                                                                                                                         0     10        20     30   0    10     20 30 40      50 0   10 20 30 40    50
                                                                                                                                                                                               Fecundity, k
                                                                                                                             d
-                          10–4                             100 0                                                                                    0.6
-                              0   20   40   60   80   100     10                                   101         102                                  0.5
-                                                      Fecundity, k                                                                                  0.4
-
-
-
-
+                          10–4                             100 0                                                              0.6
+                              0   20   40   60   80   100     10                                   101         102            0.5
+                                                      Fecundity, k                                                            0.4
                                                                                                                            πh
-                                                                                                                                                    0.3
-                                                                                                                                                    0.2
-Figure 1 | Relationship between mentorship fecundity and other                                                                                      0.1
-performance metrics. a, Cumulative distribution of the mentorship                                                           e                       0.0
-fecundity for NAS members (red) and non-NAS members (black). NAS                                                                                     20
+                                                                                                                              0.3
+                                                                                                                              0.2
+Figure 1 | Relationship between mentorship fecundity and other                                                                0.1
+performance metrics. a, Cumulative distribution of the mentorship                                                           e 0.0
+fecundity for NAS members (red) and non-NAS members (black). NAS                                                               20
 members have an average fecundity of ÆkæNAS 5 14, which is far greater than                                                                          15
-the average fecundity of non-NAS members, Ækænon-NAS 5 3.1, indicating that
-
-
-
-
-                                                                                                                           κh
-                                                                                                                                                     10
+the average fecundity of non-NAS members, Ækænon-NAS 5 3.1, indicating that                                                κh                        10
 fecundity is closely related to academic recognition. Not all mathematicians                                                                          5
 in the non-NAS group were eligible for NAS membership, owing to                                                                                       0
 citizenship and other circumstances. This fact makes the result in the figure                                               f                       2.0
 all the more striking. b, Average number of publications as a function of the                                                                       1.5
-mentorship fecundity, for NAS members (red) and non-NAS members
-
-
-
-
-                                                                                                                           κhn
-                                                                                                                                                    1.0
+mentorship fecundity, for NAS members (red) and non-NAS members                                                            κhn                      1.0
 (black). NAS members have nearly twice as many publications on average as
                                                                                                                                                     0.5
 non-NAS members for all fecundity levels. Error bars, 1 s.e.
@@ -182,7 +161,11 @@ trees, we perform comparisons of the empirical data with networks               
 
             a                                                                                        significance of any differences between the empirical data and the null
                                                                                                      models.
-           Empirical network                      K. A. Hirsch                                           We use the partitioning of children into classes to examine the
+                                                  K. A. Hirsch                                           We use the partitioning of children into classes to examine the
+
+
+
+           Empirical network
                                                                                                      relationship between the average child fecundity, Ækcæ, and the age
                                                                                                      difference, tc 2 tp, between parent and child (Fig 4a, b and Supplemen-
                                                   B. A. Griffith
@@ -194,11 +177,11 @@ trees, we perform comparisons of the empirical data with networks               
                                     H. D. Kloosterman                                                mentors with kp , 3 train protégés that go on to have mentorship
            b                                                                                         fecundities 37% higher than expected throughout their careers.
                                                                                                      Second, in the first third of their careers, mentors with kp $ 10 train
+
+
+
+
            Generating ensemble I
-
-
-
-
                                                                                                      protégés that go on to have fecundities 29% higher than expected.
                                                                                                      Finally, in the last third of their careers, mentors with kp $ 10 train
                                                                                                      protégés that go on to have fecundities 31% lower than expected.
@@ -211,11 +194,11 @@ trees, we perform comparisons of the empirical data with networks               
             c
                                                                                                      is that mentors with k , 3 are more aware of the resources they must
                                                                                                      allocate for effective mentorship, leading to a more enriching men-
+
+
+
+
            Generating ensemble II
-
-
-
-
                                                                                                      torship experience for their protégés. An alternative hypothesis is that
                                                                                                      mentors with k , 3 select for, or are selected by, protégés that have a
                                                                                                      greater aptitude for mentorship.
@@ -288,11 +271,10 @@ grouping that still gives us sufficient power to examine the statistical        
                                                                                                               Child fecundity, kc
                                 b
                                                             4
+
+
+
                               〈kc〉 z-score
-
-
-
-
                                                             2
                                                                                                                                                                                          1900s
                                                             0                                                                                                                            1910s
@@ -309,11 +291,9 @@ grouping that still gives us sufficient power to examine the statistical        
 
                                                                                                                                                                                                  Probability density
                                                             2
+
+
                                 Intercept
-
-
-
-
                                                             1
 
                                                             0                                                                                                                              101
@@ -367,50 +347,50 @@ which can then be randomized in the usual way by attempting 100 switches per    
 link in the class25,26.                                                                                                              employees. Group Organ. Manage. 21, 261–277 (1996).
                                                                                                                                                                                                                            625
                                                                                  ©2010 Macmillan Publishers Limited. All rights reserved
-LETTERS                                                                                                                                              NATURE | Vol 465 | 3 June 2010
+LETTERS                                                                                                                                            NATURE | Vol 465 | 3 June 2010
 
 
-5.    Allen, T. D., Poteet, M. L., Russell, J. E. A. & Dobbins, G. H. A field study of factors   21. Moed, H. F. Citation Analysis in Research Evaluation (Springer, 2005).
-      related to supervisors’ willingness to mentor others. J. Vocat. Behav. 50, 1–22 (1997).    22. Hirsch, J. E. An index to quantify an individual’s scientific research output. Proc.
-6.    Donaldson, S. I., Ensher, E. A. & Grant-Vallone, E. J. Longitudinal examination of             Natl Acad. Sci. USA 102, 16569–16572 (2005).
-      mentoring relationships on organizational commitment and citizenship behavior.             23. Bishop, C. M. Pattern Recognition and Machine Learning (Springer, 2007).
-      J. Career Dev. 26, 233–249 (2000).                                                         24. Athreya, K. B. & Ney, P. E. Branching Processes (Courier Dover, 2004).
-7.    Payne, S. C. & Huffman, A. H. A longitudinal examination of the influence of               25. Milo, R., Kashtan, N., Itzkovitz, S., Newman, M. E. J. & Alon, U. On the uniform
-      mentoring on organizational commitment and turnover. Acad. Manage. J. 48,                      generation of random graphs with prescribed degree sequences. Preprint at
-      158–168 (2005).                                                                                Æhttp://arxiv.org/abs/cond-mat/0312028æ (2004).
-8.    Kram, K. E. & Isabella, L. A. Mentoring alternatives: the role of peer relationships in    26. Itzkovitz, S., Milo, R., Kashtan, N., Newman, M. E. J. & Alon, U. Reply to ‘‘Comment
-      cancer development. Acad. Manage. J. 28, 110–132 (1985).                                       on ‘Subgraphs in random networks’’’. Phys. Rev. E 70, 058102 (2004).
-9.    Higgins, M. C. & Kram, K. E. Reconceptualizing mentoring at work: a                        27. Hardy, G. H. A Mathematician’s Apology (Cambridge Univ. Press, 1940).
-      developmental network perspective. Acad. Manage. Rev. 26, 264–283 (2001).                  28. Stauffer, D. & Aharony, A. Introduction to Percolation Theory 2nd edn (Taylor &
-10.   Allen, T. D., Poteet, M. L. & Burroughs, S. M. The mentor’s perspective: a                     Francis, 1992).
-      qualitative inquiry and future research agenda. J. Vocat. Behav. 51, 70–89 (1997).         29. Chapman, B. & Chang, J. Biopython: python tools for computational biology. ACM
-11.   Green, S. G. & Bauer, T. N. Supervisory mentoring by advisers: relationships with              SIGBIO Newslett. 20, 15–19 (2000).
-      doctoral student potential, productivity, and commitment. Person. Psychol. 48,             30. D’Agostino, R. B. & Stephens, M. A. Goodness-of-Fit Techniques (Dekker, 1986).
-      537–562 (1995).
-12.   Singh, R., Ragins, B. R. & Tharenou, P. Who gets a mentor? A longitudinal                  Supplementary Information is linked to the online version of the paper at
-      assessment of the rising star hypothesis. J. Vocat. Behav. 74, 11–17 (2009).               www.nature.com/nature.
-13.   Allen, T. D., Poteet, M. L. & Russell, J. E. A. Protégé selection by mentors: what
-      makes the difference? J. Organ. Behav. 21, 271–282 (2000).                                 Acknowledgements We thank R. Guimerà, P. McMullen, A. Pah, M. Sales-Pardo,
-14.   Allen, T. D. Protégé selection by mentors: contributing individual and                   E. N. Sawardecker, D. B. Stouffer and M. J. Stringer for comments and suggestions.
-      organizational factors. J. Vocat. Behav. 65, 469–483 (2004).                               L.A.N.A. gratefully acknowledges the support of US National Science Foundation
-15.   Ragins, B. R. & Scandura, T. A. Burden or blessing? Expected costs and benefits of         awards SBE 0830388 and IIS 0838564. All figures were generated using
-      being a mentor. J. Organ. Behav. 20, 493–509 (1999).                                       PYGRACE (http://pygrace.sourceforge.net) with colour schemes from
-16.   Paglis, L. L., Green, S. G. & Bauer, T. N. Does adviser mentoring add value? A             ColorBrewer 2.0 (http://colorbrewer.org).
-      longitudinal study of mentoring and doctoral student outcomes. Res. High. Ed. 47,          Author Contributions R.D.M. analyzed data, designed the study and wrote the
-      451–476 (2006).                                                                            paper. J.M.O. and L.A.N.A. designed the study and wrote the paper.
-17.   North Dakota State University. The Mathematics Genealogy Project Æhttp://
-      genealogy.math.ndsu.nodak.eduæ (accessed, November 2007).                                  Author Information Reprints and permissions information is available at
-18.   Bourne, P. E. & Fink, J. L. I am not a scientist, I am a number. PLoS Comput. Biol. 4,     www.nature.com/reprints. The authors declare no competing financial interests.
-      e1000247 (2008).                                                                           Readers are welcome to comment on the online version of this article at
-19.   Enserink, M. Are you ready to become a number? Science 323, 1662–1664 (2009).              www.nature.com/nature. Correspondence and requests for materials should be
-20.   King, J. A review of bibliometric and other science indicators and their role in           addressed to J.M.O. (jm-ottino@northwestern.edu) or L.A.N.A.
-      research evaluation. J. Inf. Sci. 13, 261–276 (1987).                                      (amaral@northwestern.edu).
+5.  Allen, T. D., Poteet, M. L., Russell, J. E. A. & Dobbins, G. H. A field study of factors   21. Moed, H. F. Citation Analysis in Research Evaluation (Springer, 2005).
+    related to supervisors’ willingness to mentor others. J. Vocat. Behav. 50, 1–22 (1997).    22. Hirsch, J. E. An index to quantify an individual’s scientific research output. Proc.
+6. Donaldson, S. I., Ensher, E. A. & Grant-Vallone, E. J. Longitudinal examination of              Natl Acad. Sci. USA 102, 16569–16572 (2005).
+    mentoring relationships on organizational commitment and citizenship behavior.             23. Bishop, C. M. Pattern Recognition and Machine Learning (Springer, 2007).
+    J. Career Dev. 26, 233–249 (2000).                                                         24. Athreya, K. B. & Ney, P. E. Branching Processes (Courier Dover, 2004).
+7. Payne, S. C. & Huffman, A. H. A longitudinal examination of the influence of                25. Milo, R., Kashtan, N., Itzkovitz, S., Newman, M. E. J. & Alon, U. On the uniform
+    mentoring on organizational commitment and turnover. Acad. Manage. J. 48,                      generation of random graphs with prescribed degree sequences. Preprint at
+    158–168 (2005).                                                                                Æhttp://arxiv.org/abs/cond-mat/0312028æ (2004).
+8. Kram, K. E. & Isabella, L. A. Mentoring alternatives: the role of peer relationships in     26. Itzkovitz, S., Milo, R., Kashtan, N., Newman, M. E. J. & Alon, U. Reply to ‘‘Comment
+    cancer development. Acad. Manage. J. 28, 110–132 (1985).                                       on ‘Subgraphs in random networks’’’. Phys. Rev. E 70, 058102 (2004).
+9. Higgins, M. C. & Kram, K. E. Reconceptualizing mentoring at work: a                         27. Hardy, G. H. A Mathematician’s Apology (Cambridge Univ. Press, 1940).
+    developmental network perspective. Acad. Manage. Rev. 26, 264–283 (2001).                  28. Stauffer, D. & Aharony, A. Introduction to Percolation Theory 2nd edn (Taylor &
+10. Allen, T. D., Poteet, M. L. & Burroughs, S. M. The mentor’s perspective: a                     Francis, 1992).
+    qualitative inquiry and future research agenda. J. Vocat. Behav. 51, 70–89 (1997).         29. Chapman, B. & Chang, J. Biopython: python tools for computational biology. ACM
+11. Green, S. G. & Bauer, T. N. Supervisory mentoring by advisers: relationships with              SIGBIO Newslett. 20, 15–19 (2000).
+    doctoral student potential, productivity, and commitment. Person. Psychol. 48,             30. D’Agostino, R. B. & Stephens, M. A. Goodness-of-Fit Techniques (Dekker, 1986).
+    537–562 (1995).
+12. Singh, R., Ragins, B. R. & Tharenou, P. Who gets a mentor? A longitudinal                  Supplementary Information is linked to the online version of the paper at
+    assessment of the rising star hypothesis. J. Vocat. Behav. 74, 11–17 (2009).               www.nature.com/nature.
+13. Allen, T. D., Poteet, M. L. & Russell, J. E. A. Protégé selection by mentors: what
+    makes the difference? J. Organ. Behav. 21, 271–282 (2000).                                 Acknowledgements We thank R. Guimerà, P. McMullen, A. Pah, M. Sales-Pardo,
+14. Allen, T. D. Protégé selection by mentors: contributing individual and                   E. N. Sawardecker, D. B. Stouffer and M. J. Stringer for comments and suggestions.
+    organizational factors. J. Vocat. Behav. 65, 469–483 (2004).                               L.A.N.A. gratefully acknowledges the support of US National Science Foundation
+15. Ragins, B. R. & Scandura, T. A. Burden or blessing? Expected costs and benefits of         awards SBE 0830388 and IIS 0838564. All figures were generated using
+    being a mentor. J. Organ. Behav. 20, 493–509 (1999).                                       PYGRACE (http://pygrace.sourceforge.net) with colour schemes from
+16. Paglis, L. L., Green, S. G. & Bauer, T. N. Does adviser mentoring add value? A             ColorBrewer 2.0 (http://colorbrewer.org).
+    longitudinal study of mentoring and doctoral student outcomes. Res. High. Ed. 47,          Author Contributions R.D.M. analyzed data, designed the study and wrote the
+    451–476 (2006).                                                                            paper. J.M.O. and L.A.N.A. designed the study and wrote the paper.
+17. North Dakota State University. The Mathematics Genealogy Project Æhttp://
+    genealogy.math.ndsu.nodak.eduæ (accessed, November 2007).                                  Author Information Reprints and permissions information is available at
+18. Bourne, P. E. & Fink, J. L. I am not a scientist, I am a number. PLoS Comput. Biol. 4,     www.nature.com/reprints. The authors declare no competing financial interests.
+    e1000247 (2008).                                                                           Readers are welcome to comment on the online version of this article at
+19. Enserink, M. Are you ready to become a number? Science 323, 1662–1664 (2009).              www.nature.com/nature. Correspondence and requests for materials should be
+20. King, J. A review of bibliometric and other science indicators and their role in           addressed to J.M.O. (jm-ottino@northwestern.edu) or L.A.N.A.
+    research evaluation. J. Inf. Sci. 13, 261–276 (1987).                                      (amaral@northwestern.edu).
 
 
 
 
 626
-                                                            ©2010 Macmillan Publishers Limited. All rights reserved
+                                                           ©2010 Macmillan Publishers Limited. All rights reserved
 doi:10.1038/nature09040
 
 

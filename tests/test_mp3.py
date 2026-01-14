@@ -1,5 +1,6 @@
 """Tests for MP3 audio format."""
 
+import importlib.util
 import shutil
 import unittest
 
@@ -8,6 +9,8 @@ import pytest
 from . import base
 
 _HAS_SOX = shutil.which("sox") is not None
+
+_HAS_POCKETSPHINX = importlib.util.find_spec("pocketsphinx") is not None
 
 
 @pytest.mark.skipif(
@@ -27,6 +30,7 @@ class Mp3TestCase(base.ShellParserTestCase, unittest.TestCase):
         """Make sure google api python output is correct."""
         self.compare_python_output(self.raw_text_filename, method="google")
 
+    @pytest.mark.skipif(not _HAS_POCKETSPHINX, reason="pocketsphinx not installed")
     def test_mp3_sphinx(self):
         """Make sure sphinx python output is correct."""
         self.compare_python_output(self.raw_text_filename, method="sphinx")

@@ -18,6 +18,39 @@ description = "Generate OCR test fixtures from source images"
 dir = "tests"
 run = "make clean && make"
 
+[tasks."test:regenerate-pdf-baselines"]
+description = "Regenerate PDF test baseline files with current library versions"
+run = """
+uv run python -c "
+import pathlib
+import shutil
+import textract
+
+pdf_dir = pathlib.Path('tests/pdf')
+
+result = textract.process(str(pdf_dir / 'raw_text.pdf'))
+(pdf_dir / 'raw_text.txt').write_bytes(result)
+print('Regenerated: raw_text.txt')
+
+if shutil.which('pdftotext'):
+    result = textract.process(str(pdf_dir / 'raw_text.pdf'), method='pdftotext')
+    (pdf_dir / 'raw_text-m=pdftotext.txt').write_bytes(result)
+    print('Regenerated: raw_text-m=pdftotext.txt')
+else:
+    print('Skipped: raw_text-m=pdftotext.txt (pdftotext not installed)')
+
+result = textract.process(str(pdf_dir / 'raw_text.pdf'), method='pdfminer')
+(pdf_dir / 'raw_text-m=pdfminer.txt').write_bytes(result)
+print('Regenerated: raw_text-m=pdfminer.txt')
+
+result = textract.process(str(pdf_dir / 'two_column.pdf'), layout=True)
+(pdf_dir / 'two_column.txt').write_bytes(result)
+print('Regenerated: two_column.txt')
+
+print('Done!')
+"
+"""
+
 [tasks."changelog:preview"]
 description = "Preview unreleased changelog entries"
 run = "./scripts/prepend-changelog.sh --preview"
