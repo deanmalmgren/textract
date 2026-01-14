@@ -11,7 +11,13 @@ Install with `asdf plugin add textract-py3 https://github.com/amrox/asdf-pyapp.g
 This fork has been migrated to `uv`. To run locally and release:
 
 ```sh
+# Install system dependencies (MacOS)
+brew bundle
+
+# Setup Python environment
 uv sync
+
+# Release
 uv run bumpversion minor
 uv build && uv publish
 ```

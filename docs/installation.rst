@@ -40,16 +40,25 @@ package manager before installing textract from pypi.
 OSX
 ---
 
-These steps rely on you having `homebrew <http://brew.sh/>`_ installed
-as well as the `cask <http://caskroom.io/>`_ plugin (``brew tap caskroom/cask``). The basic idea is to first install
-`XQuartz <https://xquartz.macosforge.org/landing/>`_ before
-installing a bunch of system packages before installing textract from
-pypi.
+These steps rely on you having `homebrew <http://brew.sh/>`_ installed.
+
+**Using Brewfile (Recommended)**
+
+The easiest way to install all dependencies is using the included Brewfile:
+
+.. code-block:: bash
+
+    brew bundle
+    pip install textract-py3
+
+**Manual Installation**
+
+Alternatively, install dependencies individually:
 
 .. code-block:: bash
 
     brew install --cask xquartz
-    brew install poppler antiword unrtf tesseract swig
+    brew install antiword ghostscript poppler sox tesseract unrtf swig
     pip install textract-py3
 
 ..     brew install libxml2 libxslt antiword poppler tesseract
@@ -57,9 +66,8 @@ pypi.
 
 .. note::
 
-    `pstotext <http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm>`_ is
-    not currently a part of homebrew so ``.ps`` extraction must be
-    enabled by manually installing from source.
+    The Brewfile includes ``ghostscript`` which provides ``ps2ascii`` for
+    ``.ps`` file extraction, replacing the unmaintained ``pstotext``.
 
 .. note::
 
