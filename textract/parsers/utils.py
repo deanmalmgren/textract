@@ -6,11 +6,12 @@ import errno
 import os
 import subprocess
 import tempfile
+from typing import NoReturn
 
 import chardet
 import six
 
-from .. import exceptions
+from textract import exceptions
 
 
 class BaseParser:
@@ -19,7 +20,7 @@ class BaseParser:
     the responsibility of handling all unicode and byte-encoding.
     """
 
-    def extract(self, filename, **kwargs):
+    def extract(self, filename, **kwargs) -> NoReturn:
         """This method must be overwritten by child classes to extract raw
         text from a filename. This method can return either a
         byte-encoded string or unicode.

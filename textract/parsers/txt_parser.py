@@ -4,7 +4,7 @@ from .utils import BaseParser
 
 
 class Parser(BaseParser):
-    """Parse ``.txt`` files"""
+    """Parse ``.txt`` files."""
 
     def extract(self, filename, **kwargs):
         with pathlib.Path(filename).open("rb") as stream:

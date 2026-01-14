@@ -40,7 +40,7 @@ class BaseParserTestCase(GenericUtilities):
     standardized_text_filename_root = ""
     unicode_text_filename_root = ""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         if self.extension == "":
             raise NotImplementedError(
@@ -49,7 +49,7 @@ class BaseParserTestCase(GenericUtilities):
 
     def get_extension_directory(self):
         return os.path.join(
-            os.path.dirname(os.path.abspath(__file__)),
+            pathlib.Path(pathlib.Path(__file__).resolve()).parent,
             self.extension,
         )
 
@@ -60,12 +60,14 @@ class BaseParserTestCase(GenericUtilities):
                 filename_root + "." + self.extension,
             )
             if not pathlib.Path(filename).exists():
-                raise Exception(
+                msg = (
                     (
-                        'expected filename "%(filename)s" to exist for testing '
+                        'expected filename "{filename}" to exist for testing '
                         "purposes but it doesnt"
-                    )
-                    % locals(),
+                    ).format(**locals())
+                )
+                raise Exception(
+                    msg,
                 )
             return filename
         return self.get_filename(default_filename_root, default_filename_root)
@@ -86,37 +88,29 @@ class BaseParserTestCase(GenericUtilities):
         return self.get_filename(self.unicode_text_filename_root, "unicode_text")
 
     def test_raw_text_cli(self):
-        """Make sure raw text matches from the command line"""
+        """Make sure raw text matches from the command line."""
         self.compare_cli_output(self.raw_text_filename)
 
     def test_raw_text_python(self):
-        """Make sure raw text matches from python"""
+        """Make sure raw text matches from python."""
         self.compare_python_output(self.raw_text_filename)
 
     def test_standardized_text_cli(self):
-        """Make sure standardized text matches from the command line"""
+        """Make sure standardized text matches from the command line."""
         temp_filename = self.assertSuccessfulTextract(
             self.standardized_text_filename,
             cleanup=False,
         )
         with pathlib.Path(temp_filename).open("rb") as stream:
-            self.assertEqual(
-                six.b("").join(stream.read().split()),
-                self.get_standardized_text(),
-                "standardized text fails for %s" % self.extension,
-            )
+            assert six.b("").join(stream.read().split()) == self.get_standardized_text(), f"standardized text fails for {self.extension}"
         pathlib.Path(temp_filename).unlink()
 
     def test_standardized_text_python(self):
-        """Make sure standardized text matches from python"""
+        """Make sure standardized text matches from python."""
         import textract
 
         result = textract.process(self.standardized_text_filename)
-        self.assertEqual(
-            six.b("").join(result.split()),
-            self.get_standardized_text(),
-            "standardized text fails for %s" % self.extension,
-        )
+        assert six.b("").join(result.split()) == self.get_standardized_text(), f"standardized text fails for {self.extension}"
 
     # def test_unicode_text_cli(self):
     #     """Make sure unicode text matches from the command line"""
@@ -127,7 +121,7 @@ class BaseParserTestCase(GenericUtilities):
     #     self.compare_python_output(self.unicode_text_filename)
 
     def get_expected_filename(self, filename, **kwargs):
-        basename, extension = os.path.splitext(filename)
+        basename, _extension = os.path.splitext(filename)
         if kwargs.get("method"):
             basename += "-m=" + kwargs.get("method")
         return basename + ".txt"
@@ -135,7 +129,7 @@ class BaseParserTestCase(GenericUtilities):
     def get_cli_options(self, **kwargs):
         option = ""
         for key, val in six.iteritems(kwargs):
-            option += "--%s=%s " % (key, val)
+            option += f"--{key}={val} "
         return option
 
     def get_standardized_text(self):
@@ -147,11 +141,7 @@ class BaseParserTestCase(GenericUtilities):
         return six.b("").join(standardized_text.split())
 
     def assertSuccessfulCommand(self, command):
-        self.assertEqual(
-            0,
-            subprocess.call(command, shell=True),
-            "COMMAND FAILED: %(command)s" % locals(),
-        )
+        assert subprocess.call(command, shell=True) == 0, "COMMAND FAILED: {command}".format(**locals())
 
     def assertSuccessfulTextract(self, filename, cleanup=True, **kwargs):
         # construct the option string
@@ -160,7 +150,7 @@ class BaseParserTestCase(GenericUtilities):
         # run the command and make sure everything worked correctly
         temp_filename = self.get_temp_filename()
         self.assertSuccessfulCommand(
-            "textract %(option)s '%(filename)s' > %(temp_filename)s" % locals(),
+            "textract {option} '{filename}' > {temp_filename}".format(**locals()),
         )
         if cleanup:
             pathlib.Path(temp_filename).unlink()
@@ -175,8 +165,7 @@ class BaseParserTestCase(GenericUtilities):
         temp_filename = self.assertSuccessfulTextract(filename, cleanup=False, **kwargs)
 
         self.assertSuccessfulCommand(
-            "diff --ignore-blank-lines '%(temp_filename)s' '%(expected_filename)s'"
-            % locals(),
+            "diff --ignore-blank-lines '{temp_filename}' '{expected_filename}'".format(**locals()),
         )
         pathlib.Path(temp_filename).unlink()
 
@@ -190,7 +179,7 @@ class BaseParserTestCase(GenericUtilities):
         with pathlib.Path(expected_filename).open("rb") as stream:
             result = self.clean_text(result)
             expected = self.clean_text(stream.read())
-            self.assertEqual(result, expected)
+            assert result == expected
 
 
 class ShellParserTestCase(BaseParserTestCase):
@@ -199,7 +188,7 @@ class ShellParserTestCase(BaseParserTestCase):
     """
 
     def test_filename_spaces(self):
-        """Make sure filenames with spaces work on the command line"""
+        """Make sure filenames with spaces work on the command line."""
         temp_filename = spaced_filename = self.get_temp_filename()
         spaced_filename += " a filename with spaces." + self.extension
         shutil.copyfile(self.raw_text_filename, spaced_filename)

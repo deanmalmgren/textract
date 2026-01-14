@@ -4,7 +4,8 @@ from tempfile import mkdtemp
 
 import six
 
-from ..exceptions import ShellError, UnknownMethod
+from textract.exceptions import ShellError, UnknownMethod
+
 from .image import Parser as TesseractParser
 from .utils import ShellParser
 
@@ -20,7 +21,7 @@ class Parser(ShellParser):
     """
 
     def extract(self, filename, method="", **kwargs):
-        if method == "" or method == "pdftotext":
+        if method in {"", "pdftotext"}:
             try:
                 return self.extract_pdftotext(filename, **kwargs)
             except ShellError as ex:
@@ -29,7 +30,7 @@ class Parser(ShellParser):
                 # pdfminer instead.
                 if method == "" and ex.is_not_installed():
                     return self.extract_pdfminer(filename, **kwargs)
-                raise ex
+                raise
 
         elif method == "pdfminer":
             return self.extract_pdfminer(filename, **kwargs)
@@ -68,7 +69,7 @@ class Parser(ShellParser):
         base = os.path.join(temp_dir, "conv")
         contents = []
         try:
-            stdout, _ = self.run(["pdftoppm", filename, base])
+            _stdout, _ = self.run(["pdftoppm", filename, base])
 
             for page in sorted(os.listdir(temp_dir)):
                 page_path = os.path.join(temp_dir, page)

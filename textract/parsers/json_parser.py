@@ -13,7 +13,7 @@ class Parser(BaseParser):
     """
 
     def extract(self, filename, **kwargs):
-        with pathlib.Path(filename).open() as raw:
+        with pathlib.Path(filename).open(encoding="utf-8") as raw:
             deserialized_json = json.load(raw)
         return self.get_text(deserialized_json)
 

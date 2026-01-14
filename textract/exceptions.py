@@ -13,20 +13,17 @@ class CommandLineError(Exception):
 
 
 class ExtensionNotSupported(CommandLineError):
-    """This error is raised with unsupported extensions"""
+    """This error is raised with unsupported extensions."""
 
-    def __init__(self, ext):
+    def __init__(self, ext) -> None:
         self.ext = ext
 
         from .parsers import _get_available_extensions
 
-        available_extensions = []
-        for e in _get_available_extensions():
-            if e.startswith("."):
-                available_extensions.append(e)
+        available_extensions = [e for e in _get_available_extensions() if e.startswith(".")]
         self.available_extensions_str = ", ".join(available_extensions)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.render(
             "The filename extension %(ext)s is not yet supported by\n"
             "textract. Please suggest this filename extension here:\n\n"
@@ -40,11 +37,11 @@ class MissingFileError(CommandLineError):
     specified path.
     """
 
-    def __init__(self, filename):
+    def __init__(self, filename) -> None:
         self.filename = filename
         self.root, self.ext = os.path.splitext(filename)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.render(
             'The file "%(filename)s" can not be found.\n'
             "Is this the right path/to/file/you/want/to/extract%(ext)s?",
@@ -56,10 +53,10 @@ class UnknownMethod(CommandLineError):
     line is unknown.
     """
 
-    def __init__(self, method):
+    def __init__(self, method) -> None:
         self.method = method
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.render(
             'The method "%(method)s" can not be found for this filetype.',
         )
@@ -70,7 +67,7 @@ class ShellError(CommandLineError):
     (meaning the command failed).
     """
 
-    def __init__(self, command, exit_code, stdout, stderr):
+    def __init__(self, command, exit_code, stdout, stderr) -> None:
         self.command = command
         self.exit_code = exit_code
         self.stdout = stdout
@@ -80,16 +77,16 @@ class ShellError(CommandLineError):
     def is_not_installed(self):
         return os.name == "posix" and self.exit_code == 127
 
-    def not_installed_message(self):
+    def not_installed_message(self) -> str:
         return (
-            "The command `%(command)s` failed because the executable\n"
-            "`%(executable)s` is not installed on your system. Please make\n"
+            "The command `{command}` failed because the executable\n"
+            "`{executable}` is not installed on your system. Please make\n"
             "sure the appropriate dependencies are installed before using\n"
             "textract:\n\n"
             "    http://textract.readthedocs.org/en/latest/installation.html\n"
-        ) % vars(self)
+        ).format(**vars(self))
 
-    def failed_message(self):
+    def failed_message(self) -> str:
         return (
             "The command `%(command)s` failed with exit code %(exit_code)d\n"
             "------------- stdout -------------\n"
@@ -98,7 +95,7 @@ class ShellError(CommandLineError):
             "%(stderr)s"
         ) % vars(self)
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self.is_not_installed():
             return self.not_installed_message()
         return self.failed_message()

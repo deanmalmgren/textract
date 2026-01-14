@@ -20,7 +20,7 @@ def ensure_bytes(string):
 
 
 class Parser(BaseParser):
-    """Extract text from Microsoft Outlook files (.msg)"""
+    """Extract text from Microsoft Outlook files (.msg)."""
 
     def extract(self, filename, **kwargs):
         m = extract_msg.Message(filename)

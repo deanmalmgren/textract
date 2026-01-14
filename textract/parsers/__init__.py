@@ -6,7 +6,7 @@ import os
 import pathlib
 import re
 
-from .. import exceptions
+from textract import exceptions
 
 # Dictionary structure for synonymous file extension types
 EXTENSION_SYNONYMS = {
@@ -88,20 +88,18 @@ def _get_available_extensions():
     extensions = []
 
     # from filenames
-    parsers_dir = os.path.join(os.path.dirname(__file__))
+    parsers_dir = os.path.join(pathlib.Path(__file__).parent)
     glob_filename = os.path.join(parsers_dir, "*" + _FILENAME_SUFFIX + ".py")
     # Escape the path for regex to handle Windows backslashes and special chars
     ext_re = re.compile(re.escape(glob_filename).replace(re.escape("*"), r"(?P<ext>\w+)"))
     for filename in glob.glob(glob_filename):
         ext_match = ext_re.match(filename)
         ext = ext_match.groups()[0]
-        extensions.append(ext)
-        extensions.append("." + ext)
+        extensions.extend((ext, "." + ext))
 
     # from relevant synonyms (don't use the '' synonym)
     for ext in EXTENSION_SYNONYMS:
         if ext:
-            extensions.append(ext)
-            extensions.append(ext.replace(".", "", 1))
+            extensions.extend((ext, ext.replace(".", "", 1)))
     extensions.sort()
     return extensions

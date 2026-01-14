@@ -3,7 +3,8 @@ import pathlib
 
 import speech_recognition as sr
 
-from ..exceptions import UnknownMethod
+from textract.exceptions import UnknownMethod
+
 from .utils import ShellParser
 
 
@@ -22,7 +23,7 @@ class Parser(ShellParser):
         speech = ""
 
         # convert to wav, if not already .wav
-        base, ext = os.path.splitext(filename)
+        _base, ext = os.path.splitext(filename)
         if ext != ".wav":
             temp_filename = self.convert_to_wav(filename)
             try:
@@ -36,7 +37,7 @@ class Parser(ShellParser):
                 audio = r.record(source)
 
             try:
-                if method == "google" or method == "":
+                if method in {"google", ""}:
                     speech = r.recognize_google(audio)
                 elif method == "sphinx":
                     speech = r.recognize_sphinx(audio)
@@ -53,7 +54,7 @@ class Parser(ShellParser):
         return speech
 
     def convert_to_wav(self, filename):
-        """Uses sox cmdline tool, to convert audio file to .wav
+        """Uses sox cmdline tool, to convert audio file to .wav.
 
         Note: for testing, use -
         http://www.text2speech.org/,

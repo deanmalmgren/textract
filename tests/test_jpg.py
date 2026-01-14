@@ -16,7 +16,7 @@ class JpgTestCase(base.ShellParserTestCase, unittest.TestCase):
         return jpeg_filename
 
     def test_jpeg_synonym_cli(self):
-        """Make sure .jpeg synonym works in cli"""
+        """Make sure .jpeg synonym works in cli."""
         jpeg_filename = self.get_jpeg_filename(self.raw_text_filename)
         self.compare_cli_output(
             jpeg_filename,
@@ -25,7 +25,7 @@ class JpgTestCase(base.ShellParserTestCase, unittest.TestCase):
         pathlib.Path(jpeg_filename).unlink()
 
     def test_jpeg_synonym_python(self):
-        """Make sure .jpeg synonym works in python"""
+        """Make sure .jpeg synonym works in python."""
         jpeg_filename = self.get_jpeg_filename(self.raw_text_filename)
         self.compare_python_output(
             jpeg_filename,

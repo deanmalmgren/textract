@@ -59,21 +59,15 @@ class Parser(BaseParser):
         "textarea",
     ]
 
-    def _visible(self, element):
+    def _visible(self, element) -> bool:
         """Used to filter text elements that have invisible text on the page."""
-        if element.name in self._disallowed_names or re.match(
-            r"<!--.*-->", six.text_type(element.extract()),
-        ):
-            return False
-        return True
+        return not (element.name in self._disallowed_names or re.match(r"<!--.*-->", six.text_type(element.extract())))
 
-    def _inline(self, element):
+    def _inline(self, element) -> bool:
         """Used to check whether given element can be treated as inline
         element (without new line after).
         """
-        if element.name in self._inline_tags:
-            return True
-        return False
+        return element.name in self._inline_tags
 
     def _find_any_text(self, tag):
         """Looks for any possible text within given tag."""
@@ -138,7 +132,7 @@ class Parser(BaseParser):
                     col_width = t["col_width"][i] + v_sep_len
                     if td["colspan"] > 1:
                         for j in range(td["colspan"] - 1):
-                            j = j + 1
+                            j += 1
                             if (i + j) < len(t["col_width"]):
                                 col_width += t["col_width"][i + j] + v_sep_len
                     html += ("%" + str(col_width) + "s") % (text + v_separator)
@@ -170,7 +164,7 @@ class Parser(BaseParser):
         # Make HTML
         html = ""
         elements = soup.find_all(True)
-        elements = [el for el in filter(self._visible, elements)]
+        elements = list(filter(self._visible, elements))
         for elem in elements:
             string = elem.string
             if string is None:

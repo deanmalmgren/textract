@@ -6,7 +6,7 @@ from .utils import BaseParser
 
 
 class Parser(BaseParser):
-    """Extract text from epub"""
+    """Extract text from epub."""
 
     def extract(self, filename, **kwargs):
         book = zipfile.ZipFile(filename)
@@ -24,8 +24,7 @@ class Parser(BaseParser):
 
     def __epub_sections(self, book):
         opf_paths = self.__get_opf_paths(book)
-        item_paths = self.__get_item_paths(book, opf_paths)
-        return item_paths
+        return self.__get_item_paths(book, opf_paths)
 
     def __get_opf_paths(self, book):
         meta_inf = book.open("META-INF/container.xml")
@@ -52,3 +51,4 @@ class Parser(BaseParser):
         for filename in book.namelist():
             if filename.endswith(partial_path):
                 return filename
+        return None

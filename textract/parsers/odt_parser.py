@@ -20,7 +20,7 @@ class Parser(BaseParser):
         """Converts the document to a string."""
         buff = ""
         for child in self.content.iter():
-            if child.tag in [self.qn("text:p"), self.qn("text:h")]:
+            if child.tag in {self.qn("text:p"), self.qn("text:h")}:
                 buff += self.text_to_string(child) + "\n"
         # remove last newline char
         if buff:
@@ -48,8 +48,8 @@ class Parser(BaseParser):
             buff += element.tail
         return buff
 
-    def qn(self, namespace):
-        """Connect tag prefix to longer namespace"""
+    def qn(self, namespace) -> str:
+        """Connect tag prefix to longer namespace."""
         nsmap = {
             "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",
         }

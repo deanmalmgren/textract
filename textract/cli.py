@@ -2,7 +2,7 @@
 
 import argparse
 import encodings
-import os
+import pathlib
 import pkgutil
 import sys
 
@@ -14,14 +14,13 @@ from .parsers import DEFAULT_ENCODING, _get_available_extensions
 
 
 class AddToNamespaceAction(argparse.Action):
-    """This adds KEY,VALUE arbitrary pairs to the argparse.Namespace object"""
+    """This adds KEY,VALUE arbitrary pairs to the argparse.Namespace object."""
 
     def __call__(self, parser, namespace, values, option_string=None):
         key, val = values.strip().split("=")
         if hasattr(namespace, key):
             parser.error(
-                ('Duplicate specification of the key "%(key)s" with --option.')
-                % locals(),
+                ('Duplicate specification of the key "{key}" with --option.').format(**locals()),
             )
         setattr(namespace, key, val)
 
@@ -41,12 +40,11 @@ class FileType(argparse.FileType):
 # output
 def get_parser():
     """Initialize the parser for the command line interface and bind the
-    autocompletion functionality
+    autocompletion functionality.
     """
     # initialize the parser
     parser = argparse.ArgumentParser(
-        description=("Command line tool for extracting text from any document. ")
-        % locals(),
+        description="Command line tool for extracting text from any document. ",
     )
 
     # define the command line options here
@@ -113,7 +111,7 @@ def _get_available_encodings():
     Inspiration from http://stackoverflow.com/a/3824405/564709
     """
     available_encodings = set(encodings.aliases.aliases.values())
-    paths = [os.path.dirname(encodings.__file__)]
+    paths = [pathlib.Path(encodings.__file__).parent]
     available_encodings.update(
         modname for importer, modname, ispkg in pkgutil.walk_packages(path=paths)
     )
