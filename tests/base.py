@@ -21,7 +21,7 @@ class GenericUtilities:  # noqa: D101
     def clean_text(self, text):  # noqa: D102, PLR6301
         lines = text.splitlines()
         # Clean empty lines (fixes epub issue)
-        lines = [line for line in lines if line.strip()]  # Clean empty lines
+        lines = [line for line in lines if line.strip()]
         return six.b("\n").join(lines)
 
 
