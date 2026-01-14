@@ -91,8 +91,17 @@ uv sync
 # Run tests
 uv run pytest
 
+# Preview unreleased changelog entries
+mise run changelog:preview
+
 # Bump version and release
-uv run cz bump --increment MINOR  # or PATCH, MAJOR
+mise run release:bump -- --increment MINOR  # or PATCH, MAJOR
+
+# Update changelog (semi-automated)
+mise run changelog:update
+# Or update docs/changelog.rst manually
+
+# Build and publish
 uv build && uv publish
 ```
 

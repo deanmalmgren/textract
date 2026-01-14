@@ -4,6 +4,7 @@ name: CI Pipeline
 "on":
   push:
     branches: [main]
+    tags: [v*]
   pull_request:
     paths:
       - .github/workflows/ci_pipeline.yml
@@ -27,3 +28,48 @@ jobs:
 
       - name: Run tests
         run: uv run pytest
+
+  publish:
+    name: Publish to PyPI
+    needs: [test]
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/textract-py3
+    permissions:
+      contents: write  # For GitHub release creation
+      id-token: write  # IMPORTANT: mandatory for PyPI trusted publishing
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - name: Install uv and Python
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.14"
+      - name: Build Package
+        run: uv build
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Generate changelog with commitizen
+        id: changelog
+        run: |
+          uv tool install commitizen
+          VERSION="${GITHUB_REF_NAME#v}"
+          CHANGELOG=$(cz changelog "$VERSION" --dry-run)
+          PREV_TAG=$(git describe --tags --abbrev=0 "$GITHUB_REF^" 2>/dev/null || echo "")
+          {
+            echo 'body<<EOF'
+            echo "$CHANGELOG"
+            if [ -n "$PREV_TAG" ]; then
+              echo ""
+              echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${PREV_TAG}...${GITHUB_REF_NAME}"
+            fi
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+      - name: Generate GitHub Release Notes
+        uses: softprops/action-gh-release@v2
+        with:
+          body: ${{ steps.changelog.outputs.body }}

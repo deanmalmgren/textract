@@ -18,5 +18,17 @@ description = "Generate OCR test fixtures from source images"
 dir = "tests"
 run = "make clean && make"
 
+[tasks."changelog:preview"]
+description = "Preview unreleased changelog entries"
+run = "./scripts/prepend-changelog.sh --preview"
+
+[tasks."changelog:update"]
+description = "Update changelog with newly released version (run after cz bump)"
+run = "./scripts/prepend-changelog.sh"
+
+[tasks."release:bump"]
+description = "Bump version (usage: mise run release:bump -- --increment PATCH|MINOR|MAJOR)"
+run = "uv run cz bump"
+
 [tools]
 python = "3.14"
