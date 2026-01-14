@@ -1,0 +1,21 @@
+---
+name: Setup Action
+description: Configure Python with uv and install package dependencies
+
+inputs:
+  python-version:
+    description: Python version
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install Project Dependencies
+      run: uv sync --all-extras
+      shell: bash

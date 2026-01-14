@@ -1,0 +1,29 @@
+---
+name: CI Pipeline
+
+"on":
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - .github/workflows/ci_pipeline.yml
+      - textract/**
+      - tests/**
+      - uv.lock
+      - pyproject.toml
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        python-version: ["3.9", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run tests
+        run: uv run pytest
