@@ -13,5 +13,10 @@ uv run --group docs sphinx-build -b html docs docs/build/html
 python -m http.server -d docs/build/html 8000
 """
 
+[tasks."test:fixtures"]
+description = "Generate OCR test fixtures from source images"
+dir = "tests"
+run = "make clean && make"
+
 [tools]
 python = "3.14"

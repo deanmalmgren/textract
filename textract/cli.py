@@ -39,7 +39,7 @@ class FileType(argparse.FileType):  # noqa: D101
                     self._mode,
                     self._bufsize,
                     self._encoding,
-                    self._errors,  # noqa: COM812
+                    self._errors,
                 )  # noqa: RUF100, SIM115
             if "w" in self._mode:
                 fileno = sys.stdout.fileno()
@@ -48,7 +48,7 @@ class FileType(argparse.FileType):  # noqa: D101
                     self._mode,
                     self._bufsize,
                     self._encoding,
-                    self._errors,  # noqa: COM812
+                    self._errors,
                 )  # noqa: RUF100, SIM115
         return super().__call__(string)
 

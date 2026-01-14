@@ -110,10 +110,11 @@ class BaseParserTestCase(GenericUtilities):
         assert six.b("").join(result.split()) == expected
 
     def get_expected_filename(self, filename, **kwargs):  # noqa: D102, PLR6301
-        basename = pathlib.Path(filename).stem
+        path = pathlib.Path(filename)
+        basename = path.stem
         if method := kwargs.get("method"):
             basename += f"-m={method}"
-        return f"{basename}.txt"
+        return str(path.parent / f"{basename}.txt")
 
     def get_cli_options(self, **kwargs):  # noqa: D102, PLR6301
         option = ""
