@@ -91,8 +91,8 @@ uv sync
 # Run tests
 uv run pytest
 
-# Release
-uv run bumpversion minor
+# Bump version and release
+uv run cz bump --increment MINOR  # or PATCH, MAJOR
 uv build && uv publish
 ```
 

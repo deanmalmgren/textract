@@ -1,6 +1,6 @@
 [build-system]
-build-backend = "hatchling.build"
-requires = ["hatchling"]
+build-backend = "uv_build"
+requires = ["uv_build>=0.9.7"]
 
 [project]
 authors = [{name = "Dean Malmgren", email = "dean.malmgren@datascopeanalytics.com"}]
@@ -35,7 +35,7 @@ Repository = "https://github.com/KyleKing/textract-py3"
 
 [dependency-groups]
 dev = [
-    "bumpversion>=0.6.0",
+    "commitizen>=3.29.1",
     "pyright>=1.1.408",
     "pytest>=7.2.1",
     "ruff>=0.14.11",
@@ -46,8 +46,14 @@ docs = [
     "sphinx-rtd-theme>=2.0",
 ]
 
-[tool.hatch.build.targets.wheel]
-packages = ["textract"]
+[tool.commitizen]
+tag_format = "v$version"
+version = "2.1.1"
+version_files = ["pyproject.toml:^version", "textract/__init__.py:^VERSION"]
+
+[tool.uv.build-backend]
+module-name = "textract"
+module-root = ""
 
 [tool.pyright]
 include = ["textract", "tests"]

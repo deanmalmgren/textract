@@ -1,0 +1,590 @@
+2026-01-14T20:13:00.4340040Z ============================= test session starts ==============================
+2026-01-14T20:13:00.4354330Z platform darwin -- Python 3.14.2, pytest-9.0.2, pluggy-1.6.0
+2026-01-14T20:13:00.4355790Z rootdir: /Users/runner/work/textract-py3/textract-py3
+2026-01-14T20:13:00.4356710Z configfile: pyproject.toml
+2026-01-14T20:13:00.4358530Z collected 133 items
+2026-01-14T20:13:00.4359400Z 
+2026-01-14T20:13:00.8303640Z tests/test_csv.py ....                                                   [  3%]
+2026-01-14T20:13:00.8316820Z tests/test_doc.py sssss                                                  [  6%]
+2026-01-14T20:13:01.2324310Z tests/test_docx.py .....                                                 [ 10%]
+2026-01-14T20:13:01.5165380Z tests/test_eml.py ....                                                   [ 13%]
+2026-01-14T20:13:02.2277050Z tests/test_epub.py ....                                                  [ 16%]
+2026-01-14T20:13:02.3752710Z tests/test_exceptions.py .....                                           [ 20%]
+2026-01-14T20:13:02.3780170Z tests/test_gif.py sssss                                                  [ 24%]
+2026-01-14T20:13:03.2199060Z tests/test_html.py ......                                                [ 28%]
+2026-01-14T20:13:03.2217370Z tests/test_jpg.py sssssss                                                [ 33%]
+2026-01-14T20:13:03.3770120Z tests/test_json.py ....                                                  [ 36%]
+2026-01-14T20:13:03.3789660Z tests/test_mp3.py ssssssss                                               [ 42%]
+2026-01-14T20:13:04.3487750Z tests/test_msg.py ....                                                   [ 45%]
+2026-01-14T20:13:04.6596120Z tests/test_no_ext.py ...                                                 [ 48%]
+2026-01-14T20:13:04.8088910Z tests/test_odt.py ....                                                   [ 51%]
+2026-01-14T20:13:04.8102540Z tests/test_ogg.py sssss                                                  [ 54%]
+2026-01-14T20:13:07.4836910Z tests/test_pdf.py FFFssFFFFsF                                            [ 63%]
+2026-01-14T20:13:07.4849920Z tests/test_png.py sssss                                                  [ 66%]
+2026-01-14T20:13:08.0595650Z tests/test_pptx.py ....                                                  [ 69%]
+2026-01-14T20:13:08.0608990Z tests/test_ps.py sssss                                                   [ 73%]
+2026-01-14T20:13:08.2360930Z tests/test_psv.py ....                                                   [ 76%]
+2026-01-14T20:13:08.2374250Z tests/test_rtf.py sssss                                                  [ 80%]
+2026-01-14T20:13:08.2386100Z tests/test_tiff.py sssss                                                 [ 84%]
+2026-01-14T20:13:08.4159150Z tests/test_tsv.py ....                                                   [ 87%]
+2026-01-14T20:13:08.5667130Z tests/test_txt.py .....                                                  [ 90%]
+2026-01-14T20:13:08.5676470Z tests/test_wav.py ssss                                                   [ 93%]
+2026-01-14T20:13:08.8167730Z tests/test_xls.py ....                                                   [ 96%]
+2026-01-14T20:13:09.2330210Z tests/test_xlsx.py ....                                                  [100%]
+2026-01-14T20:13:09.2410130Z 
+2026-01-14T20:13:09.2411040Z =================================== FAILURES ===================================
+2026-01-14T20:13:09.2411800Z _______________________ PdfTestCase.test_filename_spaces _______________________
+2026-01-14T20:13:09.2413080Z 
+2026-01-14T20:13:09.2418690Z self = <tests.test_pdf.PdfTestCase testMethod=test_filename_spaces>
+2026-01-14T20:13:09.2419080Z 
+2026-01-14T20:13:09.2419320Z     def test_filename_spaces(self):
+2026-01-14T20:13:09.2419700Z         """Make sure filenames with spaces work on the command line."""
+2026-01-14T20:13:09.2420160Z         temp_filename = spaced_filename = self.get_temp_filename()
+2026-01-14T20:13:09.2420700Z         spaced_filename += " a filename with spaces." + self.extension
+2026-01-14T20:13:09.2421140Z         shutil.copyfile(self.raw_text_filename, spaced_filename)
+2026-01-14T20:13:09.2421510Z >       self.compare_cli_output(
+2026-01-14T20:13:09.2421920Z             spaced_filename,
+2026-01-14T20:13:09.2422250Z             self.get_expected_filename(self.raw_text_filename),
+2026-01-14T20:13:09.2422590Z         )
+2026-01-14T20:13:09.2422780Z 
+2026-01-14T20:13:09.2422950Z tests/base.py:192: 
+2026-01-14T20:13:09.2423610Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-01-14T20:13:09.2424010Z tests/base.py:162: in compare_cli_output
+2026-01-14T20:13:09.2424340Z     self.assertSuccessfulCommand(
+2026-01-14T20:13:09.2424780Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-01-14T20:13:09.2425010Z 
+2026-01-14T20:13:09.2425260Z self = <tests.test_pdf.PdfTestCase testMethod=test_filename_spaces>
+2026-01-14T20:13:09.2426060Z command = "diff --ignore-blank-lines '/var/folders/kg/7q73ww8s3llgyl61c9z_j5g40000gn/T/tmp2gh23ogv' '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text.txt'"
+2026-01-14T20:13:09.2426720Z 
+2026-01-14T20:13:09.2427000Z     def assertSuccessfulCommand(self, command):  # noqa: D102, N802, PLR6301
+2026-01-14T20:13:09.2428010Z >       assert subprocess.call(command, shell=True) == 0, (  # noqa: S602
+2026-01-14T20:13:09.2428400Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-01-14T20:13:09.2428840Z             "COMMAND FAILED: {command}".format(**locals())
+2026-01-14T20:13:09.2429180Z         )
+2026-01-14T20:13:09.2429850Z E       AssertionError: COMMAND FAILED: diff --ignore-blank-lines '/var/folders/kg/7q73ww8s3llgyl61c9z_j5g40000gn/T/tmp2gh23ogv' '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text.txt'
+2026-01-14T20:13:09.2430540Z 
+2026-01-14T20:13:09.2430720Z tests/base.py:136: AssertionError
+2026-01-14T20:13:09.2431090Z ----------------------------- Captured stdout call -----------------------------
+2026-01-14T20:13:09.2431510Z 2a3
+2026-01-14T20:13:09.2431810Z > 	
+2026-01-14T20:13:09.2441670Z   
+2026-01-14T20:13:09.2442300Z 4,43c5,7
+2026-01-14T20:13:09.2443520Z < Sample text is hard. That’s 
+2026-01-14T20:13:09.2469070Z < where http://hipsum.co comes 
+2026-01-14T20:13:09.2469340Z < in handy. 
+2026-01-14T20:13:09.2469530Z < 
+2026-01-14T20:13:09.2469880Z < Semiotics church-key VHS, Truffaut cliche actually vegan. Cray Austin 
+2026-01-14T20:13:09.2470210Z < 
+2026-01-14T20:13:09.2470430Z < pop-up disrupt letterpress, kitsch fixie Cosby sweater cliche craft beer 
+2026-01-14T20:13:09.2470750Z < 
+2026-01-14T20:13:09.2470940Z < PBR&B. Gentrify cornhole Tonx McSweeney's, Shoreditch keffiyeh 
+2026-01-14T20:13:09.2471240Z < 
+2026-01-14T20:13:09.2471450Z < ethnic Marfa 90's kogi American Apparel. Shabby chic distillery church-
+2026-01-14T20:13:09.2471710Z < 
+2026-01-14T20:13:09.2471980Z < key locavore beard, food truck chillwave sartorial deep v flannel authentic 
+2026-01-14T20:13:09.2472330Z < 
+2026-01-14T20:13:09.2472600Z < Tumblr narwhal kogi organic. Cred vegan jean shorts Banksy forage 
+2026-01-14T20:13:09.2472990Z < 
+2026-01-14T20:13:09.2473280Z < Neutra dreamcatcher, hashtag Bushwick polaroid pork belly flannel 
+2026-01-14T20:13:09.2473610Z < 
+2026-01-14T20:13:09.2473940Z < keytar Portland post-ironic. Cred hoodie vegan, food truck leggings 
+2026-01-14T20:13:09.2474290Z < 
+2026-01-14T20:13:09.2474570Z < Austin pour-over banjo trust fund before they sold out cray Intelligentsia 
+2026-01-14T20:13:09.2474910Z < 
+2026-01-14T20:13:09.2475870Z < plaid typewriter. Williamsburg XOXO plaid Carles Austin tofu. 
+2026-01-14T20:13:09.2476220Z < 
+2026-01-14T20:13:09.2476430Z < Carles Tonx keffiyeh, leggings 90's lo-fi kogi viral semiotics Brooklyn 
+2026-01-14T20:13:09.2476780Z < 
+2026-01-14T20:13:09.2477030Z < biodiesel tousled bespoke kitsch. Vinyl Tonx art party Thundercats retro, 
+2026-01-14T20:13:09.2477460Z < 
+2026-01-14T20:13:09.2477780Z < viral asymmetrical artisan bicycle rights bitters master cleanse Kickstarter 
+2026-01-14T20:13:09.2478140Z < 
+2026-01-14T20:13:09.2478420Z < YOLO. Seitan street art semiotics twee skateboard, PBR&B VHS hashtag 
+2026-01-14T20:13:09.2478800Z < 
+2026-01-14T20:13:09.2479090Z < meh. Thundercats semiotics shabby chic forage single-origin coffee retro, 
+2026-01-14T20:13:09.2479470Z < 
+2026-01-14T20:13:09.2479880Z < 3 wolf moon iPhone mumblecore 90's trust fund Intelligentsia. Beard 
+2026-01-14T20:13:09.2480140Z < 
+2026-01-14T20:13:09.2480410Z < gluten-free seitan, VHS sartorial pork belly gastropub meh whatever 
+2026-01-14T20:13:09.2480740Z < 
+2026-01-14T20:13:09.2481070Z < authentic synth. Beard single-origin coffee irony fixie, before they sold 
+2026-01-14T20:13:09.2481400Z < 
+2026-01-14T20:13:09.2481510Z ---
+2026-01-14T20:13:09.2481980Z > Sample text is hard. That’s
+2026-01-14T20:13:09.2482180Z > where http://hipsum.co comes
+2026-01-14T20:13:09.2482340Z > in handy.
+2026-01-14T20:13:09.2482450Z 45,46d8
+2026-01-14T20:13:09.2482680Z < 	
+2026-01-14T20:13:09.2482840Z   
+2026-01-14T20:13:09.2483060Z < out Pitchfork kitsch readymade. Helvetica butcher wayfarers, lomo artisan 
+2026-01-14T20:13:09.2483340Z 48c10,26
+2026-01-14T20:13:09.2483550Z < hashtag Brooklyn four loko fanny pack 90's mustache 8-bit. 
+2026-01-14T20:13:09.2484070Z ---
+2026-01-14T20:13:09.2484290Z > Semiotics church-key VHS, Truffaut cliche actually vegan. Cray Austin
+2026-01-14T20:13:09.2484650Z > pop-up disrupt letterpress, kitsch fixie Cosby sweater cliche craft beer
+2026-01-14T20:13:09.2484990Z > PBR&B. Gentrify cornhole Tonx McSweeney's, Shoreditch keffiyeh
+2026-01-14T20:13:09.2485530Z > ethnic Marfa 90's kogi American Apparel. Shabby chic distillery churchkey locavore beard, food truck chillwave sartorial deep v flannel authentic
+2026-01-14T20:13:09.2486090Z > Tumblr narwhal kogi organic. Cred vegan jean shorts Banksy forage
+2026-01-14T20:13:09.2486470Z > Neutra dreamcatcher, hashtag Bushwick polaroid pork belly flannel
+2026-01-14T20:13:09.2486820Z > keytar Portland post-ironic. Cred hoodie vegan, food truck leggings
+2026-01-14T20:13:09.2487190Z > Austin pour-over banjo trust fund before they sold out cray Intelligentsia
+2026-01-14T20:13:09.2487690Z > plaid typewriter. Williamsburg XOXO plaid Carles Austin tofu.
+2026-01-14T20:13:09.2488040Z > Carles Tonx keffiyeh, leggings 90's lo-fi kogi viral semiotics Brooklyn
+2026-01-14T20:13:09.2488400Z > biodiesel tousled bespoke kitsch. Vinyl Tonx art party Thundercats retro,
+2026-01-14T20:13:09.2488790Z > viral asymmetrical artisan bicycle rights bitters master cleanse Kickstarter
+2026-01-14T20:13:09.2489190Z > YOLO. Seitan street art semiotics twee skateboard, PBR&B VHS hashtag
+2026-01-14T20:13:09.2489560Z > meh. Thundercats semiotics shabby chic forage single-origin coffee retro,
+2026-01-14T20:13:09.2489940Z > 3 wolf moon iPhone mumblecore 90's trust fund Intelligentsia. Beard
+2026-01-14T20:13:09.2490310Z > gluten-free seitan, VHS sartorial pork belly gastropub meh whatever
+2026-01-14T20:13:09.2490690Z > authentic synth. Beard single-origin coffee irony fixie, before they sold
+2026-01-14T20:13:09.2490960Z 50,89c28,48
+2026-01-14T20:13:09.2491180Z < Meh jean shorts selfies, crucifix selvage Helvetica Carles PBR Vice 
+2026-01-14T20:13:09.2491460Z < 
+2026-01-14T20:13:09.2491680Z < Banksy roof party master cleanse ugh PBR&B. Lo-fi freegan salvia photo 
+2026-01-14T20:13:09.2491960Z < 
+2026-01-14T20:13:09.2492220Z < booth, Wes Anderson skateboard Odd Future. Etsy art party Bushwick 
+2026-01-14T20:13:09.2492480Z < 
+2026-01-14T20:13:09.2492690Z < keffiyeh. Pork belly 3 wolf moon butcher mustache. YOLO raw denim lo-
+2026-01-14T20:13:09.2492960Z < 
+2026-01-14T20:13:09.2493410Z < fi, hoodie gentrify Schlitz 8-bit sriracha Shoreditch retro brunch. 
+2026-01-14T20:13:09.2493680Z < 
+2026-01-14T20:13:09.2493900Z < Williamsburg farm-to-table beard, mlkshk Banksy fap kogi Etsy art party 
+2026-01-14T20:13:09.2494200Z < 
+2026-01-14T20:13:09.2494400Z < squid semiotics. XOXO church-key Pitchfork mlkshk irony tote bag. 
+2026-01-14T20:13:09.2494670Z < 
+2026-01-14T20:13:09.2494880Z < Farm-to-table brunch tattooed hoodie keytar, literally selvage authentic 
+2026-01-14T20:13:09.2495160Z < 
+2026-01-14T20:13:09.2495380Z < trust fund deep v Thundercats Kickstarter narwhal locavore. Swag disrupt 
+2026-01-14T20:13:09.2496190Z < 
+2026-01-14T20:13:09.2496390Z < chambray, leggings shabby chic gastropub YOLO plaid hoodie 
+2026-01-14T20:13:09.2496630Z < 
+2026-01-14T20:13:09.2496840Z < Williamsburg Godard mixtape. Retro Godard keytar biodiesel, freegan 
+2026-01-14T20:13:09.2497120Z < 
+2026-01-14T20:13:09.2497320Z < paleo Etsy you probably haven't heard of them Pitchfork Schlitz 
+2026-01-14T20:13:09.2497600Z < 
+2026-01-14T20:13:09.2497840Z < readymade small batch cred. Pug trust fund paleo, 90's fixie typewriter 
+2026-01-14T20:13:09.2498110Z < 
+2026-01-14T20:13:09.2498310Z < next level banjo. Banksy occupy authentic master cleanse Bushwick 
+2026-01-14T20:13:09.2498560Z < 
+2026-01-14T20:13:09.2498800Z < fingerstache selfies, direct trade craft beer cliche +1 cray. Locavore four 
+2026-01-14T20:13:09.2499090Z < 
+2026-01-14T20:13:09.2499290Z < loko biodiesel Neutra chia mlkshk. Fanny pack YOLO Portland, mlkshk 
+2026-01-14T20:13:09.2499570Z < 
+2026-01-14T20:13:09.2499770Z < PBR&B single-origin coffee drinking vinegar 8-bit flannel gentrify 
+2026-01-14T20:13:09.2500280Z < 
+2026-01-14T20:13:09.2500400Z < stumptown pop-up. 
+2026-01-14T20:13:09.2500530Z < 
+2026-01-14T20:13:09.2500730Z < Oh. You need a little dummy text for your mockup? How quaint. 
+2026-01-14T20:13:09.2500960Z < 
+2026-01-14T20:13:09.2501360Z < I bet you’re still using Bootstrap too… 
+2026-01-14T20:13:09.2501580Z < 
+2026-01-14T20:13:09.2501670Z ---
+2026-01-14T20:13:09.2501890Z > out Pitchfork kitsch readymade. Helvetica butcher wayfarers, lomo artisan
+2026-01-14T20:13:09.2502250Z > hashtag Brooklyn four loko fanny pack 90's mustache 8-bit.
+2026-01-14T20:13:09.2502580Z > Meh jean shorts selfies, crucifix selvage Helvetica Carles PBR Vice
+2026-01-14T20:13:09.2502920Z > Banksy roof party master cleanse ugh PBR&B. Lo-fi freegan salvia photo
+2026-01-14T20:13:09.2503270Z > booth, Wes Anderson skateboard Odd Future. Etsy art party Bushwick
+2026-01-14T20:13:09.2503790Z > keffiyeh. Pork belly 3 wolf moon butcher mustache. YOLO raw denim lofi, hoodie gentrify Schlitz 8-bit sriracha Shoreditch retro brunch.
+2026-01-14T20:13:09.2504330Z > Williamsburg farm-to-table beard, mlkshk Banksy fap kogi Etsy art party
+2026-01-14T20:13:09.2504710Z > squid semiotics. XOXO church-key Pitchfork mlkshk irony tote bag.
+2026-01-14T20:13:09.2505080Z > Farm-to-table brunch tattooed hoodie keytar, literally selvage authentic
+2026-01-14T20:13:09.2505460Z > trust fund deep v Thundercats Kickstarter narwhal locavore. Swag disrupt
+2026-01-14T20:13:09.2505810Z > chambray, leggings shabby chic gastropub YOLO plaid hoodie
+2026-01-14T20:13:09.2506130Z > Williamsburg Godard mixtape. Retro Godard keytar biodiesel, freegan
+2026-01-14T20:13:09.2506480Z > paleo Etsy you probably haven't heard of them Pitchfork Schlitz
+2026-01-14T20:13:09.2506830Z > readymade small batch cred. Pug trust fund paleo, 90's fixie typewriter
+2026-01-14T20:13:09.2507180Z > next level banjo. Banksy occupy authentic master cleanse Bushwick
+2026-01-14T20:13:09.2507540Z > fingerstache selfies, direct trade craft beer cliche +1 cray. Locavore four
+2026-01-14T20:13:09.2507930Z > loko biodiesel Neutra chia mlkshk. Fanny pack YOLO Portland, mlkshk
+2026-01-14T20:13:09.2508290Z > PBR&B single-origin coffee drinking vinegar 8-bit flannel gentrify
+2026-01-14T20:13:09.2508560Z > stumptown pop-up.
+2026-01-14T20:13:09.2508780Z > Oh. You need a little dummy text for your mockup? How quaint.
+2026-01-14T20:13:09.2509290Z > I bet you’re still using Bootstrap too…
+2026-01-14T20:13:09.2509610Z ________________________ PdfTestCase.test_pdfminer_cli _________________________
+2026-01-14T20:13:09.2509830Z 
+2026-01-14T20:13:09.2509950Z self = <tests.test_pdf.PdfTestCase testMethod=test_pdfminer_cli>
+2026-01-14T20:13:09.2510150Z 
+2026-01-14T20:13:09.2510210Z     def test_pdfminer_cli(self):
+2026-01-14T20:13:09.2510440Z         """Make sure pdfminer command line output is correct."""
+2026-01-14T20:13:09.2510770Z >       self.compare_cli_output(self.raw_text_filename, method="pdfminer")
+2026-01-14T20:13:09.2510980Z 
+2026-01-14T20:13:09.2511050Z tests/test_pdf.py:42: 
+2026-01-14T20:13:09.2511250Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-01-14T20:13:09.2511510Z tests/base.py:162: in compare_cli_output
+2026-01-14T20:13:09.2511710Z     self.assertSuccessfulCommand(
+2026-01-14T20:13:09.2511940Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-01-14T20:13:09.2512140Z 
+2026-01-14T20:13:09.2512270Z self = <tests.test_pdf.PdfTestCase testMethod=test_pdfminer_cli>
+2026-01-14T20:13:09.2513000Z command = "diff --ignore-blank-lines '/var/folders/kg/7q73ww8s3llgyl61c9z_j5g40000gn/T/tmptvxkuwel' '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text-m=pdfminer.txt'"
+2026-01-14T20:13:09.2513530Z 
+2026-01-14T20:13:09.2513700Z     def assertSuccessfulCommand(self, command):  # noqa: D102, N802, PLR6301
+2026-01-14T20:13:09.2514060Z >       assert subprocess.call(command, shell=True) == 0, (  # noqa: S602
+2026-01-14T20:13:09.2514350Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-01-14T20:13:09.2514590Z             "COMMAND FAILED: {command}".format(**locals())
+2026-01-14T20:13:09.2514930Z         )
+2026-01-14T20:13:09.2515520Z E       AssertionError: COMMAND FAILED: diff --ignore-blank-lines '/var/folders/kg/7q73ww8s3llgyl61c9z_j5g40000gn/T/tmptvxkuwel' '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text-m=pdfminer.txt'
+2026-01-14T20:13:09.2516100Z 
+2026-01-14T20:13:09.2516170Z tests/base.py:136: AssertionError
+2026-01-14T20:13:09.2516430Z ----------------------------- Captured stdout call -----------------------------
+2026-01-14T20:13:09.2516690Z 2a3
+2026-01-14T20:13:09.2516800Z > 	
+2026-01-14T20:13:09.2516950Z   
+2026-01-14T20:13:09.2517070Z 8c9
+2026-01-14T20:13:09.2517290Z < Semiotics church-key VHS, Truffaut cliche actually vegan. Cray Austin 
+2026-01-14T20:13:09.2517570Z ---
+2026-01-14T20:13:09.2517680Z > 	
+2026-01-14T20:13:09.2517800Z   
+2026-01-14T20:13:09.2517930Z 9a11
+2026-01-14T20:13:09.2518150Z > Semiotics church-key VHS, Truffaut cliche actually vegan. Cray Austin 
+2026-01-14T20:13:09.2518460Z 44,45d30
+2026-01-14T20:13:09.2518570Z < 	
+2026-01-14T20:13:09.2518680Z   
+2026-01-14T20:13:09.2518790Z < 	
+2026-01-14T20:13:09.2518900Z   
+2026-01-14T20:13:09.2519100Z _______________________ PdfTestCase.test_pdfminer_python _______________________
+2026-01-14T20:13:09.2519320Z 
+2026-01-14T20:13:09.2519470Z self = <tests.test_pdf.PdfTestCase testMethod=test_pdfminer_python>
+2026-01-14T20:13:09.2519720Z 
+2026-01-14T20:13:09.2519780Z     def test_pdfminer_python(self):
+2026-01-14T20:13:09.2520040Z         """Make sure pdfminer python output is correct."""
+2026-01-14T20:13:09.2520360Z >       self.compare_python_output(self.raw_text_filename, method="pdfminer")
+2026-01-14T20:13:09.2520620Z 
+2026-01-14T20:13:09.2520670Z tests/test_pdf.py:38: 
+2026-01-14T20:13:09.2520890Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-01-14T20:13:09.2521070Z 
+2026-01-14T20:13:09.2521200Z self = <tests.test_pdf.PdfTestCase testMethod=test_pdfminer_python>
+2026-01-14T20:13:09.2521590Z filename = '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text.pdf'
+2026-01-14T20:13:09.2522060Z expected_filename = '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text-m=pdfminer.txt'
+2026-01-14T20:13:09.2522420Z kwargs = {'method': 'pdfminer'}
+2026-01-14T20:13:09.2523330Z result = b"I\t\n \xc2\xa0love\t\n \xc2\xa0word\t\n \xc2\xa0documents.\t\n \xc2\xa0They\t\n \xc2\xa0are\t\n \xc2\xa0lovely.\t\n ...le dummy text for your mockup? How quaint. \nI bet you\xe2\x80\x99re still using Bootstrap too\xe2\x80\xa6 \n \xc2\xa0"
+2026-01-14T20:13:09.2524620Z expected_content = b"I\t\r \xc2\xa0love\t\r \xc2\xa0word\t\r \xc2\xa0documents.\t\r \xc2\xa0They\t\r \xc2\xa0are\t\r \xc2\xa0lovely.\t\r ...r your mockup? How quaint. \n\nI bet you\xe2\x80\x99re still using Bootstrap too\xe2\x80\xa6 \n\n\t\r \xc2\xa0\n\n\x0c"
+2026-01-14T20:13:09.2525810Z expected = b"I\t\n \xc2\xa0love\t\n \xc2\xa0word\t\n \xc2\xa0documents.\t\n \xc2\xa0They\t\n \xc2\xa0are\t\n \xc2\xa0lovely.\t\n ...le dummy text for your mockup? How quaint. \nI bet you\xe2\x80\x99re still using Bootstrap too\xe2\x80\xa6 \n \xc2\xa0"
+2026-01-14T20:13:09.2526450Z 
+2026-01-14T20:13:09.2526650Z     def compare_python_output(self, filename, expected_filename=None, **kwargs):  # noqa: D102
+2026-01-14T20:13:09.2527000Z         if expected_filename is None:
+2026-01-14T20:13:09.2527270Z             expected_filename = self.get_expected_filename(filename, **kwargs)
+2026-01-14T20:13:09.2527540Z     
+2026-01-14T20:13:09.2527680Z         result = textract.process(filename, **kwargs)
+2026-01-14T20:13:09.2527980Z         expected_content = pathlib.Path(expected_filename).read_bytes()
+2026-01-14T20:13:09.2528240Z         result = self.clean_text(result)
+2026-01-14T20:13:09.2528450Z         expected = self.clean_text(expected_content)
+2026-01-14T20:13:09.2528660Z >       assert result == expected
+2026-01-14T20:13:09.2528830Z                ^^^^^^^^^^^^^^^^^^
+2026-01-14T20:13:09.2528990Z E       AssertionError
+2026-01-14T20:13:09.2529080Z 
+2026-01-14T20:13:09.2529140Z tests/base.py:177: AssertionError
+2026-01-14T20:13:09.2529590Z ________________________ PdfTestCase.test_raw_text_cli _________________________
+2026-01-14T20:13:09.2529810Z 
+2026-01-14T20:13:09.2529940Z self = <tests.test_pdf.PdfTestCase testMethod=test_raw_text_cli>
+2026-01-14T20:13:09.2530130Z 
+2026-01-14T20:13:09.2530190Z     def test_raw_text_cli(self):
+2026-01-14T20:13:09.2530400Z         """Make sure raw text matches from the command line."""
+2026-01-14T20:13:09.2530660Z >       self.compare_cli_output(self.raw_text_filename)
+2026-01-14T20:13:09.2530830Z 
+2026-01-14T20:13:09.2530880Z tests/base.py:88: 
+2026-01-14T20:13:09.2531060Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-01-14T20:13:09.2531300Z tests/base.py:162: in compare_cli_output
+2026-01-14T20:13:09.2531500Z     self.assertSuccessfulCommand(
+2026-01-14T20:13:09.2531730Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-01-14T20:13:09.2531900Z 
+2026-01-14T20:13:09.2532020Z self = <tests.test_pdf.PdfTestCase testMethod=test_raw_text_cli>
+2026-01-14T20:13:09.2532640Z command = "diff --ignore-blank-lines '/var/folders/kg/7q73ww8s3llgyl61c9z_j5g40000gn/T/tmph8qc0tp7' '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text.txt'"
+2026-01-14T20:13:09.2533130Z 
+2026-01-14T20:13:09.2533280Z     def assertSuccessfulCommand(self, command):  # noqa: D102, N802, PLR6301
+2026-01-14T20:13:09.2533630Z >       assert subprocess.call(command, shell=True) == 0, (  # noqa: S602
+2026-01-14T20:13:09.2533900Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-01-14T20:13:09.2534140Z             "COMMAND FAILED: {command}".format(**locals())
+2026-01-14T20:13:09.2534330Z         )
+2026-01-14T20:13:09.2534890Z E       AssertionError: COMMAND FAILED: diff --ignore-blank-lines '/var/folders/kg/7q73ww8s3llgyl61c9z_j5g40000gn/T/tmph8qc0tp7' '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text.txt'
+2026-01-14T20:13:09.2535440Z 
+2026-01-14T20:13:09.2535500Z tests/base.py:136: AssertionError
+2026-01-14T20:13:09.2535750Z ----------------------------- Captured stdout call -----------------------------
+2026-01-14T20:13:09.2536110Z 2a3
+2026-01-14T20:13:09.2536200Z > 	
+2026-01-14T20:13:09.2536420Z   
+2026-01-14T20:13:09.2536510Z 4,43c5,7
+2026-01-14T20:13:09.2536680Z < Sample text is hard. That’s 
+2026-01-14T20:13:09.2537100Z < where http://hipsum.co comes 
+2026-01-14T20:13:09.2537280Z < in handy. 
+2026-01-14T20:13:09.2537390Z < 
+2026-01-14T20:13:09.2537580Z < Semiotics church-key VHS, Truffaut cliche actually vegan. Cray Austin 
+2026-01-14T20:13:09.2537830Z < 
+2026-01-14T20:13:09.2538070Z < pop-up disrupt letterpress, kitsch fixie Cosby sweater cliche craft beer 
+2026-01-14T20:13:09.2538330Z < 
+2026-01-14T20:13:09.2538510Z < PBR&B. Gentrify cornhole Tonx McSweeney's, Shoreditch keffiyeh 
+2026-01-14T20:13:09.2538740Z < 
+2026-01-14T20:13:09.2538940Z < ethnic Marfa 90's kogi American Apparel. Shabby chic distillery church-
+2026-01-14T20:13:09.2539180Z < 
+2026-01-14T20:13:09.2539390Z < key locavore beard, food truck chillwave sartorial deep v flannel authentic 
+2026-01-14T20:13:09.2539660Z < 
+2026-01-14T20:13:09.2539850Z < Tumblr narwhal kogi organic. Cred vegan jean shorts Banksy forage 
+2026-01-14T20:13:09.2540080Z < 
+2026-01-14T20:13:09.2540270Z < Neutra dreamcatcher, hashtag Bushwick polaroid pork belly flannel 
+2026-01-14T20:13:09.2540510Z < 
+2026-01-14T20:13:09.2540710Z < keytar Portland post-ironic. Cred hoodie vegan, food truck leggings 
+2026-01-14T20:13:09.2540960Z < 
+2026-01-14T20:13:09.2541170Z < Austin pour-over banjo trust fund before they sold out cray Intelligentsia 
+2026-01-14T20:13:09.2541430Z < 
+2026-01-14T20:13:09.2541620Z < plaid typewriter. Williamsburg XOXO plaid Carles Austin tofu. 
+2026-01-14T20:13:09.2541850Z < 
+2026-01-14T20:13:09.2542040Z < Carles Tonx keffiyeh, leggings 90's lo-fi kogi viral semiotics Brooklyn 
+2026-01-14T20:13:09.2542300Z < 
+2026-01-14T20:13:09.2542500Z < biodiesel tousled bespoke kitsch. Vinyl Tonx art party Thundercats retro, 
+2026-01-14T20:13:09.2542760Z < 
+2026-01-14T20:13:09.2543160Z < viral asymmetrical artisan bicycle rights bitters master cleanse Kickstarter 
+2026-01-14T20:13:09.2543440Z < 
+2026-01-14T20:13:09.2543640Z < YOLO. Seitan street art semiotics twee skateboard, PBR&B VHS hashtag 
+2026-01-14T20:13:09.2543880Z < 
+2026-01-14T20:13:09.2544090Z < meh. Thundercats semiotics shabby chic forage single-origin coffee retro, 
+2026-01-14T20:13:09.2544350Z < 
+2026-01-14T20:13:09.2544540Z < 3 wolf moon iPhone mumblecore 90's trust fund Intelligentsia. Beard 
+2026-01-14T20:13:09.2544790Z < 
+2026-01-14T20:13:09.2544980Z < gluten-free seitan, VHS sartorial pork belly gastropub meh whatever 
+2026-01-14T20:13:09.2545230Z < 
+2026-01-14T20:13:09.2545430Z < authentic synth. Beard single-origin coffee irony fixie, before they sold 
+2026-01-14T20:13:09.2545690Z < 
+2026-01-14T20:13:09.2545780Z ---
+2026-01-14T20:13:09.2545940Z > Sample text is hard. That’s
+2026-01-14T20:13:09.2546130Z > where http://hipsum.co comes
+2026-01-14T20:13:09.2546280Z > in handy.
+2026-01-14T20:13:09.2546390Z 45,46d8
+2026-01-14T20:13:09.2546490Z < 	
+2026-01-14T20:13:09.2546590Z   
+2026-01-14T20:13:09.2546800Z < out Pitchfork kitsch readymade. Helvetica butcher wayfarers, lomo artisan 
+2026-01-14T20:13:09.2547080Z 48c10,26
+2026-01-14T20:13:09.2547250Z < hashtag Brooklyn four loko fanny pack 90's mustache 8-bit. 
+2026-01-14T20:13:09.2547470Z ---
+2026-01-14T20:13:09.2547660Z > Semiotics church-key VHS, Truffaut cliche actually vegan. Cray Austin
+2026-01-14T20:13:09.2548020Z > pop-up disrupt letterpress, kitsch fixie Cosby sweater cliche craft beer
+2026-01-14T20:13:09.2548360Z > PBR&B. Gentrify cornhole Tonx McSweeney's, Shoreditch keffiyeh
+2026-01-14T20:13:09.2548890Z > ethnic Marfa 90's kogi American Apparel. Shabby chic distillery churchkey locavore beard, food truck chillwave sartorial deep v flannel authentic
+2026-01-14T20:13:09.2549440Z > Tumblr narwhal kogi organic. Cred vegan jean shorts Banksy forage
+2026-01-14T20:13:09.2550150Z > Neutra dreamcatcher, hashtag Bushwick polaroid pork belly flannel
+2026-01-14T20:13:09.2550560Z > keytar Portland post-ironic. Cred hoodie vegan, food truck leggings
+2026-01-14T20:13:09.2550940Z > Austin pour-over banjo trust fund before they sold out cray Intelligentsia
+2026-01-14T20:13:09.2551290Z > plaid typewriter. Williamsburg XOXO plaid Carles Austin tofu.
+2026-01-14T20:13:09.2552060Z > Carles Tonx keffiyeh, leggings 90's lo-fi kogi viral semiotics Brooklyn
+2026-01-14T20:13:09.2552440Z > biodiesel tousled bespoke kitsch. Vinyl Tonx art party Thundercats retro,
+2026-01-14T20:13:09.2552830Z > viral asymmetrical artisan bicycle rights bitters master cleanse Kickstarter
+2026-01-14T20:13:09.2553200Z > YOLO. Seitan street art semiotics twee skateboard, PBR&B VHS hashtag
+2026-01-14T20:13:09.2553560Z > meh. Thundercats semiotics shabby chic forage single-origin coffee retro,
+2026-01-14T20:13:09.2553930Z > 3 wolf moon iPhone mumblecore 90's trust fund Intelligentsia. Beard
+2026-01-14T20:13:09.2554280Z > gluten-free seitan, VHS sartorial pork belly gastropub meh whatever
+2026-01-14T20:13:09.2554650Z > authentic synth. Beard single-origin coffee irony fixie, before they sold
+2026-01-14T20:13:09.2554920Z 50,89c28,48
+2026-01-14T20:13:09.2555120Z < Meh jean shorts selfies, crucifix selvage Helvetica Carles PBR Vice 
+2026-01-14T20:13:09.2555500Z < 
+2026-01-14T20:13:09.2555730Z < Banksy roof party master cleanse ugh PBR&B. Lo-fi freegan salvia photo 
+2026-01-14T20:13:09.2556020Z < 
+2026-01-14T20:13:09.2556250Z < booth, Wes Anderson skateboard Odd Future. Etsy art party Bushwick 
+2026-01-14T20:13:09.2556590Z < 
+2026-01-14T20:13:09.2556820Z < keffiyeh. Pork belly 3 wolf moon butcher mustache. YOLO raw denim lo-
+2026-01-14T20:13:09.2557090Z < 
+2026-01-14T20:13:09.2557310Z < fi, hoodie gentrify Schlitz 8-bit sriracha Shoreditch retro brunch. 
+2026-01-14T20:13:09.2557600Z < 
+2026-01-14T20:13:09.2557840Z < Williamsburg farm-to-table beard, mlkshk Banksy fap kogi Etsy art party 
+2026-01-14T20:13:09.2558140Z < 
+2026-01-14T20:13:09.2558360Z < squid semiotics. XOXO church-key Pitchfork mlkshk irony tote bag. 
+2026-01-14T20:13:09.2564970Z < 
+2026-01-14T20:13:09.2565240Z < Farm-to-table brunch tattooed hoodie keytar, literally selvage authentic 
+2026-01-14T20:13:09.2565500Z < 
+2026-01-14T20:13:09.2565710Z < trust fund deep v Thundercats Kickstarter narwhal locavore. Swag disrupt 
+2026-01-14T20:13:09.2565960Z < 
+2026-01-14T20:13:09.2566140Z < chambray, leggings shabby chic gastropub YOLO plaid hoodie 
+2026-01-14T20:13:09.2566370Z < 
+2026-01-14T20:13:09.2566570Z < Williamsburg Godard mixtape. Retro Godard keytar biodiesel, freegan 
+2026-01-14T20:13:09.2566820Z < 
+2026-01-14T20:13:09.2567000Z < paleo Etsy you probably haven't heard of them Pitchfork Schlitz 
+2026-01-14T20:13:09.2567230Z < 
+2026-01-14T20:13:09.2567430Z < readymade small batch cred. Pug trust fund paleo, 90's fixie typewriter 
+2026-01-14T20:13:09.2567690Z < 
+2026-01-14T20:13:09.2567880Z < next level banjo. Banksy occupy authentic master cleanse Bushwick 
+2026-01-14T20:13:09.2568120Z < 
+2026-01-14T20:13:09.2568330Z < fingerstache selfies, direct trade craft beer cliche +1 cray. Locavore four 
+2026-01-14T20:13:09.2568600Z < 
+2026-01-14T20:13:09.2568790Z < loko biodiesel Neutra chia mlkshk. Fanny pack YOLO Portland, mlkshk 
+2026-01-14T20:13:09.2569040Z < 
+2026-01-14T20:13:09.2569220Z < PBR&B single-origin coffee drinking vinegar 8-bit flannel gentrify 
+2026-01-14T20:13:09.2569460Z < 
+2026-01-14T20:13:09.2569570Z < stumptown pop-up. 
+2026-01-14T20:13:09.2569710Z < 
+2026-01-14T20:13:09.2569870Z < Oh. You need a little dummy text for your mockup? How quaint. 
+2026-01-14T20:13:09.2570090Z < 
+2026-01-14T20:13:09.2570450Z < I bet you’re still using Bootstrap too… 
+2026-01-14T20:13:09.2570620Z < 
+2026-01-14T20:13:09.2570710Z ---
+2026-01-14T20:13:09.2570920Z > out Pitchfork kitsch readymade. Helvetica butcher wayfarers, lomo artisan
+2026-01-14T20:13:09.2571590Z > hashtag Brooklyn four loko fanny pack 90's mustache 8-bit.
+2026-01-14T20:13:09.2571900Z > Meh jean shorts selfies, crucifix selvage Helvetica Carles PBR Vice
+2026-01-14T20:13:09.2572240Z > Banksy roof party master cleanse ugh PBR&B. Lo-fi freegan salvia photo
+2026-01-14T20:13:09.2572590Z > booth, Wes Anderson skateboard Odd Future. Etsy art party Bushwick
+2026-01-14T20:13:09.2573090Z > keffiyeh. Pork belly 3 wolf moon butcher mustache. YOLO raw denim lofi, hoodie gentrify Schlitz 8-bit sriracha Shoreditch retro brunch.
+2026-01-14T20:13:09.2573950Z > Williamsburg farm-to-table beard, mlkshk Banksy fap kogi Etsy art party
+2026-01-14T20:13:09.2574320Z > squid semiotics. XOXO church-key Pitchfork mlkshk irony tote bag.
+2026-01-14T20:13:09.2574670Z > Farm-to-table brunch tattooed hoodie keytar, literally selvage authentic
+2026-01-14T20:13:09.2575030Z > trust fund deep v Thundercats Kickstarter narwhal locavore. Swag disrupt
+2026-01-14T20:13:09.2575350Z > chambray, leggings shabby chic gastropub YOLO plaid hoodie
+2026-01-14T20:13:09.2575680Z > Williamsburg Godard mixtape. Retro Godard keytar biodiesel, freegan
+2026-01-14T20:13:09.2576010Z > paleo Etsy you probably haven't heard of them Pitchfork Schlitz
+2026-01-14T20:13:09.2576360Z > readymade small batch cred. Pug trust fund paleo, 90's fixie typewriter
+2026-01-14T20:13:09.2576700Z > next level banjo. Banksy occupy authentic master cleanse Bushwick
+2026-01-14T20:13:09.2577060Z > fingerstache selfies, direct trade craft beer cliche +1 cray. Locavore four
+2026-01-14T20:13:09.2577430Z > loko biodiesel Neutra chia mlkshk. Fanny pack YOLO Portland, mlkshk
+2026-01-14T20:13:09.2577770Z > PBR&B single-origin coffee drinking vinegar 8-bit flannel gentrify
+2026-01-14T20:13:09.2578030Z > stumptown pop-up.
+2026-01-14T20:13:09.2578230Z > Oh. You need a little dummy text for your mockup? How quaint.
+2026-01-14T20:13:09.2578540Z > I bet you’re still using Bootstrap too…
+2026-01-14T20:13:09.2578830Z _______________________ PdfTestCase.test_raw_text_python _______________________
+2026-01-14T20:13:09.2579070Z 
+2026-01-14T20:13:09.2579210Z self = <tests.test_pdf.PdfTestCase testMethod=test_raw_text_python>
+2026-01-14T20:13:09.2579420Z 
+2026-01-14T20:13:09.2579490Z     def test_raw_text_python(self):
+2026-01-14T20:13:09.2579890Z         """Make sure raw text matches from python."""
+2026-01-14T20:13:09.2580170Z >       self.compare_python_output(self.raw_text_filename)
+2026-01-14T20:13:09.2580350Z 
+2026-01-14T20:13:09.2580400Z tests/base.py:92: 
+2026-01-14T20:13:09.2580600Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-01-14T20:13:09.2580790Z 
+2026-01-14T20:13:09.2580930Z self = <tests.test_pdf.PdfTestCase testMethod=test_raw_text_python>
+2026-01-14T20:13:09.2581330Z filename = '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text.pdf'
+2026-01-14T20:13:09.2581760Z expected_filename = '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text.txt'
+2026-01-14T20:13:09.2582080Z kwargs = {}
+2026-01-14T20:13:09.2582710Z result = b"I\t\n \xc2\xa0love\t\n \xc2\xa0word\t\n \xc2\xa0documents.\t\n \xc2\xa0They\t\n \xc2\xa0are\t\n \xc2\xa0lovely.\t\n ...le dummy text for your mockup? How quaint. \nI bet you\xe2\x80\x99re still using Bootstrap too\xe2\x80\xa6 \n \xc2\xa0"
+2026-01-14T20:13:09.2583980Z expected_content = b"I\t\r \xc2\xa0love\t\r \xc2\xa0word\t\r \xc2\xa0documents.\t\r \xc2\xa0They\t\r \xc2\xa0are\t\r \xc2\xa0lovely.\t\r ...ext for your mockup? How quaint.\nI bet you\xe2\x80\x99re still using Bootstrap too\xe2\x80\xa6\n\t\r \xc2\xa0\n\n\x0c"
+2026-01-14T20:13:09.2585220Z expected = b"I\t\n \xc2\xa0love\t\n \xc2\xa0word\t\n \xc2\xa0documents.\t\n \xc2\xa0They\t\n \xc2\xa0are\t\n \xc2\xa0lovely.\t\n ...ttle dummy text for your mockup? How quaint.\nI bet you\xe2\x80\x99re still using Bootstrap too\xe2\x80\xa6\n \xc2\xa0"
+2026-01-14T20:13:09.2585860Z 
+2026-01-14T20:13:09.2586050Z     def compare_python_output(self, filename, expected_filename=None, **kwargs):  # noqa: D102
+2026-01-14T20:13:09.2586410Z         if expected_filename is None:
+2026-01-14T20:13:09.2586690Z             expected_filename = self.get_expected_filename(filename, **kwargs)
+2026-01-14T20:13:09.2586940Z     
+2026-01-14T20:13:09.2587090Z         result = textract.process(filename, **kwargs)
+2026-01-14T20:13:09.2587390Z         expected_content = pathlib.Path(expected_filename).read_bytes()
+2026-01-14T20:13:09.2587660Z         result = self.clean_text(result)
+2026-01-14T20:13:09.2587890Z         expected = self.clean_text(expected_content)
+2026-01-14T20:13:09.2588100Z >       assert result == expected
+2026-01-14T20:13:09.2588560Z                ^^^^^^^^^^^^^^^^^^
+2026-01-14T20:13:09.2588740Z E       AssertionError
+2026-01-14T20:13:09.2588840Z 
+2026-01-14T20:13:09.2588900Z tests/base.py:177: AssertionError
+2026-01-14T20:13:09.2589170Z ____________________ PdfTestCase.test_standardized_text_cli ____________________
+2026-01-14T20:13:09.2589380Z 
+2026-01-14T20:13:09.2589530Z self = <tests.test_pdf.PdfTestCase testMethod=test_standardized_text_cli>
+2026-01-14T20:13:09.2589750Z 
+2026-01-14T20:13:09.2589810Z     def test_standardized_text_cli(self):
+2026-01-14T20:13:09.2590060Z         """Make sure standardized text matches from the command line."""
+2026-01-14T20:13:09.2590360Z         temp_filename = self.assertSuccessfulTextract(
+2026-01-14T20:13:09.2590590Z             self.standardized_text_filename,
+2026-01-14T20:13:09.2590780Z             cleanup=False,
+2026-01-14T20:13:09.2590920Z         )
+2026-01-14T20:13:09.2591050Z         assert temp_filename is not None
+2026-01-14T20:13:09.2591270Z         content = pathlib.Path(temp_filename).read_bytes()
+2026-01-14T20:13:09.2591510Z         expected = self.get_standardized_text()
+2026-01-14T20:13:09.2591740Z >       assert six.b("").join(content.split()) == expected
+2026-01-14T20:13:09.2591970Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-01-14T20:13:09.2592170Z E       AssertionError
+2026-01-14T20:13:09.2592270Z 
+2026-01-14T20:13:09.2592330Z tests/base.py:103: AssertionError
+2026-01-14T20:13:09.2592590Z __________________ PdfTestCase.test_standardized_text_python ___________________
+2026-01-14T20:13:09.2592830Z 
+2026-01-14T20:13:09.2593080Z self = <tests.test_pdf.PdfTestCase testMethod=test_standardized_text_python>
+2026-01-14T20:13:09.2593750Z 
+2026-01-14T20:13:09.2593840Z     def test_standardized_text_python(self):
+2026-01-14T20:13:09.2594080Z         """Make sure standardized text matches from python."""
+2026-01-14T20:13:09.2594360Z         result = textract.process(self.standardized_text_filename)
+2026-01-14T20:13:09.2594630Z         expected = self.get_standardized_text()
+2026-01-14T20:13:09.2594870Z >       assert six.b("").join(result.split()) == expected
+2026-01-14T20:13:09.2595110Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-01-14T20:13:09.2595300Z E       AssertionError
+2026-01-14T20:13:09.2595390Z 
+2026-01-14T20:13:09.2595460Z tests/base.py:110: AssertionError
+2026-01-14T20:13:09.2595710Z _________________________ PdfTestCase.test_two_column __________________________
+2026-01-14T20:13:09.2595920Z 
+2026-01-14T20:13:09.2596040Z self = <tests.test_pdf.PdfTestCase testMethod=test_two_column>
+2026-01-14T20:13:09.2596230Z 
+2026-01-14T20:13:09.2596290Z     def test_two_column(self):
+2026-01-14T20:13:09.2596500Z         """Preserve two column layout in extraction."""
+2026-01-14T20:13:09.2596750Z         d = pathlib.Path(self.get_extension_directory())
+2026-01-14T20:13:09.2596980Z         filename = str(d / "two_column.pdf")
+2026-01-14T20:13:09.2597220Z >       self.compare_python_output(filename, layout=True)
+2026-01-14T20:13:09.2597380Z 
+2026-01-14T20:13:09.2597440Z tests/test_pdf.py:61: 
+2026-01-14T20:13:09.2597640Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-01-14T20:13:09.2597820Z 
+2026-01-14T20:13:09.2597940Z self = <tests.test_pdf.PdfTestCase testMethod=test_two_column>
+2026-01-14T20:13:09.2598290Z filename = '/Users/runner/work/textract-py3/textract-py3/tests/pdf/two_column.pdf'
+2026-01-14T20:13:09.2598740Z expected_filename = '/Users/runner/work/textract-py3/textract-py3/tests/pdf/two_column.txt'
+2026-01-14T20:13:09.2599070Z kwargs = {'layout': True}
+2026-01-14T20:13:09.2599760Z result = b'LETTERS\nVol 465 | 3 June 2010 | doi:10.1038/nature09040\nThe role of mentorship in prote\xc2\xb4ge\xc2\xb4 performa...he 1,000 realizations generated for our null\nmodels.\n\xc2\xa92010\nMacmillan Publishers Limited. All rights reserved'
+2026-01-14T20:13:09.2601060Z expected_content = b'                                                                                                                    ...                                                  \xc2\xa92010 Macmillan Publishers Limited. All rights reserved\n\x0c'
+2026-01-14T20:13:09.2601820Z expected = b'                                                                                                                    ...s.\n                                                    \xc2\xa92010 Macmillan Publishers Limited. All rights reserved'
+2026-01-14T20:13:09.2602220Z 
+2026-01-14T20:13:09.2602410Z     def compare_python_output(self, filename, expected_filename=None, **kwargs):  # noqa: D102
+2026-01-14T20:13:09.2602740Z         if expected_filename is None:
+2026-01-14T20:13:09.2603010Z             expected_filename = self.get_expected_filename(filename, **kwargs)
+2026-01-14T20:13:09.2603320Z     
+2026-01-14T20:13:09.2603480Z         result = textract.process(filename, **kwargs)
+2026-01-14T20:13:09.2603770Z         expected_content = pathlib.Path(expected_filename).read_bytes()
+2026-01-14T20:13:09.2604040Z         result = self.clean_text(result)
+2026-01-14T20:13:09.2604260Z         expected = self.clean_text(expected_content)
+2026-01-14T20:13:09.2604460Z >       assert result == expected
+2026-01-14T20:13:09.2604620Z                ^^^^^^^^^^^^^^^^^^
+2026-01-14T20:13:09.2604780Z E       AssertionError
+2026-01-14T20:13:09.2604870Z 
+2026-01-14T20:13:09.2604930Z tests/base.py:177: AssertionError
+2026-01-14T20:13:09.2605150Z =============================== warnings summary ===============================
+2026-01-14T20:13:09.2605470Z tests/test_epub.py::EpubTestCase::test_raw_text_python
+2026-01-14T20:13:09.2605760Z tests/test_epub.py::EpubTestCase::test_standardized_text_python
+2026-01-14T20:13:09.2606390Z   /Users/runner/work/textract-py3/textract-py3/textract/parsers/epub_parser.py:31: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+2026-01-14T20:13:09.2607070Z   
+2026-01-14T20:13:09.2607870Z   Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+2026-01-14T20:13:09.2608740Z   
+2026-01-14T20:13:09.2609210Z   If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+2026-01-14T20:13:09.2609740Z   
+2026-01-14T20:13:09.2609880Z       from bs4 import XMLParsedAsHTMLWarning
+2026-01-14T20:13:09.2610080Z       import warnings
+2026-01-14T20:13:09.2610210Z   
+2026-01-14T20:13:09.2610420Z       warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+2026-01-14T20:13:09.2610700Z   
+2026-01-14T20:13:09.2610860Z     meta_soup = BeautifulSoup(meta_inf, features="lxml")
+2026-01-14T20:13:09.2611030Z 
+2026-01-14T20:13:09.2611140Z tests/test_epub.py::EpubTestCase::test_raw_text_python
+2026-01-14T20:13:09.2611670Z tests/test_epub.py::EpubTestCase::test_standardized_text_python
+2026-01-14T20:13:09.2612300Z   /Users/runner/work/textract-py3/textract-py3/textract/parsers/epub_parser.py:43: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+2026-01-14T20:13:09.2612860Z   
+2026-01-14T20:13:09.2613680Z   Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+2026-01-14T20:13:09.2614550Z   
+2026-01-14T20:13:09.2615010Z   If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+2026-01-14T20:13:09.2615540Z   
+2026-01-14T20:13:09.2615680Z       from bs4 import XMLParsedAsHTMLWarning
+2026-01-14T20:13:09.2615880Z       import warnings
+2026-01-14T20:13:09.2616020Z   
+2026-01-14T20:13:09.2616510Z       warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+2026-01-14T20:13:09.2616800Z   
+2026-01-14T20:13:09.2616970Z     opf_soup = BeautifulSoup(book.open(opf_path), "lxml")
+2026-01-14T20:13:09.2617150Z 
+2026-01-14T20:13:09.2617260Z tests/test_epub.py::EpubTestCase::test_raw_text_python
+2026-01-14T20:13:09.2617570Z tests/test_epub.py::EpubTestCase::test_standardized_text_python
+2026-01-14T20:13:09.2618210Z   /Users/runner/work/textract-py3/textract-py3/textract/parsers/epub_parser.py:17: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+2026-01-14T20:13:09.2618750Z   
+2026-01-14T20:13:09.2619560Z   Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+2026-01-14T20:13:09.2620470Z   
+2026-01-14T20:13:09.2620940Z   If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+2026-01-14T20:13:09.2621470Z   
+2026-01-14T20:13:09.2621600Z       from bs4 import XMLParsedAsHTMLWarning
+2026-01-14T20:13:09.2621790Z       import warnings
+2026-01-14T20:13:09.2621930Z   
+2026-01-14T20:13:09.2622130Z       warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+2026-01-14T20:13:09.2622400Z   
+2026-01-14T20:13:09.2622570Z     soup = BeautifulSoup(book.open(text_name), features="lxml")
+2026-01-14T20:13:09.2622960Z 
+2026-01-14T20:13:09.2623130Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-01-14T20:13:09.2623470Z =========================== short test summary info ============================
+2026-01-14T20:13:09.2624320Z FAILED tests/test_pdf.py::PdfTestCase::test_filename_spaces - AssertionError: COMMAND FAILED: diff --ignore-blank-lines '/var/folders/kg/7q73ww8s3llgyl61c9z_j5g40000gn/T/tmp2gh23ogv' '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text.txt'
+2026-01-14T20:13:09.2625740Z FAILED tests/test_pdf.py::PdfTestCase::test_pdfminer_cli - AssertionError: COMMAND FAILED: diff --ignore-blank-lines '/var/folders/kg/7q73ww8s3llgyl61c9z_j5g40000gn/T/tmptvxkuwel' '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text-m=pdfminer.txt'
+2026-01-14T20:13:09.2626630Z FAILED tests/test_pdf.py::PdfTestCase::test_pdfminer_python - AssertionError
+2026-01-14T20:13:09.2627480Z FAILED tests/test_pdf.py::PdfTestCase::test_raw_text_cli - AssertionError: COMMAND FAILED: diff --ignore-blank-lines '/var/folders/kg/7q73ww8s3llgyl61c9z_j5g40000gn/T/tmph8qc0tp7' '/Users/runner/work/textract-py3/textract-py3/tests/pdf/raw_text.txt'
+2026-01-14T20:13:09.2636040Z FAILED tests/test_pdf.py::PdfTestCase::test_raw_text_python - AssertionError
+2026-01-14T20:13:09.2636480Z FAILED tests/test_pdf.py::PdfTestCase::test_standardized_text_cli - AssertionError
+2026-01-14T20:13:09.2636900Z FAILED tests/test_pdf.py::PdfTestCase::test_standardized_text_python - AssertionError
+2026-01-14T20:13:09.2637290Z FAILED tests/test_pdf.py::PdfTestCase::test_two_column - AssertionError
+2026-01-14T20:13:09.2637630Z ============= 8 failed, 68 passed, 57 skipped, 6 warnings in 8.75s =============

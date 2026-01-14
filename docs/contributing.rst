@@ -61,3 +61,38 @@ System dependencies
 Some parsers require system-level dependencies. See the
 :ref:`installation <installation>` guide for details on installing
 these for your operating system.
+
+
+.. _contributing-release:
+
+Releasing
+---------
+
+This project uses `commitizen <https://commitizen-tools.github.io/commitizen/>`_
+for version management. Commitizen automatically updates version numbers in
+``pyproject.toml`` and ``textract/__init__.py``.
+
+To bump the version:
+
+.. code-block:: bash
+
+    # Show current version
+    uv run cz version
+
+    # Bump version (prompts for version type)
+    uv run cz bump
+
+    # Bump specific version types
+    uv run cz bump --increment PATCH  # 2.1.1 -> 2.1.2
+    uv run cz bump --increment MINOR  # 2.1.1 -> 2.2.0
+    uv run cz bump --increment MAJOR  # 2.1.1 -> 3.0.0
+
+    # Preview without committing
+    uv run cz bump --dry-run
+
+After bumping the version, build and publish:
+
+.. code-block:: bash
+
+    uv build
+    uv publish
