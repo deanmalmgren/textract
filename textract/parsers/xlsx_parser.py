@@ -1,4 +1,4 @@
-import six
+import six  # noqa: D100
 import xlrd
 from six.moves import xrange
 
@@ -8,7 +8,7 @@ from .utils import BaseParser
 class Parser(BaseParser):
     """Extract text from Excel files (.xls/xlsx)."""
 
-    def extract(self, filename, **kwargs):
+    def extract(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002, D102, PLR6301
         workbook = xlrd.open_workbook(filename)
         sheets_name = workbook.sheet_names()
         output = "\n"

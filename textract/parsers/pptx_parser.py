@@ -1,4 +1,4 @@
-import pptx
+import pptx  # noqa: D100
 
 from .utils import BaseParser
 
@@ -6,7 +6,7 @@ from .utils import BaseParser
 class Parser(BaseParser):
     """Extract text from pptx file using python-pptx."""
 
-    def extract(self, filename, **kwargs):
+    def extract(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002, D102, PLR6301
         presentation = pptx.Presentation(filename)
         text_runs = []
         for slide in presentation.slides:

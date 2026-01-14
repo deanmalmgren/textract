@@ -1,4 +1,4 @@
-import os
+import os  # noqa: D100
 import shutil
 from tempfile import mkdtemp
 
@@ -18,9 +18,9 @@ except ImportError:
 class Parser(ShellParser):
     """Extract text from pdf files using either the ``pdftotext`` method
     (default) or the ``pdfminer`` method.
-    """
+    """  # noqa: D205
 
-    def extract(self, filename, method="", **kwargs):
+    def extract(self, filename, method="", **kwargs):  # noqa: ANN001, ANN201, D102
         if method in {"", "pdftotext"}:
             try:
                 return self.extract_pdftotext(filename, **kwargs)
@@ -28,7 +28,7 @@ class Parser(ShellParser):
                 # If pdftotext isn't installed and the pdftotext method
                 # wasn't specified, then gracefully fallback to using
                 # pdfminer instead.
-                if method == "" and ex.is_not_installed():
+                if method == "" and ex.is_not_installed():  # noqa: PLC1901
                     return self.extract_pdfminer(filename, **kwargs)
                 raise
 
@@ -39,7 +39,7 @@ class Parser(ShellParser):
         else:
             raise UnknownMethod(method)
 
-    def extract_pdftotext(self, filename, **kwargs):
+    def extract_pdftotext(self, filename, **kwargs):  # noqa: ANN001, ANN201
         """Extract text from pdfs using the pdftotext command line utility."""
         if "layout" in kwargs:
             args = ["pdftotext", "-layout", filename, "-"]
@@ -48,7 +48,7 @@ class Parser(ShellParser):
         stdout, _ = self.run(args)
         return stdout
 
-    def extract_pdfminer(self, filename, **kwargs):
+    def extract_pdfminer(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002
         """Extract text from pdfs using pdfminer."""
         # Nested try/except loops? Not great
         # Try the normal pdf2txt, if that fails try the python3
@@ -63,16 +63,16 @@ class Parser(ShellParser):
                 stdout, _ = self.run(["python2", pdf2txt_path, filename])
         return stdout
 
-    def extract_tesseract(self, filename, **kwargs):
+    def extract_tesseract(self, filename, **kwargs):  # noqa: ANN001, ANN201
         """Extract text from pdfs using tesseract (per-page OCR)."""
         temp_dir = mkdtemp()
-        base = os.path.join(temp_dir, "conv")
+        base = os.path.join(temp_dir, "conv")  # noqa: PTH118
         contents = []
         try:
             _stdout, _ = self.run(["pdftoppm", filename, base])
 
-            for page in sorted(os.listdir(temp_dir)):
-                page_path = os.path.join(temp_dir, page)
+            for page in sorted(os.listdir(temp_dir)):  # noqa: PTH208
+                page_path = os.path.join(temp_dir, page)  # noqa: PTH118
                 page_content = TesseractParser().extract(page_path, **kwargs)
                 contents.append(page_content)
             return six.b("").join(contents)

@@ -12,25 +12,25 @@ class CommandLineError(Exception):
     """The traceback of all CommandLineError's is suppressed when the errors occur on the command line.
 
     This provides a useful command line interface.
-    """
+    """  # noqa: E501
 
-    def render(self, msg: str) -> str:
+    def render(self, msg: str) -> str:  # noqa: D102
         return msg % vars(self)
 
 
-class ExtensionNotSupported(CommandLineError):
+class ExtensionNotSupported(CommandLineError):  # noqa: N818
     """Error raised when file extension is not supported."""
 
     def __init__(self, ext: str) -> None:
         """Initialize with unsupported extension."""
         self.ext = ext
 
-        from .parsers import _get_available_extensions
+        from .parsers import _get_available_extensions  # noqa: PLC0415
 
-        available_extensions = [e for e in _get_available_extensions() if e.startswith(".")]
+        available_extensions = [e for e in _get_available_extensions() if e.startswith(".")]  # noqa: E501
         self.available_extensions_str = ", ".join(available_extensions)
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # noqa: D105
         return self.render(
             "The filename extension %(ext)s is not yet supported by\n"
             "textract. Please suggest this filename extension here:\n\n"
@@ -52,14 +52,14 @@ class MissingFileError(CommandLineError):
         self.root = p.stem
         self.ext = p.suffix
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # noqa: D105
         return self.render(
             'The file "%(filename)s" can not be found.\n'
             "Is this the right path/to/file/you/want/to/extract%(ext)s?",
         )
 
 
-class UnknownMethod(CommandLineError):
+class UnknownMethod(CommandLineError):  # noqa: N818
     """Error raised when extraction method is not recognized.
 
     This error occurs when an invalid --method is specified on the command line.
@@ -69,7 +69,7 @@ class UnknownMethod(CommandLineError):
         """Initialize with unknown method name."""
         self.method = method
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # noqa: D105
         return self.render(
             'The method "%(method)s" can not be found for this filetype.',
         )
@@ -106,14 +106,14 @@ class ShellError(CommandLineError):
     def failed_message(self) -> str:
         """Format error message when command execution failed."""
         return (
-            "The command `%(command)s` failed with exit code %(exit_code)d\n"
+            "The command `%(command)s` failed with exit code %(exit_code)d\n"  # noqa: UP031
             "------------- stdout -------------\n"
             "%(stdout)s"
             "------------- stderr -------------\n"
             "%(stderr)s"
         ) % vars(self)
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # noqa: D105
         if self.is_not_installed():
             return self.not_installed_message()
         return self.failed_message()

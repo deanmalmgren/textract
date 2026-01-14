@@ -1,5 +1,5 @@
-import pathlib
-import xml.etree.ElementTree as ET
+import pathlib  # noqa: D100
+import xml.etree.ElementTree as ET  # noqa: S405
 import zipfile
 
 from .utils import BaseParser
@@ -8,15 +8,15 @@ from .utils import BaseParser
 class Parser(BaseParser):
     """Extract text from open document files."""
 
-    def extract(self, filename, **kwargs):
+    def extract(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002, D102
         # Inspiration from
         # https://github.com/odoo/odoo/blob/master/addons/document/odt2txt.py
         with pathlib.Path(filename).open("rb") as stream:
             zip_stream = zipfile.ZipFile(stream)
-            self.content = ET.fromstring(zip_stream.read("content.xml"))
+            self.content = ET.fromstring(zip_stream.read("content.xml"))  # noqa: S314
         return self.to_string()
 
-    def to_string(self):
+    def to_string(self):  # noqa: ANN201
         """Converts the document to a string."""
         buff = ""
         for child in self.content.iter():
@@ -27,7 +27,7 @@ class Parser(BaseParser):
             buff = buff[:-1]
         return buff
 
-    def text_to_string(self, element):
+    def text_to_string(self, element):  # noqa: ANN001, ANN201, D102
         buff = ""
         if element.text is not None:
             buff += element.text
@@ -48,7 +48,7 @@ class Parser(BaseParser):
             buff += element.tail
         return buff
 
-    def qn(self, namespace) -> str:
+    def qn(self, namespace) -> str:  # noqa: ANN001, PLR6301
         """Connect tag prefix to longer namespace."""
         nsmap = {
             "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",

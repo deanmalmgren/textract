@@ -1,4 +1,4 @@
-import os
+import os  # noqa: D100
 import pathlib
 
 import speech_recognition as sr
@@ -19,11 +19,11 @@ class Parser(ShellParser):
     with Rich (US English) for best results
     """
 
-    def extract(self, filename, method="", **kwargs):
+    def extract(self, filename, method="", **kwargs):  # noqa: ANN001, ANN201, D102
         speech = ""
 
         # convert to wav, if not already .wav
-        _base, ext = os.path.splitext(filename)
+        _base, ext = os.path.splitext(filename)  # noqa: PTH122
         if ext != ".wav":
             temp_filename = self.convert_to_wav(filename)
             try:
@@ -53,7 +53,7 @@ class Parser(ShellParser):
 
         return speech
 
-    def convert_to_wav(self, filename):
+    def convert_to_wav(self, filename):  # noqa: ANN001, ANN201
         """Uses sox cmdline tool, to convert audio file to .wav.
 
         Note: for testing, use -

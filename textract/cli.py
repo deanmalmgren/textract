@@ -16,19 +16,19 @@ from .parsers import DEFAULT_ENCODING, _get_available_extensions
 class AddToNamespaceAction(argparse.Action):
     """This adds KEY,VALUE arbitrary pairs to the argparse.Namespace object."""
 
-    def __call__(self, parser, namespace, values, option_string=None):
+    def __call__(self, parser, namespace, values, option_string=None):  # noqa: ANN001, ANN204, D102
         key, val = values.strip().split("=")
         if hasattr(namespace, key):
             parser.error(
-                ('Duplicate specification of the key "{key}" with --option.').format(**locals()),
+                ('Duplicate specification of the key "{key}" with --option.').format(**locals()),  # noqa: E501
             )
         setattr(namespace, key, val)
 
 
 # Fix FileType to honor 'b' flag, see: https://bugs.python.org/issue14156
-class FileType(argparse.FileType):
-    def __call__(self, string):
-        if string == "-" and six.PY3:
+class FileType(argparse.FileType):  # noqa: D101
+    def __call__(self, string):  # noqa: ANN001, ANN204, D102
+        if string == "-" and six.PY3:  # noqa: YTT202
             if "r" in self._mode:
                 string = sys.stdin.fileno()
             elif "w" in self._mode:
@@ -38,10 +38,10 @@ class FileType(argparse.FileType):
 
 # This function is necessary to enable autodocumentation of the script
 # output
-def get_parser():
+def get_parser():  # noqa: ANN201
     """Initialize the parser for the command line interface and bind the
     autocompletion functionality.
-    """
+    """  # noqa: D205
     # initialize the parser
     parser = argparse.ArgumentParser(
         description="Command line tool for extracting text from any document. ",
@@ -104,12 +104,12 @@ def get_parser():
     return parser
 
 
-def _get_available_encodings():
+def _get_available_encodings():  # noqa: ANN202
     """Get a list of the available encodings to make it easy to
     tab-complete the command line interface.
 
     Inspiration from http://stackoverflow.com/a/3824405/564709
-    """
+    """  # noqa: D205
     available_encodings = set(encodings.aliases.aliases.values())
     paths = [pathlib.Path(encodings.__file__).parent]
     available_encodings.update(

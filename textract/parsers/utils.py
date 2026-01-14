@@ -1,10 +1,10 @@
 """This module includes a bunch of convenient base classes that are
 reused in many of the other parser modules.
-"""
+"""  # noqa: D205, EXE002
 
 import errno
 import os
-import subprocess
+import subprocess  # noqa: S404
 import tempfile
 from typing import NoReturn
 
@@ -18,28 +18,28 @@ class BaseParser:
     """The :class:`.BaseParser` abstracts out some common functionality
     that is used across all document Parsers. In particular, it has
     the responsibility of handling all unicode and byte-encoding.
-    """
+    """  # noqa: D205
 
-    def extract(self, filename, **kwargs) -> NoReturn:
+    def extract(self, filename, **kwargs) -> NoReturn:  # noqa: ANN001
         """This method must be overwritten by child classes to extract raw
         text from a filename. This method can return either a
         byte-encoded string or unicode.
-        """
+        """  # noqa: D205
         raise NotImplementedError("must be overwritten by child classes")
 
-    def encode(self, text, encoding):
+    def encode(self, text, encoding):  # noqa: ANN001, ANN201, PLR6301
         """Encode the ``text`` in ``encoding`` byte-encoding. This ignores
         code points that can't be encoded in byte-strings.
-        """
+        """  # noqa: D205
         return text.encode(encoding, "ignore")
 
-    def process(self, filename, input_encoding, output_encoding="utf8", **kwargs):
+    def process(self, filename, input_encoding, output_encoding="utf8", **kwargs):  # noqa: ANN001, ANN201
         """Process ``filename`` and encode byte-string with ``encoding``. This
         method is called by :func:`textract.parsers.process` and wraps
         the :meth:`.BaseParser.extract` method in `a delicious unicode
         sandwich <http://nedbatchelder.com/text/unipain.html>`_.
 
-        """
+        """  # noqa: D205
         # make a "unicode sandwich" to handle dealing with unknown
         # input byte strings and converting them to a predictable
         # output encoding
@@ -48,10 +48,10 @@ class BaseParser:
         unicode_string = self.decode(byte_string, input_encoding)
         return self.encode(unicode_string, output_encoding)
 
-    def decode(self, text, input_encoding=None):
+    def decode(self, text, input_encoding=None):  # noqa: ANN001, ANN201, PLR6301
         """Decode ``text`` using the `chardet
         <https://github.com/chardet/chardet>`_ package.
-        """
+        """  # noqa: D205
         # only decode byte strings into unicode if it hasn't already
         # been done by a subclass
         if isinstance(text, six.text_type):
@@ -65,9 +65,9 @@ class BaseParser:
         if input_encoding:
             return text.decode(input_encoding)
 
-        # use chardet to automatically detect the encoding text if no encoding is provided
+        # use chardet to automatically detect the encoding text if no encoding is provided  # noqa: E501
         result = chardet.detect(text)
-        encoding = result["encoding"] if result["confidence"] > 0.80 else "utf8"
+        encoding = result["encoding"] if result["confidence"] > 0.80 else "utf8"  # noqa: PLR2004
         return text.decode(encoding, errors="replace")
 
 
@@ -75,16 +75,16 @@ class ShellParser(BaseParser):
     """The :class:`.ShellParser` extends the :class:`.BaseParser` to make
     it easy to run external programs from the command line with
     `Fabric <http://www.fabfile.org/>`_-like behavior.
-    """
+    """  # noqa: D205
 
-    def run(self, args):
+    def run(self, args):  # noqa: ANN001, ANN201, PLR6301
         """Run ``command`` and return the subsequent ``stdout`` and ``stderr``
         as a tuple. If the command is not successful, this raises a
         :exc:`textract.exceptions.ShellError`.
-        """
+        """  # noqa: D205
         # run a subprocess and put the stdout and stderr on the pipe object
         try:
-            pipe = subprocess.Popen(
+            pipe = subprocess.Popen(  # noqa: S603
                 args,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
@@ -93,7 +93,7 @@ class ShellParser(BaseParser):
             if e.errno == errno.ENOENT:
                 # File not found.
                 # This is equivalent to getting exitcode 127 from sh
-                raise exceptions.ShellError(
+                raise exceptions.ShellError(  # noqa: B904
                     " ".join(args),
                     127,
                     "",
@@ -116,7 +116,7 @@ class ShellParser(BaseParser):
 
         return stdout, stderr
 
-    def temp_filename(self):
+    def temp_filename(self):  # noqa: ANN201, PLR6301
         """Return a unique tempfile name."""
         # TODO: it would be nice to get this to behave more like a
         # context so we can make sure these temporary files are

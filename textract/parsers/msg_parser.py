@@ -1,10 +1,10 @@
-import extract_msg
+import extract_msg  # noqa: D100
 import six
 
 from .utils import BaseParser
 
 
-def ensure_bytes(string):
+def ensure_bytes(string):  # noqa: ANN001, ANN201
     """Normalize string to bytes.
 
     `extract_msg.Message._getStringStream` can return unicode or bytes depending
@@ -22,6 +22,6 @@ def ensure_bytes(string):
 class Parser(BaseParser):
     """Extract text from Microsoft Outlook files (.msg)."""
 
-    def extract(self, filename, **kwargs):
+    def extract(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002, D102, PLR6301
         m = extract_msg.Message(filename)
         return ensure_bytes(m.subject) + six.b("\n\n") + ensure_bytes(m.body)

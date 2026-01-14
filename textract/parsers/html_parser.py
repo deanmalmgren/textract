@@ -1,4 +1,4 @@
-import pathlib
+import pathlib  # noqa: D100
 import re
 
 import six
@@ -11,9 +11,9 @@ class Parser(BaseParser):
     """Extract text from html file using beautifulsoup4. Filter text to
     only show the visible parts of the page. Insipration from `here
     <http://stackoverflow.com/a/1983219/564709>`_.
-    """
+    """  # noqa: D205
 
-    _disallowed_names = [
+    _disallowed_names = [  # noqa: RUF012
         "style",
         "script",
         "[document]",
@@ -25,7 +25,7 @@ class Parser(BaseParser):
         "body",
     ]
 
-    _inline_tags = [
+    _inline_tags = [  # noqa: RUF012
         "b",
         "big",
         "i",
@@ -59,17 +59,17 @@ class Parser(BaseParser):
         "textarea",
     ]
 
-    def _visible(self, element) -> bool:
+    def _visible(self, element) -> bool:  # noqa: ANN001
         """Used to filter text elements that have invisible text on the page."""
-        return not (element.name in self._disallowed_names or re.match(r"<!--.*-->", six.text_type(element.extract())))
+        return not (element.name in self._disallowed_names or re.match(r"<!--.*-->", six.text_type(element.extract())))  # noqa: E501
 
-    def _inline(self, element) -> bool:
+    def _inline(self, element) -> bool:  # noqa: ANN001
         """Used to check whether given element can be treated as inline
         element (without new line after).
-        """
+        """  # noqa: D205
         return element.name in self._inline_tags
 
-    def _find_any_text(self, tag):
+    def _find_any_text(self, tag):  # noqa: ANN001, ANN202, PLR6301
         """Looks for any possible text within given tag."""
         text = ""
         if tag is not None:
@@ -79,12 +79,12 @@ class Parser(BaseParser):
             text = text.strip()
         return text
 
-    def _parse_tables(self, soup):
+    def _parse_tables(self, soup):  # noqa: ANN001, ANN202
         """Returns array containing basic informations about tables for ASCII
         replacement (look: _replace_tables()).
-        """
+        """  # noqa: D205
         tables = []
-        for t in soup.find_all("table"):
+        for t in soup.find_all("table"):  # noqa: PLR1702
             t_dict = {"width": 0, "table": t, "trs": [], "col_width": {}}
             trs = t.find_all("tr")
             if len(trs) > 0:
@@ -114,12 +114,12 @@ class Parser(BaseParser):
                 tables.append(t_dict)
         return tables
 
-    def _replace_tables(self, soup, v_separator=" | ", h_separator="-"):
+    def _replace_tables(self, soup, v_separator=" | ", h_separator="-"):  # noqa: ANN001, ANN202
         """Replaces <table> elements with its ASCII equivalent."""
         tables = self._parse_tables(soup)
         v_sep_len = len(v_separator)
         v_left_sep = v_separator.lstrip()
-        for t in tables:
+        for t in tables:  # noqa: PLR1702
             html = ""
             trs = t["trs"]
             h_length = 1 + (v_sep_len * len(t["col_width"])) + t["width"]
@@ -132,7 +132,7 @@ class Parser(BaseParser):
                     col_width = t["col_width"][i] + v_sep_len
                     if td["colspan"] > 1:
                         for j in range(td["colspan"] - 1):
-                            j += 1
+                            j += 1  # noqa: PLW2901
                             if (i + j) < len(t["col_width"]):
                                 col_width += t["col_width"][i + j] + v_sep_len
                     html += ("%" + str(col_width) + "s") % (text + v_separator)
@@ -143,15 +143,15 @@ class Parser(BaseParser):
             t["table"].replace_with(new_table)
         return soup
 
-    def _join_inlines(self, soup):
+    def _join_inlines(self, soup):  # noqa: ANN001, ANN202
         """Unwraps inline elements defined in self._inline_tags."""
-        elements = soup.find_all(True)
+        elements = soup.find_all(True)  # noqa: FBT003
         for elem in elements:
             if self._inline(elem):
                 elem.unwrap()
         return soup
 
-    def extract(self, filename, **kwargs):
+    def extract(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002, D102
         with pathlib.Path(filename).open("rb") as stream:
             soup = BeautifulSoup(stream, "lxml")
 
@@ -163,7 +163,7 @@ class Parser(BaseParser):
 
         # Make HTML
         html = ""
-        elements = soup.find_all(True)
+        elements = soup.find_all(True)  # noqa: FBT003
         elements = list(filter(self._visible, elements))
         for elem in elements:
             string = elem.string

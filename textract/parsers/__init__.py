@@ -1,4 +1,4 @@
-"""Route the request to the appropriate parser based on file type."""
+"""Route the request to the appropriate parser based on file type."""  # noqa: EXE002
 
 import glob
 import importlib
@@ -8,7 +8,7 @@ import re
 from textract import exceptions
 
 # Dictionary structure for synonymous file extension types
-EXTENSION_SYNONYMS = {
+EXTENSION_SYNONYMS = {  # noqa: RUF067
     ".jpeg": ".jpg",
     ".tff": ".tiff",
     ".tif": ".tiff",
@@ -21,24 +21,24 @@ EXTENSION_SYNONYMS = {
 # default encoding that is returned by the process method. specify it
 # here so the default is used on both the process function and also by
 # the command line interface
-DEFAULT_OUTPUT_ENCODING = "utf_8"
-DEFAULT_ENCODING = "utf_8"
+DEFAULT_OUTPUT_ENCODING = "utf_8"  # noqa: RUF067
+DEFAULT_ENCODING = "utf_8"  # noqa: RUF067
 
 # filename format
-_FILENAME_SUFFIX = "_parser"
+_FILENAME_SUFFIX = "_parser"  # noqa: RUF067
 
 
-def process(
-    filename,
-    input_encoding=None,
-    output_encoding=DEFAULT_OUTPUT_ENCODING,
-    extension=None,
+def process(  # noqa: ANN201, RUF067
+    filename,  # noqa: ANN001
+    input_encoding=None,  # noqa: ANN001
+    output_encoding=DEFAULT_OUTPUT_ENCODING,  # noqa: ANN001
+    extension=None,  # noqa: ANN001
     **kwargs,
 ):
     """This is the core function used for extracting text. It routes the
     ``filename`` to the appropriate parser and returns the extracted
     text as a byte-string encoded with ``encoding``.
-    """
+    """  # noqa: D205
     # make sure the filename exists
     if not pathlib.Path(filename).exists():
         raise exceptions.MissingFileError(filename)
@@ -79,10 +79,10 @@ def process(
     return parser.process(filename, input_encoding, output_encoding, **kwargs)
 
 
-def _get_available_extensions():
+def _get_available_extensions():  # noqa: ANN202, RUF067
     """Get a list of available file extensions to make it easy for
     tab-completion and exception handling.
-    """
+    """  # noqa: D205
     extensions = []
 
     # from filenames
@@ -90,7 +90,7 @@ def _get_available_extensions():
     glob_filename = str(parsers_dir / f"*{_FILENAME_SUFFIX}.py")
     # Escape the path for regex to handle Windows backslashes and special chars
     ext_re = re.compile(re.escape(glob_filename).replace(re.escape("*"), r"(?P<ext>\w+)"))
-    for filename in glob.glob(glob_filename):
+    for filename in glob.glob(glob_filename):  # noqa: PTH207
         ext_match = ext_re.match(filename)
         ext = ext_match.groups()[0]
         extensions.extend((ext, "." + ext))

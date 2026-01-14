@@ -6,7 +6,7 @@ from .utils import ShellParser
 class Parser(ShellParser):
     """Extract text from various image file formats using tesseract-ocr."""
 
-    def extract(self, filename, **kwargs):
+    def extract(self, filename, **kwargs):  # noqa: ANN001, ANN201, D102
         # if language given as argument, specify language for tesseract to use
         if "language" in kwargs:
             args = ["tesseract", filename, "stdout", "-l", kwargs["language"]]
