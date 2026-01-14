@@ -1,0 +1,14 @@
+[tasks."docs:build"]
+description = "Build HTML documentation"
+run = "uv run --group docs sphinx-build -b html docs docs/build/html"
+
+[tasks."docs:clean"]
+description = "Clean documentation build"
+run = "rm -rf docs/build"
+
+[tasks."docs:serve"]
+description = "Build and serve docs locally"
+run = """
+uv run --group docs sphinx-build -b html docs docs/build/html
+python -m http.server -d docs/build/html 8000
+"""

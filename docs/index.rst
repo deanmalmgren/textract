@@ -1,10 +1,10 @@
-.. textract documentation master file, created by
-   sphinx-quickstart on Fri Jul  4 11:09:09 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 textract
-================================
+========
+
+.. note::
+
+   This is `textract-py3 <https://github.com/KyleKing/textract-py3>`_,
+   a maintained fork of `deanmalmgren/textract <https://github.com/deanmalmgren/textract>`_.
 
 As undesirable as it might be, more often than not there is extremely
 useful information embedded in Word documents, PowerPoint
@@ -36,9 +36,9 @@ Currently supporting
 --------------------
 
 textract supports a growing list of file types for text extraction. If
-you don't see your favorite file type here, Please recommend other
+you don't see your favorite file type here, please recommend other
 file types by either mentioning them on the `issue tracker
-<https://github.com/deanmalmgren/textract/issues>`_ or by
+<https://github.com/KyleKing/textract-py3/issues>`_ or by
 :ref:`contributing a pull request <contributing>`.
 
 
