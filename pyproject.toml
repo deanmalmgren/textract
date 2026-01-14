@@ -1,38 +1,43 @@
 [build-system]
-build-backend = "poetry.core.masonry.api"
-requires = ["poetry-core"]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
 
-[tool.poetry]
-authors = ["Dean Malmgren <dean.malmgren@datascopeanalytics.com>"]
+[project]
+authors = [{name = "Dean Malmgren", email = "dean.malmgren@datascopeanalytics.com"}]
 description = "Minimally maintained fork of deanmalmgren/textract to replace '*' dependencies "
-license = "MIT"
+license = {text = "MIT"}
 name = "textract-py3"
-packages = [{include = "textract"}]
 readme = "README.md"
-repository = "https://github.com/KyleKing/textract-py3"
+requires-python = ">=3.9"
 version = "2.1.1"
+dependencies = [
+    "SpeechRecognition>=3.8.1",
+    "argcomplete>=1.10.0",
+    "beautifulsoup4>=4.8.0",
+    "chardet>=3",
+    "docx2txt>=0.8",
+    "extract-msg>=0.30.11",
+    "pdfminer.six>=20221105",
+    "python-pptx>=0.6.18",
+    "six>=1.16.0",
+    "xlrd>=1.2.0,<2.0.0",  # v2 drops support for xlsx. Requires openpyxl or alternative to support xlsx if upgrading xlrd. See: https://github.com/deanmalmgren/textract/pull/543#issuecomment-2684619988
+]
 
-[tool.poetry.dependencies]
-python = "^3.7"
-SpeechRecognition = ">=3.8.1"
-argcomplete = ">=1.10.0"
-beautifulsoup4 = ">=4.8.0"
-chardet = ">=3"
-docx2txt = ">=0.8"
-extract-msg = ">=0.30.11"
-"pdfminer.six" = ">=20221105"
-python-pptx = ">=0.6.18"
-six = ">=1.16.0"
-xlrd = ">=1.2.0,<2.0.0"  # v2 drops support for xlsx. Requires openpyxl or alternative to support xlsx if upgrading xlrd. See: https://github.com/deanmalmgren/textract/pull/543#issuecomment-2684619988
-pocketsphinx = {version = ">=0.1.15", optional = true}
+[project.optional-dependencies]
+pocketsphinx = ["pocketsphinx>=0.1.15"]
 
-[tool.poetry.extras]
-pocketsphinx = ["pocketsphinx"]
-
-[tool.poetry.group.dev.dependencies]
-bumpversion = ">=0.6.0"
-nose = ">=1.3.7"
-pytest = ">=7.2.1"
-
-[tool.poetry.scripts]
+[project.scripts]
 textract = "textract.bin.textract:main"
+
+[project.urls]
+Repository = "https://github.com/KyleKing/textract-py3"
+
+[dependency-groups]
+dev = [
+    "bumpversion>=0.6.0",
+    "nose>=1.3.7",
+    "pytest>=7.2.1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["textract"]
