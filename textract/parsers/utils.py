@@ -1,12 +1,11 @@
-"""This module includes a bunch of convenient base classes that are
-reused in many of the other parser modules.
-"""  # noqa: D205, EXE002
+"""Convenient base classes reused in many parser modules."""  # noqa: EXE002
+
+from __future__ import annotations
 
 import errno
 import os
 import subprocess  # noqa: S404
 import tempfile
-from typing import NoReturn
 
 import chardet
 import six
@@ -20,7 +19,7 @@ class BaseParser:
     the responsibility of handling all unicode and byte-encoding.
     """  # noqa: D205
 
-    def extract(self, filename, **kwargs) -> NoReturn:  # noqa: ANN001
+    def extract(self, filename, **kwargs) -> bytes | str:  # noqa: ANN001
         """This method must be overwritten by child classes to extract raw
         text from a filename. This method can return either a
         byte-encoded string or unicode.
@@ -110,8 +109,8 @@ class ShellParser(BaseParser):
             raise exceptions.ShellError(
                 " ".join(args),
                 pipe.returncode,
-                stdout,
-                stderr,
+                stdout.decode("utf-8", errors="replace"),
+                stderr.decode("utf-8", errors="replace"),
             )
 
         return stdout, stderr

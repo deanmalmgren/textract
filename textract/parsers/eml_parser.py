@@ -21,5 +21,9 @@ class Parser(BaseParser):
             parser = EmailParser()
             message = parser.parse(stream)
 
-        text_content = [part.get_payload() for part in message.walk() if part.get_content_type().startswith("text/plain")]  # noqa: E501
+        text_content = [
+            str(part.get_payload())
+            for part in message.walk()
+            if part.get_content_type().startswith("text/plain")
+        ]
         return "\n\n".join(text_content)

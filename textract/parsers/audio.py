@@ -38,9 +38,9 @@ class Parser(ShellParser):
 
             try:
                 if method in {"google", ""}:
-                    speech = r.recognize_google(audio)
+                    speech = r.recognize_google(audio)  # type: ignore[attr-defined]
                 elif method == "sphinx":
-                    speech = r.recognize_sphinx(audio)
+                    speech = r.recognize_sphinx(audio)  # type: ignore[attr-defined]
                 else:
                     raise UnknownMethod(method)
             except LookupError:  # audio is not understandable

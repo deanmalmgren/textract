@@ -97,6 +97,7 @@ class BaseParserTestCase(GenericUtilities):
             self.standardized_text_filename,
             cleanup=False,
         )
+        assert temp_filename is not None
         content = pathlib.Path(temp_filename).read_bytes()
         expected = self.get_standardized_text()
         assert six.b("").join(content.split()) == expected
@@ -121,7 +122,9 @@ class BaseParserTestCase(GenericUtilities):
         return option
 
     def get_standardized_text(self):  # noqa: D102
-        filename = pathlib.Path(self.get_extension_directory()) / "standardized_text.txt"  # noqa: E501
+        filename = (
+            pathlib.Path(self.get_extension_directory()) / "standardized_text.txt"
+        )
         if filename.exists():
             standardized_text = filename.read_bytes()
         else:
@@ -129,7 +132,9 @@ class BaseParserTestCase(GenericUtilities):
         return six.b("").join(standardized_text.split())
 
     def assertSuccessfulCommand(self, command):  # noqa: D102, N802, PLR6301
-        assert subprocess.call(command, shell=True) == 0, "COMMAND FAILED: {command}".format(**locals())  # noqa: E501, S602
+        assert subprocess.call(command, shell=True) == 0, (  # noqa: S602
+            "COMMAND FAILED: {command}".format(**locals())
+        )
 
     def assertSuccessfulTextract(self, filename, cleanup=True, **kwargs):  # noqa: D102, FBT002, N802
         # construct the option string
@@ -151,9 +156,12 @@ class BaseParserTestCase(GenericUtilities):
 
         # run the command and make sure everything worked correctly
         temp_filename = self.assertSuccessfulTextract(filename, cleanup=False, **kwargs)
+        assert temp_filename is not None
 
         self.assertSuccessfulCommand(
-            "diff --ignore-blank-lines '{temp_filename}' '{expected_filename}'".format(**locals()),  # noqa: E501
+            "diff --ignore-blank-lines '{temp_filename}' '{expected_filename}'".format(
+                **locals(),
+            ),
         )
         pathlib.Path(temp_filename).unlink()
 

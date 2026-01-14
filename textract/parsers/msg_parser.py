@@ -4,7 +4,7 @@ import six
 from .utils import BaseParser
 
 
-def ensure_bytes(string):  # noqa: ANN001, ANN201
+def ensure_bytes(string) -> bytes:  # noqa: ANN001
     """Normalize string to bytes.
 
     `extract_msg.Message._getStringStream` can return unicode or bytes depending

@@ -1,6 +1,5 @@
 import six  # noqa: D100
 import xlrd
-from six.moves import xrange
 
 from .utils import BaseParser
 
@@ -20,7 +19,7 @@ class Parser(BaseParser):
             for curr_row in range(num_rows):
                 worksheet.row(curr_row)
                 new_output = []
-                for index_col in xrange(num_cells):
+                for index_col in range(num_cells):
                     value = worksheet.cell_value(curr_row, index_col)
                     if value:
                         if isinstance(value, (int, float)):

@@ -17,10 +17,13 @@ class AddToNamespaceAction(argparse.Action):
     """This adds KEY,VALUE arbitrary pairs to the argparse.Namespace object."""
 
     def __call__(self, parser, namespace, values, option_string=None):  # noqa: ANN001, ANN204, D102
+        assert isinstance(values, str)  # noqa: S101
         key, val = values.strip().split("=")
         if hasattr(namespace, key):
             parser.error(
-                ('Duplicate specification of the key "{key}" with --option.').format(**locals()),  # noqa: E501
+                ('Duplicate specification of the key "{key}" with --option.').format(
+                    **locals(),
+                ),
             )
         setattr(namespace, key, val)
 
@@ -30,9 +33,23 @@ class FileType(argparse.FileType):  # noqa: D101
     def __call__(self, string):  # noqa: ANN001, ANN204, D102
         if string == "-" and six.PY3:  # noqa: YTT202
             if "r" in self._mode:
-                string = sys.stdin.fileno()
-            elif "w" in self._mode:
-                string = sys.stdout.fileno()
+                fileno = sys.stdin.fileno()
+                return open(  # noqa: PTH123
+                    fileno,
+                    self._mode,
+                    self._bufsize,
+                    self._encoding,
+                    self._errors,  # noqa: COM812
+                )  # noqa: RUF100, SIM115
+            if "w" in self._mode:
+                fileno = sys.stdout.fileno()
+                return open(  # noqa: PTH123
+                    fileno,
+                    self._mode,
+                    self._bufsize,
+                    self._encoding,
+                    self._errors,  # noqa: COM812
+                )  # noqa: RUF100, SIM115
         return super().__call__(string)
 
 
@@ -51,7 +68,7 @@ def get_parser():  # noqa: ANN201
     parser.add_argument(
         "filename",
         help="Filename to extract text.",
-    ).completer = argcomplete.completers.FilesCompleter
+    ).completer = argcomplete.completers.FilesCompleter  # type: ignore[attr-defined]
     parser.add_argument(
         "-e",
         "--encoding",

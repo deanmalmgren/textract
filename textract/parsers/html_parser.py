@@ -61,7 +61,10 @@ class Parser(BaseParser):
 
     def _visible(self, element) -> bool:  # noqa: ANN001
         """Used to filter text elements that have invisible text on the page."""
-        return not (element.name in self._disallowed_names or re.match(r"<!--.*-->", six.text_type(element.extract())))  # noqa: E501
+        return not (
+            element.name in self._disallowed_names
+            or re.match(r"<!--.*-->", six.text_type(element.extract()))
+        )
 
     def _inline(self, element) -> bool:  # noqa: ANN001
         """Used to check whether given element can be treated as inline
@@ -166,7 +169,7 @@ class Parser(BaseParser):
         elements = soup.find_all(True)  # noqa: FBT003
         elements = list(filter(self._visible, elements))
         for elem in elements:
-            string = elem.string
+            string = elem.string  # type: ignore[attr-defined]
             if string is None:
                 string = self._find_any_text(elem)
             string = string.strip()

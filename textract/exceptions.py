@@ -27,7 +27,9 @@ class ExtensionNotSupported(CommandLineError):  # noqa: N818
 
         from .parsers import _get_available_extensions  # noqa: PLC0415
 
-        available_extensions = [e for e in _get_available_extensions() if e.startswith(".")]  # noqa: E501
+        available_extensions = [
+            e for e in _get_available_extensions() if e.startswith(".")
+        ]
         self.available_extensions_str = ", ".join(available_extensions)
 
     def __str__(self) -> str:  # noqa: D105

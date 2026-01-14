@@ -91,9 +91,9 @@ def _get_available_extensions():  # noqa: ANN202, RUF067
     # Escape the path for regex to handle Windows backslashes and special chars
     ext_re = re.compile(re.escape(glob_filename).replace(re.escape("*"), r"(?P<ext>\w+)"))
     for filename in glob.glob(glob_filename):  # noqa: PTH207
-        ext_match = ext_re.match(filename)
-        ext = ext_match.groups()[0]
-        extensions.extend((ext, "." + ext))
+        if ext_match := ext_re.match(filename):
+            ext = ext_match.groups()[0]
+            extensions.extend((ext, "." + ext))
 
     # from relevant synonyms (don't use the '' synonym)
     for ext in EXTENSION_SYNONYMS:
