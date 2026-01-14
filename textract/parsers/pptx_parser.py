@@ -4,8 +4,7 @@ from .utils import BaseParser
 
 
 class Parser(BaseParser):
-    """Extract text from pptx file using python-pptx
-    """
+    """Extract text from pptx file using python-pptx"""
 
     def extract(self, filename, **kwargs):
         presentation = pptx.Presentation(filename)
@@ -17,4 +16,4 @@ class Parser(BaseParser):
                 for paragraph in shape.text_frame.paragraphs:
                     for run in paragraph.runs:
                         text_runs.append(run.text)
-        return '\n\n'.join(text_runs)
+        return "\n\n".join(text_runs)

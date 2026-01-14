@@ -7,63 +7,69 @@ class CommandLineError(Exception):
     errors occur on the command line to provide a useful command line
     interface.
     """
+
     def render(self, msg):
         return msg % vars(self)
 
 
 class ExtensionNotSupported(CommandLineError):
     """This error is raised with unsupported extensions"""
+
     def __init__(self, ext):
         self.ext = ext
 
         from .parsers import _get_available_extensions
+
         available_extensions = []
         for e in _get_available_extensions():
-            if e.startswith('.'):
+            if e.startswith("."):
                 available_extensions.append(e)
-        self.available_extensions_str = ', '.join(available_extensions)
+        self.available_extensions_str = ", ".join(available_extensions)
 
     def __str__(self):
-        return self.render((
-            'The filename extension %(ext)s is not yet supported by\n'
-            'textract. Please suggest this filename extension here:\n\n'
-            '    https://github.com/deanmalmgren/textract/issues\n\n'
-            'Available extensions include: %(available_extensions_str)s\n'
-        ))
+        return self.render(
+            "The filename extension %(ext)s is not yet supported by\n"
+            "textract. Please suggest this filename extension here:\n\n"
+            "    https://github.com/deanmalmgren/textract/issues\n\n"
+            "Available extensions include: %(available_extensions_str)s\n",
+        )
 
 
 class MissingFileError(CommandLineError):
     """This error is raised when the file can not be located at the
     specified path.
     """
+
     def __init__(self, filename):
         self.filename = filename
         self.root, self.ext = os.path.splitext(filename)
 
     def __str__(self):
-        return self.render((
+        return self.render(
             'The file "%(filename)s" can not be found.\n'
-            'Is this the right path/to/file/you/want/to/extract%(ext)s?'
-        ))
+            "Is this the right path/to/file/you/want/to/extract%(ext)s?",
+        )
 
 
 class UnknownMethod(CommandLineError):
     """This error is raised when the specified --method on the command
     line is unknown.
     """
+
     def __init__(self, method):
         self.method = method
 
     def __str__(self):
-        return self.render((
-            'The method "%(method)s" can not be found for this filetype.'
-        ))
+        return self.render(
+            'The method "%(method)s" can not be found for this filetype.',
+        )
 
 
 class ShellError(CommandLineError):
     """This error is raised when a shell.run returns a non-zero exit code
     (meaning the command failed).
     """
+
     def __init__(self, command, exit_code, stdout, stderr):
         self.command = command
         self.exit_code = exit_code
@@ -72,7 +78,7 @@ class ShellError(CommandLineError):
         self.executable = self.command.split()[0]
 
     def is_not_installed(self):
-        return os.name == 'posix' and self.exit_code == 127
+        return os.name == "posix" and self.exit_code == 127
 
     def not_installed_message(self):
         return (
@@ -95,5 +101,4 @@ class ShellError(CommandLineError):
     def __str__(self):
         if self.is_not_installed():
             return self.not_installed_message()
-        else:
-            return self.failed_message()
+        return self.failed_message()

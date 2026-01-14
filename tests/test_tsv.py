@@ -4,4 +4,4 @@ from . import base
 
 
 class TsvTestCase(base.BaseParserTestCase, unittest.TestCase):
-    extension = 'tsv'
+    extension = "tsv"

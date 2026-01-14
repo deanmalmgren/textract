@@ -1,11 +1,11 @@
-import unittest
 import os
+import unittest
 
 from . import base
 
 
 class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
-    extension = 'html'
+    extension = "html"
 
     def test_table_text_python(self):
         """Make sure tables in html look pretty through python"""

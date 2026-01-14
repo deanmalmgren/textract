@@ -4,4 +4,4 @@ from . import base
 
 
 class WavTestCase(base.BaseParserTestCase, unittest.TestCase):
-    extension = 'wav'
+    extension = "wav"

@@ -1,3 +1,4 @@
+import pathlib
 from email.parser import Parser as EmailParser
 
 from .utils import BaseParser
@@ -16,12 +17,12 @@ class Parser(BaseParser):
         # TODO: could also potentially grab text/html content instead of
         # only grabbing text/plain content
 
-        with open(filename) as stream:
+        with pathlib.Path(filename).open() as stream:
             parser = EmailParser()
             message = parser.parse(stream)
 
         text_content = []
         for part in message.walk():
-            if part.get_content_type().startswith('text/plain'):
+            if part.get_content_type().startswith("text/plain"):
                 text_content.append(part.get_payload())
-        return '\n\n'.join(text_content)
+        return "\n\n".join(text_content)

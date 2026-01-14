@@ -1,14 +1,12 @@
-import xlrd
 import six
-
+import xlrd
 from six.moves import xrange
 
 from .utils import BaseParser
 
 
 class Parser(BaseParser):
-    """Extract text from Excel files (.xls/xlsx).
-    """
+    """Extract text from Excel files (.xls/xlsx)."""
 
     def extract(self, filename, **kwargs):
         workbook = xlrd.open_workbook(filename)
@@ -29,5 +27,5 @@ class Parser(BaseParser):
                             value = six.text_type(value)
                         new_output.append(value)
                 if new_output:
-                    output += u' '.join(new_output) + u'\n'
+                    output += " ".join(new_output) + "\n"
         return output

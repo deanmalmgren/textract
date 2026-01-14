@@ -1,10 +1,9 @@
-"""
-Route the request to the appropriate parser based on file type.
-"""
+"""Route the request to the appropriate parser based on file type."""
 
-import os
-import importlib
 import glob
+import importlib
+import os
+import pathlib
 import re
 
 from .. import exceptions
@@ -23,21 +22,26 @@ EXTENSION_SYNONYMS = {
 # default encoding that is returned by the process method. specify it
 # here so the default is used on both the process function and also by
 # the command line interface
-DEFAULT_OUTPUT_ENCODING = 'utf_8'
-DEFAULT_ENCODING = 'utf_8'
+DEFAULT_OUTPUT_ENCODING = "utf_8"
+DEFAULT_ENCODING = "utf_8"
 
 # filename format
-_FILENAME_SUFFIX = '_parser'
+_FILENAME_SUFFIX = "_parser"
 
 
-def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODING, extension=None, **kwargs):
+def process(
+    filename,
+    input_encoding=None,
+    output_encoding=DEFAULT_OUTPUT_ENCODING,
+    extension=None,
+    **kwargs,
+):
     """This is the core function used for extracting text. It routes the
     ``filename`` to the appropriate parser and returns the extracted
     text as a byte-string encoded with ``encoding``.
     """
-
     # make sure the filename exists
-    if not os.path.exists(filename):
+    if not pathlib.Path(filename).exists():
         raise exceptions.MissingFileError(filename)
 
     # get the filename extension, which is something like .docx for
@@ -49,8 +53,8 @@ def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODI
     if extension:
         ext = extension
         # check if the extension has the leading .
-        if not ext.startswith('.'):
-            ext = '.' + ext
+        if not ext.startswith("."):
+            ext = "." + ext
         ext = ext.lower()
     else:
         _, ext = os.path.splitext(filename)
@@ -67,9 +71,7 @@ def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODI
     # If we can't import the module, the file extension isn't currently
     # supported
     try:
-        filetype_module = importlib.import_module(
-            rel_module, 'textract.parsers'
-        )
+        filetype_module = importlib.import_module(rel_module, "textract.parsers")
     except ImportError:
         raise exceptions.ExtensionNotSupported(ext)
 
@@ -90,17 +92,17 @@ def _get_available_extensions():
     glob_filename = os.path.join(parsers_dir, "*" + _FILENAME_SUFFIX + ".py")
     # escape backslashes for python 3.6+
     glob_filename = glob_filename.replace("//", "////")
-    ext_re = re.compile(glob_filename.replace('*', r"(?P<ext>\w+)"))
+    ext_re = re.compile(glob_filename.replace("*", r"(?P<ext>\w+)"))
     for filename in glob.glob(glob_filename):
         ext_match = ext_re.match(filename)
         ext = ext_match.groups()[0]
         extensions.append(ext)
-        extensions.append('.' + ext)
+        extensions.append("." + ext)
 
     # from relevant synonyms (don't use the '' synonym)
-    for ext in EXTENSION_SYNONYMS.keys():
+    for ext in EXTENSION_SYNONYMS:
         if ext:
             extensions.append(ext)
-            extensions.append(ext.replace('.', '', 1))
+            extensions.append(ext.replace(".", "", 1))
     extensions.sort()
     return extensions

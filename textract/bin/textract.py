@@ -1,13 +1,11 @@
-"""
-Command-line application.
-"""
+"""Command-line application."""
 
 import sys
 
-from ..cli import get_parser
 from .. import process
-from ..exceptions import CommandLineError
+from ..cli import get_parser
 from ..colors import red
+from ..exceptions import CommandLineError
 
 
 # extract text
@@ -20,8 +18,7 @@ def main():
     try:
         output = process(**vars(args))
     except CommandLineError as ex:
-        sys.stderr.write(red(ex) + '\n')
+        sys.stderr.write(red(ex) + "\n")
         sys.exit(1)
     else:
         args.output.write(output)
-

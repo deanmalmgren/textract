@@ -27,9 +27,7 @@ latex_documents = [
     ("index", "textract.tex", "textract Documentation", author, "manual"),
 ]
 
-man_pages = [
-    ("index", "textract", "textract Documentation", [author], 1)
-]
+man_pages = [("index", "textract", "textract Documentation", [author], 1)]
 
 texinfo_documents = [
     (

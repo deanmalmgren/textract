@@ -1,4 +1,5 @@
 import zipfile
+
 from bs4 import BeautifulSoup
 
 from .utils import BaseParser
@@ -9,16 +10,16 @@ class Parser(BaseParser):
 
     def extract(self, filename, **kwargs):
         book = zipfile.ZipFile(filename)
-        result = ''
+        result = ""
         for text_name in self.__epub_sections(book):
             if not text_name.endswith("html"):
                 continue
-            soup = BeautifulSoup(book.open(text_name), features='lxml')
-            html_content_tags = ['title', 'p', 'h1', 'h2', 'h3', 'h4']
+            soup = BeautifulSoup(book.open(text_name), features="lxml")
+            html_content_tags = ["title", "p", "h1", "h2", "h3", "h4"]
             for child in soup.find_all(html_content_tags):
                 inner_text = child.text.strip() if child.text else ""
                 if inner_text:
-                    result += inner_text + '\n'
+                    result += inner_text + "\n"
         return result
 
     def __epub_sections(self, book):
@@ -28,9 +29,9 @@ class Parser(BaseParser):
 
     def __get_opf_paths(self, book):
         meta_inf = book.open("META-INF/container.xml")
-        meta_soup = BeautifulSoup(meta_inf, features='lxml')
+        meta_soup = BeautifulSoup(meta_inf, features="lxml")
         return [f["full-path"] for f in meta_soup.rootfiles.find_all("rootfile")]
-    
+
     def __get_item_paths(self, book, opf_paths):
         item_paths = []
         for opf_path in opf_paths:
@@ -46,7 +47,7 @@ class Parser(BaseParser):
             if item["id"] == item_id:
                 return item
         return None
-    
+
     def __get_full_item_path(self, book, partial_path):
         for filename in book.namelist():
             if filename.endswith(partial_path):
