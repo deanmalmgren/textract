@@ -1,9 +1,13 @@
+"""Tests for MP3 audio format."""
+
 import unittest
 
 from . import base
 
 
 class Mp3TestCase(base.ShellParserTestCase, unittest.TestCase):
+    """Test text extraction from MP3 audio files."""
+
     extension = "mp3"
 
     def test_mp3(self):

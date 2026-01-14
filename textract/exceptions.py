@@ -1,21 +1,28 @@
+"""Custom exceptions for textract."""
+
 import os
+import pathlib
+
+# Command not found exit code
+_NOT_INSTALLED_EXIT_CODE = 127
 
 
 # traceback from exceptions that inherit from this class are suppressed
 class CommandLineError(Exception):
-    """The traceback of all CommandLineError's is suppressed when the
-    errors occur on the command line to provide a useful command line
-    interface.
+    """The traceback of all CommandLineError's is suppressed when the errors occur on the command line.
+
+    This provides a useful command line interface.
     """
 
-    def render(self, msg):
+    def render(self, msg: str) -> str:
         return msg % vars(self)
 
 
 class ExtensionNotSupported(CommandLineError):
-    """This error is raised with unsupported extensions."""
+    """Error raised when file extension is not supported."""
 
-    def __init__(self, ext) -> None:
+    def __init__(self, ext: str) -> None:
+        """Initialize with unsupported extension."""
         self.ext = ext
 
         from .parsers import _get_available_extensions
@@ -33,13 +40,17 @@ class ExtensionNotSupported(CommandLineError):
 
 
 class MissingFileError(CommandLineError):
-    """This error is raised when the file can not be located at the
-    specified path.
+    """Error raised when file cannot be located.
+
+    This error occurs when the specified path does not exist.
     """
 
-    def __init__(self, filename) -> None:
+    def __init__(self, filename: str) -> None:
+        """Initialize with missing file path."""
         self.filename = filename
-        self.root, self.ext = os.path.splitext(filename)
+        p = pathlib.Path(filename)
+        self.root = p.stem
+        self.ext = p.suffix
 
     def __str__(self) -> str:
         return self.render(
@@ -49,11 +60,13 @@ class MissingFileError(CommandLineError):
 
 
 class UnknownMethod(CommandLineError):
-    """This error is raised when the specified --method on the command
-    line is unknown.
+    """Error raised when extraction method is not recognized.
+
+    This error occurs when an invalid --method is specified on the command line.
     """
 
-    def __init__(self, method) -> None:
+    def __init__(self, method: str) -> None:
+        """Initialize with unknown method name."""
         self.method = method
 
     def __str__(self) -> str:
@@ -63,21 +76,25 @@ class UnknownMethod(CommandLineError):
 
 
 class ShellError(CommandLineError):
-    """This error is raised when a shell.run returns a non-zero exit code
-    (meaning the command failed).
+    """Error raised when shell command execution fails.
+
+    This occurs when an external tool returns a non-zero exit code.
     """
 
-    def __init__(self, command, exit_code, stdout, stderr) -> None:
+    def __init__(self, command: str, exit_code: int, stdout: str, stderr: str) -> None:
+        """Initialize with command execution details."""
         self.command = command
         self.exit_code = exit_code
         self.stdout = stdout
         self.stderr = stderr
         self.executable = self.command.split()[0]
 
-    def is_not_installed(self):
-        return os.name == "posix" and self.exit_code == 127
+    def is_not_installed(self) -> bool:
+        """Check if the command failed because executable is not installed."""
+        return os.name == "posix" and self.exit_code == _NOT_INSTALLED_EXIT_CODE
 
     def not_installed_message(self) -> str:
+        """Format error message when executable is not installed."""
         return (
             "The command `{command}` failed because the executable\n"
             "`{executable}` is not installed on your system. Please make\n"
@@ -87,6 +104,7 @@ class ShellError(CommandLineError):
         ).format(**vars(self))
 
     def failed_message(self) -> str:
+        """Format error message when command execution failed."""
         return (
             "The command `%(command)s` failed with exit code %(exit_code)d\n"
             "------------- stdout -------------\n"

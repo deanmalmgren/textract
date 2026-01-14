@@ -2,7 +2,6 @@
 
 import glob
 import importlib
-import os
 import pathlib
 import re
 
@@ -57,8 +56,7 @@ def process(
             ext = "." + ext
         ext = ext.lower()
     else:
-        _, ext = os.path.splitext(filename)
-        ext = ext.lower()
+        ext = pathlib.Path(filename).suffix.lower()
 
     # check the EXTENSION_SYNONYMS dictionary
     ext = EXTENSION_SYNONYMS.get(ext, ext)
@@ -72,8 +70,8 @@ def process(
     # supported
     try:
         filetype_module = importlib.import_module(rel_module, "textract.parsers")
-    except ImportError:
-        raise exceptions.ExtensionNotSupported(ext)
+    except ImportError as err:
+        raise exceptions.ExtensionNotSupported(ext) from err
 
     # do the extraction
 
@@ -88,8 +86,8 @@ def _get_available_extensions():
     extensions = []
 
     # from filenames
-    parsers_dir = os.path.join(pathlib.Path(__file__).parent)
-    glob_filename = os.path.join(parsers_dir, "*" + _FILENAME_SUFFIX + ".py")
+    parsers_dir = pathlib.Path(__file__).parent
+    glob_filename = str(parsers_dir / f"*{_FILENAME_SUFFIX}.py")
     # Escape the path for regex to handle Windows backslashes and special chars
     ext_re = re.compile(re.escape(glob_filename).replace(re.escape("*"), r"(?P<ext>\w+)"))
     for filename in glob.glob(glob_filename):

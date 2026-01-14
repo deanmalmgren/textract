@@ -1,3 +1,5 @@
+"""Tests for JPG image format."""
+
 import pathlib
 import shutil
 import unittest
@@ -6,9 +8,12 @@ from . import base
 
 
 class JpgTestCase(base.ShellParserTestCase, unittest.TestCase):
+    """Test text extraction from JPG images."""
+
     extension = "jpg"
 
     def get_jpeg_filename(self, contents_filename):
+        """Generate JPEG version of file."""
         temp_filename = self.get_temp_filename()
         jpeg_filename = temp_filename + ".jpeg"
         pathlib.Path(temp_filename).unlink()

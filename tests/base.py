@@ -1,10 +1,11 @@
-import os
 import pathlib
 import shutil
 import subprocess
 import tempfile
 
 import six
+
+import textract
 
 
 class GenericUtilities:
@@ -25,8 +26,10 @@ class GenericUtilities:
 
 
 class BaseParserTestCase(GenericUtilities):
-    """This BaseParserTestCase object is used to collect a bunch of
-    standardized tests that should be run for every BaseParser.
+    """Collect standardized tests for every BaseParser.
+
+    This BaseParserTestCase object provides a set of standard tests
+    that should be run for each file format parser.
     """
 
     # 'txt', for example. this is mandatory and potentially the only thing that
@@ -42,33 +45,26 @@ class BaseParserTestCase(GenericUtilities):
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-        if self.extension == "":
+        if not self.extension:
             raise NotImplementedError(
                 "need to specify `extension` class attribute on test case",
             )
 
     def get_extension_directory(self):
-        return os.path.join(
-            pathlib.Path(pathlib.Path(__file__).resolve()).parent,
-            self.extension,
-        )
+        return str(pathlib.Path(__file__).resolve().parent / self.extension)
 
     def get_filename(self, filename_root, default_filename_root):
         if filename_root:
-            filename = os.path.join(
-                self.get_extension_directory(),
-                filename_root + "." + self.extension,
+            filename = str(
+                pathlib.Path(self.get_extension_directory())
+                / f"{filename_root}.{self.extension}",
             )
             if not pathlib.Path(filename).exists():
                 msg = (
-                    (
-                        'expected filename "{filename}" to exist for testing '
-                        "purposes but it doesnt"
-                    ).format(**locals())
+                    f'expected filename "{filename}" to exist for testing '
+                    f"purposes but it doesn't"
                 )
-                raise Exception(
-                    msg,
-                )
+                raise FileNotFoundError(msg)
             return filename
         return self.get_filename(default_filename_root, default_filename_root)
 
@@ -101,30 +97,22 @@ class BaseParserTestCase(GenericUtilities):
             self.standardized_text_filename,
             cleanup=False,
         )
-        with pathlib.Path(temp_filename).open("rb") as stream:
-            assert six.b("").join(stream.read().split()) == self.get_standardized_text(), f"standardized text fails for {self.extension}"
+        content = pathlib.Path(temp_filename).read_bytes()
+        expected = self.get_standardized_text()
+        assert six.b("").join(content.split()) == expected
         pathlib.Path(temp_filename).unlink()
 
     def test_standardized_text_python(self):
         """Make sure standardized text matches from python."""
-        import textract
-
         result = textract.process(self.standardized_text_filename)
-        assert six.b("").join(result.split()) == self.get_standardized_text(), f"standardized text fails for {self.extension}"
-
-    # def test_unicode_text_cli(self):
-    #     """Make sure unicode text matches from the command line"""
-    #     self.compare_cli_output(self.unicode_text_filename)
-
-    # def test_unicode_text_python(self):
-    #     """Make sure unicode text matches from python"""
-    #     self.compare_python_output(self.unicode_text_filename)
+        expected = self.get_standardized_text()
+        assert six.b("").join(result.split()) == expected
 
     def get_expected_filename(self, filename, **kwargs):
-        basename, _extension = os.path.splitext(filename)
-        if kwargs.get("method"):
-            basename += "-m=" + kwargs.get("method")
-        return basename + ".txt"
+        basename = pathlib.Path(filename).stem
+        if method := kwargs.get("method"):
+            basename += f"-m={method}"
+        return f"{basename}.txt"
 
     def get_cli_options(self, **kwargs):
         option = ""
@@ -133,9 +121,9 @@ class BaseParserTestCase(GenericUtilities):
         return option
 
     def get_standardized_text(self):
-        filename = os.path.join(self.get_extension_directory(), "standardized_text.txt")
-        if pathlib.Path(filename).exists():
-            standardized_text = pathlib.Path(filename).read_bytes()
+        filename = pathlib.Path(self.get_extension_directory()) / "standardized_text.txt"
+        if filename.exists():
+            standardized_text = filename.read_bytes()
         else:
             standardized_text = six.b("the quick brown fox jumps over the lazy dog")
         return six.b("").join(standardized_text.split())
@@ -173,18 +161,18 @@ class BaseParserTestCase(GenericUtilities):
         if expected_filename is None:
             expected_filename = self.get_expected_filename(filename, **kwargs)
 
-        import textract
-
         result = textract.process(filename, **kwargs)
-        with pathlib.Path(expected_filename).open("rb") as stream:
-            result = self.clean_text(result)
-            expected = self.clean_text(stream.read())
-            assert result == expected
+        expected_content = pathlib.Path(expected_filename).read_bytes()
+        result = self.clean_text(result)
+        expected = self.clean_text(expected_content)
+        assert result == expected
 
 
 class ShellParserTestCase(BaseParserTestCase):
-    """This BaseParserTestCase object is used to collect a bunch of
-    standardized tests that should be run for every ShellParser.
+    """Collect standardized tests for every ShellParser.
+
+    This BaseParserTestCase object extends BaseParserTestCase with tests
+    specific to parsers that use shell commands.
     """
 
     def test_filename_spaces(self):

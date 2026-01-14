@@ -1,3 +1,5 @@
+"""Configuration file for Sphinx documentation."""
+
 from importlib.metadata import version as get_version
 
 project = "textract"

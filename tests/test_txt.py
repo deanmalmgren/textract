@@ -1,3 +1,5 @@
+"""Tests for TXT file format."""
+
 import pathlib
 import shutil
 import unittest
@@ -6,6 +8,8 @@ from . import base
 
 
 class TxtTestCase(base.BaseParserTestCase, unittest.TestCase):
+    """Test text extraction from TXT files."""
+
     extension = "txt"
 
     def test_extensionless_filenames(self):
