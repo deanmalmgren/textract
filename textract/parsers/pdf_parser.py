@@ -57,6 +57,8 @@ class Parser(ShellParser):
         try:
             stdout, _ = self.run(["pdf2txt.py", filename])
         except (OSError, ShellError):
+            if pdf2txt_path is None:
+                raise
             try:
                 stdout, _ = self.run(["python3", pdf2txt_path, filename])
             except ShellError:

@@ -2,6 +2,7 @@
 
 import importlib.util
 import shutil
+import sys
 import unittest
 
 import pytest
@@ -16,6 +17,10 @@ _HAS_POCKETSPHINX = importlib.util.find_spec("pocketsphinx") is not None
 @pytest.mark.skipif(
     not _HAS_SOX,
     reason="sox is not installed (install via: brew install sox)",
+)
+@pytest.mark.skipif(
+    sys.platform == "win32",
+    reason="sox.portable on Windows lacks libmad for MP3 decoding",
 )
 class Mp3TestCase(base.ShellParserTestCase, unittest.TestCase):
     """Test text extraction from MP3 audio files."""

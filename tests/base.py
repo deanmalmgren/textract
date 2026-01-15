@@ -17,11 +17,11 @@ def _quote_path(path: str) -> str:
 
 
 def _files_equal_ignore_blank_lines(file1: str, file2: str) -> bool:
-    """Compare two files, ignoring blank lines."""
+    """Compare two files, ignoring blank lines and normalizing line endings."""
     content1 = pathlib.Path(file1).read_bytes()
     content2 = pathlib.Path(file2).read_bytes()
-    lines1 = [line for line in content1.splitlines() if line.strip()]
-    lines2 = [line for line in content2.splitlines() if line.strip()]
+    lines1 = [line.rstrip(b"\r") for line in content1.splitlines() if line.strip()]
+    lines2 = [line.rstrip(b"\r") for line in content2.splitlines() if line.strip()]
     return lines1 == lines2
 
 
