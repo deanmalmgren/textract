@@ -47,6 +47,8 @@ class Parser(ShellParser):
                 speech = ""
             except sr.UnknownValueError:
                 speech = ""
+            except sr.RequestError:  # API unavailable or network error
+                speech = ""
 
             # add a newline, to make output cleaner
             speech += "\n"

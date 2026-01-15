@@ -28,6 +28,8 @@ jobs:
 
       - name: Run tests
         run: uv run pytest
+        env:
+          SKIP_NETWORK_TESTS: "true"
 
   publish:
     name: Publish to PyPI

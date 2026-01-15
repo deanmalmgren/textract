@@ -14,7 +14,7 @@ class Parser(BaseParser):
         for text_name in self.__epub_sections(book):
             if not text_name.endswith("html"):
                 continue
-            soup = BeautifulSoup(book.open(text_name), features="lxml")
+            soup = BeautifulSoup(book.open(text_name), features="xml")
             html_content_tags = ["title", "p", "h1", "h2", "h3", "h4"]
             for child in soup.find_all(html_content_tags):
                 inner_text = child.text.strip() if child.text else ""
@@ -28,7 +28,7 @@ class Parser(BaseParser):
 
     def __get_opf_paths(self, book):  # noqa: ANN001, ANN202, PLR6301
         meta_inf = book.open("META-INF/container.xml")
-        meta_soup = BeautifulSoup(meta_inf, features="lxml")
+        meta_soup = BeautifulSoup(meta_inf, features="xml")
         if not meta_soup.rootfiles:
             return []
         return [
@@ -40,7 +40,7 @@ class Parser(BaseParser):
     def __get_item_paths(self, book, opf_paths):  # noqa: ANN001, ANN202
         item_paths = []
         for opf_path in opf_paths:
-            opf_soup = BeautifulSoup(book.open(opf_path), "lxml")
+            opf_soup = BeautifulSoup(book.open(opf_path), "xml")
             if not opf_soup.spine:
                 continue
             epub_items = opf_soup.spine.find_all("itemref")
