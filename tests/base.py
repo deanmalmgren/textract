@@ -151,16 +151,33 @@ class BaseParserTestCase(GenericUtilities):
 
     def assertSuccessfulCommand(self, command):  # noqa: D102, N802, PLR6301
         assert subprocess.call(command, shell=True) == 0, (  # noqa: S602
-            "COMMAND FAILED: {command}".format(**locals())
+            f"COMMAND FAILED: {command}"
         )
 
     def assertSuccessfulTextract(self, filename, cleanup=True, **kwargs):  # noqa: D102, FBT002, N802
         option = self.get_cli_options(**kwargs)
         temp_filename = self.get_temp_filename()
-        quoted_filename = _quote_path(filename)
-        self.assertSuccessfulCommand(
-            f"textract {option} {quoted_filename} > {temp_filename}",
+
+        # Build command arguments
+        cmd = ["textract"]
+        if option.strip():
+            cmd.extend(option.strip().split())
+        cmd.append(filename)
+
+        # Run command and write output to file
+        with pathlib.Path(temp_filename).open("wb") as output_file:
+            result = subprocess.run(  # noqa: S603
+                cmd,  # noqa: S607
+                stdout=output_file,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+        assert result.returncode == 0, (
+            f"textract command failed with exit code {result.returncode}: "
+            f"{result.stderr.decode('utf-8', errors='ignore')}"
         )
+
         if cleanup:
             pathlib.Path(temp_filename).unlink()
             return None
