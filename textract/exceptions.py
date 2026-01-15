@@ -1,6 +1,5 @@
 """Custom exceptions for textract."""
 
-import os
 import pathlib
 
 # Command not found exit code
@@ -93,7 +92,7 @@ class ShellError(CommandLineError):
 
     def is_not_installed(self) -> bool:
         """Check if the command failed because executable is not installed."""
-        return os.name == "posix" and self.exit_code == _NOT_INSTALLED_EXIT_CODE
+        return self.exit_code == _NOT_INSTALLED_EXIT_CODE
 
     def not_installed_message(self) -> str:
         """Format error message when executable is not installed."""

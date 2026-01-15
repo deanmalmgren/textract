@@ -1,11 +1,28 @@
 import pathlib
 import shutil
 import subprocess  # noqa: S404
+import sys
 import tempfile
 
 import six
 
 import textract
+
+
+def _quote_path(path: str) -> str:
+    """Quote a path for shell commands in a cross-platform way."""
+    if sys.platform == "win32":
+        return f'"{path}"'
+    return f"'{path}'"
+
+
+def _files_equal_ignore_blank_lines(file1: str, file2: str) -> bool:
+    """Compare two files, ignoring blank lines."""
+    content1 = pathlib.Path(file1).read_bytes()
+    content2 = pathlib.Path(file2).read_bytes()
+    lines1 = [line for line in content1.splitlines() if line.strip()]
+    lines2 = [line for line in content2.splitlines() if line.strip()]
+    return lines1 == lines2
 
 
 class GenericUtilities:  # noqa: D101
@@ -138,13 +155,11 @@ class BaseParserTestCase(GenericUtilities):
         )
 
     def assertSuccessfulTextract(self, filename, cleanup=True, **kwargs):  # noqa: D102, FBT002, N802
-        # construct the option string
         option = self.get_cli_options(**kwargs)
-
-        # run the command and make sure everything worked correctly
         temp_filename = self.get_temp_filename()
+        quoted_filename = _quote_path(filename)
         self.assertSuccessfulCommand(
-            "textract {option} '{filename}' > {temp_filename}".format(**locals()),
+            f"textract {option} {quoted_filename} > {temp_filename}",
         )
         if cleanup:
             pathlib.Path(temp_filename).unlink()
@@ -155,14 +170,10 @@ class BaseParserTestCase(GenericUtilities):
         if expected_filename is None:
             expected_filename = self.get_expected_filename(filename, **kwargs)
 
-        # run the command and make sure everything worked correctly
         temp_filename = self.assertSuccessfulTextract(filename, cleanup=False, **kwargs)
         assert temp_filename is not None
-
-        self.assertSuccessfulCommand(
-            "diff --ignore-blank-lines '{temp_filename}' '{expected_filename}'".format(
-                **locals(),
-            ),
+        assert _files_equal_ignore_blank_lines(temp_filename, expected_filename), (
+            f"Files differ: {temp_filename} vs {expected_filename}"
         )
         pathlib.Path(temp_filename).unlink()
 

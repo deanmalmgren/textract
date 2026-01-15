@@ -16,8 +16,12 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
     def test_unsupported_extension_cli(self):
         """Make sure unsupported extension exits with non-zero status."""
         filename = self.get_temp_filename(extension="extension")
-        command = "textract {filename} 2> /dev/null".format(**locals())
-        assert subprocess.call(command, shell=True) == 1  # noqa: S602
+        result = subprocess.run(  # noqa: S603
+            ["textract", filename],  # noqa: S607
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+        assert result.returncode == 1
         pathlib.Path(filename).unlink()
 
     def test_unsupported_extension_python(self):
@@ -34,8 +38,12 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
         """Make sure missing files exits with non-zero status."""
         filename = self.get_temp_filename()
         pathlib.Path(filename).unlink()
-        command = "textract {filename} 2> /dev/null".format(**locals())
-        assert subprocess.call(command, shell=True) == 1  # noqa: S602
+        result = subprocess.run(  # noqa: S603
+            ["textract", filename],  # noqa: S607
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+        assert result.returncode == 1
 
     def test_missing_filename_python(self):
         """Make sure missing files raise the correct error."""
