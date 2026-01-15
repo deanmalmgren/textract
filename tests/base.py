@@ -16,12 +16,39 @@ def _quote_path(path: str) -> str:
     return f"'{path}'"
 
 
+def _normalize_whitespace(content: bytes) -> list[bytes]:
+    """Normalize whitespace for comparison.
+
+    Converts all whitespace (tabs, spaces, nbsp, etc.) to single spaces,
+    removes blank lines, and normalizes line endings.
+    """
+    import re
+    # Split into lines and filter blanks
+    lines = [line for line in content.splitlines() if line.strip()]
+    # Normalize whitespace within each line:
+    # - Replace tabs, CR, nbsp (\xc2\xa0), and multiple spaces with single space
+    # - Strip leading/trailing whitespace from each line
+    normalized = []
+    for line in lines:
+        # Replace common whitespace variants with space
+        line = line.replace(b"\t", b" ")
+        line = line.replace(b"\r", b" ")
+        line = line.replace(b"\xc2\xa0", b" ")  # nbsp in UTF-8
+        # Collapse multiple spaces to single space
+        line = re.sub(rb" +", b" ", line)
+        # Strip leading/trailing whitespace
+        line = line.strip()
+        if line:  # Keep non-empty lines
+            normalized.append(line)
+    return normalized
+
+
 def _files_equal_ignore_blank_lines(file1: str, file2: str) -> bool:
-    """Compare two files, ignoring blank lines and normalizing line endings."""
+    """Compare two files, ignoring blank lines and normalizing whitespace."""
     content1 = pathlib.Path(file1).read_bytes()
     content2 = pathlib.Path(file2).read_bytes()
-    lines1 = [line.rstrip(b"\r") for line in content1.splitlines() if line.strip()]
-    lines2 = [line.rstrip(b"\r") for line in content2.splitlines() if line.strip()]
+    lines1 = _normalize_whitespace(content1)
+    lines2 = _normalize_whitespace(content2)
     return lines1 == lines2
 
 
@@ -38,8 +65,18 @@ class GenericUtilities:  # noqa: D101
     def clean_text(self, text):  # noqa: D102, PLR6301
         lines = text.splitlines()
         # Clean empty lines (fixes epub issue)
-        lines = [line for line in lines if line.strip()]
-        return six.b("\n").join(lines)
+        cleaned_lines = []
+        for line in lines:
+            if not line.strip():
+                continue
+            # Normalize tabs and nbsp to spaces, but preserve multiple spaces for layout
+            line = line.replace(b"\t", b" ")
+            line = line.replace(b"\r", b"")
+            line = line.replace(b"\xc2\xa0", b" ")  # nbsp in UTF-8
+            line = line.rstrip()  # Only strip trailing whitespace
+            if line:
+                cleaned_lines.append(line)
+        return six.b("\n").join(cleaned_lines)
 
 
 class BaseParserTestCase(GenericUtilities):

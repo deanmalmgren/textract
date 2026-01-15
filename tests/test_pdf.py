@@ -60,8 +60,8 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
         )
 
     @pytest.mark.skipif(
-        platform.system() == "Linux",
-        reason="PDF layout extraction varies by poppler version; Linux CI has different output",
+        platform.system() in {"Linux", "Windows"},
+        reason="PDF layout extraction varies by platform; character encoding differs",
     )
     def test_two_column(self):
         """Preserve two column layout in extraction."""

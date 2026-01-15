@@ -51,16 +51,37 @@ class Parser(ShellParser):
 
     def extract_pdfminer(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002
         """Extract text from pdfs using pdfminer."""
-        # Try the normal pdf2txt, if that fails try with sys.executable
+        import pathlib
+        import platform
+
+        # Find pdf2txt script
         pdf2txt_path = which("pdf2txt.py")
-        try:
-            stdout, _ = self.run(["pdf2txt.py", filename])
-        except (OSError, ShellError):
-            if pdf2txt_path is None:
-                raise
-            # On Windows and some systems, .py files aren't directly executable
-            # Use sys.executable to run the script through Python
+
+        # If not found via which, look in Scripts/bin directory
+        if pdf2txt_path is None:
+            bin_dir = pathlib.Path(sys.executable).parent
+            potential_paths = [
+                bin_dir / "pdf2txt.py",  # Unix: .venv/bin/pdf2txt.py
+                bin_dir / "Scripts" / "pdf2txt.py",  # Windows: .venv/Scripts/pdf2txt.py
+            ]
+            for path in potential_paths:
+                if path.exists():
+                    pdf2txt_path = str(path)
+                    break
+
+        if pdf2txt_path is None:
+            msg = "pdf2txt.py not found in environment"
+            raise ShellError("pdf2txt.py", 127, "", msg)
+
+        # On Windows, always use sys.executable; on Unix, try direct execution first
+        if platform.system() == "Windows":
             stdout, _ = self.run([sys.executable, pdf2txt_path, filename])
+        else:
+            try:
+                stdout, _ = self.run(["pdf2txt.py", filename])
+            except (OSError, ShellError):
+                # Fallback to using sys.executable
+                stdout, _ = self.run([sys.executable, pdf2txt_path, filename])
         return stdout
 
     def extract_tesseract(self, filename, **kwargs):  # noqa: ANN001, ANN201
