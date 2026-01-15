@@ -63,3 +63,7 @@ tests/pdf/large.pdf
 
 # OCR-generated test fixtures are committed to VCS but can be regenerated
 # using `mise run test:fixtures` or `cd tests && make`
+
+# Act (local GitHub Actions testing)
+.secrets
+.env.act

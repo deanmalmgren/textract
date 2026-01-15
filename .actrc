@@ -1,0 +1,19 @@
+# Act configuration for local GitHub Actions testing
+# Docs: https://github.com/nektos/act
+
+# Use larger images with more tools pre-installed
+# Options: micro, medium (default), large
+-P ubuntu-latest=catthehacker/ubuntu:act-latest
+-P macos-latest=ghcr.io/catthehacker/macos:latest
+
+# Bind the workflow files
+--bind
+
+# Use the artifact server for artifact actions
+--artifact-server-path /tmp/act-artifacts
+
+# Reuse containers to speed up subsequent runs
+--reuse
+
+# Verbose output for debugging
+--verbose
