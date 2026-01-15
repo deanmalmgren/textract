@@ -1,5 +1,6 @@
 import os  # noqa: D100
 import shutil
+import sys
 from tempfile import mkdtemp
 
 import six
@@ -50,19 +51,16 @@ class Parser(ShellParser):
 
     def extract_pdfminer(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002
         """Extract text from pdfs using pdfminer."""
-        # Nested try/except loops? Not great
-        # Try the normal pdf2txt, if that fails try the python3
-        # pdf2txt, if that fails try the python2 pdf2txt
+        # Try the normal pdf2txt, if that fails try with sys.executable
         pdf2txt_path = which("pdf2txt.py")
         try:
             stdout, _ = self.run(["pdf2txt.py", filename])
         except (OSError, ShellError):
             if pdf2txt_path is None:
                 raise
-            try:
-                stdout, _ = self.run(["python3", pdf2txt_path, filename])
-            except ShellError:
-                stdout, _ = self.run(["python2", pdf2txt_path, filename])
+            # On Windows and some systems, .py files aren't directly executable
+            # Use sys.executable to run the script through Python
+            stdout, _ = self.run([sys.executable, pdf2txt_path, filename])
         return stdout
 
     def extract_tesseract(self, filename, **kwargs):  # noqa: ANN001, ANN201
