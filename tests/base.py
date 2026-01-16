@@ -52,6 +52,46 @@ def _files_equal_ignore_blank_lines(file1: str, file2: str) -> bool:
     return lines1 == lines2
 
 
+def _generate_file_diff_message(file1: str, file2: str) -> str:
+    """Generate detailed diff message for file comparison failures."""
+    content1 = pathlib.Path(file1).read_bytes()
+    content2 = pathlib.Path(file2).read_bytes()
+    lines1 = _normalize_whitespace(content1)
+    lines2 = _normalize_whitespace(content2)
+
+    msg_parts = [f"\nFiles differ: {file1} vs {file2}"]
+
+    # Show line counts
+    msg_parts.append(f"Line counts: {len(lines1)} vs {len(lines2)}")
+
+    # Show first differing line
+    min_lines = min(len(lines1), len(lines2))
+    first_diff_idx = None
+    for i in range(min_lines):
+        if lines1[i] != lines2[i]:
+            first_diff_idx = i
+            break
+
+    if first_diff_idx is not None:
+        msg_parts.append(f"First difference at line {first_diff_idx + 1}:")
+        msg_parts.append(f"  Actual:   {lines1[first_diff_idx]!r}")
+        msg_parts.append(f"  Expected: {lines2[first_diff_idx]!r}")
+    elif len(lines1) != len(lines2):
+        msg_parts.append("Files differ in length (all common lines match)")
+
+    # Show preview of actual content (first 3 lines)
+    msg_parts.append("\nActual output (first 3 lines):")
+    for i, line in enumerate(lines1[:3]):
+        msg_parts.append(f"  {i + 1}: {line!r}")
+
+    # Show preview of expected content (first 3 lines)
+    msg_parts.append("\nExpected output (first 3 lines):")
+    for i, line in enumerate(lines2[:3]):
+        msg_parts.append(f"  {i + 1}: {line!r}")
+
+    return "\n".join(msg_parts)
+
+
 class GenericUtilities:  # noqa: D101
     def get_temp_filename(self, extension=None):  # noqa: D102, PLR6301
         stream = tempfile.NamedTemporaryFile(delete=False)  # noqa: SIM115
@@ -226,9 +266,10 @@ class BaseParserTestCase(GenericUtilities):
 
         temp_filename = self.assertSuccessfulTextract(filename, cleanup=False, **kwargs)
         assert temp_filename is not None
-        assert _files_equal_ignore_blank_lines(temp_filename, expected_filename), (
-            f"Files differ: {temp_filename} vs {expected_filename}"
-        )
+        if not _files_equal_ignore_blank_lines(temp_filename, expected_filename):
+            diff_msg = _generate_file_diff_message(temp_filename, expected_filename)
+            pathlib.Path(temp_filename).unlink()
+            raise AssertionError(diff_msg)
         pathlib.Path(temp_filename).unlink()
 
     def compare_python_output(self, filename, expected_filename=None, **kwargs):  # noqa: D102
