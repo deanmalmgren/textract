@@ -3,39 +3,28 @@
 Contributing
 ============
 
-The overarching goal of this project is to make it as easy as possible
-to extract raw text from any document for the purposes of most natural
-language processing tasks. In practice, this means that this project
-should preferentially provide tools that correctly produce output that
-has words in the correct order but that whitespace between words,
-formatting, etc is totally irrelevant. As the various parsers mature,
-I fully expect the output to become more readable to support
-additional use cases, like `extracting text to appear in web pages
-<https://github.com/deanmalmgren/textract/pull/58#issuecomment-53697943>`_.
+.. note::
+   The primary contributor documentation is in `CONTRIBUTING.md <https://github.com/KyleKing/textract-py3/blob/main/CONTRIBUTING.md>`_
+   at the repository root. This page provides a summary for the documentation site.
 
-Importantly, this project is committed to being as agnostic about how
-the content is extracted as it is about the means in which the text is
-analyzed downstream. This means that ``textract`` should support
-multiple modes of extracting text from any document and provide
-reasonably good defaults (defaulting to tools that tend to produce the
-correct word sequence).
+This is a maintained fork of `deanmalmgren/textract <https://github.com/deanmalmgren/textract>`_
+focused on minimizing dependencies and supporting modern Python.
 
-Another important aspect of this project is that we want to have
-extremely good documentation. If you notice a typo, error, confusing
-statement etc, please fix it!
-
+The overarching goal is to make it as easy as possible to extract raw text from any document
+for natural language processing tasks. In practice, this means prioritizing correct word order
+over formatting and supporting multiple extraction methods for each file type.
 
 .. _contributing-quick-start:
 
 Quick start
 -----------
 
-1. `Fork <https://github.com/KyleKing/textract-py3/fork>`_ and clone the
-   project:
+1. `Fork <https://github.com/KyleKing/textract-py3/fork>`_ and clone the project:
 
    .. code-block:: bash
 
         git clone https://github.com/YOUR-USERNAME/textract-py3.git
+        cd textract-py3
 
 2. Install development dependencies using `uv <https://docs.astral.sh/uv/>`_:
 
@@ -52,159 +41,66 @@ Quick start
 4. Submit a pull request with your changes.
 
 CI is handled by GitHub Actions, which runs tests across multiple Python
-versions and operating systems.
-
+versions (3.9-3.14) and operating systems (Ubuntu, macOS, Windows).
 
 System dependencies
 ~~~~~~~~~~~~~~~~~~~
 
-Some parsers require system-level dependencies. See the
-:ref:`installation <installation>` guide for details on installing
-these for your operating system.
+Some file types require system-level tools. See the :ref:`installation <installation>`
+guide for platform-specific installation instructions:
 
+- ``.doc`` requires ``antiword``
+- ``.pdf`` requires ``pdftotext`` (from poppler-utils) or uses built-in ``pdfminer``
+- ``.jpg``, ``.png`` require ``tesseract`` for OCR
+- ``.ps`` requires ``ghostscript``
+- ``.rtf`` requires ``unrtf``
+- ``.wav`` requires ``sox`` and ``SpeechRecognition``
 
 .. _contributing-release:
 
 Releasing
 ---------
 
-This project uses `commitizen <https://commitizen-tools.github.io/commitizen/>`_
-for version management and `PyPI Trusted Publishers <https://docs.pypi.org/trusted-publishers>`_
-for secure, token-free publishing from GitHub Actions. Commitizen automatically
-updates version numbers in ``pyproject.toml`` and ``textract/__init__.py``.
+Publishing is automated via GitHub Actions with `PyPI Trusted Publishers <https://docs.pypi.org/trusted-publishers>`_.
+No API tokens needed.
 
-Initial Setup (One-time)
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Before publishing for the first time, configure Trusted Publishing on PyPI:
-
-1. Go to your project's page on PyPI: ``https://pypi.org/manage/project/textract-py3/settings/publishing/``
-
-   - If the project doesn't exist yet, go to `PyPI's publishing page <https://pypi.org/manage/account/publishing>`_ to add a "pending" publisher
-
-2. Add a new Trusted Publisher with these settings:
-
-   - **PyPI Project Name**: ``textract-py3``
-   - **Owner**: ``KyleKing``
-   - **Repository name**: ``textract-py3``
-   - **Workflow name**: ``ci_pipeline.yml`` (``.github/workflows/ci_pipeline.yml``)
-   - **Environment name**: ``pypi``
-
-3. Configure the GitHub Environment:
-
-   - Go to your repository's ``Settings`` → ``Environments``
-   - Create an environment named ``pypi``
-   - (Recommended) Enable "Required reviewers" for production safety
-
-Publishing a Release
-~~~~~~~~~~~~~~~~~~~~~
-
-Use commitizen to bump versions and create tags. You can use either ``mise`` tasks
-or run ``uv`` commands directly:
+Basic release workflow:
 
 .. code-block:: bash
-
-    # Show current version
-    uv run cz version --project
 
     # Preview unreleased changes
     mise run changelog:preview
-    # Or: uv run cz changelog --dry-run | head -50
 
-    # Bump version
-    mise run release:bump -- --increment MINOR  # or PATCH, MAJOR
-    # Or: uv run cz bump --increment MINOR
+    # Bump version (PATCH, MINOR, or MAJOR)
+    mise run release:bump -- --increment MINOR
 
-    # Update changelog (semi-automated via mise task)
+    # Update changelog
     mise run changelog:update
-    # This runs scripts/prepend-changelog.sh
 
-    # Preview without committing
-    uv run cz bump --dry-run --yes
-
-The ``cz bump`` command automatically:
-
-- Updates version numbers in ``pyproject.toml`` and ``textract/__init__.py``
-- Creates a git commit with the changes
-- Creates a git tag (format: ``v2.1.2``)
-
-After bumping, push the commit and tag to trigger the GitHub Action:
-
-.. code-block:: bash
-
-    # Push the commit and tag
+    # Push to trigger automated publishing
     git push origin main --tags
 
-The GitHub Action will automatically:
+For detailed release instructions, prerelease workflows, and changelog management options,
+see `CONTRIBUTING.md <https://github.com/KyleKing/textract-py3/blob/main/CONTRIBUTING.md#releasing>`_.
 
-- Run tests across multiple Python versions and operating systems
-- Build the package with ``uv build``
-- Publish to PyPI using Trusted Publishers (no API tokens needed)
-- Generate a changelog from commit messages using commitizen
-- Create a GitHub Release with the changelog
+Local Testing
+-------------
 
-**Note:** The changelog in ``docs/changelog.rst`` is currently maintained manually
-to preserve the existing format and historical entries. The GitHub Action generates
-release notes automatically, but the manual changelog remains for documentation purposes.
+Test GitHub Actions workflows locally using `Act <https://github.com/nektos/act>`_ for
+Linux/macOS, or cloud VMs for Windows testing.
 
-Changelog Management
-~~~~~~~~~~~~~~~~~~~~
+For comprehensive local testing documentation including Windows testing options,
+see `CONTRIBUTING.md <https://github.com/KyleKing/textract-py3/blob/main/CONTRIBUTING.md#local-ci-testing>`_.
 
-The project maintains a manual changelog in ``docs/changelog.rst``. You have
-three options for managing changelog updates:
+Pull Requests
+-------------
 
-**Option 1: Semi-Automated (Recommended)**
+When submitting PRs:
 
-Use the ``scripts/prepend-changelog.sh`` script to generate and prepend new
-entries non-destructively:
+- Include tests for new functionality
+- Update documentation if adding features or changing behavior
+- Follow existing code style (enforced by ruff)
+- Use conventional commit messages for changelog generation
+- Ensure CI passes on all platforms before requesting review
 
-.. code-block:: bash
-
-    # Preview unreleased changes before bumping
-    mise run changelog:preview
-    # Or: ./scripts/prepend-changelog.sh --preview
-
-    # After running `cz bump`, update the changelog
-    mise run changelog:update
-    # Or: ./scripts/prepend-changelog.sh
-
-    # Review and commit the changes
-    diff docs/changelog.rst.backup docs/changelog.rst
-    git add docs/changelog.rst
-    rm docs/changelog.rst.backup
-
-This approach generates new entries from conventional commits and prepends them
-to the existing changelog without destroying historical entries.
-
-**Option 2: Manual Updates**
-
-After bumping versions, manually add entries under the "latest changes in
-development for next release" section in ``docs/changelog.rst``.
-
-**Option 3: Full Auto-Generation**
-
-Commitizen can generate a complete changelog from git commit messages:
-
-.. code-block:: bash
-
-    # Preview auto-generated changelog (RST format)
-    uv run cz changelog --dry-run
-
-    # Generate complete changelog (overwrites docs/changelog.rst)
-    uv run cz changelog
-
-    # Generate for specific version range
-    uv run cz changelog 2.1.0..2.2.0 --dry-run
-
-**Warning:** Running ``uv run cz changelog`` without ``--dry-run`` will overwrite
-the existing changelog file. The auto-generated format differs from the current
-manual format. Review the dry-run output before committing to this approach.
-
-To enable automatic changelog updates on version bumps, set
-``update_changelog_on_bump = true`` in the ``[tool.commitizen]`` section of
-``pyproject.toml``. This requires migrating the existing changelog to
-commitizen's format first.
-
-**Changelog Format:** For auto-generated changelogs to categorize commits properly,
-use conventional commit prefixes like ``feat:``, ``fix:``, ``refactor:``,
-``docs:``, ``test:``, ``ci:``, etc. in commit messages.
+For more details, see `CONTRIBUTING.md <https://github.com/KyleKing/textract-py3/blob/main/CONTRIBUTING.md>`_.

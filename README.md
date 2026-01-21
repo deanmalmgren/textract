@@ -77,45 +77,9 @@ textract supports a growing list of file types. If you don't see your format her
 - `.wav` via [SpeechRecognition](https://pypi.python.org/pypi/SpeechRecognition/) and [pocketsphinx](https://github.com/cmusphinx/pocketsphinx/)
 - `.xls`, `.xlsx` via [xlrd](https://pypi.python.org/pypi/xlrd)
 
-## Development
+## Contributing
 
-This fork uses `uv` for dependency management and development workflows.
-
-```sh
-# # Install system dependencies (macOS)
-# brew bundle
-
-# Setup Python environment
-uv sync
-
-# Run tests
-uv run pytest
-
-# Preview unreleased changelog entries
-mise run changelog:preview
-
-# Bump version and release
-mise run release:bump -- --increment MINOR  # or PATCH, MAJOR
-
-# Update changelog (semi-automated)
-mise run changelog:update
-# Or update docs/changelog.rst manually
-
-# Build and publish
-uv build && uv publish
-```
-
-For contributing guidelines, see the [contributing documentation](docs/contributing.rst).
-
-### Local Testing
-
-Test CI workflows locally using Act (Linux/macOS only) or debug Windows-specific issues using cloud VMs. See the [local testing guide](docs/local-testing.md) for detailed instructions.
-
-GitHub Codespaces (Recommended)
-  - Cost: Free (60 hours/month on 2-core)
-  - Setup: Zero - just create Windows codespace from repo
-  - Best for: Quick debugging of CI failures
-  - URL: https://github.com/KyleKing/textract-py3 → Code → Codespaces
+Development setup, testing, and release processes are documented in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Documentation
 
