@@ -9,7 +9,7 @@ license = {text = "MIT"}
 name = "textract-py3"
 readme = "README.md"
 requires-python = ">=3.9"
-version = "3.0.0rc0"
+version = "3.0.0"
 dependencies = [
     "Pillow>=9.0.0",
     "SpeechRecognition>=3.8.1",
@@ -50,7 +50,7 @@ docs = [
 changelog_file = "docs/changelog.rst"
 tag_format = "v$version"
 update_changelog_on_bump = false
-version = "3.0.0rc0"
+version = "3.0.0"
 version_files = ["pyproject.toml:^version", "textract/__init__.py:^VERSION"]
 
 [tool.uv.build-backend]
