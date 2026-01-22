@@ -128,7 +128,7 @@ def _get_available_encodings():  # noqa: ANN202
     Inspiration from http://stackoverflow.com/a/3824405/564709
     """  # noqa: D205
     available_encodings = set(encodings.aliases.aliases.values())
-    paths = [pathlib.Path(encodings.__file__).parent]
+    paths = [str(pathlib.Path(encodings.__file__).parent)]
     available_encodings.update(
         modname for importer, modname, ispkg in pkgutil.walk_packages(path=paths)
     )
