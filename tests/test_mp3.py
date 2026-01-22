@@ -30,12 +30,18 @@ class Mp3TestCase(base.ShellParserTestCase, unittest.TestCase):
 
     extension = "mp3"
 
-    @pytest.mark.skipif(_SKIP_NETWORK_TESTS, reason="network access required for Google API")
+    @pytest.mark.skipif(
+        _SKIP_NETWORK_TESTS,
+        reason="network access required for Google API",
+    )
     def test_mp3(self):
         """Make sure default audio method output is correct."""
         self.compare_python_output(self.raw_text_filename)
 
-    @pytest.mark.skipif(_SKIP_NETWORK_TESTS, reason="network access required for Google API")
+    @pytest.mark.skipif(
+        _SKIP_NETWORK_TESTS,
+        reason="network access required for Google API",
+    )
     def test_mp3_google(self):
         """Make sure google api python output is correct."""
         self.compare_python_output(self.raw_text_filename, method="google")

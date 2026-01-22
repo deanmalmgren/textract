@@ -16,7 +16,10 @@ class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
 
     @pytest.mark.skipif(
         platform.system() == "Windows",
-        reason="HTML output varies on Windows due to BeautifulSoup/lxml platform differences",
+        reason=(
+            "HTML output varies on Windows "
+            "due to BeautifulSoup/lxml platform differences"
+        ),
     )
     def test_raw_text_cli(self):
         """Make sure raw text matches from the command line."""
@@ -24,7 +27,10 @@ class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
 
     @pytest.mark.skipif(
         platform.system() == "Windows",
-        reason="HTML output varies on Windows due to BeautifulSoup/lxml platform differences",
+        reason=(
+            "HTML output varies on Windows "
+            "due to BeautifulSoup/lxml platform differences"
+        ),
     )
     def test_raw_text_python(self):
         """Make sure raw text matches from python."""
@@ -32,7 +38,10 @@ class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
 
     @pytest.mark.skipif(
         platform.system() == "Windows",
-        reason="HTML output varies on Windows due to BeautifulSoup/lxml platform differences",
+        reason=(
+            "HTML output varies on Windows "
+            "due to BeautifulSoup/lxml platform differences"
+        ),
     )
     def test_standardized_text_cli(self):
         """Make sure standardized text matches from the command line."""
@@ -40,7 +49,10 @@ class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
 
     @pytest.mark.skipif(
         platform.system() == "Windows",
-        reason="HTML output varies on Windows due to BeautifulSoup/lxml platform differences",
+        reason=(
+            "HTML output varies on Windows "
+            "due to BeautifulSoup/lxml platform differences"
+        ),
     )
     def test_standardized_text_python(self):
         """Make sure standardized text matches from python."""
@@ -48,7 +60,10 @@ class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
 
     @pytest.mark.skipif(
         platform.system() == "Windows",
-        reason="HTML output varies on Windows due to BeautifulSoup/lxml platform differences",
+        reason=(
+            "HTML output varies on Windows "
+            "due to BeautifulSoup/lxml platform differences"
+        ),
     )
     def test_table_text_python(self):
         """Make sure tables in html look pretty through python."""
@@ -57,7 +72,10 @@ class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
 
     @pytest.mark.skipif(
         platform.system() == "Windows",
-        reason="HTML output varies on Windows due to BeautifulSoup/lxml platform differences",
+        reason=(
+            "HTML output varies on Windows "
+            "due to BeautifulSoup/lxml platform differences"
+        ),
     )
     def test_table_text_cli(self):
         """Make sure tables in html look pretty through cli."""

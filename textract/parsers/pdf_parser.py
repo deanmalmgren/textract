@@ -1,4 +1,6 @@
 import os  # noqa: D100
+import pathlib
+import platform
 import shutil
 import sys
 from tempfile import mkdtemp
@@ -51,9 +53,6 @@ class Parser(ShellParser):
 
     def extract_pdfminer(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002
         """Extract text from pdfs using pdfminer."""
-        import pathlib
-        import platform
-
         # Find pdf2txt script
         pdf2txt_path = which("pdf2txt.py")
 

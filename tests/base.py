@@ -1,4 +1,5 @@
 import pathlib
+import re
 import shutil
 import subprocess  # noqa: S404
 import sys
@@ -22,7 +23,6 @@ def _normalize_whitespace(content: bytes) -> list[bytes]:
     Converts all whitespace (tabs, spaces, nbsp, etc.) to single spaces,
     removes blank lines, and normalizes line endings.
     """
-    import re
     # Split into lines and filter blanks
     lines = [line for line in content.splitlines() if line.strip()]
     # Normalize whitespace within each line:
@@ -30,16 +30,15 @@ def _normalize_whitespace(content: bytes) -> list[bytes]:
     # - Strip leading/trailing whitespace from each line
     normalized = []
     for line in lines:
-        # Replace common whitespace variants with space
-        line = line.replace(b"\t", b" ")
-        line = line.replace(b"\r", b" ")
-        line = line.replace(b"\xc2\xa0", b" ")  # nbsp in UTF-8
-        # Collapse multiple spaces to single space
-        line = re.sub(rb" +", b" ", line)
-        # Strip leading/trailing whitespace
-        line = line.strip()
-        if line:  # Keep non-empty lines
-            normalized.append(line)
+        # Replace whitespace variants, collapse spaces, and strip
+        processed = (
+            line.replace(b"\t", b" ")
+            .replace(b"\r", b" ")
+            .replace(b"\xc2\xa0", b" ")  # nbsp in UTF-8
+        )
+        processed = re.sub(rb" +", b" ", processed).strip()
+        if processed:  # Keep non-empty lines
+            normalized.append(processed)
     return normalized
 
 
@@ -73,9 +72,13 @@ def _generate_file_diff_message(file1: str, file2: str) -> str:
             break
 
     if first_diff_idx is not None:
-        msg_parts.append(f"First difference at line {first_diff_idx + 1}:")
-        msg_parts.append(f"  Actual:   {lines1[first_diff_idx]!r}")
-        msg_parts.append(f"  Expected: {lines2[first_diff_idx]!r}")
+        msg_parts.extend(
+            [
+                f"First difference at line {first_diff_idx + 1}:",
+                f"  Actual:   {lines1[first_diff_idx]!r}",
+                f"  Expected: {lines2[first_diff_idx]!r}",
+            ],
+        )
     elif len(lines1) != len(lines2):
         msg_parts.append("Files differ in length (all common lines match)")
 
@@ -110,12 +113,14 @@ class GenericUtilities:  # noqa: D101
             if not line.strip():
                 continue
             # Normalize tabs and nbsp to spaces, but preserve multiple spaces for layout
-            line = line.replace(b"\t", b" ")
-            line = line.replace(b"\r", b"")
-            line = line.replace(b"\xc2\xa0", b" ")  # nbsp in UTF-8
-            line = line.rstrip()  # Only strip trailing whitespace
-            if line:
-                cleaned_lines.append(line)
+            processed = (
+                line.replace(b"\t", b" ")
+                .replace(b"\r", b"")
+                .replace(b"\xc2\xa0", b" ")  # nbsp in UTF-8
+                .rstrip()  # Only strip trailing whitespace
+            )
+            if processed:
+                cleaned_lines.append(processed)
         return six.b("\n").join(cleaned_lines)
 
 
@@ -244,7 +249,7 @@ class BaseParserTestCase(GenericUtilities):
         # Run command and write output to file
         with pathlib.Path(temp_filename).open("wb") as output_file:
             result = subprocess.run(  # noqa: S603
-                cmd,  # noqa: S607
+                cmd,
                 stdout=output_file,
                 stderr=subprocess.PIPE,
                 check=False,

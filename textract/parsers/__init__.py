@@ -89,7 +89,9 @@ def _get_available_extensions():  # noqa: ANN202, RUF067
     parsers_dir = pathlib.Path(__file__).parent
     glob_filename = str(parsers_dir / f"*{_FILENAME_SUFFIX}.py")
     # Escape the path for regex to handle Windows backslashes and special chars
-    ext_re = re.compile(re.escape(glob_filename).replace(re.escape("*"), r"(?P<ext>\w+)"))
+    ext_re = re.compile(
+        re.escape(glob_filename).replace(re.escape("*"), r"(?P<ext>\w+)"),
+    )
     for filename in glob.glob(glob_filename):  # noqa: PTH207
         if ext_match := ext_re.match(filename):
             ext = ext_match.groups()[0]
