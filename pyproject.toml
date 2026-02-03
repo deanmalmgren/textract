@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "textract"
+version = "1.6.6"
+description = "Extract text from any document. No muss. No fuss."
+authors = ["Dean Malmgren <dean.malmgren@datascopeanalytics.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "textract"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+argcomplete = "^3.1.4"
+beautifulsoup4 = "^4.12.2"
+chardet = "^5.2.0"
+docx2txt = "^0.8"
+extract-msg = "^0.46.0"
+pdfminer = "^20191125"
+python-pptx = "^0.6.23"
+speechrecognition = "^3.10.0"
+xlrd = "^2.0.1"
+six = "^1.16.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
