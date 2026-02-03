@@ -5,7 +5,7 @@ Maintained fork of [deanmalmgren/textract](https://github.com/deanmalmgren/textr
 ## Quick Start
 
 ```bash
-git clone https://github.com/KyleKing/textract.git
+git clone https://github.com/deanmalmgren/textract.git
 cd textract
 uv sync --group dev
 uv run pytest
@@ -116,7 +116,7 @@ Act doesn't support Windows. Use cloud VMs for Windows debugging:
 **GitHub Codespaces (recommended for quick tests):**
 
 ```bash
-# Create Windows codespace at https://github.com/KyleKing/textract
+# Create Windows codespace at https://github.com/deanmalmgren/textract
 # Inside codespace:
 choco install tesseract ghostscript sox.portable poppler -y
 uv sync --all-extras
@@ -138,7 +138,7 @@ choco install -y tesseract ghostscript sox.portable poppler python --version=3.1
 pip install uv
 
 # Clone and test
-git clone https://github.com/KyleKing/textract
+git clone https://github.com/deanmalmgren/textract
 cd textract
 uv sync --all-extras
 $env:SKIP_NETWORK_TESTS="true"

@@ -4,7 +4,7 @@ Contributing
 ============
 
 .. note::
-   The primary contributor documentation is in `CONTRIBUTING.md <https://github.com/KyleKing/textract/blob/main/CONTRIBUTING.md>`_
+   The primary contributor documentation is in `CONTRIBUTING.md <https://github.com/deanmalmgren/textract/blob/main/CONTRIBUTING.md>`_
    at the repository root. This page provides a summary for the documentation site.
 
 This is a maintained fork of `deanmalmgren/textract <https://github.com/deanmalmgren/textract>`_
@@ -19,7 +19,7 @@ over formatting and supporting multiple extraction methods for each file type.
 Quick start
 -----------
 
-1. `Fork <https://github.com/KyleKing/textract/fork>`_ and clone the project:
+1. `Fork <https://github.com/deanmalmgren/textract/fork>`_ and clone the project:
 
    .. code-block:: bash
 
@@ -81,7 +81,7 @@ Basic release workflow:
     git push origin main --tags
 
 For detailed release instructions, prerelease workflows, and changelog management options,
-see `CONTRIBUTING.md <https://github.com/KyleKing/textract/blob/main/CONTRIBUTING.md#releasing>`_.
+see `CONTRIBUTING.md <https://github.com/deanmalmgren/textract/blob/main/CONTRIBUTING.md#releasing>`_.
 
 Local Testing
 -------------
@@ -90,7 +90,7 @@ Test GitHub Actions workflows locally using `Act <https://github.com/nektos/act>
 Linux/macOS, or cloud VMs for Windows testing.
 
 For comprehensive local testing documentation including Windows testing options,
-see `CONTRIBUTING.md <https://github.com/KyleKing/textract/blob/main/CONTRIBUTING.md#local-ci-testing>`_.
+see `CONTRIBUTING.md <https://github.com/deanmalmgren/textract/blob/main/CONTRIBUTING.md#local-ci-testing>`_.
 
 Pull Requests
 -------------
@@ -103,4 +103,4 @@ When submitting PRs:
 - Use conventional commit messages for changelog generation
 - Ensure CI passes on all platforms before requesting review
 
-For more details, see `CONTRIBUTING.md <https://github.com/KyleKing/textract/blob/main/CONTRIBUTING.md>`_.
+For more details, see `CONTRIBUTING.md <https://github.com/deanmalmgren/textract/blob/main/CONTRIBUTING.md>`_.

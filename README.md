@@ -51,7 +51,7 @@ For system dependencies and detailed installation instructions, see the [install
 
 ## Supported File Types
 
-textract supports a growing list of file types. If you don't see your format here, please [open an issue](https://github.com/KyleKing/textract/issues) or [contribute a pull request](docs/contributing.rst).
+textract supports a growing list of file types. If you don't see your format here, please [open an issue](https://github.com/deanmalmgren/textract/issues) or [contribute a pull request](docs/contributing.rst).
 
 - `.csv` via python builtins
 - `.doc` via [antiword](http://www.winfield.demon.nl/)

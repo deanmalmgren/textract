@@ -31,7 +31,7 @@ pocketsphinx = ["pocketsphinx>=0.1.15"]
 textract = "textract.bin.textract:main"
 
 [project.urls]
-Repository = "https://github.com/KyleKing/textract"
+Repository = "https://github.com/deanmalmgren/textract"
 
 [dependency-groups]
 dev = [
@@ -91,6 +91,7 @@ ignore = [
   'TRY003', # Avoid specifying long messages outside the exception class
 ]
 preview = true
+# select = ['ALL'] PLANNED: de-activated for now to minimize diffs
 unfixable = [
   'ERA001', # Commented out code
 ]
@@ -120,10 +121,6 @@ known-first-party = ['textract']
   'PT004', # flake8-pytest-style: fixture does not return
   'S101', # Use of `assert` detected
 ]
-
-
-[tool.ruff.format]
-quote-style = 'single'
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
