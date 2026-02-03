@@ -1,10 +1,11 @@
-import docx2txt  # noqa: D100
+import docx2txt
 
 from .utils import BaseParser
 
 
 class Parser(BaseParser):
-    """Extract text from docx file using python-docx."""
+    """Extract text from docx file using python-docx.
+    """
 
-    def extract(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002, D102, PLR6301
+    def extract(self, filename, **kwargs):
         return docx2txt.process(filename)

@@ -1,100 +1,76 @@
-import os  # noqa: D100
-import pathlib
-import platform
+import os
 import shutil
-import sys
+import six
 from tempfile import mkdtemp
 
-import six
+from ..exceptions import UnknownMethod, ShellError
 
-from textract.exceptions import ShellError, UnknownMethod
-
-from .image import Parser as TesseractParser
 from .utils import ShellParser
+from .image import Parser as TesseractParser
 
-try:
-    from shutil import which
-except ImportError:
-    from distutils.spawn import find_executable as which
-
+from distutils.spawn import find_executable
 
 class Parser(ShellParser):
     """Extract text from pdf files using either the ``pdftotext`` method
     (default) or the ``pdfminer`` method.
-    """  # noqa: D205
+    """
 
-    def extract(self, filename, method="", **kwargs):  # noqa: ANN001, ANN201, D102
-        if method in {"", "pdftotext"}:
+    def extract(self, filename, method='', **kwargs):
+        if method == '' or method == 'pdftotext':
             try:
                 return self.extract_pdftotext(filename, **kwargs)
             except ShellError as ex:
                 # If pdftotext isn't installed and the pdftotext method
                 # wasn't specified, then gracefully fallback to using
                 # pdfminer instead.
-                if method == "" and ex.is_not_installed():  # noqa: PLC1901
+                if method == '' and ex.is_not_installed():
                     return self.extract_pdfminer(filename, **kwargs)
-                raise
+                else:
+                    raise ex
 
-        elif method == "pdfminer":
+        elif method == 'pdfminer':
             return self.extract_pdfminer(filename, **kwargs)
-        elif method == "tesseract":
+        elif method == 'tesseract':
             return self.extract_tesseract(filename, **kwargs)
         else:
             raise UnknownMethod(method)
 
-    def extract_pdftotext(self, filename, **kwargs):  # noqa: ANN001, ANN201
+    def extract_pdftotext(self, filename, **kwargs):
         """Extract text from pdfs using the pdftotext command line utility."""
-        if "layout" in kwargs:
-            args = ["pdftotext", "-layout", filename, "-"]
+        if 'layout' in kwargs:
+            args = ['pdftotext', '-layout', filename, '-']
         else:
-            args = ["pdftotext", filename, "-"]
+            args = ['pdftotext', filename, '-']
         stdout, _ = self.run(args)
         return stdout
 
-    def extract_pdfminer(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002
+    def extract_pdfminer(self, filename, **kwargs):
         """Extract text from pdfs using pdfminer."""
-        # Find pdf2txt script
-        pdf2txt_path = which("pdf2txt.py")
-
-        # If not found via which, look in Scripts/bin directory
-        if pdf2txt_path is None:
-            bin_dir = pathlib.Path(sys.executable).parent
-            potential_paths = [
-                bin_dir / "pdf2txt.py",  # Unix: .venv/bin/pdf2txt.py
-                bin_dir / "Scripts" / "pdf2txt.py",  # Windows: .venv/Scripts/pdf2txt.py
-            ]
-            for path in potential_paths:
-                if path.exists():
-                    pdf2txt_path = str(path)
-                    break
-
-        if pdf2txt_path is None:
-            msg = "pdf2txt.py not found in environment"
-            raise ShellError("pdf2txt.py", 127, "", msg)
-
-        # On Windows, always use sys.executable; on Unix, try direct execution first
-        if platform.system() == "Windows":
-            stdout, _ = self.run([sys.executable, pdf2txt_path, filename])
-        else:
+        # Nested try/except loops? Not great
+        # Try the normal pdf2txt, if that fails try the python3
+        # pdf2txt, if that fails try the python2 pdf2txt
+        pdf2txt_path = find_executable('pdf2txt.py')
+        try:
+            stdout, _ = self.run(['pdf2txt.py', filename])
+        except OSError:
             try:
-                stdout, _ = self.run(["pdf2txt.py", filename])
-            except (OSError, ShellError):
-                # Fallback to using sys.executable
-                stdout, _ = self.run([sys.executable, pdf2txt_path, filename])
+                stdout, _ = self.run(['python3',pdf2txt_path, filename])
+            except ShellError:
+                stdout, _ = self.run(['python2',pdf2txt_path, filename])
         return stdout
 
-    def extract_tesseract(self, filename, **kwargs):  # noqa: ANN001, ANN201
+    def extract_tesseract(self, filename, **kwargs):
         """Extract text from pdfs using tesseract (per-page OCR)."""
         temp_dir = mkdtemp()
-        base = os.path.join(temp_dir, "conv")  # noqa: PTH118
+        base = os.path.join(temp_dir, 'conv')
         contents = []
         try:
-            _stdout, _ = self.run(["pdftoppm", filename, base])
+            stdout, _ = self.run(['pdftoppm', filename, base])
 
-            for page in sorted(os.listdir(temp_dir)):  # noqa: PTH208
-                page_path = os.path.join(temp_dir, page)  # noqa: PTH118
+            for page in sorted(os.listdir(temp_dir)):
+                page_path = os.path.join(temp_dir, page)
                 page_content = TesseractParser().extract(page_path, **kwargs)
                 contents.append(page_content)
-            return six.b("").join(contents)
+            return six.b('').join(contents)
         finally:
             shutil.rmtree(temp_dir)

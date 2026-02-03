@@ -1920,7 +1920,7 @@ wheels = [
 
 [[package]]
 name = "textract"
-version = "3.0.0rc0"
+version = "3.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "argcomplete" },
