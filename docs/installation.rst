@@ -10,13 +10,13 @@ packages and other source libraries. Python dependencies are installed
 automatically with textract. The source libraries are a separate matter
 though and largely depend on your operating system.
 
-Install textract-py3 with pip or uv:
+Install textract with pip or uv:
 
 .. code-block:: bash
 
-    pip install textract-py3
+    pip install textract
     # or
-    uv add textract-py3
+    uv add textract
 
 Ubuntu / Debian
 ---------------
@@ -30,7 +30,7 @@ package manager before installing textract from pypi.
 
     apt-get install python-dev libxml2-dev libxslt1-dev antiword unrtf poppler-utils pstotext tesseract-ocr \
     flac ffmpeg lame libmad0 libsox-fmt-mp3 sox libjpeg-dev swig libpulse-dev
-    pip install textract-py3
+    pip install textract
 
 .. note::
 
@@ -49,7 +49,7 @@ The easiest way to install all dependencies is using the included Brewfile:
 .. code-block:: bash
 
     brew bundle
-    pip install textract-py3
+    pip install textract
 
 **Manual Installation**
 
@@ -59,7 +59,7 @@ Alternatively, install dependencies individually:
 
     brew install --cask xquartz
     brew install antiword ghostscript poppler sox tesseract unrtf swig
-    pip install textract-py3
+    pip install textract
 
 ..     brew install libxml2 libxslt antiword poppler tesseract
 ..     brew link libxml2 libxslt
@@ -86,7 +86,7 @@ Ubuntu / Debian while using ``pkg`` as package manager.
     pkg install lang/python38 devel/py-pip textproc/libxml2 textproc/libxslt textproc/antiword textproc/unrtf \
     graphics/poppler print/pstotext graphics/tesseract audio/flac multimedia/ffmpeg audio/lame audio/sox \
     graphics/jpeg-turbo
-    pip install textract-py3
+    pip install textract
 
 Don't see your operating system installation instructions here?
 ---------------------------------------------------------------
@@ -97,7 +97,7 @@ accommodated. If your operating system doesn't have documentation about
 how to install the textract dependencies, please
 :ref:`contribute a pull request <contributing>` with a new section
 including the appropriate details. The following libraries may be
-needed before running ``pip install textract-py3``:
+needed before running ``pip install textract``:
 
 - `libxml2 2.6.21 or later <http://xmlsoft.org/downloads.html>`_
   is required by the ``.docx`` parser which uses `lxml

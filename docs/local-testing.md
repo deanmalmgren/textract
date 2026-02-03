@@ -100,7 +100,7 @@ Since Act doesn't support Windows, here are cloud options for Windows testing:
 **Usage:**
 ```bash
 # Create a Windows codespace
-# Go to: https://github.com/KyleKing/textract-py3
+# Go to: https://github.com/KyleKing/textract
 # Click: Code -> Codespaces -> Create codespace on main
 # Select: Windows machine type
 
@@ -136,8 +136,8 @@ uv run pytest
    choco install tesseract ghostscript sox.portable poppler -y
    choco install python --version=3.14
    choco install git
-   git clone https://github.com/KyleKing/textract-py3
-   cd textract-py3
+   git clone https://github.com/KyleKing/textract
+   cd textract
    pip install uv
    uv sync --all-extras
    uv run pytest
@@ -232,8 +232,8 @@ choco install -y `
 pip install uv
 
 # Clone and test
-git clone https://github.com/KyleKing/textract-py3
-cd textract-py3
+git clone https://github.com/KyleKing/textract
+cd textract
 uv sync --all-extras
 $env:SKIP_NETWORK_TESTS="true"
 uv run pytest

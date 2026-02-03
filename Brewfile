@@ -1,4 +1,4 @@
-# Brewfile for textract-py3 dependencies
+# Brewfile for textract dependencies
 # Usage: brew bundle
 
 # GUI requirement for some dependencies

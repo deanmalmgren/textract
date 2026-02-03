@@ -1,4 +1,4 @@
-# textract-py3
+# textract
 
 Extract text from any document. No muss. No fuss.
 
@@ -31,27 +31,27 @@ Install with modern Python tooling:
 
 ```sh
 # Using uvx
-uvx textract-py3 path/to/file.pdf
+uvx textract path/to/file.pdf
 
 # Using uv
-uv tool install textract-py3
+uv tool install textract
 
 # Using asdf
-asdf plugin add textract-py3 https://github.com/amrox/asdf-pyapp.git
-asdf install textract-py3 latest
+asdf plugin add textract https://github.com/amrox/asdf-pyapp.git
+asdf install textract latest
 
 # Using mise
-mise use -g pipx:textract-py3
+mise use -g pipx:textract
 
 # Using pip
-pip install textract-py3
+pip install textract
 ```
 
 For system dependencies and detailed installation instructions, see the [installation documentation](docs/installation.rst).
 
 ## Supported File Types
 
-textract supports a growing list of file types. If you don't see your format here, please [open an issue](https://github.com/KyleKing/textract-py3/issues) or [contribute a pull request](docs/contributing.rst).
+textract supports a growing list of file types. If you don't see your format here, please [open an issue](https://github.com/KyleKing/textract/issues) or [contribute a pull request](docs/contributing.rst).
 
 - `.csv` via python builtins
 - `.doc` via [antiword](http://www.winfield.demon.nl/)

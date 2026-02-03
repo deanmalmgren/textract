@@ -6,7 +6,7 @@ project = "textract"
 author = "Dean Malmgren, Kyle King"
 copyright = "2014, Dean Malmgren; 2024, Kyle King"  # noqa: A001
 
-release = version = get_version("textract-py3")
+release = version = get_version("textract")
 
 extensions = [
     "sphinx.ext.autodoc",

@@ -3,7 +3,7 @@ textract
 
 .. note::
 
-   This is `textract-py3 <https://github.com/KyleKing/textract-py3>`_,
+   This is `textract <https://github.com/KyleKing/textract>`_,
    a maintained fork of `deanmalmgren/textract <https://github.com/deanmalmgren/textract>`_.
 
 As undesirable as it might be, more often than not there is extremely
@@ -38,7 +38,7 @@ Currently supporting
 textract supports a growing list of file types for text extraction. If
 you don't see your favorite file type here, please recommend other
 file types by either mentioning them on the `issue tracker
-<https://github.com/KyleKing/textract-py3/issues>`_ or by
+<https://github.com/KyleKing/textract/issues>`_ or by
 :ref:`contributing a pull request <contributing>`.
 
 

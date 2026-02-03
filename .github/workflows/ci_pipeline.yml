@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/textract-py3
+      url: https://pypi.org/p/textract
     permissions:
       contents: write  # For GitHub release creation
       id-token: write  # IMPORTANT: mandatory for PyPI trusted publishing

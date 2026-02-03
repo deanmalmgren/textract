@@ -6,7 +6,7 @@ requires = ["uv_build>=0.9.7"]
 authors = [{name = "Dean Malmgren", email = "dean.malmgren@datascopeanalytics.com"}]
 description = "Minimally maintained fork of deanmalmgren/textract to replace '*' dependencies "
 license = {text = "MIT"}
-name = "textract-py3"
+name = "textract"
 readme = "README.md"
 requires-python = ">=3.9"
 version = "3.0.0"
@@ -31,7 +31,7 @@ pocketsphinx = ["pocketsphinx>=0.1.15"]
 textract = "textract.bin.textract:main"
 
 [project.urls]
-Repository = "https://github.com/KyleKing/textract-py3"
+Repository = "https://github.com/KyleKing/textract"
 
 [dependency-groups]
 dev = [

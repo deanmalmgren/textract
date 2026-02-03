@@ -1,12 +1,12 @@
-# Contributing to textract-py3
+# Contributing to textract
 
 Maintained fork of [deanmalmgren/textract](https://github.com/deanmalmgren/textract) focused on minimizing dependencies and supporting modern Python.
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/KyleKing/textract-py3.git
-cd textract-py3
+git clone https://github.com/KyleKing/textract.git
+cd textract
 uv sync --group dev
 uv run pytest
 ```
@@ -116,7 +116,7 @@ Act doesn't support Windows. Use cloud VMs for Windows debugging:
 **GitHub Codespaces (recommended for quick tests):**
 
 ```bash
-# Create Windows codespace at https://github.com/KyleKing/textract-py3
+# Create Windows codespace at https://github.com/KyleKing/textract
 # Inside codespace:
 choco install tesseract ghostscript sox.portable poppler -y
 uv sync --all-extras
@@ -138,8 +138,8 @@ choco install -y tesseract ghostscript sox.portable poppler python --version=3.1
 pip install uv
 
 # Clone and test
-git clone https://github.com/KyleKing/textract-py3
-cd textract-py3
+git clone https://github.com/KyleKing/textract
+cd textract
 uv sync --all-extras
 $env:SKIP_NETWORK_TESTS="true"
 uv run pytest
@@ -153,11 +153,11 @@ Publishing is automated via GitHub Actions with [PyPI Trusted Publishers](https:
 
 Configure Trusted Publishing on PyPI:
 
-1. Go to https://pypi.org/manage/project/textract-py3/settings/publishing/
+1. Go to https://pypi.org/manage/project/textract/settings/publishing/
 2. Add new Trusted Publisher:
-   - **PyPI Project Name**: `textract-py3`
+   - **PyPI Project Name**: `textract`
    - **Owner**: `KyleKing`
-   - **Repository name**: `textract-py3`
+   - **Repository name**: `textract`
    - **Workflow name**: `ci_pipeline.yml`
    - **Environment name**: `pypi`
 3. Configure GitHub Environment:
