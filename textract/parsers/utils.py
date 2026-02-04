@@ -2,24 +2,26 @@
 reused in many of the other parser modules.
 """
 
-import subprocess
-import tempfile
-import os
+from __future__ import annotations
+
 import errno
+import os
+import subprocess  # noqa: S404
+import tempfile
 
-import six
 import chardet
+import six
 
-from .. import exceptions
+from textract import exceptions
 
 
-class BaseParser(object):
+class BaseParser:
     """The :class:`.BaseParser` abstracts out some common functionality
     that is used across all document Parsers. In particular, it has
     the responsibility of handling all unicode and byte-encoding.
     """
 
-    def extract(self, filename, **kwargs):
+    def extract(self, filename, **kwargs) -> bytes | str:  # noqa: ANN001
         """This method must be overwritten by child classes to extract raw
         text from a filename. This method can return either a
         byte-encoded string or unicode.
@@ -84,9 +86,10 @@ class ShellParser(BaseParser):
 
         # run a subprocess and put the stdout and stderr on the pipe object
         try:
-            pipe = subprocess.Popen(
+            pipe = subprocess.Popen(  # noqa: S603
                 args,
-                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
             )
         except OSError as e:
             if e.errno == errno.ENOENT:
@@ -95,7 +98,7 @@ class ShellParser(BaseParser):
                 raise exceptions.ShellError(
                     ' '.join(args), 127, '', '',
                 )
-            else: raise #Reraise the last exception unmodified
+            raise  # Reraise the last exception unmodified
 
         # pipe.wait() ends up hanging on large files. using
         # pipe.communicate appears to avoid this issue

@@ -1,7 +1,10 @@
-import speech_recognition as sr
-import os
+import os  # noqa: D100
+import pathlib
 
-from ..exceptions import UnknownMethod
+import speech_recognition as sr
+
+from textract.exceptions import UnknownMethod
+
 from .utils import ShellParser
 
 
@@ -27,7 +30,7 @@ class Parser(ShellParser):
             try:
                 speech = self.extract(temp_filename, method, **kwargs)
             finally:  # make sure temp_file is deleted
-                os.remove(temp_filename)
+                pathlib.Path(temp_filename).unlink()
         else:
             r = sr.Recognizer()
 
@@ -35,16 +38,18 @@ class Parser(ShellParser):
                 audio = r.record(source)
 
             try:
-                if method == 'google' or method == '':
-                    speech = r.recognize_google(audio)
-                elif method == 'sphinx':
-                    speech = r.recognize_sphinx(audio)
+                if method in {"google", ""}:
+                    speech = r.recognize_google(audio)  # type: ignore[attr-defined]
+                elif method == "sphinx":
+                    speech = r.recognize_sphinx(audio)  # type: ignore[attr-defined]
                 else:
                     raise UnknownMethod(method)
             except LookupError:  # audio is not understandable
                 speech = ''
             except sr.UnknownValueError:
                 speech = ''
+            except sr.RequestError:  # API unavailable or network error
+                speech = ""
 
             # add a newline, to make output cleaner
             speech += '\n'
@@ -59,6 +64,6 @@ class Parser(ShellParser):
         http://www.text2speech.org/,
         with American Male 2 for best results
         """
-        temp_filename = '{0}.wav'.format(self.temp_filename())
-        self.run(['sox', '-G', '-c', '1', filename, temp_filename])
+        temp_filename = f"{self.temp_filename()}.wav"
+        self.run(["sox", "-G", "-c", "1", filename, temp_filename])
         return temp_filename

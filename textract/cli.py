@@ -4,12 +4,12 @@ Use argparse to handle command-line arguments.
 
 import argparse
 import encodings
-import os
+import pathlib
 import pkgutil
 import sys
-import six
 
 import argcomplete
+import six
 
 from . import VERSION
 from .parsers import DEFAULT_ENCODING, _get_available_extensions
@@ -97,9 +97,10 @@ def _get_available_encodings():
     Inspiration from http://stackoverflow.com/a/3824405/564709
     """
     available_encodings = set(encodings.aliases.aliases.values())
-    paths = [os.path.dirname(encodings.__file__)]
-    for importer, modname, ispkg in pkgutil.walk_packages(path=paths):
-        available_encodings.add(modname)
+    paths = [str(pathlib.Path(encodings.__file__).parent)]
+    available_encodings.update(
+        modname for importer, modname, ispkg in pkgutil.walk_packages(path=paths)
+    )
     available_encodings = list(available_encodings)
     available_encodings.sort()
     return available_encodings

@@ -1,4 +1,9 @@
-import os
+"""Custom exceptions for textract."""
+
+import pathlib
+
+# Command not found exit code
+_NOT_INSTALLED_EXIT_CODE = 127
 
 
 # traceback from exceptions that inherit from this class are suppressed
@@ -7,21 +12,22 @@ class CommandLineError(Exception):
     errors occur on the command line to provide a useful command line
     interface.
     """
-    def render(self, msg):
+    def render(self, msg: str) -> str:  # noqa: D102
         return msg % vars(self)
 
 
 class ExtensionNotSupported(CommandLineError):
     """This error is raised with unsupported extensions"""
-    def __init__(self, ext):
+    def __init__(self, ext: str) -> None:
+        """Initialize with unsupported extension."""
         self.ext = ext
 
-        from .parsers import _get_available_extensions
-        available_extensions = []
-        for e in _get_available_extensions():
-            if e.startswith('.'):
-                available_extensions.append(e)
-        self.available_extensions_str = ', '.join(available_extensions)
+        from .parsers import _get_available_extensions  # noqa: PLC0415
+
+        available_extensions = [
+            e for e in _get_available_extensions() if e.startswith(".")
+        ]
+        self.available_extensions_str = ", ".join(available_extensions)
 
     def __str__(self):
         return self.render((
@@ -36,9 +42,13 @@ class MissingFileError(CommandLineError):
     """This error is raised when the file can not be located at the
     specified path.
     """
-    def __init__(self, filename):
+
+    def __init__(self, filename: str) -> None:
+        """Initialize with missing file path."""
         self.filename = filename
-        self.root, self.ext = os.path.splitext(filename)
+        p = pathlib.Path(filename)
+        self.root = p.stem
+        self.ext = p.suffix
 
     def __str__(self):
         return self.render((
@@ -51,7 +61,9 @@ class UnknownMethod(CommandLineError):
     """This error is raised when the specified --method on the command
     line is unknown.
     """
-    def __init__(self, method):
+
+    def __init__(self, method: str) -> None:
+        """Initialize with unknown method name."""
         self.method = method
 
     def __str__(self):
@@ -64,26 +76,31 @@ class ShellError(CommandLineError):
     """This error is raised when a shell.run returns a non-zero exit code
     (meaning the command failed).
     """
-    def __init__(self, command, exit_code, stdout, stderr):
+
+    def __init__(self, command: str, exit_code: int, stdout: str, stderr: str) -> None:
+        """Initialize with command execution details."""
         self.command = command
         self.exit_code = exit_code
         self.stdout = stdout
         self.stderr = stderr
         self.executable = self.command.split()[0]
 
-    def is_not_installed(self):
-        return os.name == 'posix' and self.exit_code == 127
+    def is_not_installed(self) -> bool:
+        """Check if the command failed because executable is not installed."""
+        return self.exit_code == _NOT_INSTALLED_EXIT_CODE
 
-    def not_installed_message(self):
+    def not_installed_message(self) -> str:
+        """Format error message when executable is not installed."""
         return (
-            "The command `%(command)s` failed because the executable\n"
-            "`%(executable)s` is not installed on your system. Please make\n"
+            "The command `{command}` failed because the executable\n"
+            "`{executable}` is not installed on your system. Please make\n"
             "sure the appropriate dependencies are installed before using\n"
             "textract:\n\n"
             "    http://textract.readthedocs.org/en/latest/installation.html\n"
-        ) % vars(self)
+        ).format(**vars(self))
 
-    def failed_message(self):
+    def failed_message(self) -> str:
+        """Format error message when command execution failed."""
         return (
             "The command `%(command)s` failed with exit code %(exit_code)d\n"
             "------------- stdout -------------\n"
@@ -92,8 +109,7 @@ class ShellError(CommandLineError):
             "%(stderr)s"
         ) % vars(self)
 
-    def __str__(self):
+    def __str__(self) -> str:  # noqa: D105
         if self.is_not_installed():
             return self.not_installed_message()
-        else:
-            return self.failed_message()
+        return self.failed_message()
