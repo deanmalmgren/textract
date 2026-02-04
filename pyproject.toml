@@ -4,12 +4,12 @@ requires = ["uv_build>=0.9.7"]
 
 [project]
 authors = [{name = "Dean Malmgren", email = "dean.malmgren@datascopeanalytics.com"}]
-description = "Minimally maintained fork of deanmalmgren/textract to replace '*' dependencies "
+description = "extract text from any document. no muss. no fuss. "
 license = {text = "MIT"}
 name = "textract"
-readme = "README.md"
+readme = "README.rst"
 requires-python = ">=3.9"
-version = "3.0.0"
+version = "1.6.4"
 dependencies = [
     "Pillow>=9.0.0",
     "SpeechRecognition>=3.8.1",
@@ -50,7 +50,7 @@ docs = [
 changelog_file = "docs/changelog.rst"
 tag_format = "v$version"
 update_changelog_on_bump = false
-version = "3.0.0"
+version = "1.6.4"
 version_files = ["pyproject.toml:^version", "textract/__init__.py:^VERSION"]
 
 [tool.uv.build-backend]
