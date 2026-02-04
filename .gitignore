@@ -71,3 +71,6 @@ tests/gif/standardized_text.txt
 tests/jpg/standardized_text.txt
 tests/tiff/standardized_text.txt
 tests/pdf/ocr_text.txt
+
+# PyCharm
+.idea/

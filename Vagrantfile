@@ -27,8 +27,7 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--ioapic", "on"]
     vb.customize ["modifyvm", :id, "--cpus", "2"]
     vb.customize ["modifyvm", :id, "--memory", "2048"]
-    override_config.vm.box = "trusty64"
-    override_config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+    override_config.vm.box = "ubuntu/focal64"
   end
 
   # steps for provisioning so that these provisioning steps are

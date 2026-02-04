@@ -86,7 +86,7 @@ file types by either mentioning them on the `issue tracker
 
 * ``.wav`` via `SpeechRecognition`_ and `pocketsphinx`_
 
-* ``.xlsx`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
+* ``.xlsx`` via `openpyxl <https://pypi.python.org/pypi/openpyxl>`_
 
 * ``.xls`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
 

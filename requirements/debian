@@ -9,7 +9,7 @@ make
 
 # these packages are required by python-docx, which depends on lxml
 # and requires these things
-python-dev
+python3-dev
 libxml2-dev
 libxslt1-dev
 
@@ -48,3 +48,5 @@ swig
 # libxslt1-dev for compiling lxml.
 # https://github.com/deanmalmgren/textract/issues/19
 zlib1g-dev
+
+python-is-python3

@@ -3,4 +3,4 @@
 # This script gets called from within the
 # Docker container.
 
-./tests/run.py
+cd "$(dirname "$0")" && make && pytest && cd -

@@ -6,7 +6,7 @@
 # if its a problem.
 # http://docs.travis-ci.com/user/languages/python/#Travis-CI-Uses-Isolated-virtualenvs
 sudo apt-get update -qq
-sudo apt-get install -y python-pip python-dev build-essential
+sudo apt-get install -y python3-pip python3-dev build-essential
 
 # install pep8 and nose for testing
 sudo pip install pep8 nose
