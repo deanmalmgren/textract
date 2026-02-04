@@ -10,13 +10,21 @@ packages and other source libraries. Python dependencies are installed
 automatically with textract. The source libraries are a separate matter
 though and largely depend on your operating system.
 
-Install textract with pip or uv:
+Install textract with pip:
 
 .. code-block:: bash
 
     pip install textract
-    # or
-    uv add textract
+
+For modern Python tooling, textract can also be installed with:
+
+.. code-block:: bash
+
+    # One-off execution with uvx
+    uvx textract path/to/file.pdf
+
+    # Install as tool with uv
+    uv tool install textract
 
 Ubuntu / Debian
 ---------------
@@ -42,32 +50,16 @@ OSX
 
 These steps rely on you having `homebrew <http://brew.sh/>`_ installed.
 
-**Using Brewfile (Recommended)**
-
-The easiest way to install all dependencies is using the included Brewfile:
-
-.. code-block:: bash
-
-    brew bundle
-    pip install textract
-
-**Manual Installation**
-
-Alternatively, install dependencies individually:
-
 .. code-block:: bash
 
     brew install --cask xquartz
     brew install antiword ghostscript poppler sox tesseract unrtf swig
     pip install textract
 
-..     brew install libxml2 libxslt antiword poppler tesseract
-..     brew link libxml2 libxslt
-
 .. note::
 
-    The Brewfile includes ``ghostscript`` which provides ``ps2ascii`` for
-    ``.ps`` file extraction, replacing the unmaintained ``pstotext``.
+    ``ghostscript`` provides ``ps2ascii`` for ``.ps`` file extraction,
+    replacing the unmaintained ``pstotext``.
 
 .. note::
 

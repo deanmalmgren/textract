@@ -172,16 +172,16 @@ Configure Trusted Publishing on PyPI:
 uv run cz version --project
 
 # Preview unreleased changes
-mise run changelog:preview
+./scripts/prepend-changelog.sh --preview
 
 # Bump version (PATCH, MINOR, or MAJOR)
-mise run release:bump -- --increment MINOR
+uv run cz bump --increment MINOR
 
 # For rc/beta releases
 uv run cz bump --prerelease rc
 
 # Update changelog (semi-automated)
-mise run changelog:update
+./scripts/prepend-changelog.sh
 
 # Push to trigger automated publishing
 git push origin main --tags
@@ -207,10 +207,10 @@ The project maintains a manual changelog in `docs/changelog.rst`. Three options:
 
 ```bash
 # Preview unreleased changes
-mise run changelog:preview
+./scripts/prepend-changelog.sh --preview
 
 # After bumping version, update changelog
-mise run changelog:update
+./scripts/prepend-changelog.sh
 
 # Review and commit
 diff docs/changelog.rst.backup docs/changelog.rst

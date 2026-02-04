@@ -69,13 +69,13 @@ Basic release workflow:
 .. code-block:: bash
 
     # Preview unreleased changes
-    mise run changelog:preview
+    uv run cz changelog --dry-run | head -50
 
     # Bump version (PATCH, MINOR, or MAJOR)
-    mise run release:bump -- --increment MINOR
+    uv run cz bump --increment MINOR
 
-    # Update changelog
-    mise run changelog:update
+    # Update changelog with new version
+    ./scripts/prepend-changelog.sh
 
     # Push to trigger automated publishing
     git push origin main --tags
