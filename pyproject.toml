@@ -3,6 +3,7 @@ build-backend = "uv_build"
 requires = ["uv_build>=0.9.7"]
 
 [project]
+# TODO: Add Kyle as maintainer?
 authors = [{name = "Dean Malmgren", email = "dean.malmgren@datascopeanalytics.com"}]
 description = "extract text from any document. no muss. no fuss. "
 license = {text = "MIT"}
@@ -65,65 +66,6 @@ pythonVersion = "3.9"
 # Docs: https://github.com/charliermarsh/ruff
 # Tip: uv run ruff rule RUF100
 target-version = 'py39'
-
-[tool.ruff.lint]
-ignore = [
-  'ANN002', # Missing type annotation for `*args`
-  'ANN003', # Missing type annotation for `**kwargs`
-  'ANN401', # Dynamically typed expressions (typing.Any) are disallowed in `pop_key`
-  'BLE001', # Do not catch blind exception: `Exception`
-  'CPY001', # Missing copyright notice at top of file
-  'D203', # "1 blank line required before class docstring" (Conflicts with D211)
-  'D213', # "Multi-line docstring summary should start at the second line" (Conflicts with D212)
-  'DOC201', # PLANNED: finish updating docstrings for Returns
-  'DOC501', # Raised exception `RuntimeError` missing from docstring
-  'EM101', # Exception must not use a string literal, assign to variable first
-  'FIX001', # Line contains FIXME
-  'FIX002', # Line contains TODO
-  'FIX004', # Line contains HACK
-  'PLR0913', # Too many arguments in function definition (6 > 5)
-  'TC001', # Move application import `tail_jsonl.config.Config` into a type-checking block (Conflicts with Beartype)
-  'TC002', # Move third-party import `rich.console.Console` into a type-checking block (Conflicts with Beartype)
-  'TC003', # Move standard library import `argparse` into a type-checking block (Conflicts with Beartype)
-  'TD001', # Invalid TODO tag: `FIXME`
-  'TD002', # Missing author in TODO; try: `# TODO(<author_name>): ...`
-  'TD003', # Missing issue link on the line following this TODO
-  'TRY003', # Avoid specifying long messages outside the exception class
-]
-preview = true
-# select = ['ALL'] PLANNED: de-activated for now to minimize diffs
-unfixable = [
-  'ERA001', # Commented out code
-]
-
-[tool.ruff.lint.flake8-tidy-imports.banned-api]
-'typing.Callable'.msg = 'Use "from collections.abc" instead.'
-'typing.Dict'.msg = 'Use "from __future__ import annotations"'
-'typing.List'.msg = 'Use "from __future__ import annotations"'
-'typing.Optional'.msg = 'Use "from __future__ import annotations"'
-'typing.Protocol'.msg = 'Use "from beartype.typing" instead.'
-
-[tool.ruff.lint.isort]
-known-first-party = ['textract']
-
-[tool.ruff.lint.per-file-ignores]
-'__init__.py' = [
-  'D104', # Missing docstring in public package
-]
-'tests/*.py' = [
-  'ANN001', # Missing type annotation for function argument
-  'ANN201', # Missing return type annotation for public function
-  'ANN202', # Missing return type annotation for private function `test_make_diffable`
-  'ARG001', # Unused function argument: `line`
-  'D100', # Missing docstring in public module
-  'D103', # Missing docstring in public function
-  'PLC2701', # Private name import `_<>` from external module
-  'PT004', # flake8-pytest-style: fixture does not return
-  'S101', # Use of `assert` detected
-]
-
-[tool.ruff.lint.pydocstyle]
-convention = "google"
 
 [tool.pytest.ini_options]
 filterwarnings = [
