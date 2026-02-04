@@ -15,7 +15,7 @@ def ensure_bytes(string) -> bytes:  # noqa: ANN001
     if isinstance(string, six.string_types):
         return string.encode('utf-8')
     if string is None:
-        return b""
+        return b''
     return string
 
 
