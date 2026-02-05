@@ -1,4 +1,4 @@
-import pathlib  # noqa: D100
+import pathlib
 import re
 
 import six
@@ -25,14 +25,14 @@ class Parser(BaseParser):
         'input', 'label', 'select', 'textarea',
     ]
 
-    def _visible(self, element) -> bool:  # noqa: ANN001
+    def _visible(self, element) -> bool:
         """Used to filter text elements that have invisible text on the page."""
         return not (
             element.name in self._disallowed_names
             or re.match(r"<!--.*-->", six.text_type(element.extract()))
         )
 
-    def _inline(self, element) -> bool:  # noqa: ANN001
+    def _inline(self, element) -> bool:
         """Used to check whether given element can be treated as inline
         element (without new line after).
         """
@@ -121,7 +121,7 @@ class Parser(BaseParser):
                 elem.unwrap()
         return soup
 
-    def extract(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002, D102
+    def extract(self, filename, **kwargs):
         with pathlib.Path(filename).open("rb") as stream:
             soup = BeautifulSoup(stream, "lxml")
 
@@ -133,7 +133,7 @@ class Parser(BaseParser):
 
         # Make HTML
         html = ''
-        elements = soup.find_all(True)  # noqa: FBT003
+        elements = soup.find_all(True)
         elements = list(filter(self._visible, elements))
         for elem in elements:
             string = elem.string  # type: ignore[attr-defined]

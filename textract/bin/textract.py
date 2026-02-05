@@ -12,7 +12,7 @@ from textract.exceptions import CommandLineError
 def main() -> None:
     """Interpret the command-line arguments, process the document and
     raise errors accordingly (with traceback surpressed).
-    """  # noqa: D205
+    """
     parser = get_parser()
     args = parser.parse_args()
     try:

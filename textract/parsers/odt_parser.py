@@ -1,5 +1,5 @@
-import pathlib  # noqa: D100
-import xml.etree.ElementTree as ET  # noqa: S405
+import pathlib
+import xml.etree.ElementTree as ET
 import zipfile
 
 from .utils import BaseParser

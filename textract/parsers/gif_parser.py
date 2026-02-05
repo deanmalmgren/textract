@@ -15,7 +15,7 @@ class Parser(ShellParser):
     from animated GIFs before processing with tesseract.
     """
 
-    def extract(self, filename, **kwargs):  # noqa: ANN001, ANN201, D102
+    def extract(self, filename, **kwargs):
         # Open the GIF and check if it's animated
         with Image.open(filename) as img:
             # Check if this is an animated GIF (n_frames > 1)
@@ -40,7 +40,7 @@ class Parser(ShellParser):
             # For static GIFs, process directly
             return self._run_tesseract(filename, **kwargs)
 
-    def _run_tesseract(self, filename, **kwargs):  # noqa: ANN001, ANN202
+    def _run_tesseract(self, filename, **kwargs):
         """Run tesseract on a single image file."""
         if "language" in kwargs:
             args = ["tesseract", filename, "stdout", "-l", kwargs["language"]]

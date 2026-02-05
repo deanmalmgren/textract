@@ -1,7 +1,7 @@
 import pathlib
 import re
 import shutil
-import subprocess  # noqa: S404
+import subprocess
 import sys
 import tempfile
 
@@ -95,9 +95,9 @@ def _generate_file_diff_message(file1: str, file2: str) -> str:
     return "\n".join(msg_parts)
 
 
-class GenericUtilities:  # noqa: D101
-    def get_temp_filename(self, extension=None):  # noqa: D102, PLR6301
-        stream = tempfile.NamedTemporaryFile(delete=False)  # noqa: SIM115
+class GenericUtilities:
+    def get_temp_filename(self, extension=None):
+        stream = tempfile.NamedTemporaryFile(delete=False)
         stream.close()
         filename = stream.name
         if extension is not None:
@@ -105,7 +105,7 @@ class GenericUtilities:  # noqa: D101
             shutil.move(stream.name, filename)
         return filename
 
-    def clean_text(self, text):  # noqa: D102, PLR6301
+    def clean_text(self, text):
         lines = text.splitlines()
         # Clean empty lines (fixes epub issue)
         cleaned_lines = []
@@ -142,17 +142,17 @@ class BaseParserTestCase(GenericUtilities):
     standardized_text_filename_root = ""
     unicode_text_filename_root = ""
 
-    def __init__(self, *args, **kwargs) -> None:  # noqa: D107
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         if not self.extension:
             raise NotImplementedError(
                 "need to specify `extension` class attribute on test case",
             )
 
-    def get_extension_directory(self):  # noqa: D102
+    def get_extension_directory(self):
         return str(pathlib.Path(__file__).resolve().parent / self.extension)
 
-    def get_filename(self, filename_root, default_filename_root):  # noqa: D102
+    def get_filename(self, filename_root, default_filename_root):
         if filename_root:
             filename = str(
                 pathlib.Path(self.get_extension_directory())
@@ -168,18 +168,18 @@ class BaseParserTestCase(GenericUtilities):
         return self.get_filename(default_filename_root, default_filename_root)
 
     @property
-    def raw_text_filename(self):  # noqa: D102
+    def raw_text_filename(self):
         return self.get_filename(self.raw_text_filename_root, "raw_text")
 
     @property
-    def standardized_text_filename(self):  # noqa: D102
+    def standardized_text_filename(self):
         return self.get_filename(
             self.standardized_text_filename_root,
             "standardized_text",
         )
 
     @property
-    def unicode_text_filename(self):  # noqa: D102
+    def unicode_text_filename(self):
         return self.get_filename(self.unicode_text_filename_root, "unicode_text")
 
     def test_raw_text_cli(self):
@@ -208,20 +208,20 @@ class BaseParserTestCase(GenericUtilities):
         expected = self.get_standardized_text()
         assert six.b("").join(result.split()) == expected
 
-    def get_expected_filename(self, filename, **kwargs):  # noqa: D102, PLR6301
+    def get_expected_filename(self, filename, **kwargs):
         path = pathlib.Path(filename)
         basename = path.stem
         if method := kwargs.get("method"):
             basename += f"-m={method}"
         return str(path.parent / f"{basename}.txt")
 
-    def get_cli_options(self, **kwargs):  # noqa: D102, PLR6301
+    def get_cli_options(self, **kwargs):
         option = ""
         for key, val in six.iteritems(kwargs):
             option += f"--{key}={val} "
         return option
 
-    def get_standardized_text(self):  # noqa: D102
+    def get_standardized_text(self):
         filename = (
             pathlib.Path(self.get_extension_directory()) / "standardized_text.txt"
         )
@@ -231,12 +231,12 @@ class BaseParserTestCase(GenericUtilities):
             standardized_text = six.b("the quick brown fox jumps over the lazy dog")
         return six.b("").join(standardized_text.split())
 
-    def assertSuccessfulCommand(self, command):  # noqa: D102, N802, PLR6301
-        assert subprocess.call(command, shell=True) == 0, (  # noqa: S602
+    def assertSuccessfulCommand(self, command):
+        assert subprocess.call(command, shell=True) == 0, (
             f"COMMAND FAILED: {command}"
         )
 
-    def assertSuccessfulTextract(self, filename, cleanup=True, **kwargs):  # noqa: D102, FBT002, N802
+    def assertSuccessfulTextract(self, filename, cleanup=True, **kwargs):
         option = self.get_cli_options(**kwargs)
         temp_filename = self.get_temp_filename()
 
@@ -248,7 +248,7 @@ class BaseParserTestCase(GenericUtilities):
 
         # Run command and write output to file
         with pathlib.Path(temp_filename).open("wb") as output_file:
-            result = subprocess.run(  # noqa: S603
+            result = subprocess.run(
                 cmd,
                 stdout=output_file,
                 stderr=subprocess.PIPE,
@@ -265,7 +265,7 @@ class BaseParserTestCase(GenericUtilities):
             return None
         return temp_filename
 
-    def compare_cli_output(self, filename, expected_filename=None, **kwargs):  # noqa: D102
+    def compare_cli_output(self, filename, expected_filename=None, **kwargs):
         if expected_filename is None:
             expected_filename = self.get_expected_filename(filename, **kwargs)
 
@@ -277,7 +277,7 @@ class BaseParserTestCase(GenericUtilities):
             raise AssertionError(diff_msg)
         pathlib.Path(temp_filename).unlink()
 
-    def compare_python_output(self, filename, expected_filename=None, **kwargs):  # noqa: D102
+    def compare_python_output(self, filename, expected_filename=None, **kwargs):
         if expected_filename is None:
             expected_filename = self.get_expected_filename(filename, **kwargs)
 

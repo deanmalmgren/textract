@@ -1,4 +1,4 @@
-import os  # noqa: D100
+import os
 import pathlib
 
 import speech_recognition as sr

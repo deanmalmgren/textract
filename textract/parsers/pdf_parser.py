@@ -1,4 +1,4 @@
-import os  # noqa: D100
+import os
 import pathlib
 import platform
 import shutil

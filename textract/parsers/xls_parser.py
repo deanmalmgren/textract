@@ -1,3 +1,3 @@
-from .xlsx_parser import Parser  # noqa: D100
+from .xlsx_parser import Parser
 
 __all__ = ["Parser"]

@@ -12,7 +12,7 @@ class CommandLineError(Exception):
     errors occur on the command line to provide a useful command line
     interface.
     """
-    def render(self, msg: str) -> str:  # noqa: D102
+    def render(self, msg: str) -> str:
         return msg % vars(self)
 
 
@@ -22,7 +22,7 @@ class ExtensionNotSupported(CommandLineError):
         """Initialize with unsupported extension."""
         self.ext = ext
 
-        from .parsers import _get_available_extensions  # noqa: PLC0415
+        from .parsers import _get_available_extensions
 
         available_extensions = [
             e for e in _get_available_extensions() if e.startswith(".")
@@ -109,7 +109,7 @@ class ShellError(CommandLineError):
             "%(stderr)s"
         ) % vars(self)
 
-    def __str__(self) -> str:  # noqa: D105
+    def __str__(self) -> str:
         if self.is_not_installed():
             return self.not_installed_message()
         return self.failed_message()

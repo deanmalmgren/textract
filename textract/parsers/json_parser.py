@@ -1,4 +1,4 @@
-import json  # noqa: D100
+import json
 import pathlib
 
 import six
@@ -12,7 +12,7 @@ class Parser(BaseParser):
     from mongodb dumps, for example.
     """
 
-    def extract(self, filename, **kwargs):  # noqa: ANN001, ANN201, ARG002, D102
+    def extract(self, filename, **kwargs):
         with pathlib.Path(filename).open(encoding="utf-8") as raw:
             deserialized_json = json.load(raw)
         return self.get_text(deserialized_json)

@@ -1,3 +1,3 @@
-from .image import Parser  # noqa: D100
+from .image import Parser
 
 __all__ = ["Parser"]

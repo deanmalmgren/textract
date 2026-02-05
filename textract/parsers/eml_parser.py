@@ -1,4 +1,4 @@
-import pathlib  # noqa: D100
+import pathlib
 from email.parser import Parser as EmailParser
 
 from .utils import BaseParser

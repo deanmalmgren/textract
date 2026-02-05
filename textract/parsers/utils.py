@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import errno
 import os
-import subprocess  # noqa: S404
+import subprocess
 import tempfile
 
 import chardet
@@ -21,7 +21,7 @@ class BaseParser:
     the responsibility of handling all unicode and byte-encoding.
     """
 
-    def extract(self, filename, **kwargs) -> bytes | str:  # noqa: ANN001
+    def extract(self, filename, **kwargs) -> bytes | str:
         """This method must be overwritten by child classes to extract raw
         text from a filename. This method can return either a
         byte-encoded string or unicode.
@@ -86,7 +86,7 @@ class ShellParser(BaseParser):
 
         # run a subprocess and put the stdout and stderr on the pipe object
         try:
-            pipe = subprocess.Popen(  # noqa: S603
+            pipe = subprocess.Popen(
                 args,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,

@@ -5,7 +5,7 @@ import re
 
 
 def _wrap_with(code, bold=False):
-    def inner(text) -> str:  # noqa: ANN001
+    def inner(text) -> str:
         c = code
         if bold:
             c = f"1;{c}"

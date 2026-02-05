@@ -1,4 +1,4 @@
-import six  # noqa: D100
+import six
 import xlrd
 
 from .utils import BaseParser
