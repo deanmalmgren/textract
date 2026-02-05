@@ -3,6 +3,7 @@ reused in many of the other parser modules.
 """
 
 import subprocess
+import sys
 import tempfile
 import os
 import errno
@@ -11,6 +12,8 @@ import six
 import chardet
 
 from .. import exceptions
+
+IS_WIN32 = 'win32' in str(sys.platform).lower()
 
 
 class BaseParser(object):
@@ -81,12 +84,19 @@ class ShellParser(BaseParser):
         as a tuple. If the command is not successful, this raises a
         :exc:`textract.exceptions.ShellError`.
         """
-
+        # create new console with no new window if in win32
+        if IS_WIN32:
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags = subprocess.CREATE_NEW_CONSOLE | subprocess.STARTF_USESHOWWINDOW
+            startupinfo.wShowWindow = subprocess.SW_HIDE
+        else:
+            startupinfo = None
         # run a subprocess and put the stdout and stderr on the pipe object
         try:
             pipe = subprocess.Popen(
                 args,
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                startupinfo=startupinfo
             )
         except OSError as e:
             if e.errno == errno.ENOENT:
