@@ -2,19 +2,11 @@ import pathlib
 import re
 import shutil
 import subprocess
-import sys
 import tempfile
 
 import six
 
 import textract
-
-
-def _quote_path(path: str) -> str:
-    """Quote a path for shell commands in a cross-platform way."""
-    if sys.platform == "win32":
-        return f'"{path}"'
-    return f"'{path}'"
 
 
 def _normalize_whitespace(content: bytes) -> list[bytes]:

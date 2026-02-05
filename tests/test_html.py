@@ -23,7 +23,7 @@ class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
     )
     def test_raw_text_cli(self):
         """Make sure raw text matches from the command line."""
-        return super().test_raw_text_cli()
+        super().test_raw_text_cli()
 
     @pytest.mark.skipif(
         platform.system() == "Windows",
@@ -34,7 +34,7 @@ class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
     )
     def test_raw_text_python(self):
         """Make sure raw text matches from python."""
-        return super().test_raw_text_python()
+        super().test_raw_text_python()
 
     @pytest.mark.skipif(
         platform.system() == "Windows",
@@ -45,7 +45,7 @@ class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
     )
     def test_standardized_text_cli(self):
         """Make sure standardized text matches from the command line."""
-        return super().test_standardized_text_cli()
+        super().test_standardized_text_cli()
 
     @pytest.mark.skipif(
         platform.system() == "Windows",
@@ -56,7 +56,7 @@ class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
     )
     def test_standardized_text_python(self):
         """Make sure standardized text matches from python."""
-        return super().test_standardized_text_python()
+        super().test_standardized_text_python()
 
     @pytest.mark.skipif(
         platform.system() == "Windows",
