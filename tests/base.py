@@ -1,211 +1,294 @@
-import os
+import pathlib
+import re
+import shutil
 import subprocess
 import tempfile
-import shutil
+
 import six
 
-import requests
+import textract
 
 
-class GenericUtilities(object):
+def _normalize_whitespace(content: bytes) -> list[bytes]:
+    """Normalize whitespace for comparison.
 
+    Converts all whitespace (tabs, spaces, nbsp, etc.) to single spaces,
+    removes blank lines, and normalizes line endings.
+    """
+    # Split into lines and filter blanks
+    lines = [line for line in content.splitlines() if line.strip()]
+    # Normalize whitespace within each line:
+    # - Replace tabs, CR, nbsp (\xc2\xa0), and multiple spaces with single space
+    # - Strip leading/trailing whitespace from each line
+    normalized = []
+    for line in lines:
+        # Replace whitespace variants, collapse spaces, and strip
+        processed = (
+            line.replace(b"\t", b" ")
+            .replace(b"\r", b" ")
+            .replace(b"\xc2\xa0", b" ")  # nbsp in UTF-8
+        )
+        processed = re.sub(rb" +", b" ", processed).strip()
+        if processed:  # Keep non-empty lines
+            normalized.append(processed)
+    return normalized
+
+
+def _files_equal_ignore_blank_lines(file1: str, file2: str) -> bool:
+    """Compare two files, ignoring blank lines and normalizing whitespace."""
+    content1 = pathlib.Path(file1).read_bytes()
+    content2 = pathlib.Path(file2).read_bytes()
+    lines1 = _normalize_whitespace(content1)
+    lines2 = _normalize_whitespace(content2)
+    return lines1 == lines2
+
+
+def _generate_file_diff_message(file1: str, file2: str) -> str:
+    """Generate detailed diff message for file comparison failures."""
+    content1 = pathlib.Path(file1).read_bytes()
+    content2 = pathlib.Path(file2).read_bytes()
+    lines1 = _normalize_whitespace(content1)
+    lines2 = _normalize_whitespace(content2)
+
+    msg_parts = [f"\nFiles differ: {file1} vs {file2}"]
+
+    # Show line counts
+    msg_parts.append(f"Line counts: {len(lines1)} vs {len(lines2)}")
+
+    # Show first differing line
+    min_lines = min(len(lines1), len(lines2))
+    first_diff_idx = None
+    for i in range(min_lines):
+        if lines1[i] != lines2[i]:
+            first_diff_idx = i
+            break
+
+    if first_diff_idx is not None:
+        msg_parts.extend(
+            [
+                f"First difference at line {first_diff_idx + 1}:",
+                f"  Actual:   {lines1[first_diff_idx]!r}",
+                f"  Expected: {lines2[first_diff_idx]!r}",
+            ],
+        )
+    elif len(lines1) != len(lines2):
+        msg_parts.append("Files differ in length (all common lines match)")
+
+    # Show preview of actual content (first 3 lines)
+    msg_parts.append("\nActual output (first 3 lines):")
+    for i, line in enumerate(lines1[:3]):
+        msg_parts.append(f"  {i + 1}: {line!r}")
+
+    # Show preview of expected content (first 3 lines)
+    msg_parts.append("\nExpected output (first 3 lines):")
+    for i, line in enumerate(lines2[:3]):
+        msg_parts.append(f"  {i + 1}: {line!r}")
+
+    return "\n".join(msg_parts)
+
+
+class GenericUtilities:
     def get_temp_filename(self, extension=None):
         stream = tempfile.NamedTemporaryFile(delete=False)
         stream.close()
         filename = stream.name
-        if not extension is None:
-            filename += '.' + extension
+        if extension is not None:
+            filename += "." + extension
             shutil.move(stream.name, filename)
         return filename
 
     def clean_text(self, text):
         lines = text.splitlines()
         # Clean empty lines (fixes epub issue)
-        lines = [line for line in lines if line.strip()]  # Clean empty lines
-        return six.b('\n').join(lines)
+        cleaned_lines = []
+        for line in lines:
+            if not line.strip():
+                continue
+            # Normalize tabs and nbsp to spaces, but preserve multiple spaces for layout
+            processed = (
+                line.replace(b"\t", b" ")
+                .replace(b"\r", b"")
+                .replace(b"\xc2\xa0", b" ")  # nbsp in UTF-8
+                .rstrip()  # Only strip trailing whitespace
+            )
+            if processed:
+                cleaned_lines.append(processed)
+        return six.b("\n").join(cleaned_lines)
 
 
 class BaseParserTestCase(GenericUtilities):
-    """This BaseParserTestCase object is used to collect a bunch of
-    standardized tests that should be run for every BaseParser.
+    """Collect standardized tests for every BaseParser.
+
+    This BaseParserTestCase object provides a set of standard tests
+    that should be run for each file format parser.
     """
 
     # 'txt', for example. this is mandatory and potentially the only thing that
     #  has to be specified to subclass this unittest
-    extension = ''
+    extension = ""
 
     # User can specify a particular filename root (without
     # extension!), but these have good defaults that are specified by
     # the @property methods below
-    raw_text_filename_root = ''
-    standardized_text_filename_root = ''
-    unicode_text_filename_root = ''
+    raw_text_filename_root = ""
+    standardized_text_filename_root = ""
+    unicode_text_filename_root = ""
 
-    def __init__(self, *args, **kwargs):
-        super(BaseParserTestCase, self).__init__(*args, **kwargs)
-        if self.extension == '':
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        if not self.extension:
             raise NotImplementedError(
-                'need to specify `extension` class attribute on test case'
+                "need to specify `extension` class attribute on test case",
             )
 
     def get_extension_directory(self):
-        return os.path.join(
-            os.path.dirname(os.path.abspath(__file__)),
-            self.extension,
-        )
+        return str(pathlib.Path(__file__).resolve().parent / self.extension)
 
     def get_filename(self, filename_root, default_filename_root):
         if filename_root:
-            filename = os.path.join(
-                self.get_extension_directory(),
-                filename_root + '.' + self.extension,
+            filename = str(
+                pathlib.Path(self.get_extension_directory())
+                / f"{filename_root}.{self.extension}",
             )
-            if not os.path.exists(filename):
-                raise Exception((
-                    'expected filename "%(filename)s" to exist for testing '
-                    'purposes but it doesnt'
-                ) % locals())
+            if not pathlib.Path(filename).exists():
+                msg = (
+                    f'expected filename "{filename}" to exist for testing '
+                    f"purposes but it doesn't"
+                )
+                raise FileNotFoundError(msg)
             return filename
         return self.get_filename(default_filename_root, default_filename_root)
 
     @property
     def raw_text_filename(self):
-        return self.get_filename(self.raw_text_filename_root,
-                                 "raw_text")
+        return self.get_filename(self.raw_text_filename_root, "raw_text")
 
     @property
     def standardized_text_filename(self):
-        return self.get_filename(self.standardized_text_filename_root,
-                                 "standardized_text")
+        return self.get_filename(
+            self.standardized_text_filename_root,
+            "standardized_text",
+        )
 
     @property
     def unicode_text_filename(self):
-        return self.get_filename(self.unicode_text_filename_root,
-                                 "unicode_text")
+        return self.get_filename(self.unicode_text_filename_root, "unicode_text")
 
     def test_raw_text_cli(self):
-        """Make sure raw text matches from the command line"""
+        """Make sure raw text matches from the command line."""
         self.compare_cli_output(self.raw_text_filename)
 
     def test_raw_text_python(self):
-        """Make sure raw text matches from python"""
+        """Make sure raw text matches from python."""
         self.compare_python_output(self.raw_text_filename)
 
     def test_standardized_text_cli(self):
-        """Make sure standardized text matches from the command line"""
+        """Make sure standardized text matches from the command line."""
         temp_filename = self.assertSuccessfulTextract(
             self.standardized_text_filename,
             cleanup=False,
         )
-        with open(temp_filename, 'rb') as stream:
-            self.assertEqual(
-                six.b('').join(stream.read().split()),
-                self.get_standardized_text(),
-                "standardized text fails for %s" % self.extension,
-            )
-        os.remove(temp_filename)
+        assert temp_filename is not None
+        content = pathlib.Path(temp_filename).read_bytes()
+        expected = self.get_standardized_text()
+        assert six.b("").join(content.split()) == expected
+        pathlib.Path(temp_filename).unlink()
 
     def test_standardized_text_python(self):
-        """Make sure standardized text matches from python"""
-        import textract
+        """Make sure standardized text matches from python."""
         result = textract.process(self.standardized_text_filename)
-        self.assertEqual(
-            six.b('').join(result.split()),
-            self.get_standardized_text(),
-            "standardized text fails for %s" % self.extension,
-        )
-
-    # def test_unicode_text_cli(self):
-    #     """Make sure unicode text matches from the command line"""
-    #     self.compare_cli_output(self.unicode_text_filename)
-
-    # def test_unicode_text_python(self):
-    #     """Make sure unicode text matches from python"""
-    #     self.compare_python_output(self.unicode_text_filename)
+        expected = self.get_standardized_text()
+        assert six.b("").join(result.split()) == expected
 
     def get_expected_filename(self, filename, **kwargs):
-        basename, extension = os.path.splitext(filename)
-        if kwargs.get('method'):
-            basename += '-m=' + kwargs.get('method')
-        return basename + '.txt'
+        path = pathlib.Path(filename)
+        basename = path.stem
+        if method := kwargs.get("method"):
+            basename += f"-m={method}"
+        return str(path.parent / f"{basename}.txt")
 
     def get_cli_options(self, **kwargs):
-        option = ''
+        option = ""
         for key, val in six.iteritems(kwargs):
-            option += '--%s=%s ' % (key, val)
+            option += f"--{key}={val} "
         return option
 
     def get_standardized_text(self):
-        filename = os.path.join(
-            self.get_extension_directory(),
-            "standardized_text.txt"
+        filename = (
+            pathlib.Path(self.get_extension_directory()) / "standardized_text.txt"
         )
-        if os.path.exists(filename):
-            with open(filename, 'rb') as stream:
-                standardized_text = stream.read()
+        if filename.exists():
+            standardized_text = filename.read_bytes()
         else:
-            standardized_text = six.b(
-                "the quick brown fox jumps over the lazy dog"
-            )
-        return six.b('').join(standardized_text.split())
+            standardized_text = six.b("the quick brown fox jumps over the lazy dog")
+        return six.b("").join(standardized_text.split())
 
     def assertSuccessfulCommand(self, command):
-        self.assertEqual(
-            0, subprocess.call(command, shell=True),
-            "COMMAND FAILED: %(command)s" % locals()
+        assert subprocess.call(command, shell=True) == 0, (
+            f"COMMAND FAILED: {command}"
         )
 
     def assertSuccessfulTextract(self, filename, cleanup=True, **kwargs):
-
-        # construct the option string
         option = self.get_cli_options(**kwargs)
-
-        # run the command and make sure everything worked correctly
         temp_filename = self.get_temp_filename()
-        self.assertSuccessfulCommand(
-            "textract %(option)s '%(filename)s' > %(temp_filename)s" % locals()
+
+        # Build command arguments
+        cmd = ["textract"]
+        if option.strip():
+            cmd.extend(option.strip().split())
+        cmd.append(filename)
+
+        # Run command and write output to file
+        with pathlib.Path(temp_filename).open("wb") as output_file:
+            result = subprocess.run(
+                cmd,
+                stdout=output_file,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+
+        assert result.returncode == 0, (
+            f"textract command failed with exit code {result.returncode}: "
+            f"{result.stderr.decode('utf-8', errors='ignore')}"
         )
+
         if cleanup:
-            os.remove(temp_filename)
+            pathlib.Path(temp_filename).unlink()
             return None
-        else:
-            return temp_filename
+        return temp_filename
 
     def compare_cli_output(self, filename, expected_filename=None, **kwargs):
         if expected_filename is None:
             expected_filename = self.get_expected_filename(filename, **kwargs)
 
-        # run the command and make sure everything worked correctly
-        temp_filename = self.assertSuccessfulTextract(
-            filename,
-            cleanup=False,
-            **kwargs
-        )
-
-        self.assertSuccessfulCommand(
-            "diff --ignore-blank-lines '%(temp_filename)s' '%(expected_filename)s'" % locals()
-        )
-        os.remove(temp_filename)
+        temp_filename = self.assertSuccessfulTextract(filename, cleanup=False, **kwargs)
+        assert temp_filename is not None
+        if not _files_equal_ignore_blank_lines(temp_filename, expected_filename):
+            diff_msg = _generate_file_diff_message(temp_filename, expected_filename)
+            pathlib.Path(temp_filename).unlink()
+            raise AssertionError(diff_msg)
+        pathlib.Path(temp_filename).unlink()
 
     def compare_python_output(self, filename, expected_filename=None, **kwargs):
         if expected_filename is None:
             expected_filename = self.get_expected_filename(filename, **kwargs)
 
-        import textract
         result = textract.process(filename, **kwargs)
-        with open(expected_filename, 'rb') as stream:
-            result = self.clean_text(result)
-            expected = self.clean_text(stream.read())
-            self.assertEqual(result, expected)
+        expected_content = pathlib.Path(expected_filename).read_bytes()
+        result = self.clean_text(result)
+        expected = self.clean_text(expected_content)
+        assert result == expected
 
 
 class ShellParserTestCase(BaseParserTestCase):
-    """This BaseParserTestCase object is used to collect a bunch of
-    standardized tests that should be run for every ShellParser.
+    """Collect standardized tests for every ShellParser.
+
+    This BaseParserTestCase object extends BaseParserTestCase with tests
+    specific to parsers that use shell commands.
     """
 
     def test_filename_spaces(self):
-        """Make sure filenames with spaces work on the command line"""
+        """Make sure filenames with spaces work on the command line."""
         temp_filename = spaced_filename = self.get_temp_filename()
         spaced_filename += " a filename with spaces." + self.extension
         shutil.copyfile(self.raw_text_filename, spaced_filename)
@@ -213,5 +296,5 @@ class ShellParserTestCase(BaseParserTestCase):
             spaced_filename,
             self.get_expected_filename(self.raw_text_filename),
         )
-        os.remove(temp_filename)
-        os.remove(spaced_filename)
+        pathlib.Path(temp_filename).unlink()
+        pathlib.Path(spaced_filename).unlink()

@@ -1,0 +1,73 @@
+[build-system]
+build-backend = "uv_build"
+requires = ["uv_build>=0.9.7"]
+
+[project]
+# TODO: Add Kyle as maintainer?
+authors = [{name = "Dean Malmgren", email = "dean.malmgren@datascopeanalytics.com"}]
+description = "extract text from any document. no muss. no fuss. "
+license = {text = "MIT"}
+name = "textract"
+readme = "README.rst"
+requires-python = ">=3.9"
+version = "1.6.4"
+dependencies = [
+    "Pillow>=9.0.0",
+    "SpeechRecognition>=3.8.1",
+    "argcomplete>=3.6.3",
+    "beautifulsoup4>=4.8.0",
+    "chardet>=5.2.0",
+    "docx2txt>=0.8",
+    "extract-msg>=0.40.0",
+    "pdfminer.six>=20221105",
+    "python-pptx>=0.6.18",
+    "six>=1.17.0",
+    "xlrd>=1.2.0,<2.0.0",  # v2 drops support for xlsx. Requires openpyxl or alternative to support xlsx if upgrading xlrd. See: https://github.com/deanmalmgren/textract/pull/543#issuecomment-2684619988
+]
+
+[project.optional-dependencies]
+pocketsphinx = ["pocketsphinx>=0.1.15"]
+
+[project.scripts]
+textract = "textract.bin.textract:main"
+
+[project.urls]
+Repository = "https://github.com/deanmalmgren/textract"
+
+[dependency-groups]
+dev = [
+    "commitizen>=3.29.1",
+    "pyright>=1.1.408",
+    "pytest>=7.2.1",
+    "ruff>=0.14.13",
+]
+docs = [
+    "sphinx>=7.0",
+    "sphinx-argparse>=0.4",
+    "sphinx-rtd-theme>=2.0",
+]
+
+[tool.commitizen]
+changelog_file = "docs/changelog.rst"
+tag_format = "v$version"
+update_changelog_on_bump = false
+version = "1.6.4"
+version_files = ["pyproject.toml:^version", "textract/__init__.py:^VERSION"]
+
+[tool.uv.build-backend]
+module-name = "textract"
+module-root = ""
+
+[tool.pyright]
+include = ["textract", "tests"]
+pythonVersion = "3.9"
+
+[tool.ruff]
+# Docs: https://github.com/charliermarsh/ruff
+# Tip: uv run ruff rule RUF100
+target-version = 'py39'
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:aifc was removed in Python 3.13:DeprecationWarning:speech_recognition",
+]

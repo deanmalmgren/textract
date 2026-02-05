@@ -2,12 +2,12 @@
 Route the request to the appropriate parser based on file type.
 """
 
-import os
-import importlib
 import glob
+import importlib
+import pathlib
 import re
 
-from .. import exceptions
+from textract import exceptions
 
 # Dictionary structure for synonymous file extension types
 EXTENSION_SYNONYMS = {
@@ -37,7 +37,7 @@ def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODI
     """
 
     # make sure the filename exists
-    if not os.path.exists(filename):
+    if not pathlib.Path(filename).exists():
         raise exceptions.MissingFileError(filename)
 
     # get the filename extension, which is something like .docx for
@@ -53,8 +53,7 @@ def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODI
             ext = '.' + ext
         ext = ext.lower()
     else:
-        _, ext = os.path.splitext(filename)
-        ext = ext.lower()
+        ext = pathlib.Path(filename).suffix.lower()
 
     # check the EXTENSION_SYNONYMS dictionary
     ext = EXTENSION_SYNONYMS.get(ext, ext)
@@ -72,6 +71,9 @@ def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODI
         )
     except ImportError:
         raise exceptions.ExtensionNotSupported(ext)
+        filetype_module = importlib.import_module(rel_module, "textract.parsers")
+    except ImportError as err:
+        raise exceptions.ExtensionNotSupported(ext) from err
 
     # do the extraction
 
@@ -86,21 +88,20 @@ def _get_available_extensions():
     extensions = []
 
     # from filenames
-    parsers_dir = os.path.join(os.path.dirname(__file__))
-    glob_filename = os.path.join(parsers_dir, "*" + _FILENAME_SUFFIX + ".py")
-    # escape backslashes for python 3.6+
-    glob_filename = glob_filename.replace("//", "////")
-    ext_re = re.compile(glob_filename.replace('*', r"(?P<ext>\w+)"))
+    parsers_dir = pathlib.Path(__file__).parent
+    glob_filename = str(parsers_dir / f"*{_FILENAME_SUFFIX}.py")
+    # Escape the path for regex to handle Windows backslashes and special chars
+    ext_re = re.compile(
+        re.escape(glob_filename).replace(re.escape("*"), r"(?P<ext>\w+)"),
+    )
     for filename in glob.glob(glob_filename):
-        ext_match = ext_re.match(filename)
-        ext = ext_match.groups()[0]
-        extensions.append(ext)
-        extensions.append('.' + ext)
+        if ext_match := ext_re.match(filename):
+            ext = ext_match.groups()[0]
+            extensions.extend((ext, "." + ext))
 
     # from relevant synonyms (don't use the '' synonym)
-    for ext in EXTENSION_SYNONYMS.keys():
+    for ext in EXTENSION_SYNONYMS:
         if ext:
-            extensions.append(ext)
-            extensions.append(ext.replace('.', '', 1))
+            extensions.extend((ext, ext.replace(".", "", 1)))
     extensions.sort()
     return extensions

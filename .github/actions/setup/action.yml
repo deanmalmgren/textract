@@ -1,0 +1,40 @@
+---
+name: Setup Action
+description: Configure Python with uv and install package dependencies
+
+inputs:
+  python-version:
+    description: Python version
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Install system dependencies (Ubuntu)
+      if: runner.os == 'Linux'
+      uses: awalsh128/cache-apt-pkgs-action@v1
+      with:
+        packages: antiword tesseract-ocr sox libsox-fmt-mp3 ghostscript unrtf poppler-utils
+        version: 1.1
+
+    - name: Install system dependencies (macOS)
+      if: runner.os == 'macOS'
+      shell: bash
+      run: |
+        brew install antiword tesseract sox lame mad ghostscript unrtf poppler
+
+    - name: Install system dependencies (Windows)
+      if: runner.os == 'Windows'
+      shell: pwsh
+      run: |
+        choco install tesseract ghostscript sox.portable poppler -y
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install Project Dependencies
+      run: uv sync --all-extras
+      shell: bash

@@ -5,11 +5,12 @@ import re
 
 
 def _wrap_with(code, bold=False):
-    def inner(text):
+    def inner(text) -> str:
         c = code
         if bold:
-            c = "1;%s" % c
-        return "\033[%sm%s\033[0m" % (c, text)
+            c = f"1;{c}"
+        return f"\033[{c}m{text}\033[0m"
+
     return inner
 
 

@@ -1,13 +1,17 @@
+"""Tests for DOCX file format."""
+
+import pathlib
 import unittest
-import os
 
 from . import base
 
 
 class DocxTestCase(base.BaseParserTestCase, unittest.TestCase):
-    extension = 'docx'
+    """Test text extraction from DOCX (Word) files."""
+
+    extension = "docx"
 
     def test_tables(self):
-        """make sure table output is correct"""
-        d = self.get_extension_directory()
-        self.compare_cli_output(os.path.join(d, "paragraphs_and_tables.docx"))
+        """Make sure table output is correct."""
+        d = pathlib.Path(self.get_extension_directory())
+        self.compare_cli_output(str(d / "paragraphs_and_tables.docx"))

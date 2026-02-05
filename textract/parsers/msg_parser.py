@@ -1,11 +1,10 @@
-import six
-
 import extract_msg
+import six
 
 from .utils import BaseParser
 
 
-def ensure_bytes(string):
+def ensure_bytes(string) -> bytes:
     """Normalize string to bytes.
 
     `extract_msg.Message._getStringStream` can return unicode or bytes depending

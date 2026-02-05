@@ -61,13 +61,4 @@ docs/textract/
 # ignore big testing files that are dynamically downloaded
 tests/pdf/large.pdf
 
-# ignore raw_text.txt files that are dynamically generated during testing
-tests/png/raw_text.txt
-tests/gif/raw_text.txt
-tests/jpg/raw_text.txt
-tests/tiff/raw_text.txt
-tests/png/standardized_text.txt
-tests/gif/standardized_text.txt
-tests/jpg/standardized_text.txt
-tests/tiff/standardized_text.txt
-tests/pdf/ocr_text.txt
+# OCR-generated test fixtures are committed to VCS but can be regenerated using `cd tests && make`

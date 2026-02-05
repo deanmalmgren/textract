@@ -36,7 +36,7 @@ Currently supporting
 --------------------
 
 textract supports a growing list of file types for text extraction. If
-you don't see your favorite file type here, Please recommend other
+you don't see your favorite file type here, please recommend other
 file types by either mentioning them on the `issue tracker
 <https://github.com/deanmalmgren/textract/issues>`_ or by
 :ref:`contributing a pull request <contributing>`.

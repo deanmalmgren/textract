@@ -1,6 +1,7 @@
+import pathlib
 import re
-import six
 
+import six
 from bs4 import BeautifulSoup
 
 from .utils import BaseParser
@@ -24,22 +25,18 @@ class Parser(BaseParser):
         'input', 'label', 'select', 'textarea',
     ]
 
-    def _visible(self, element):
-        """Used to filter text elements that have invisible text on the page.
-        """
-        if element.name in self._disallowed_names:
-            return False
-        elif re.match(u'<!--.*-->', six.text_type(element.extract())):
-            return False
-        return True
+    def _visible(self, element) -> bool:
+        """Used to filter text elements that have invisible text on the page."""
+        return not (
+            element.name in self._disallowed_names
+            or re.match(r"<!--.*-->", six.text_type(element.extract()))
+        )
 
-    def _inline(self, element):
+    def _inline(self, element) -> bool:
         """Used to check whether given element can be treated as inline
         element (without new line after).
         """
-        if element.name in self._inline_tags:
-            return True
-        return False
+        return element.name in self._inline_tags
 
     def _find_any_text(self, tag):
         """Looks for any possible text within given tag.
@@ -125,8 +122,8 @@ class Parser(BaseParser):
         return soup
 
     def extract(self, filename, **kwargs):
-        with open(filename, "rb") as stream:
-            soup = BeautifulSoup(stream, 'lxml')
+        with pathlib.Path(filename).open("rb") as stream:
+            soup = BeautifulSoup(stream, "lxml")
 
         # Convert tables to ASCII ones
         soup = self._replace_tables(soup)
@@ -137,9 +134,9 @@ class Parser(BaseParser):
         # Make HTML
         html = ''
         elements = soup.find_all(True)
-        elements = [el for el in filter(self._visible, elements)]
+        elements = list(filter(self._visible, elements))
         for elem in elements:
-            string = elem.string
+            string = elem.string  # type: ignore[attr-defined]
             if string is None:
                 string = self._find_any_text(elem)
             string = string.strip()

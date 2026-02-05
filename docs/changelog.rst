@@ -5,11 +5,6 @@ This project uses `semantic versioning <http://semver.org/>`_ to
 track version numbers, where backwards incompatible changes
 (highlighted in **bold**) bump the major version of the package.
 
-
-latest changes in development for next release
-----------------------------------------------
-
-.. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
 1.6.5
 -------------------
 

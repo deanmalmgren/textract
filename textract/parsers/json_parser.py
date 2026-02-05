@@ -1,4 +1,6 @@
 import json
+import pathlib
+
 import six
 
 from .utils import BaseParser
@@ -11,7 +13,7 @@ class Parser(BaseParser):
     """
 
     def extract(self, filename, **kwargs):
-        with open(filename, 'r') as raw:
+        with pathlib.Path(filename).open(encoding="utf-8") as raw:
             deserialized_json = json.load(raw)
         return self.get_text(deserialized_json)
 
@@ -34,5 +36,4 @@ class Parser(BaseParser):
 
         if isinstance(deserialized_json, six.string_types):
             return deserialized_json
-        else:
-            return ''
+        return ""

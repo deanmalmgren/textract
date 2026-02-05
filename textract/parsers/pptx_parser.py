@@ -14,7 +14,6 @@ class Parser(BaseParser):
             for shape in slide.shapes:
                 if not shape.has_text_frame:
                     continue
-                for paragraph in shape.text_frame.paragraphs:
-                    for run in paragraph.runs:
-                        text_runs.append(run.text)
-        return '\n\n'.join(text_runs)
+                for paragraph in shape.text_frame.paragraphs:  # type: ignore[attr-defined]
+                    text_runs.extend(run.text for run in paragraph.runs)
+        return "\n\n".join(text_runs)

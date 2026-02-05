@@ -21,12 +21,12 @@ clean:
 
 # create OCR output for the multi-page pdf test
 pdf/ocr_text.txt: pdf/ocr_text.pdf
-	pdftoppm $< /tmp/pdf-ocr-text
-	for x in /tmp/pdf-ocr-text*; do \
+	pdftoppm $< pdf/pdf-ocr-text
+	cd pdf && for x in pdf-ocr-text*.ppm; do \
 		tesseract $$x $$(basename $$x .ppm) > /dev/null; \
 	done
-	cat pdf-ocr-text*.txt > $@
-	rm -f pdf-ocr-text*
+	cat pdf/pdf-ocr-text*.txt > $@
+	rm -f pdf/pdf-ocr-text*
 
 ps/raw_text.txt: ps/raw_text.ps
 	ps2ascii $< > $@
@@ -38,7 +38,7 @@ ps/raw_text.txt: ps/raw_text.ps
 	f=$@; g=$${f%%.*}; tesseract $< $${g} > /dev/null
 
 %.txt: %.gif
-	f=$@; g=$${f%%.*}; tesseract $< $${g} > /dev/null
+	uv run python -c "import sys; import textract; sys.stdout.buffer.write(textract.process('$<'))" > $@
 
 %.txt: %.tiff
 	f=$@; g=$${f%%.*}; tesseract $< $${g} > /dev/null
