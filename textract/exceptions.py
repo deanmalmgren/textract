@@ -7,12 +7,14 @@ class CommandLineError(Exception):
     errors occur on the command line to provide a useful command line
     interface.
     """
+
     def render(self, msg):
         return msg % vars(self)
 
 
 class ExtensionNotSupported(CommandLineError):
     """This error is raised with unsupported extensions"""
+
     def __init__(self, ext):
         self.ext = ext
 
@@ -36,6 +38,7 @@ class MissingFileError(CommandLineError):
     """This error is raised when the file can not be located at the
     specified path.
     """
+
     def __init__(self, filename):
         self.filename = filename
         self.root, self.ext = os.path.splitext(filename)
@@ -51,6 +54,7 @@ class UnknownMethod(CommandLineError):
     """This error is raised when the specified --method on the command
     line is unknown.
     """
+
     def __init__(self, method):
         self.method = method
 
@@ -64,6 +68,7 @@ class ShellError(CommandLineError):
     """This error is raised when a shell.run returns a non-zero exit code
     (meaning the command failed).
     """
+
     def __init__(self, command, exit_code, stdout, stderr):
         self.command = command
         self.exit_code = exit_code
@@ -97,3 +102,20 @@ class ShellError(CommandLineError):
             return self.not_installed_message()
         else:
             return self.failed_message()
+
+
+class MissingModuleError(CommandLineError):
+    """This error is raised when a dependency module is not installed.
+    """
+
+    def __init__(self, import_error):
+        self.import_error = import_error.__str__()
+        self.missing_module = self.import_error.split('No module named ')[1]
+
+    def __str__(self):
+        return self.render((
+            'Module %(missing_module)s is not installed on your system.\n'
+            'Please make sure the appropriate dependencies are installed \n'
+            'before using textract:\n\n'
+            '    http://textract.readthedocs.org/en/latest/installation.html\n'
+        ))

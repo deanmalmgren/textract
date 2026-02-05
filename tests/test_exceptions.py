@@ -55,3 +55,16 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
             self.assertTrue(e.is_not_installed())
         else:
             self.assertTrue(False, "Expected ShellError")
+
+    def test_missing_module_python(self):
+        """Make sure not installed modules raises the correct error"""
+        filename = self.get_temp_filename()
+        import sys
+        temp = os
+        sys.modules['os'] = None
+        import textract
+        from textract.exceptions import MissingModuleError
+        with self.assertRaises(MissingModuleError):
+            textract.process(filename)
+        sys.modules['os'] = temp
+        os.remove(filename)
