@@ -49,87 +49,16 @@ Quick start
         uv sync --group dev
         uv run pytest
 
-3. Contribute! There are several `open issues
+3. Install system dependencies for your platform. See the
+   :ref:`installation <installation>` guide for platform-specific
+   instructions (macOS, Ubuntu/Debian, Windows, FreeBSD).
+
+4. Contribute! There are several `open issues
    <https://github.com/deanmalmgren/textract/issues>`_ that provide
    good places to dig in. Check out the `contribution guidelines
    <https://github.com/deanmalmgren/textract/blob/main/CONTRIBUTING.md>`_
    and send pull requests; your help is greatly appreciated!
 
-Depending on your development preferences, there are lots of ways to
-get started developing with textract:
-
-Developing in a native Ubuntu environment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-4. Install all the necessary system packages:
-
-   .. code-block:: bash
-
-       ./provision/travis-mock.sh
-       ./provision/debian.sh
-
-       # optionally run some of the steps in these scripts, but you
-       # may want to be selective about what you do as they alter global
-       # environment states
-       ./provision/python.sh
-       ./provision/development.sh
-
-.. _run-ubuntu-tests:
-
-5. Make sure everything is working by running the suite of functional tests:
-
-   .. code-block:: bash
-
-        uv run pytest
-
-   These functional tests are designed to be run on Ubuntu/Debian
-   systems. You can run all tests with:
-
-   .. code-block:: bash
-
-        uv run pytest
-
-   Current build status: |Build Status|
-
-
-Developing with Vagrant virtual machine
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-4. Install `Vagrant <http://vagrantup.com/downloads>`_ and
-   `Virtualbox <https://www.virtualbox.org/wiki/Downloads>`_ and launch
-   the development virtual machine:
-
-   .. code-block:: bash
-
-        vagrant plugin install iniparse
-        vagrant up && vagrant provision
-
-   On ``vagrant ssh``\ ing to the virtual machine, note that the
-   ``PYTHONPATH`` and ``PATH`` `environment variables have been
-   altered in this virtual machine
-   <https://github.com/deanmalmgren/textract/blob/master/provision/development.sh>`_
-   so that any changes you make to textract in development are
-   automatically incorporated into the command.
-
-5. Make sure everything is working by running the test suite:
-
-   .. code-block:: bash
-
-        uv run pytest
-
-   Current build status: |Build Status|
-
-
-
-Developing with Docker container
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-4. Go to the `Docker
-   documentation <http://docs.docker.com/installation/ubuntulinux/>`_
-   and follow the instructions under "If you'd like to try the latest
-   version of Docker" to install Docker.
-
-5. Just run ``tests/run_docker_tests.sh`` to run the full test suite.
    Current build status: |Build Status|
 
 

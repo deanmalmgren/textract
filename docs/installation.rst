@@ -66,6 +66,18 @@ First install XQuartz and system packages, then install textract from PyPI:
     homebrew, you may also need to install the python
     development header files for textract to properly install.
 
+Windows
+-------
+
+Install `Chocolatey <https://chocolatey.org/install>`_ then install system packages:
+
+.. code-block:: powershell
+
+    choco install tesseract ghostscript sox.portable poppler -y
+    pip install textract
+    # or with uv
+    uv pip install textract
+
 FreeBSD
 -------
 
@@ -79,6 +91,13 @@ First install system packages using pkg, then install textract from PyPI:
     pip install textract
     # or with uv
     uv pip install textract
+
+Reference: CI System Dependencies
+----------------------------------
+
+The canonical list of system dependencies is maintained in the GitHub Actions
+workflow at `.github/actions/setup/action.yml <https://github.com/deanmalmgren/textract/blob/main/.github/actions/setup/action.yml>`_.
+This is what CI uses and is kept up-to-date with each platform's requirements.
 
 Don't see your operating system installation instructions here?
 ---------------------------------------------------------------

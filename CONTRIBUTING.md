@@ -81,8 +81,7 @@ add support for hitherto unsupported file type `.abc123`:
   `docs/installation.rst`.
 
 * add documentation about the awesome new file format this is being
-  supported in `docs/index.rst` and be sure to give yourself a pat on
-  the back by updating the changelog in `docs/changelog.rst`
+  supported in `docs/index.rst`
 
 * finally, make sure the entire test suite passes by running
   `uv run pytest` and fix any lingering problems.
@@ -130,6 +129,15 @@ Install system dependencies (Ubuntu/Debian)::
 
     apt-get install antiword tesseract-ocr ghostscript poppler-utils sox libsox-fmt-mp3 unrtf
 
+Install system dependencies (Windows)::
+
+    choco install tesseract ghostscript sox.portable poppler -y
+
+.. note::
+
+   The canonical list of system dependencies is in `.github/actions/setup/action.yml
+   <https://github.com/deanmalmgren/textract/blob/main/.github/actions/setup/action.yml>`_.
+
 
 Releasing
 ---------
@@ -137,7 +145,7 @@ Releasing
 Bump version and update changelog::
 
     uv run cz bump --increment MINOR
-    ./scripts/prepend-changelog.sh
     git push origin main --tags
 
 Publishing is automated via GitHub Actions using PyPI Trusted Publishers.
+Changelog is automatically generated from conventional commits.
