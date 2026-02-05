@@ -3,6 +3,11 @@
 Contributing
 ============
 
+.. note::
+
+   See `CONTRIBUTING.md <https://github.com/deanmalmgren/textract/blob/main/CONTRIBUTING.md>`_
+   for detailed contributor documentation.
+
 The overarching goal of this project is to make it as easy as possible
 to extract raw text from any document for the purposes of most natural
 language processing tasks. In practice, this means that this project
@@ -37,10 +42,17 @@ Quick start
 
         git clone https://github.com/YOUR-USERNAME/textract.git
 
-2. Contribute! There are several `open issues
+2. Install dependencies and run tests:
+
+   .. code-block:: bash
+
+        uv sync --group dev
+        uv run pytest
+
+3. Contribute! There are several `open issues
    <https://github.com/deanmalmgren/textract/issues>`_ that provide
    good places to dig in. Check out the `contribution guidelines
-   <https://github.com/deanmalmgren/textract/blob/master/CONTRIBUTING.md>`_
+   <https://github.com/deanmalmgren/textract/blob/main/CONTRIBUTING.md>`_
    and send pull requests; your help is greatly appreciated!
 
 Depending on your development preferences, there are lots of ways to
@@ -49,7 +61,7 @@ get started developing with textract:
 Developing in a native Ubuntu environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Install all the necessary system packages:
+4. Install all the necessary system packages:
 
    .. code-block:: bash
 
@@ -64,23 +76,18 @@ Developing in a native Ubuntu environment
 
 .. _run-ubuntu-tests:
 
-4. On the virtual machine, make sure everything is working by running
-   the suite of functional tests:
+5. Make sure everything is working by running the suite of functional tests:
 
    .. code-block:: bash
 
-        nosetests
+        uv run pytest
 
-   These functional tests are designed to be run on an Ubuntu 12.04
-   LTS server, just like the virtual machine and the server that runs
-   the travis-ci test suite. There are some other tests that have been
-   added along the way in the `Travis configuration
-   <https://github.com/deanmalmgren/textract/blob/master/.travis.yml>`_. For
-   your convenience, you can run all of these tests with:
+   These functional tests are designed to be run on Ubuntu/Debian
+   systems. You can run all tests with:
 
    .. code-block:: bash
 
-        ./tests/run.py
+        uv run pytest
 
    Current build status: |Build Status|
 
@@ -88,7 +95,7 @@ Developing in a native Ubuntu environment
 Developing with Vagrant virtual machine
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Install `Vagrant <http://vagrantup.com/downloads>`_ and
+4. Install `Vagrant <http://vagrantup.com/downloads>`_ and
    `Virtualbox <https://www.virtualbox.org/wiki/Downloads>`_ and launch
    the development virtual machine:
 
@@ -104,7 +111,12 @@ Developing with Vagrant virtual machine
    so that any changes you make to textract in development are
    automatically incorporated into the command.
 
-4. See :ref:`step 4 <run-ubuntu-tests>` in the Ubuntu development environment.
+5. Make sure everything is working by running the test suite:
+
+   .. code-block:: bash
+
+        uv run pytest
+
    Current build status: |Build Status|
 
 
@@ -112,12 +124,12 @@ Developing with Vagrant virtual machine
 Developing with Docker container
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Go to the `Docker
+4. Go to the `Docker
    documentation <http://docs.docker.com/installation/ubuntulinux/>`_
    and follow the instructions under "If you'd like to try the latest
    version of Docker" to install Docker.
 
-4. Just run ``tests/run_docker_tests.sh`` to run the full test suite.
+5. Just run ``tests/run_docker_tests.sh`` to run the full test suite.
    Current build status: |Build Status|
 
 

@@ -72,21 +72,20 @@ add support for hitherto unsupported file type `.abc123`:
       extension = 'abc123'
   ```
 
-  now you should be able to run tests on your parser with `nosetests
-  tests/test_abc123.py` or the tests for every parser with `nosetests`.
+  now you should be able to run tests on your parser with `uv run pytest
+  tests/test_abc123.py` or the tests for every parser with `uv run pytest`.
 
 * if your package relies on any external sources, be sure to add them
-  in either `requirements/python` (for python packages) or
-  `requirements/debian` (for debian packages) and update the
-  installation documentation accordingly in `docs/installation.rst`.
+  in `pyproject.toml` (for python packages) or document system
+  dependencies and update the installation documentation accordingly in
+  `docs/installation.rst`.
 
 * add documentation about the awesome new file format this is being
   supported in `docs/index.rst` and be sure to give yourself a pat on
   the back by updating the changelog in `docs/changelog.rst`
 
 * finally, make sure the entire test suite passes by running
-  `./tests/run.py` and fix any lingering problems (usually PEP-8
-  nonsense).
+  `uv run pytest` and fix any lingering problems.
 
 
 Style guidelines
@@ -114,3 +113,31 @@ generally recommend:
 -  `code comments should be about *what* is being done, not *how* it is
    being done <https://www.kernel.org/doc/Documentation/CodingStyle>`_
    --- that should be self-evident from the code itself.
+
+
+Development Setup
+-----------------
+
+Install dependencies::
+
+    uv sync
+
+Install system dependencies (macOS)::
+
+    brew install antiword tesseract ghostscript poppler sox unrtf
+
+Install system dependencies (Ubuntu/Debian)::
+
+    apt-get install antiword tesseract-ocr ghostscript poppler-utils sox libsox-fmt-mp3 unrtf
+
+
+Releasing
+---------
+
+Bump version and update changelog::
+
+    uv run cz bump --increment MINOR
+    ./scripts/prepend-changelog.sh
+    git push origin main --tags
+
+Publishing is automated via GitHub Actions using PyPI Trusted Publishers.

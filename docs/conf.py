@@ -4,7 +4,7 @@ from importlib.metadata import version as get_version
 
 project = "textract"
 author = "Dean Malmgren, Kyle King"
-copyright = "2014, Dean Malmgren; 2024, Kyle King"  # noqa: A001
+copyright = "2014, Dean Malmgren; 2023, Kyle King"
 
 release = version = get_version("textract")
 
