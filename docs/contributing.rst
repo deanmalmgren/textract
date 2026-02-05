@@ -3,104 +3,124 @@
 Contributing
 ============
 
-.. note::
-   The primary contributor documentation is in `CONTRIBUTING.md <https://github.com/deanmalmgren/textract/blob/main/CONTRIBUTING.md>`_
-   at the repository root. This page provides a summary for the documentation site.
+The overarching goal of this project is to make it as easy as possible
+to extract raw text from any document for the purposes of most natural
+language processing tasks. In practice, this means that this project
+should preferentially provide tools that correctly produce output that
+has words in the correct order but that whitespace between words,
+formatting, etc is totally irrelevant. As the various parsers mature,
+I fully expect the output to become more readable to support
+additional use cases, like `extracting text to appear in web pages
+<https://github.com/deanmalmgren/textract/pull/58#issuecomment-53697943>`_.
 
-This is a maintained fork of `deanmalmgren/textract <https://github.com/deanmalmgren/textract>`_
-focused on minimizing dependencies and supporting modern Python.
+Importantly, this project is committed to being as agnostic about how
+the content is extracted as it is about the means in which the text is
+analyzed downstream. This means that ``textract`` should support
+multiple modes of extracting text from any document and provide
+reasonably good defaults (defaulting to tools that tend to produce the
+correct word sequence).
 
-The overarching goal is to make it as easy as possible to extract raw text from any document
-for natural language processing tasks. In practice, this means prioritizing correct word order
-over formatting and supporting multiple extraction methods for each file type.
+Another important aspect of this project is that we want to have
+extremely good documentation. If you notice a type-o, error, confusing
+statement etc, please fix it!
+
 
 .. _contributing-quick-start:
 
 Quick start
 -----------
 
-1. `Fork <https://github.com/deanmalmgren/textract/fork>`_ and clone the project:
+1. `Fork <https://github.com/deanmalmgren/textract/fork>`_ and clone the
+   project:
 
    .. code-block:: bash
 
         git clone https://github.com/YOUR-USERNAME/textract.git
-        cd textract
 
-2. Install development dependencies using `uv <https://docs.astral.sh/uv/>`_:
+2. Contribute! There are several `open issues
+   <https://github.com/deanmalmgren/textract/issues>`_ that provide
+   good places to dig in. Check out the `contribution guidelines
+   <https://github.com/deanmalmgren/textract/blob/master/CONTRIBUTING.md>`_
+   and send pull requests; your help is greatly appreciated!
+
+Depending on your development preferences, there are lots of ways to
+get started developing with textract:
+
+Developing in a native Ubuntu environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+3. Install all the necessary system packages:
 
    .. code-block:: bash
 
-        uv sync --group dev
+       ./provision/travis-mock.sh
+       ./provision/debian.sh
 
-3. Make your changes and run the test suite:
+       # optionally run some of the steps in these scripts, but you
+       # may want to be selective about what you do as they alter global
+       # environment states
+       ./provision/python.sh
+       ./provision/development.sh
+
+.. _run-ubuntu-tests:
+
+4. On the virtual machine, make sure everything is working by running
+   the suite of functional tests:
 
    .. code-block:: bash
 
-        uv run pytest
+        nosetests
 
-4. Submit a pull request with your changes.
+   These functional tests are designed to be run on an Ubuntu 12.04
+   LTS server, just like the virtual machine and the server that runs
+   the travis-ci test suite. There are some other tests that have been
+   added along the way in the `Travis configuration
+   <https://github.com/deanmalmgren/textract/blob/master/.travis.yml>`_. For
+   your convenience, you can run all of these tests with:
 
-CI is handled by GitHub Actions, which runs tests across multiple Python
-versions (3.9-3.14) and operating systems (Ubuntu, macOS, Windows).
+   .. code-block:: bash
 
-System dependencies
-~~~~~~~~~~~~~~~~~~~
+        ./tests/run.py
 
-Some file types require system-level tools. See the :ref:`installation <installation>`
-guide for platform-specific installation instructions:
+   Current build status: |Build Status|
 
-- ``.doc`` requires ``antiword``
-- ``.pdf`` requires ``pdftotext`` (from poppler-utils) or uses built-in ``pdfminer``
-- ``.jpg``, ``.png`` require ``tesseract`` for OCR
-- ``.ps`` requires ``ghostscript``
-- ``.rtf`` requires ``unrtf``
-- ``.wav`` requires ``sox`` and ``SpeechRecognition``
 
-.. _contributing-release:
+Developing with Vagrant virtual machine
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Releasing
----------
+3. Install `Vagrant <http://vagrantup.com/downloads>`_ and
+   `Virtualbox <https://www.virtualbox.org/wiki/Downloads>`_ and launch
+   the development virtual machine:
 
-Publishing is automated via GitHub Actions with `PyPI Trusted Publishers <https://docs.pypi.org/trusted-publishers>`_.
-No API tokens needed.
+   .. code-block:: bash
 
-Basic release workflow:
+        vagrant plugin install iniparse
+        vagrant up && vagrant provision
 
-.. code-block:: bash
+   On ``vagrant ssh``\ ing to the virtual machine, note that the
+   ``PYTHONPATH`` and ``PATH`` `environment variables have been
+   altered in this virtual machine
+   <https://github.com/deanmalmgren/textract/blob/master/provision/development.sh>`_
+   so that any changes you make to textract in development are
+   automatically incorporated into the command.
 
-    # Preview unreleased changes
-    uv run cz changelog --dry-run | head -50
+4. See :ref:`step 4 <run-ubuntu-tests>` in the Ubuntu development environment.
+   Current build status: |Build Status|
 
-    # Bump version (PATCH, MINOR, or MAJOR)
-    uv run cz bump --increment MINOR
 
-    # Update changelog with new version
-    ./scripts/prepend-changelog.sh
 
-    # Push to trigger automated publishing
-    git push origin main --tags
+Developing with Docker container
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For detailed release instructions, prerelease workflows, and changelog management options,
-see `CONTRIBUTING.md <https://github.com/deanmalmgren/textract/blob/main/CONTRIBUTING.md#releasing>`_.
+3. Go to the `Docker
+   documentation <http://docs.docker.com/installation/ubuntulinux/>`_
+   and follow the instructions under "If you'd like to try the latest
+   version of Docker" to install Docker.
 
-Local Testing
--------------
+4. Just run ``tests/run_docker_tests.sh`` to run the full test suite.
+   Current build status: |Build Status|
 
-Test GitHub Actions workflows locally using `Act <https://github.com/nektos/act>`_ for
-Linux/macOS, or cloud VMs for Windows testing.
 
-For comprehensive local testing documentation including Windows testing options,
-see `CONTRIBUTING.md <https://github.com/deanmalmgren/textract/blob/main/CONTRIBUTING.md#local-ci-testing>`_.
+.. |Build Status| image:: https://travis-ci.org/deanmalmgren/textract.png
+   :target: https://travis-ci.org/deanmalmgren/textract
 
-Pull Requests
--------------
-
-When submitting PRs:
-
-- Include tests for new functionality
-- Update documentation if adding features or changing behavior
-- Follow existing code style (enforced by ruff)
-- Use conventional commit messages for changelog generation
-- Ensure CI passes on all platforms before requesting review
-
-For more details, see `CONTRIBUTING.md <https://github.com/deanmalmgren/textract/blob/main/CONTRIBUTING.md>`_.

@@ -1,290 +1,116 @@
-# Contributing to textract
+Any and all contributions are welcome and appreciated. To make it easy
+to keep things organized, this project uses the
+[general guidelines](https://guides.github.com/introduction/flow/)
+for the fork-branch-pull request model for github. Briefly, this means:
 
-Maintained fork of [deanmalmgren/textract](https://github.com/deanmalmgren/textract) focused on minimizing dependencies and supporting modern Python.
+1. Make sure your fork's `master` branch is up to date:
 
-## Quick Start
+    	git remote add deanmalmgren https://github.com/deanmalmgren/textract.git
+        git checkout master
+        git pull deanmalmgren/master
 
-```bash
-git clone https://github.com/deanmalmgren/textract.git
-cd textract
-uv sync --group dev
-uv run pytest
-```
+2. Start a feature branch with a descriptive name about what you're
+   trying to accomplish:
 
-## Development Environment
+        git checkout -b csv-support
 
-### Setup
+3. Make commits to this feature branch (`csv-support`, in this case)
+   in a way that other people can understand with good commit messages
+   to explain the changes you've made:
 
-```bash
-# Install dependencies
-uv sync --group dev
+        emacs textract/parsers/csv_parser.py
+	    git add textract/parsers/csv_parser.py
+	    git commit -m 'added csv_parser'
 
-# Install optional dependencies
-uv sync --all-extras
+4. If an issue already exists for the code you're contributing, use
+   [issue2pr](http://issue2pr.herokuapp.com/) to attach your code to
+   that issue:
 
-# Install system dependencies (macOS)
-brew install antiword tesseract ghostscript poppler sox
+        git push origin csv-support
+		chrome http://issue2pr.herokuapp.com
+		# enter the issue URL, HEAD=yourusername:csv-support, Base=master
 
-# Install system dependencies (Ubuntu/Debian)
-apt-get install antiword tesseract-ocr ghostscript poppler-utils sox libsox-fmt-mp3
-```
+   If the issue doesn't already exist, just send a pull
+   request in the usual way:
 
-### Running Tests
+        git push origin csv-support
+		chrome http://github.com/deanmalmgren/textract/compare
 
-```bash
-# Run full test suite
-uv run pytest
 
-# Run specific test file
-uv run pytest tests/test_core.py
+Common contributions: support for new file type
+-----------------------------------------------
 
-# Run with verbose output
-uv run pytest -v
+This project has really taken off, much more so than I would have
+thought (thanks everybody!). To help new contributors, I thought I'd
+jot down some notes for one of the more common contributions---how to
+add support for hitherto unsupported file type `.abc123`:
 
-# Skip network tests
-SKIP_NETWORK_TESTS=true uv run pytest
-```
+* write a `Parser` class in `textract/parsers/abc123_parser.py` that
+  inherits from `textract.parsers.utils.BaseParser` or
+  `textract.parsers.utils.ShellParser` and implements the
+  `extract(self, filename, **kwargs)` method.
 
-### Code Quality
+* add a test file in `tests/abc123/raw_text.abc123`, run textract on
+  it like this:
 
-```bash
-# Type checking
-uv run pyright
+  ```shell
+  textract tests/abc123/raw_text.abc123 > tests/abc123/raw_text.txt
+  ```
 
-# Linting and formatting
-uv run ruff check
-uv run ruff format
+  and add the basic test suite by creating
+  a file called `tests/test_abc123.py` with content that looks
+  something like this:
 
-# Fix auto-fixable issues
-uv run ruff check --fix
-```
+  ```python
+  # tests/test_abc123.py
+  import unittest
 
-## Local CI Testing
+  import base
 
-### Linux/macOS with Act
 
-Act runs GitHub Actions workflows locally using Docker. Windows workflows not supported.
+  class Abc123TestCase(unittest.TestCase, base.BaseParserTestCase):
+      extension = 'abc123'
+  ```
 
-```bash
-# Install
-brew install act
+  now you should be able to run tests on your parser with `nosetests
+  tests/test_abc123.py` or the tests for every parser with `nosetests`.
 
-# List available jobs
-./scripts/test-with-act.sh list
+* if your package relies on any external sources, be sure to add them
+  in either `requirements/python` (for python packages) or
+  `requirements/debian` (for debian packages) and update the
+  installation documentation accordingly in `docs/installation.rst`.
 
-# Run Ubuntu tests (fastest)
-./scripts/test-with-act.sh
+* add documentation about the awesome new file format this is being
+  supported in `docs/index.rst` and be sure to give yourself a pat on
+  the back by updating the changelog in `docs/changelog.rst`
 
-# Run specific matrix combinations
-./scripts/test-with-act.sh test-ubuntu-3.9
-./scripts/test-with-act.sh test-macos-3.14
+* finally, make sure the entire test suite passes by running
+  `./tests/run.py` and fix any lingering problems (usually PEP-8
+  nonsense).
 
-# Run with custom options
-act -j test --matrix os:ubuntu-latest --matrix python-version:3.9
-```
 
-**Limitations:**
-- No Windows support
-- Docker required
-- First run downloads large images (~GB)
-- Some system dependencies may need manual setup
+Style guidelines
+----------------
 
-**Troubleshooting:**
+As a general rule of thumb, the goal of this package is to be as
+readable as possible to make it easy for novices and experts alike to
+contribute to the source code in meaningful ways. Pull requests that
+favor cleverness or optimization over readability are less likely to be
+incorporated.
 
-```bash
-# Interactive debugging
-act -j test --matrix os:ubuntu-latest --shell
-
-# Clean up containers
-docker ps -a | grep act | awk '{print $1}' | xargs docker rm -f
-
-# Remove old images
-docker images | grep act | awk '{print $3}' | xargs docker rmi -f
-```
-
-### Windows Testing
-
-Act doesn't support Windows. Use cloud VMs for Windows debugging:
-
-| Option | Best For | Cost | Setup |
-|--------|----------|------|-------|
-| GitHub Codespaces | Quick debugging (<1hr) | Free (60hr/month) | Zero setup |
-| Oracle Cloud Free Tier | Extended testing | Free (always) | Moderate setup |
-| Azure Free Trial | First-time users | $100-200 credit | Moderate setup |
-| Local VM (UTM/Parallels) | Frequent testing | One-time/$99/year | High setup |
-
-**GitHub Codespaces (recommended for quick tests):**
-
-```bash
-# Create Windows codespace at https://github.com/deanmalmgren/textract
-# Inside codespace:
-choco install tesseract ghostscript sox.portable poppler -y
-uv sync --all-extras
-uv run pytest
-```
-
-**Windows setup script (`setup-windows.ps1`):**
-
-```powershell
-# Install Chocolatey
-if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
-    Set-ExecutionPolicy Bypass -Scope Process -Force
-    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-    iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-}
-
-# Install dependencies
-choco install -y tesseract ghostscript sox.portable poppler python --version=3.14 git
-pip install uv
-
-# Clone and test
-git clone https://github.com/deanmalmgren/textract
-cd textract
-uv sync --all-extras
-$env:SKIP_NETWORK_TESTS="true"
-uv run pytest
-```
-
-## Releasing
-
-Publishing is automated via GitHub Actions with [PyPI Trusted Publishers](https://docs.pypi.org/trusted-publishers). No API tokens needed.
-
-### Initial Setup (one-time)
-
-Configure Trusted Publishing on PyPI:
-
-1. Go to https://pypi.org/manage/project/textract/settings/publishing/
-2. Add new Trusted Publisher:
-   - **PyPI Project Name**: `textract`
-   - **Owner**: `KyleKing`
-   - **Repository name**: `textract`
-   - **Workflow name**: `ci_pipeline.yml`
-   - **Environment name**: `pypi`
-3. Configure GitHub Environment:
-   - Go to repository Settings → Environments
-   - Create environment named `pypi`
-   - Enable "Required reviewers" for production safety
-
-### Publishing a Release
-
-```bash
-# Check current version
-uv run cz version --project
-
-# Preview unreleased changes
-./scripts/prepend-changelog.sh --preview
-
-# Bump version (PATCH, MINOR, or MAJOR)
-uv run cz bump --increment MINOR
-
-# For rc/beta releases
-uv run cz bump --prerelease rc
-
-# Update changelog (semi-automated)
-./scripts/prepend-changelog.sh
-
-# Push to trigger automated publishing
-git push origin main --tags
-```
-
-The `cz bump` command automatically:
-- Updates version numbers in `pyproject.toml` and `textract/__init__.py`
-- Creates git commit with changes
-- Creates git tag (format: `v2.1.2`)
-
-After pushing the tag, GitHub Actions automatically:
-- Runs tests across multiple Python versions and operating systems
-- Builds package with `uv build`
-- Publishes to PyPI using Trusted Publishers
-- Generates changelog from commit messages
-- Creates GitHub Release with changelog
-
-### Changelog Management
-
-The project maintains a manual changelog in `docs/changelog.rst`. Three options:
-
-**Option 1: Semi-Automated (recommended)**
-
-```bash
-# Preview unreleased changes
-./scripts/prepend-changelog.sh --preview
-
-# After bumping version, update changelog
-./scripts/prepend-changelog.sh
-
-# Review and commit
-diff docs/changelog.rst.backup docs/changelog.rst
-git add docs/changelog.rst
-rm docs/changelog.rst.backup
-```
-
-Generates new entries from conventional commits and prepends to existing changelog without destroying history.
-
-**Option 2: Manual Updates**
-
-After bumping versions, manually add entries to `docs/changelog.rst` under "latest changes in development for next release".
-
-**Option 3: Full Auto-Generation**
-
-```bash
-# Preview auto-generated changelog
-uv run cz changelog --dry-run
-
-# Generate complete changelog (overwrites existing)
-uv run cz changelog
-```
-
-**Warning:** Auto-generation overwrites the existing changelog and changes format. Use with caution.
-
-**Changelog format:** Use conventional commit prefixes (`feat:`, `fix:`, `refactor:`, `docs:`, `test:`, `ci:`) for auto-generated changelogs to categorize commits properly.
-
-## System Dependencies
-
-Some file types require system-level tools:
-
-### macOS
-
-```bash
-brew install antiword tesseract ghostscript poppler sox
-```
-
-### Ubuntu/Debian
-
-```bash
-apt-get install antiword tesseract-ocr ghostscript poppler-utils sox libsox-fmt-mp3 unrtf
-```
-
-### Windows
-
-```powershell
-choco install antiword tesseract ghostscript sox.portable poppler
-```
-
-### File Type Support
-
-- `.doc` requires `antiword`
-- `.pdf` requires `pdftotext` (from poppler-utils) or uses built-in `pdfminer`
-- `.jpg`, `.png` require `tesseract` for OCR
-- `.ps` requires `ghostscript`
-- `.rtf` requires `unrtf`
-- `.wav` requires `sox` and `SpeechRecognition`
-
-## Project Philosophy
-
-The overarching goal is to make it as easy as possible to extract raw text from any document for natural language processing tasks. In practice:
-
-- Prioritize correct word order over formatting
-- Support multiple extraction methods for each file type
-- Provide reasonable defaults (tools that produce correct word sequences)
-- Remain agnostic about downstream text analysis
-- Maintain excellent documentation
-
-## Pull Requests
-
-When submitting PRs:
-
-- Include tests for new functionality
-- Update documentation if adding features or changing behavior
-- Follow existing code style (enforced by ruff)
-- Use conventional commit messages for changelog generation
-- Ensure CI passes on all platforms before requesting review
+To make this notion of "readability" more concrete, here are a few
+stylistic guidelines that are inspired by other projects and we
+generally recommend:
+
+-  write functions and methods that can `fit on a screen or two of a
+   standard
+   terminal <https://www.kernel.org/doc/Documentation/CodingStyle>`_
+   --- no more than approximately 40 lines.
+
+-  unless it makes code less readable, adhere to `PEP
+   8 <http://legacy.python.org/dev/peps/pep-0008/>`_ style
+   recommendations --- use an appropriate amount of whitespace.
+
+-  `code comments should be about *what* is being done, not *how* it is
+   being done <https://www.kernel.org/doc/Documentation/CodingStyle>`_
+   --- that should be self-evident from the code itself.
