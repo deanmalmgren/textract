@@ -142,10 +142,13 @@ Install system dependencies (Windows)::
 Releasing
 ---------
 
-Bump version and update changelog::
+Releases are handled via GitHub Actions with manual triggering:
 
-    uv run cz bump --increment MINOR
-    git push origin main --tags
+1. Push conventional commits (``feat:``, ``fix:``, etc.) to ``main``
+2. Manually trigger the ``Bump Version`` workflow from GitHub Actions tab
+3. The workflow analyzes commits, bumps version, updates changelog, and creates release
+4. The ``ci_pipeline.yml`` workflow automatically publishes to PyPI on tag creation
 
-Publishing is automated via GitHub Actions using PyPI Trusted Publishers.
-Changelog is automatically generated from conventional commits.
+To preview what version would be bumped::
+
+    uv run cz bump --dry-run

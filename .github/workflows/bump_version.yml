@@ -1,0 +1,30 @@
+---
+name: Bump Version
+
+"on":
+  workflow_dispatch: null
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    name: Bump version and create release with commitizen
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Bump version and generate changelog
+        uses: commitizen-tools/commitizen-action@master
+        with:
+          branch: main
+          changelog_increment_filename: body.md
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate GitHub Release Notes
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: body.md
+          tag_name: ${{ env.REVISION }}
