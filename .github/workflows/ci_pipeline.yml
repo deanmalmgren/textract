@@ -29,14 +29,9 @@ jobs:
 
       - name: Run tests
         id: tests
-        continue-on-error: true
         run: uv run pytest
         env:
           SKIP_NETWORK_TESTS: "true"
-
-      - name: Check test results
-        if: steps.tests.outcome == 'failure'
-        run: exit 1
 
   publish:
     name: Publish to PyPI
