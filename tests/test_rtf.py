@@ -12,7 +12,7 @@ _HAS_UNRTF = shutil.which("unrtf") is not None
 
 @pytest.mark.skipif(
     not _HAS_UNRTF,
-    reason="unrtf is not installed (install via: brew install unrtf)",
+    reason="unrtf is not installed (install via your system package manager, e.g. apt/brew/pacman)",
 )
 class RtfTestCase(base.ShellParserTestCase, unittest.TestCase):
     """Test text extraction from RTF files."""

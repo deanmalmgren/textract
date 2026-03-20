@@ -60,7 +60,7 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
 
     @pytest.mark.skipif(
         not _HAS_PDFTOTEXT,
-        reason="pdftotext is not installed (install via: brew install poppler)",
+        reason="pdftotext is not installed (part of poppler; install via your system package manager, e.g. apt/brew/pacman)",
     )
     @pytest.mark.skipif(
         platform.system() == "Windows",
@@ -72,7 +72,7 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
 
     @pytest.mark.skipif(
         not _HAS_PDFTOTEXT,
-        reason="pdftotext is not installed (install via: brew install poppler)",
+        reason="pdftotext is not installed (part of poppler; install via your system package manager, e.g. apt/brew/pacman)",
     )
     @pytest.mark.skipif(
         platform.system() == "Windows",
@@ -100,7 +100,7 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
 
     @pytest.mark.skipif(
         not _HAS_TESSERACT,
-        reason="tesseract-ocr is not installed (install via: brew install tesseract)",
+        reason="tesseract-ocr is not installed (see https://tesseract-ocr.github.io/tessdoc/Installation.html)",
     )
     @pytest.mark.skipif(
         platform.system() == "Linux",

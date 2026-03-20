@@ -14,7 +14,7 @@ _HAS_ANTIWORD = shutil.which("antiword") is not None
     not _HAS_ANTIWORD,
     reason=(
         "antiword is not installed "
-        "(no longer maintained, install via: brew install antiword)"
+        "(no longer maintained; install via your system package manager, e.g. apt/brew/pacman)"
     ),
 )
 class DocTestCase(base.ShellParserTestCase, unittest.TestCase):

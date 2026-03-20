@@ -39,10 +39,10 @@ First install system packages using apt-get, then install textract from PyPI:
     instances of Ubuntu. See `issue #19
     <https://github.com/deanmalmgren/textract/pull/19>`_ for details
 
-OSX
----
+macOS
+-----
 
-These steps rely on you having `homebrew <http://brew.sh/>`_ installed.
+These steps rely on you having `Homebrew <https://brew.sh/>`_ installed.
 First install XQuartz and system packages, then install textract from PyPI:
 
 .. code-block:: bash
@@ -52,9 +52,6 @@ First install XQuartz and system packages, then install textract from PyPI:
     pip install textract
     # or with uv
     uv pip install textract
-
-..     brew install libxml2 libxslt antiword poppler tesseract
-..     brew link libxml2 libxslt
 
 .. note::
 
@@ -128,20 +125,20 @@ documentation about how to install the textract dependencies, please
 
     - python header files are required for building lxml.
 
-    - `antiword <http://www.winfield.demon.nl/>`_ is required by the
-      ``.doc`` parser.
+    - `antiword <https://github.com/grobian/antiword>`_ is required by the
+      ``.doc`` parser (note: no longer actively maintained).
 
-    - `pdftotext <http://poppler.freedesktop.org/>`_ is *optionally*
-      required by the ``.pdf`` parser (there is a pure python fallback
-      that works if pdftotext isn't installed).
+    - `pdftotext <https://poppler.freedesktop.org/>`_ (part of poppler) is
+      *optionally* required by the ``.pdf`` parser (there is a pure python
+      fallback that works if pdftotext isn't installed).
 
-    - `pstotext <http://pages.cs.wisc.edu/~ghost/doc/pstotext.htm>`_
+    - `ps2ascii <https://www.ghostscript.com/>`_ (part of ghostscript)
       is required by the ``.ps`` parser.
 
-    - `tesseract-ocr <https://code.google.com/p/tesseract-ocr/>`_
+    - `tesseract-ocr <https://tesseract-ocr.github.io/tessdoc/Installation.html>`_
       is required by the ``.jpg``, ``.png`` and ``.gif`` parser.
 
-    - `sox <http://sox.sourceforge.net/>`_
+    - `sox <https://sox.sourceforge.net/>`_
       is required by the ``.mp3`` and ``.ogg`` parser.
       You need to install ffmpeg, lame, libmad0 and libsox-fmt-mp3,
       before building sox, for these filetypes to work.

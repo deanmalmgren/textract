@@ -19,7 +19,7 @@ _SKIP_NETWORK_TESTS = os.environ.get("SKIP_NETWORK_TESTS", "false").lower() == "
 
 @pytest.mark.skipif(
     not _HAS_SOX,
-    reason="sox is not installed (install via: brew install sox)",
+    reason="sox is not installed (install via your system package manager, e.g. apt/brew/pacman)",
 )
 @pytest.mark.skipif(
     sys.platform == "win32",
