@@ -125,14 +125,22 @@ add support for hitherto unsupported file type ``.abc123``:
   ``textract.parsers.utils.ShellParser`` and implements the
   ``extract(self, filename, **kwargs)`` method.
 
-* add a test file in ``tests/abc123/raw_text.abc123``, run textract on
-  it like this:
+* add a test file in ``tests/abc123/raw_text.abc123`` and generate the
+  expected output. For most file types that use pure Python libraries,
+  run textract on it:
 
   .. code-block:: shell
 
      textract tests/abc123/raw_text.abc123 > tests/abc123/raw_text.txt
 
-  and add the basic test suite by creating
+  For file types that require external tools (PDF OCR, image OCR, PostScript),
+  add the file to ``tests/Makefile`` and run:
+
+  .. code-block:: shell
+
+     cd tests && make
+
+  Then add the basic test suite by creating
   a file called ``tests/test_abc123.py`` with content that looks
   something like this:
 
@@ -196,7 +204,7 @@ Install dependencies::
 
     uv sync
 
-Install system dependencies (macOS)::
+Install system dependencies (macOS, using `Homebrew <https://brew.sh/>`_)::
 
     brew install antiword tesseract ghostscript poppler sox unrtf
 
@@ -204,14 +212,14 @@ Install system dependencies (Ubuntu/Debian)::
 
     apt-get install antiword tesseract-ocr ghostscript poppler-utils sox libsox-fmt-mp3 unrtf
 
-Install system dependencies (Windows)::
+Install system dependencies (Windows, using `Chocolatey <https://chocolatey.org/install>`_)::
 
     choco install tesseract ghostscript sox.portable poppler -y
 
 .. note::
 
    The canonical list of system dependencies is in `.github/actions/setup/action.yml
-   <https://github.com/deanmalmgren/textract/blob/main/.github/actions/setup/action.yml>`_.
+   <https://github.com/deanmalmgren/textract/blob/master/.github/actions/setup/action.yml>`_.
 
 
 Releasing
@@ -219,7 +227,7 @@ Releasing
 
 Releases are handled via GitHub Actions with manual triggering:
 
-1. Push conventional commits (``feat:``, ``fix:``, etc.) to ``main``
+1. Push conventional commits (``feat:``, ``fix:``, etc.) to ``master``
 2. Manually trigger the ``Bump Version`` workflow from GitHub Actions tab
 3. The workflow analyzes commits, bumps version, updates changelog, and creates release
 4. The ``ci_pipeline.yml`` workflow automatically publishes to PyPI on tag creation

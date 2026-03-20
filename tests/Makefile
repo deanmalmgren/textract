@@ -1,9 +1,11 @@
-# This file is used to create standardized text for any textract method that
-# uses any command line utility or third party service (as opposed to a pure
-# python package) for text extraction. These types of extraction methods have
-# made it particularly difficult to maintain reasonably stable testing
-# environments, so this provides a useful workaround to validate that the
-# extraction methods are working correctly across all development environments
+# This file generates test fixtures for textract methods that rely on external
+# command line utilities (tesseract, pdftoppm, ps2ascii). Generated .txt files
+# are committed to git so tests can run without requiring these dependencies.
+#
+# To regenerate fixtures after adding new test files:
+#   1. Install system dependencies (tesseract, poppler-utils, ghostscript)
+#   2. Run: cd tests && make
+#   3. Commit the generated .txt files
 #
 # https://github.com/deanmalmgren/textract/issues/78
 
@@ -21,12 +23,12 @@ clean:
 
 # create OCR output for the multi-page pdf test
 pdf/ocr_text.txt: pdf/ocr_text.pdf
-	pdftoppm $< pdf/pdf-ocr-text
-	cd pdf && for x in pdf-ocr-text*.ppm; do \
+	pdftoppm $< /tmp/pdf-ocr-text
+	for x in /tmp/pdf-ocr-text*; do \
 		tesseract $$x $$(basename $$x .ppm) > /dev/null; \
 	done
-	cat pdf/pdf-ocr-text*.txt > $@
-	rm -f pdf/pdf-ocr-text*
+	cat pdf-ocr-text*.txt > $@
+	rm -f pdf-ocr-text*
 
 ps/raw_text.txt: ps/raw_text.ps
 	ps2ascii $< > $@
@@ -38,7 +40,7 @@ ps/raw_text.txt: ps/raw_text.ps
 	f=$@; g=$${f%%.*}; tesseract $< $${g} > /dev/null
 
 %.txt: %.gif
-	uv run python -c "import sys; import textract; sys.stdout.buffer.write(textract.process('$<'))" > $@
+	f=$@; g=$${f%%.*}; tesseract $< $${g} > /dev/null
 
 %.txt: %.tiff
 	f=$@; g=$${f%%.*}; tesseract $< $${g} > /dev/null
