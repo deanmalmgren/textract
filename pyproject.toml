@@ -27,6 +27,11 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+docs = [
+    "sphinx>=7.0",
+    "sphinx-argparse>=0.4",
+    "sphinx-rtd-theme>=2.0",
+]
 pocketsphinx = ["pocketsphinx>=0.1.15"]
 
 [project.scripts]
@@ -41,11 +46,6 @@ dev = [
     "pyright>=1.1.408",
     "pytest>=7.2.1",
     "ruff>=0.14.13",
-]
-docs = [
-    "sphinx>=7.0",
-    "sphinx-argparse>=0.4",
-    "sphinx-rtd-theme>=2.0",
 ]
 
 [tool.commitizen]

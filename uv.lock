@@ -1954,6 +1954,15 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+docs = [
+    { name = "sphinx", version = "7.4.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
+    { name = "sphinx", version = "8.1.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.10.*'" },
+    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
+    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "sphinx-argparse", version = "0.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
+    { name = "sphinx-argparse", version = "0.5.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
+    { name = "sphinx-rtd-theme" },
+]
 pocketsphinx = [
     { name = "pocketsphinx" },
 ]
@@ -1966,15 +1975,6 @@ dev = [
     { name = "pytest", version = "8.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "pytest", version = "9.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "ruff" },
-]
-docs = [
-    { name = "sphinx", version = "7.4.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
-    { name = "sphinx", version = "8.1.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.10.*'" },
-    { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.11.*'" },
-    { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "sphinx-argparse", version = "0.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
-    { name = "sphinx-argparse", version = "0.5.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
-    { name = "sphinx-rtd-theme" },
 ]
 
 [package.metadata]
@@ -1991,9 +1991,12 @@ requires-dist = [
     { name = "python-pptx", specifier = ">=0.6.18" },
     { name = "six", specifier = ">=1.17.0" },
     { name = "speechrecognition", specifier = ">=3.8.1" },
+    { name = "sphinx", marker = "extra == 'docs'", specifier = ">=7.0" },
+    { name = "sphinx-argparse", marker = "extra == 'docs'", specifier = ">=0.4" },
+    { name = "sphinx-rtd-theme", marker = "extra == 'docs'", specifier = ">=2.0" },
     { name = "xlrd", specifier = ">=1.2.0,<2.0.0" },
 ]
-provides-extras = ["pocketsphinx"]
+provides-extras = ["docs", "pocketsphinx"]
 
 [package.metadata.requires-dev]
 dev = [
@@ -2001,11 +2004,6 @@ dev = [
     { name = "pyright", specifier = ">=1.1.408" },
     { name = "pytest", specifier = ">=7.2.1" },
     { name = "ruff", specifier = ">=0.14.13" },
-]
-docs = [
-    { name = "sphinx", specifier = ">=7.0" },
-    { name = "sphinx-argparse", specifier = ">=0.4" },
-    { name = "sphinx-rtd-theme", specifier = ">=2.0" },
 ]
 
 [[package]]
