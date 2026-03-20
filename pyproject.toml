@@ -68,6 +68,9 @@ pythonVersion = "3.9"
 # Tip: uv run ruff rule RUF100
 target-version = 'py39'
 
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
 [tool.pytest.ini_options]
 filterwarnings = [
     "ignore:aifc was removed in Python 3.13:DeprecationWarning:speech_recognition",

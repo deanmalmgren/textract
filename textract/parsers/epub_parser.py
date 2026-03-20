@@ -1,4 +1,5 @@
 import zipfile
+
 from bs4 import BeautifulSoup
 
 from .utils import BaseParser
