@@ -565,7 +565,7 @@ name = "exceptiongroup"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+    { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/50/79/66800aadf48771f6b62f7eb014e352e5d06856655206165d775e675a02c9/exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219", size = 30371, upload-time = "2025-11-21T23:01:54.787Z" }
 wheels = [
@@ -1942,6 +1942,7 @@ dependencies = [
     { name = "chardet" },
     { name = "docx2txt" },
     { name = "extract-msg" },
+    { name = "lxml" },
     { name = "pdfminer-six", version = "20251107", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "pdfminer-six", version = "20260107", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "pillow", version = "11.3.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
@@ -1983,6 +1984,7 @@ requires-dist = [
     { name = "chardet", specifier = ">=5.2.0" },
     { name = "docx2txt", specifier = ">=0.8" },
     { name = "extract-msg", specifier = ">=0.40.0" },
+    { name = "lxml", specifier = ">=4.9.0" },
     { name = "pdfminer-six", specifier = ">=20221105" },
     { name = "pillow", specifier = ">=9.0.0" },
     { name = "pocketsphinx", marker = "extra == 'pocketsphinx'", specifier = ">=0.1.15" },
