@@ -33,13 +33,6 @@ jobs:
         env:
           SKIP_NETWORK_TESTS: "true"
 
-      - name: Debug HTML tests (Windows xfail visibility)
-        if: runner.os == 'Windows'
-        run: uv run pytest tests/test_html.py --runxfail
-        continue-on-error: true
-        env:
-          SKIP_NETWORK_TESTS: "true"
-
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
