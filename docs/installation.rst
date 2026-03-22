@@ -75,6 +75,20 @@ Install `Chocolatey <https://chocolatey.org/install>`_ then install system packa
     # or with uv
     uv pip install textract
 
+.. note::
+
+    Two parsers are **not supported on Windows**:
+
+    - ``.mp3`` / ``.ogg``: `sox.portable <https://community.chocolatey.org/packages/sox.portable>`_
+      does not include ``libmad``. SoX dynamically loads ``libmad.dll`` for MP3
+      decoding but does not ship it due to patent restrictions — see the
+      `SoX mailing list discussion <https://sourceforge.net/p/sox/mailman/message/27169341/>`_.
+      Use Linux or macOS where ``libsox-fmt-mp3``/``mad`` are available.
+
+    - ``.rtf``: `unrtf <https://www.gnu.org/software/unrtf/>`_ is a GNU project
+      with no Windows port and no Chocolatey package. RTF extraction is only
+      available on Linux (``apt install unrtf``) and macOS (``brew install unrtf``).
+
 FreeBSD
 -------
 

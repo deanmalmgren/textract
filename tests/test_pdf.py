@@ -34,9 +34,10 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
         """Make sure raw text matches from the command line."""
         super().test_raw_text_cli()
 
-    @pytest.mark.skipif(
+    @pytest.mark.xfail(
         platform.system() == "Windows",
-        reason="PDF extraction character encoding differs on Windows",
+        reason="PDF extraction character encoding differs on Windows — under investigation",
+        strict=False,
     )
     def test_raw_text_python(self):
         """Make sure raw text matches from python."""
