@@ -45,6 +45,7 @@ class Parser(BaseParser):
         if tag is not None:
             text = six.text_type(tag)
             text = re.sub(r'(<[^>]+>)', '', text)
+            text = text.replace('\r\n', '\n').replace('\r', '\n')
             text = re.sub(r'\s', ' ', text)
             text = text.strip()
         return text
