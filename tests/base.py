@@ -87,6 +87,43 @@ def _generate_file_diff_message(file1: str, file2: str) -> str:
     return "\n".join(msg_parts)
 
 
+def _generate_bytes_diff_message(actual: bytes, expected: bytes, label: str) -> str:
+    """Generate detailed diff message comparing actual bytes against expected bytes."""
+    lines1 = _normalize_whitespace(actual)
+    lines2 = _normalize_whitespace(expected)
+
+    msg_parts = [f"\nPython output differs from {label}"]
+    msg_parts.append(f"Line counts: {len(lines1)} vs {len(lines2)}")
+
+    min_lines = min(len(lines1), len(lines2))
+    first_diff_idx = None
+    for i in range(min_lines):
+        if lines1[i] != lines2[i]:
+            first_diff_idx = i
+            break
+
+    if first_diff_idx is not None:
+        msg_parts.extend(
+            [
+                f"First difference at line {first_diff_idx + 1}:",
+                f"  Actual:   {lines1[first_diff_idx]!r}",
+                f"  Expected: {lines2[first_diff_idx]!r}",
+            ],
+        )
+    elif len(lines1) != len(lines2):
+        msg_parts.append("Files differ in length (all common lines match)")
+
+    msg_parts.append("\nActual output (first 3 lines):")
+    for i, line in enumerate(lines1[:3]):
+        msg_parts.append(f"  {i + 1}: {line!r}")
+
+    msg_parts.append("\nExpected output (first 3 lines):")
+    for i, line in enumerate(lines2[:3]):
+        msg_parts.append(f"  {i + 1}: {line!r}")
+
+    return "\n".join(msg_parts)
+
+
 class GenericUtilities:
     def get_temp_filename(self, extension=None):
         stream = tempfile.NamedTemporaryFile(delete=False)
@@ -275,9 +312,13 @@ class BaseParserTestCase(GenericUtilities):
 
         result = textract.process(filename, **kwargs)
         expected_content = pathlib.Path(expected_filename).read_bytes()
-        result = self.clean_text(result)
-        expected = self.clean_text(expected_content)
-        assert result == expected
+        cleaned_result = self.clean_text(result)
+        cleaned_expected = self.clean_text(expected_content)
+        if cleaned_result != cleaned_expected:
+            diff_msg = _generate_bytes_diff_message(
+                cleaned_result, cleaned_expected, expected_filename
+            )
+            raise AssertionError(diff_msg)
 
 
 class ShellParserTestCase(BaseParserTestCase):
