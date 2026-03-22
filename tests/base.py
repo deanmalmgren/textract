@@ -43,85 +43,49 @@ def _files_equal_ignore_blank_lines(file1: str, file2: str) -> bool:
     return lines1 == lines2
 
 
+def _format_diff_message(lines1: list[bytes], lines2: list[bytes], header: str) -> str:
+    msg_parts = [f"\n{header}", f"Line counts: {len(lines1)} vs {len(lines2)}"]
+
+    min_lines = min(len(lines1), len(lines2))
+    first_diff_idx = next(
+        (i for i in range(min_lines) if lines1[i] != lines2[i]), None
+    )
+
+    if first_diff_idx is not None:
+        msg_parts.extend([
+            f"First difference at line {first_diff_idx + 1}:",
+            f"  Actual:   {lines1[first_diff_idx]!r}",
+            f"  Expected: {lines2[first_diff_idx]!r}",
+        ])
+    elif len(lines1) != len(lines2):
+        msg_parts.append("Files differ in length (all common lines match)")
+
+    msg_parts.append("\nActual output (first 3 lines):")
+    msg_parts.extend(f"  {i + 1}: {line!r}" for i, line in enumerate(lines1[:3]))
+    msg_parts.append("\nExpected output (first 3 lines):")
+    msg_parts.extend(f"  {i + 1}: {line!r}" for i, line in enumerate(lines2[:3]))
+
+    return "\n".join(msg_parts)
+
+
 def _generate_file_diff_message(file1: str, file2: str) -> str:
     """Generate detailed diff message for file comparison failures."""
     content1 = pathlib.Path(file1).read_bytes()
     content2 = pathlib.Path(file2).read_bytes()
-    lines1 = _normalize_whitespace(content1)
-    lines2 = _normalize_whitespace(content2)
-
-    msg_parts = [f"\nFiles differ: {file1} vs {file2}"]
-
-    # Show line counts
-    msg_parts.append(f"Line counts: {len(lines1)} vs {len(lines2)}")
-
-    # Show first differing line
-    min_lines = min(len(lines1), len(lines2))
-    first_diff_idx = None
-    for i in range(min_lines):
-        if lines1[i] != lines2[i]:
-            first_diff_idx = i
-            break
-
-    if first_diff_idx is not None:
-        msg_parts.extend(
-            [
-                f"First difference at line {first_diff_idx + 1}:",
-                f"  Actual:   {lines1[first_diff_idx]!r}",
-                f"  Expected: {lines2[first_diff_idx]!r}",
-            ],
-        )
-    elif len(lines1) != len(lines2):
-        msg_parts.append("Files differ in length (all common lines match)")
-
-    # Show preview of actual content (first 3 lines)
-    msg_parts.append("\nActual output (first 3 lines):")
-    for i, line in enumerate(lines1[:3]):
-        msg_parts.append(f"  {i + 1}: {line!r}")
-
-    # Show preview of expected content (first 3 lines)
-    msg_parts.append("\nExpected output (first 3 lines):")
-    for i, line in enumerate(lines2[:3]):
-        msg_parts.append(f"  {i + 1}: {line!r}")
-
-    return "\n".join(msg_parts)
+    return _format_diff_message(
+        _normalize_whitespace(content1),
+        _normalize_whitespace(content2),
+        f"Files differ: {file1} vs {file2}",
+    )
 
 
 def _generate_bytes_diff_message(actual: bytes, expected: bytes, label: str) -> str:
     """Generate detailed diff message comparing actual bytes against expected bytes."""
-    lines1 = _normalize_whitespace(actual)
-    lines2 = _normalize_whitespace(expected)
-
-    msg_parts = [f"\nPython output differs from {label}"]
-    msg_parts.append(f"Line counts: {len(lines1)} vs {len(lines2)}")
-
-    min_lines = min(len(lines1), len(lines2))
-    first_diff_idx = None
-    for i in range(min_lines):
-        if lines1[i] != lines2[i]:
-            first_diff_idx = i
-            break
-
-    if first_diff_idx is not None:
-        msg_parts.extend(
-            [
-                f"First difference at line {first_diff_idx + 1}:",
-                f"  Actual:   {lines1[first_diff_idx]!r}",
-                f"  Expected: {lines2[first_diff_idx]!r}",
-            ],
-        )
-    elif len(lines1) != len(lines2):
-        msg_parts.append("Files differ in length (all common lines match)")
-
-    msg_parts.append("\nActual output (first 3 lines):")
-    for i, line in enumerate(lines1[:3]):
-        msg_parts.append(f"  {i + 1}: {line!r}")
-
-    msg_parts.append("\nExpected output (first 3 lines):")
-    for i, line in enumerate(lines2[:3]):
-        msg_parts.append(f"  {i + 1}: {line!r}")
-
-    return "\n".join(msg_parts)
+    return _format_diff_message(
+        _normalize_whitespace(actual),
+        _normalize_whitespace(expected),
+        f"Python output differs from {label}",
+    )
 
 
 class GenericUtilities:
