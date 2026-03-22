@@ -51,7 +51,7 @@ dev = [
 [tool.commitizen]
 changelog_file = "docs/changelog.rst"
 tag_format = "v$version"
-update_changelog_on_bump = false
+update_changelog_on_bump = true
 version = "1.6.4"
 version_files = ["pyproject.toml:^version", "textract/__init__.py:^VERSION"]
 
@@ -72,6 +72,7 @@ target-version = 'py39'
 select = ["E4", "E7", "E9", "F", "I"]
 
 [tool.pytest.ini_options]
+addopts = ["-v", "--tb=short", "-ra"]
 filterwarnings = [
     "ignore:aifc was removed in Python 3.13:DeprecationWarning:speech_recognition",
 ]
