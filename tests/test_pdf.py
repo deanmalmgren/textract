@@ -9,6 +9,7 @@ import pytest
 
 from . import base
 
+_HAS_PDFTOPPM = shutil.which("pdftoppm") is not None
 _HAS_PDFTOTEXT = shutil.which("pdftotext") is not None
 _HAS_TESSERACT = shutil.which("tesseract") is not None
 
@@ -91,24 +92,18 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
         """Make sure pdftotext command line output is correct."""
         self.compare_cli_output(self.raw_text_filename, method="pdftotext")
 
-    @pytest.mark.xfail(
-        platform.system() == "Windows",
-        reason=_WINDOWS_PDF_REASON,
-        strict=False,
-    )
     def test_pdfminer_python(self):
         """Make sure pdfminer python output is correct."""
         self.compare_python_output(self.raw_text_filename, method="pdfminer")
 
-    @pytest.mark.xfail(
-        platform.system() == "Windows",
-        reason=_WINDOWS_PDF_REASON,
-        strict=False,
-    )
     def test_pdfminer_cli(self):
         """Make sure pdfminer command line output is correct."""
         self.compare_cli_output(self.raw_text_filename, method="pdfminer")
 
+    @pytest.mark.skipif(
+        not _HAS_PDFTOPPM,
+        reason="pdftoppm is not installed (part of poppler; required for PDF OCR via tesseract)",
+    )
     @pytest.mark.skipif(
         not _HAS_TESSERACT,
         reason="tesseract-ocr is not installed (see https://tesseract-ocr.github.io/tessdoc/Installation.html)",

@@ -1,4 +1,3 @@
-import os
 import sys
 
 from .utils import ShellParser
@@ -11,16 +10,11 @@ class Parser(ShellParser):
 
     def extract(self, filename, **kwargs):
         if sys.platform == 'win32':
-            tmp = self.temp_filename()
-            try:
-                self.run([
-                    'gswin64c', '-q', '-dNODISPLAY', '-dBATCH', '-dNOPAUSE',
-                    '-sDEVICE=txtwrite', f'-sOutputFile={tmp}', filename,
-                ])
-                with open(tmp, 'rb') as f:
-                    return f.read()
-            finally:
-                os.unlink(tmp)
-        else:
-            stdout, _ = self.run(['ps2ascii', filename])
+            stdout, _ = self.run([
+                'gswin64c', '-q', '-dNODISPLAY', '-dBATCH', '-dNOPAUSE',
+                '-sDEVICE=txtwrite', '-sOutputFile=-', filename,
+            ])
             return stdout
+
+        stdout, _ = self.run(['ps2ascii', filename])
+        return stdout
