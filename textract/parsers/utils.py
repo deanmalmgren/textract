@@ -7,7 +7,6 @@ from __future__ import annotations
 import errno
 import os
 import subprocess
-import sys
 import tempfile
 
 import chardet
@@ -91,7 +90,6 @@ class ShellParser(BaseParser):
                 args,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                shell=sys.platform == 'win32',
             )
         except OSError as e:
             if e.errno == errno.ENOENT:

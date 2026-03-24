@@ -37,12 +37,12 @@ runs:
             Sort-Object Name |
             Select-Object -Last 1 -ExpandProperty FullName
         Add-Content -Path $env:GITHUB_PATH -Value "$gsBin\bin"
-        # ps2ascii is a Unix wrapper around ghostscript — create a cmd equivalent
-        $wrapperDir = "C:\tools\wrappers"
-        New-Item -ItemType Directory -Path $wrapperDir -Force | Out-Null
-        $wrapper = "@echo off`r`ngswin64c.exe -q -dNODISPLAY -dBATCH -dNOPAUSE -sDEVICE=txtwrite -sOutputFile=- %1`r`n"
-        [System.IO.File]::WriteAllText("$wrapperDir\ps2ascii.cmd", $wrapper)
-        Add-Content -Path $env:GITHUB_PATH -Value $wrapperDir
+        # poppler bin not added to PATH by choco — find pdftoppm.exe dynamically
+        $popplerBin = Get-ChildItem "C:\tools" -Recurse -Filter "pdftoppm.exe" -ErrorAction SilentlyContinue |
+            Select-Object -First 1 -ExpandProperty DirectoryName
+        if ($popplerBin) {
+            Add-Content -Path $env:GITHUB_PATH -Value $popplerBin
+        }
 
     - name: Install uv
       uses: astral-sh/setup-uv@v7
