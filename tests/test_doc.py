@@ -13,8 +13,7 @@ _HAS_ANTIWORD = shutil.which("antiword") is not None
 @pytest.mark.skipif(
     not _HAS_ANTIWORD,
     reason=(
-        "antiword is not installed "
-        "(no longer maintained; install via your system package manager, e.g. apt/brew/pacman)"
+        "antiword is not installed (install via your system package manager)"
     ),
 )
 class DocTestCase(base.ShellParserTestCase, unittest.TestCase):

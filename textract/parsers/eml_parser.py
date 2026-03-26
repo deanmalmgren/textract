@@ -1,4 +1,4 @@
-import pathlib
+from pathlib import Path
 from email.parser import Parser as EmailParser
 
 from .utils import BaseParser
@@ -17,7 +17,7 @@ class Parser(BaseParser):
         # TODO: could also potentially grab text/html content instead of
         # only grabbing text/plain content
 
-        with pathlib.Path(filename).open(encoding="utf-8") as stream:
+        with Path(filename).open(encoding="utf-8") as stream:
             parser = EmailParser()
             message = parser.parse(stream)
 

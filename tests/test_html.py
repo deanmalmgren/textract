@@ -1,6 +1,6 @@
 """Tests for HTML file format."""
 
-import pathlib
+from pathlib import Path
 import unittest
 
 from . import base
@@ -13,10 +13,10 @@ class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
 
     def test_table_text_python(self):
         """Make sure tables in html look pretty through python."""
-        d = pathlib.Path(self.get_extension_directory())
+        d = Path(self.get_extension_directory())
         self.compare_python_output(str(d / "tables.html"))
 
     def test_table_text_cli(self):
         """Make sure tables in html look pretty through cli."""
-        d = pathlib.Path(self.get_extension_directory())
+        d = Path(self.get_extension_directory())
         self.compare_cli_output(str(d / "tables.html"))

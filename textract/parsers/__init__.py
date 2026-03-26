@@ -4,7 +4,7 @@ Route the request to the appropriate parser based on file type.
 
 import glob
 import importlib
-import pathlib
+from pathlib import Path
 import re
 
 from textract import exceptions
@@ -37,7 +37,7 @@ def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODI
     """
 
     # make sure the filename exists
-    if not pathlib.Path(filename).exists():
+    if not Path(filename).exists():
         raise exceptions.MissingFileError(filename)
 
     # get the filename extension, which is something like .docx for
@@ -53,7 +53,7 @@ def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODI
             ext = '.' + ext
         ext = ext.lower()
     else:
-        ext = pathlib.Path(filename).suffix.lower()
+        ext = Path(filename).suffix.lower()
 
     # check the EXTENSION_SYNONYMS dictionary
     ext = EXTENSION_SYNONYMS.get(ext, ext)
@@ -88,7 +88,7 @@ def _get_available_extensions():
     extensions = []
 
     # from filenames
-    parsers_dir = pathlib.Path(__file__).parent
+    parsers_dir = Path(__file__).parent
     glob_filename = str(parsers_dir / f"*{_FILENAME_SUFFIX}.py")
     # Escape the path for regex to handle Windows backslashes and special chars
     ext_re = re.compile(

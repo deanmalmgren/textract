@@ -1,4 +1,4 @@
-import pathlib
+from pathlib import Path
 import re
 import shutil
 import subprocess
@@ -36,8 +36,8 @@ def _normalize_whitespace(content: bytes) -> list[bytes]:
 
 def _files_equal_ignore_blank_lines(file1: str, file2: str) -> bool:
     """Compare two files, ignoring blank lines and normalizing whitespace."""
-    content1 = pathlib.Path(file1).read_bytes()
-    content2 = pathlib.Path(file2).read_bytes()
+    content1 = Path(file1).read_bytes()
+    content2 = Path(file2).read_bytes()
     lines1 = _normalize_whitespace(content1)
     lines2 = _normalize_whitespace(content2)
     return lines1 == lines2
@@ -70,8 +70,8 @@ def _format_diff_message(lines1: list[bytes], lines2: list[bytes], header: str) 
 
 def _generate_file_diff_message(file1: str, file2: str) -> str:
     """Generate detailed diff message for file comparison failures."""
-    content1 = pathlib.Path(file1).read_bytes()
-    content2 = pathlib.Path(file2).read_bytes()
+    content1 = Path(file1).read_bytes()
+    content2 = Path(file2).read_bytes()
     return _format_diff_message(
         _normalize_whitespace(content1),
         _normalize_whitespace(content2),
@@ -143,15 +143,15 @@ class BaseParserTestCase(GenericUtilities):
             )
 
     def get_extension_directory(self):
-        return str(pathlib.Path(__file__).resolve().parent / self.extension)
+        return str(Path(__file__).resolve().parent / self.extension)
 
     def get_filename(self, filename_root, default_filename_root):
         if filename_root:
             filename = str(
-                pathlib.Path(self.get_extension_directory())
+                Path(self.get_extension_directory())
                 / f"{filename_root}.{self.extension}",
             )
-            if not pathlib.Path(filename).exists():
+            if not Path(filename).exists():
                 msg = (
                     f'expected filename "{filename}" to exist for testing '
                     f"purposes but it doesn't"
@@ -190,10 +190,10 @@ class BaseParserTestCase(GenericUtilities):
             cleanup=False,
         )
         assert temp_filename is not None
-        content = pathlib.Path(temp_filename).read_bytes()
+        content = Path(temp_filename).read_bytes()
         expected = self.get_standardized_text()
         assert six.b("").join(content.split()) == expected
-        pathlib.Path(temp_filename).unlink()
+        Path(temp_filename).unlink()
 
     def test_standardized_text_python(self):
         """Make sure standardized text matches from python."""
@@ -202,7 +202,7 @@ class BaseParserTestCase(GenericUtilities):
         assert six.b("").join(result.split()) == expected
 
     def get_expected_filename(self, filename, **kwargs):
-        path = pathlib.Path(filename)
+        path = Path(filename)
         basename = path.stem
         if method := kwargs.get("method"):
             basename += f"-m={method}"
@@ -216,7 +216,7 @@ class BaseParserTestCase(GenericUtilities):
 
     def get_standardized_text(self):
         filename = (
-            pathlib.Path(self.get_extension_directory()) / "standardized_text.txt"
+            Path(self.get_extension_directory()) / "standardized_text.txt"
         )
         if filename.exists():
             standardized_text = filename.read_bytes()
@@ -240,7 +240,7 @@ class BaseParserTestCase(GenericUtilities):
         cmd.append(filename)
 
         # Run command and write output to file
-        with pathlib.Path(temp_filename).open("wb") as output_file:
+        with Path(temp_filename).open("wb") as output_file:
             result = subprocess.run(
                 cmd,
                 stdout=output_file,
@@ -254,7 +254,7 @@ class BaseParserTestCase(GenericUtilities):
         )
 
         if cleanup:
-            pathlib.Path(temp_filename).unlink()
+            Path(temp_filename).unlink()
             return None
         return temp_filename
 
@@ -266,16 +266,16 @@ class BaseParserTestCase(GenericUtilities):
         assert temp_filename is not None
         if not _files_equal_ignore_blank_lines(temp_filename, expected_filename):
             diff_msg = _generate_file_diff_message(temp_filename, expected_filename)
-            pathlib.Path(temp_filename).unlink()
+            Path(temp_filename).unlink()
             raise AssertionError(diff_msg)
-        pathlib.Path(temp_filename).unlink()
+        Path(temp_filename).unlink()
 
     def compare_python_output(self, filename, expected_filename=None, **kwargs):
         if expected_filename is None:
             expected_filename = self.get_expected_filename(filename, **kwargs)
 
         result = textract.process(filename, **kwargs)
-        expected_content = pathlib.Path(expected_filename).read_bytes()
+        expected_content = Path(expected_filename).read_bytes()
         cleaned_result = self.clean_text(result)
         cleaned_expected = self.clean_text(expected_content)
         if cleaned_result != cleaned_expected:
@@ -301,5 +301,5 @@ class ShellParserTestCase(BaseParserTestCase):
             spaced_filename,
             self.get_expected_filename(self.raw_text_filename),
         )
-        pathlib.Path(temp_filename).unlink()
-        pathlib.Path(spaced_filename).unlink()
+        Path(temp_filename).unlink()
+        Path(spaced_filename).unlink()

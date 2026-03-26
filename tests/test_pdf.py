@@ -1,6 +1,6 @@
 """Tests for PDF file format."""
 
-import pathlib
+from pathlib import Path
 import platform
 import shutil
 import unittest
@@ -114,7 +114,7 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
     )
     def test_tesseract_cli(self):
         """Confirm pdf extraction with tesseract."""
-        d = pathlib.Path(self.get_extension_directory())
+        d = Path(self.get_extension_directory())
         self.compare_cli_output(
             str(d / "ocr_text.pdf"),
             expected_filename=str(d / "ocr_text.txt"),
@@ -127,6 +127,6 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
     )
     def test_two_column(self):
         """Preserve two column layout in extraction."""
-        d = pathlib.Path(self.get_extension_directory())
+        d = Path(self.get_extension_directory())
         filename = str(d / "two_column.pdf")
         self.compare_python_output(filename, layout=True)

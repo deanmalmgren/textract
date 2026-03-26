@@ -1,4 +1,4 @@
-import pathlib
+from pathlib import Path
 import xml.etree.ElementTree as ET
 import zipfile
 
@@ -12,7 +12,7 @@ class Parser(BaseParser):
     def extract(self, filename, **kwargs):
         # Inspiration from
         # https://github.com/odoo/odoo/blob/master/addons/document/odt2txt.py
-        with pathlib.Path(filename).open("rb") as stream:
+        with Path(filename).open("rb") as stream:
             zip_stream = zipfile.ZipFile(stream)
             self.content = ET.fromstring(zip_stream.read("content.xml"))
         return self.to_string()

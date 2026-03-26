@@ -1,5 +1,5 @@
 import json
-import pathlib
+from pathlib import Path
 
 import six
 
@@ -13,7 +13,7 @@ class Parser(BaseParser):
     """
 
     def extract(self, filename, **kwargs):
-        with pathlib.Path(filename).open(encoding="utf-8") as raw:
+        with Path(filename).open(encoding="utf-8") as raw:
             deserialized_json = json.load(raw)
         return self.get_text(deserialized_json)
 

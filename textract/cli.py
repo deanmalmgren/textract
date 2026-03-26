@@ -4,7 +4,7 @@ Use argparse to handle command-line arguments.
 
 import argparse
 import encodings
-import pathlib
+from pathlib import Path
 import pkgutil
 import sys
 
@@ -97,7 +97,7 @@ def _get_available_encodings():
     Inspiration from http://stackoverflow.com/a/3824405/564709
     """
     available_encodings = set(encodings.aliases.aliases.values())
-    paths = [str(pathlib.Path(encodings.__file__).parent)]
+    paths = [str(Path(encodings.__file__).parent)]
     available_encodings.update(
         modname for importer, modname, ispkg in pkgutil.walk_packages(path=paths)
     )

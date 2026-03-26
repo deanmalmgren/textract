@@ -1,6 +1,6 @@
 """Tests for JPG image format."""
 
-import pathlib
+from pathlib import Path
 import shutil
 import unittest
 
@@ -24,7 +24,7 @@ class JpgTestCase(base.ShellParserTestCase, unittest.TestCase):
         """Generate JPEG version of file."""
         temp_filename = self.get_temp_filename()
         jpeg_filename = temp_filename + ".jpeg"
-        pathlib.Path(temp_filename).unlink()
+        Path(temp_filename).unlink()
         shutil.copyfile(contents_filename, jpeg_filename)
         return jpeg_filename
 
@@ -35,7 +35,7 @@ class JpgTestCase(base.ShellParserTestCase, unittest.TestCase):
             jpeg_filename,
             self.get_expected_filename(self.raw_text_filename),
         )
-        pathlib.Path(jpeg_filename).unlink()
+        Path(jpeg_filename).unlink()
 
     def test_jpeg_synonym_python(self):
         """Make sure .jpeg synonym works in python."""
@@ -44,4 +44,4 @@ class JpgTestCase(base.ShellParserTestCase, unittest.TestCase):
             jpeg_filename,
             self.get_expected_filename(self.raw_text_filename),
         )
-        pathlib.Path(jpeg_filename).unlink()
+        Path(jpeg_filename).unlink()

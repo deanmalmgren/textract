@@ -1,5 +1,5 @@
 import os
-import pathlib
+from pathlib import Path
 
 import speech_recognition as sr
 
@@ -30,7 +30,7 @@ class Parser(ShellParser):
             try:
                 speech = self.extract(temp_filename, method, **kwargs)
             finally:  # make sure temp_file is deleted
-                pathlib.Path(temp_filename).unlink()
+                Path(temp_filename).unlink()
         else:
             r = sr.Recognizer()
 

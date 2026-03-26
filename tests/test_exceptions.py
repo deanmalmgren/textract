@@ -1,9 +1,13 @@
-import pathlib
+from pathlib import Path
 import subprocess
 import unittest
 import uuid
 
 import pytest
+
+import textract
+from textract.exceptions import ExtensionNotSupported, MissingFileError
+from textract.parsers import exceptions, utils
 
 from . import base
 
@@ -22,22 +26,20 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
             check=False,
         )
         assert result.returncode == 1
-        pathlib.Path(filename).unlink()
+        Path(filename).unlink()
 
     def test_unsupported_extension_python(self):
         """Make sure unsupported extension raises the correct error."""
         filename = self.get_temp_filename(extension="extension")
-        import textract
-        from textract.exceptions import ExtensionNotSupported
 
         with pytest.raises(ExtensionNotSupported):
             textract.process(filename)
-        pathlib.Path(filename).unlink()
+        Path(filename).unlink()
 
     def test_missing_filename_cli(self):
         """Make sure missing files exits with non-zero status."""
         filename = self.get_temp_filename()
-        pathlib.Path(filename).unlink()
+        Path(filename).unlink()
         result = subprocess.run(
             ["textract", filename],
             stderr=subprocess.DEVNULL,
@@ -48,17 +50,13 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
     def test_missing_filename_python(self):
         """Make sure missing files raise the correct error."""
         filename = self.get_temp_filename()
-        pathlib.Path(filename).unlink()
-        import textract
-        from textract.exceptions import MissingFileError
+        Path(filename).unlink()
 
         with pytest.raises(MissingFileError):
             textract.process(filename)
 
     def test_shell_parser_run(self):
         """Get a useful error message when a dependency is missing."""
-        from textract.parsers import exceptions, utils
-
         parser = utils.ShellParser()
         try:
             # There shouldn't be a command on the path matching a random uuid

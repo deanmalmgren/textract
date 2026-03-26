@@ -1,4 +1,4 @@
-import pathlib
+from pathlib import Path
 import re
 
 import six
@@ -123,7 +123,7 @@ class Parser(BaseParser):
         return soup
 
     def extract(self, filename, **kwargs):
-        with pathlib.Path(filename).open("rb") as stream:
+        with Path(filename).open("rb") as stream:
             soup = BeautifulSoup(stream, "lxml")
 
         # Convert tables to ASCII ones

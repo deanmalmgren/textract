@@ -1,6 +1,6 @@
 """Custom exceptions for textract."""
 
-import pathlib
+from pathlib import Path
 
 # Command not found exit code
 _NOT_INSTALLED_EXIT_CODE = 127
@@ -46,7 +46,7 @@ class MissingFileError(CommandLineError):
     def __init__(self, filename: str) -> None:
         """Initialize with missing file path."""
         self.filename = filename
-        p = pathlib.Path(filename)
+        p = Path(filename)
         self.root = p.stem
         self.ext = p.suffix
 
