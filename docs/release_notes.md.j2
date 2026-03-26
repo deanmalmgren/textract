@@ -1,0 +1,23 @@
+{% for entry in tree %}
+
+{% set entry_title -%}
+{{ entry.version }}{% if entry.date %} ({{ entry.date }}){% endif -%}
+{%- endset %}
+{{ entry_title }}
+{{ "=" * entry_title|length }}
+{% for change_key, changes in entry.changes.items() %}
+
+{% if change_key -%}
+{{ change_key }}
+{{ "-" * change_key|length }}
+{% endif %}
+
+{% for change in changes %}
+{% if change.scope %}
+- **{{ change.scope }}**: {{ change.message }}
+{% elif change.message %}
+- {{ change.message }}
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endfor %}

@@ -51,6 +51,7 @@ dev = [
 [tool.commitizen]
 changelog_file = "docs/changelog.rst"
 tag_format = "v$version"
+template = "docs/changelog.j2"
 update_changelog_on_bump = true
 version = "1.6.4"
 version_files = ["pyproject.toml:^version", "textract/__init__.py:^VERSION"]

@@ -41,12 +41,16 @@ jobs:
           path: test-results.xml
 
   release:
-    name: Create GitHub Release
+    name: Release and Publish
     needs: [test]
     if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
     runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/textract
     permissions:
       contents: write
+      id-token: write  # IMPORTANT: mandatory for PyPI trusted publishing
     steps:
       - uses: actions/checkout@v6
         with:
@@ -56,29 +60,12 @@ jobs:
         with:
           python-version: "3.14"
       - name: Generate release notes
-        run: uv run cz changelog --incremental --file-name body.md
+        run: uv run cz changelog --incremental --file-name body.md --template docs/release_notes.md.j2
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           body_path: body.md
           tag_name: ${{ github.ref_name }}
-
-  publish:
-    name: Publish to PyPI
-    needs: [test]
-    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
-    runs-on: ubuntu-latest
-    environment:
-      name: pypi
-      url: https://pypi.org/p/textract
-    permissions:
-      id-token: write  # IMPORTANT: mandatory for PyPI trusted publishing
-    steps:
-      - uses: actions/checkout@v6
-      - name: Install uv and Python
-        uses: astral-sh/setup-uv@v7
-        with:
-          python-version: "3.14"
       - name: Build Package
         run: uv build
       - name: Publish to PyPI
