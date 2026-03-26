@@ -53,18 +53,13 @@ jobs:
       id-token: write  # IMPORTANT: mandatory for PyPI trusted publishing
     steps:
       - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          fetch-tags: true
       - uses: astral-sh/setup-uv@v7
         with:
           python-version: "3.14"
-      - name: Generate release notes
-        run: uv run cz changelog --incremental --file-name body.md --template docs/release_notes.md.j2
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          body_path: body.md
+          generate_release_notes: true
           tag_name: ${{ github.ref_name }}
       - name: Build Package
         run: uv build

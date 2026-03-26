@@ -225,22 +225,24 @@ Install system dependencies (Windows, using `Chocolatey <https://chocolatey.org/
 Releasing
 ---------
 
-Releases use `commitizen <https://commitizen-tools.github.io/commitizen/>`_ with a local-bump workflow:
+Releases use `commitizen <https://commitizen-tools.github.io/commitizen/>`_ with a local-bump workflow.
+Commits on ``main`` must follow `conventional commits <https://www.conventionalcommits.org/>`_
+(``feat:``, ``fix:``, ``docs:``, etc.) for the version bump and changelog to be generated correctly.
 
-1. Ensure commits on ``main`` follow `conventional commits <https://www.conventionalcommits.org/>`_ (``feat:``, ``fix:``, ``docs:``, etc.)
-2. Run ``cz bump`` locally — this updates version files, appends to ``docs/changelog.rst``, and creates a signed tag:
-
-   .. code-block:: bash
-
-       uv run cz bump
-       git push --follow-tags
-
-3. CI automatically runs tests, creates a GitHub Release with the changelog increment, and publishes to PyPI.
-
-To preview the next version and changelog without committing:
+**Preview** the next version and changelog before bumping:
 
 .. code-block:: bash
 
     uv run cz bump --dry-run
     uv run cz changelog --dry-run --incremental
+
+**Bump** when ready — this updates version files, appends to ``docs/changelog.rst`` using
+``docs/changelog.j2``, commits, and creates a tag:
+
+.. code-block:: bash
+
+    uv run cz bump
+    git push --follow-tags
+
+CI then runs tests, creates a GitHub Release with auto-generated notes from merged PRs, and publishes to PyPI.
 

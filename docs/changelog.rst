@@ -18,14 +18,12 @@ track version numbers, where backwards incompatible changes
 
   * fixing dependency declarations (`#162`_ by `@lillypad`_)
 
-
 1.6.1
 -------------------
 
 * several bug fixes, including:
 
   * fixing the readthedocs build (`#150`_)
-
 
 1.6.0
 -------------------
@@ -98,14 +96,12 @@ track version numbers, where backwards incompatible changes
   * updated tests for ``.html``, ``.ogg``, ``.wav``, and ``.mp3`` file types to
     be consistent with more recent versions of the underlying packages.
 
-
 1.3.0
 -----
 
 * support for ``.rtf`` files (`#84`_)
 
 * support for ``.msg`` files (`#87`_ and `#17`_ by `@anthonygarvan`_)
-
 
 1.2.0
 -----
@@ -127,7 +123,6 @@ track version numbers, where backwards incompatible changes
 
   * standardizing testing environment to be compatible with different versions
     of third-party command line tools (`#78`_)
-
 
 1.1.0
 -----
@@ -156,7 +151,6 @@ track version numbers, where backwards incompatible changes
 
   * improved html output with reduced whitespace around inline
     elements in output text (`#58`_ by `@eiotec`_)
-
 
 1.0.0
 -----
@@ -189,7 +183,6 @@ track version numbers, where backwards incompatible changes
 
   * including support for Docker-based testing (`#46`_ by `@ShawnMilo`_)
 
-
 0.5.1
 -----
 
@@ -198,7 +191,6 @@ track version numbers, where backwards incompatible changes
   * documentation fixes
 
   * shell commands hanging on large files (`#33`_)
-
 
 0.5.0
 -----
@@ -224,7 +216,6 @@ track version numbers, where backwards incompatible changes
 
   * cleaned up implementation of extension parsers to avoid magic
 
-
 0.4.0
 -----
 
@@ -235,7 +226,6 @@ track version numbers, where backwards incompatible changes
 * automated the documentation for the python package using
   sphinx-apidoc in docs/Makefile (`#9`_)
 
-
 0.3.0
 -----
 
@@ -243,7 +233,6 @@ track version numbers, where backwards incompatible changes
 
 * fixed installation bug with not properly including requirements
   files in the manifest
-
 
 0.2.0
 -----
@@ -258,12 +247,10 @@ track version numbers, where backwards incompatible changes
 
   * fixing tests to make sure the work properly on travis-ci
 
-
 0.1.0
 -----
 
 * Initial release, support for ``.docx`` and ``.pptx``
-
 
 .. list of contributors that are linked to above. putting links here
 .. to make the text above relatively clean
@@ -291,7 +278,6 @@ track version numbers, where backwards incompatible changes
 .. _@ShawnMilo: https://github.com/ShawnMilo
 .. _@sirex: https://github.com/sirex
 .. _@suned: https://github.com/suned
-
 
 .. list of issues that have been resolved. putting links here to make
 .. the text above relatively clean
