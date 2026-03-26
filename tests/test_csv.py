@@ -1,7 +1,6 @@
-import unittest
 
 from . import base
 
 
-class CsvTestCase(base.BaseParserTestCase, unittest.TestCase):
+class CsvTestCase(base.BaseParserTests):
     extension = 'csv'

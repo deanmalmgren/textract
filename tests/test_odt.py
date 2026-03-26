@@ -1,7 +1,6 @@
-import unittest
 
 from . import base
 
 
-class OdtTestCase(base.BaseParserTestCase, unittest.TestCase):
+class OdtTestCase(base.BaseParserTests):
     extension = 'odt'

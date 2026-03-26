@@ -1,7 +1,6 @@
 """Tests for PNG image format."""
 
 import shutil
-import unittest
 
 import pytest
 
@@ -14,7 +13,7 @@ _HAS_TESSERACT = shutil.which("tesseract") is not None
     not _HAS_TESSERACT,
     reason="tesseract-ocr is not installed (see https://tesseract-ocr.github.io/tessdoc/Installation.html)",
 )
-class PngTestCase(base.ShellParserTestCase, unittest.TestCase):
+class PngTestCase(base.ShellParserTests):
     """Test text extraction from PNG images."""
 
     extension = "png"

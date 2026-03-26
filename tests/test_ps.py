@@ -3,7 +3,6 @@
 import platform
 import shutil
 import sys
-import unittest
 
 import pytest
 
@@ -26,7 +25,7 @@ _WINDOWS_PS_REASON = "PS text layout may differ between gswin64c txtwrite and ps
     reason=_WINDOWS_PS_REASON,
     strict=False,
 )
-class PsTestCase(base.ShellParserTestCase, unittest.TestCase):
+class PsTestCase(base.ShellParserTests):
     """Test text extraction from PostScript files."""
 
     extension = "ps"

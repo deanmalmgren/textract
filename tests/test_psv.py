@@ -1,7 +1,6 @@
-import unittest
 
 from . import base
 
 
-class PsvTestCase(base.BaseParserTestCase, unittest.TestCase):
+class PsvTestCase(base.BaseParserTests):
     extension = 'psv'

@@ -1,6 +1,5 @@
 from pathlib import Path
 import subprocess
-import unittest
 import uuid
 
 import pytest
@@ -12,7 +11,7 @@ from textract.parsers import exceptions, utils
 from . import base
 
 
-class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
+class ExceptionTestCase(base.GenericUtilities):
     """This class contains a bunch of tests to make sure that textract
     fails in expected ways.
     """

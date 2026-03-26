@@ -2,12 +2,11 @@
 
 from pathlib import Path
 import shutil
-import unittest
 
 from . import base
 
 
-class TxtTestCase(base.BaseParserTestCase, unittest.TestCase):
+class TxtTestCase(base.BaseParserTests):
     """Test text extraction from TXT files."""
 
     extension = "txt"

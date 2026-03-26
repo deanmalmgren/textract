@@ -1,7 +1,6 @@
-import unittest
 
 from . import base
 
 
-class TsvTestCase(base.BaseParserTestCase, unittest.TestCase):
+class TsvTestCase(base.BaseParserTests):
     extension = 'tsv'

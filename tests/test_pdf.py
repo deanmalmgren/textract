@@ -2,7 +2,6 @@
 
 import platform
 import shutil
-import unittest
 import unittest.mock
 from pathlib import Path
 
@@ -43,8 +42,8 @@ _METHOD_PARAMS = [
 ]
 
 # Reusable decorator for the five default-method tests inherited from base.
-# A class-level mark cannot be used because the explicit-method tests (pdfminer,
-# tesseract) must not carry the Windows xfail.
+# A class-level mark cannot be used because the explicit-method tests
+# (pdfminer, tesseract) must not carry the Windows xfail.
 _windows_xfail = pytest.mark.xfail(
     platform.system() == "Windows",
     reason=_WINDOWS_PDF_REASON,
@@ -52,7 +51,7 @@ _windows_xfail = pytest.mark.xfail(
 )
 
 
-class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
+class PdfTestCase(base.ShellParserTests):
     """Test text extraction from PDF files."""
 
     extension = "pdf"

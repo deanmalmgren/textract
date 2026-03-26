@@ -1,7 +1,6 @@
 """Tests for OGG audio format."""
 
 import shutil
-import unittest
 
 import pytest
 
@@ -14,7 +13,7 @@ _HAS_SOX = shutil.which("sox") is not None
     not _HAS_SOX,
     reason="sox is not installed (install via your system package manager, e.g. apt/brew/pacman)",
 )
-class OggTestCase(base.ShellParserTestCase, unittest.TestCase):
+class OggTestCase(base.ShellParserTests):
     """Test text extraction from OGG audio files."""
 
     extension = "ogg"

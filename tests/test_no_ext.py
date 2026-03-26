@@ -1,12 +1,11 @@
 """Tests for processing files without extensions."""
 
 from pathlib import Path
-import unittest
 
 import textract
 
 
-class NoExtTestCase(unittest.TestCase):
+class NoExtTestCase:
     """Test extraction from files without file extensions."""
 
     def test_docx(self):

@@ -1,12 +1,11 @@
 """Tests for HTML file format."""
 
 from pathlib import Path
-import unittest
 
 from . import base
 
 
-class HtmlTestCase(base.BaseParserTestCase, unittest.TestCase):
+class HtmlTestCase(base.BaseParserTests):
     """Test text extraction from HTML files."""
 
     extension = "html"

@@ -1,7 +1,6 @@
 """Tests for DOC file format."""
 
 import shutil
-import unittest
 
 import pytest
 
@@ -16,7 +15,7 @@ _HAS_ANTIWORD = shutil.which("antiword") is not None
         "antiword is not installed (install via your system package manager)"
     ),
 )
-class DocTestCase(base.ShellParserTestCase, unittest.TestCase):
+class DocTestCase(base.ShellParserTests):
     """Test text extraction from DOC files."""
 
     extension = "doc"

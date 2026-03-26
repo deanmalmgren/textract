@@ -4,7 +4,6 @@ import importlib.util
 import os
 import shutil
 import sys
-import unittest
 
 import pytest
 
@@ -26,7 +25,7 @@ _SKIP_NETWORK_TESTS = os.environ.get("SKIP_NETWORK_TESTS", "false").lower() == "
     reason="sox.portable on Windows lacks libmad for MP3 decoding",
     strict=True,
 )
-class Mp3TestCase(base.ShellParserTestCase, unittest.TestCase):
+class Mp3TestCase(base.ShellParserTests):
     """Test text extraction from MP3 audio files."""
 
     extension = "mp3"

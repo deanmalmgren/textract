@@ -1,7 +1,6 @@
-import unittest
 
 from . import base
 
 
-class XlsTestCase(base.BaseParserTestCase, unittest.TestCase):
+class XlsTestCase(base.BaseParserTests):
     extension = 'xls'

@@ -1,7 +1,6 @@
-import unittest
 
 from . import base
 
 
-class MsgTestCase(base.BaseParserTestCase, unittest.TestCase):
+class MsgTestCase(base.BaseParserTests):
     extension = 'msg'

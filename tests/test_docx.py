@@ -1,12 +1,11 @@
 """Tests for DOCX file format."""
 
 from pathlib import Path
-import unittest
 
 from . import base
 
 
-class DocxTestCase(base.BaseParserTestCase, unittest.TestCase):
+class DocxTestCase(base.BaseParserTests):
     """Test text extraction from DOCX (Word) files."""
 
     extension = "docx"

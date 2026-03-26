@@ -117,10 +117,10 @@ class GenericUtilities:
         return six.b("\n").join(cleaned_lines)
 
 
-class BaseParserTestCase(GenericUtilities):
+class BaseParserTests(GenericUtilities):
     """Collect standardized tests for every BaseParser.
 
-    This BaseParserTestCase object provides a set of standard tests
+    This BaseParserTests object provides a set of standard tests
     that should be run for each file format parser.
     """
 
@@ -134,13 +134,6 @@ class BaseParserTestCase(GenericUtilities):
     raw_text_filename_root = ""
     standardized_text_filename_root = ""
     unicode_text_filename_root = ""
-
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-        if not self.extension:
-            raise NotImplementedError(
-                "need to specify `extension` class attribute on test case",
-            )
 
     def get_extension_directory(self):
         return str(Path(__file__).resolve().parent / self.extension)
@@ -285,7 +278,7 @@ class BaseParserTestCase(GenericUtilities):
             raise AssertionError(diff_msg)
 
 
-class ShellParserTestCase(BaseParserTestCase):
+class ShellParserTests(BaseParserTests):
     """Collect standardized tests for every ShellParser.
 
     This BaseParserTestCase object extends BaseParserTestCase with tests
