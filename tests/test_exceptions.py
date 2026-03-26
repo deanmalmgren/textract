@@ -58,10 +58,7 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
     def test_shell_parser_run(self):
         """Get a useful error message when a dependency is missing."""
         parser = utils.ShellParser()
-        try:
+        with pytest.raises(exceptions.ShellError) as exc_info:
             # There shouldn't be a command on the path matching a random uuid
             parser.run([str(uuid.uuid4())])
-        except exceptions.ShellError as e:
-            assert e.is_not_installed()
-        else:
-            raise AssertionError("Expected ShellError")
+        assert exc_info.value.is_not_installed()
