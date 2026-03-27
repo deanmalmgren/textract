@@ -9,38 +9,58 @@ from . import base
 
 _HAS_TESSERACT = shutil.which("tesseract") is not None
 
-
-@pytest.mark.skipif(
+pytestmark = pytest.mark.skipif(
     not _HAS_TESSERACT,
     reason="tesseract-ocr is not installed (see https://tesseract-ocr.github.io/tessdoc/Installation.html)",
 )
-class JpgTestCase(base.ShellParserTests):
-    """Test text extraction from JPG images."""
 
-    extension = "jpg"
+_EXTENSION = "jpg"
 
-    def get_jpeg_filename(self, contents_filename):
-        """Generate JPEG version of file."""
-        temp_filename = self.get_temp_filename()
-        jpeg_filename = temp_filename + ".jpeg"
-        Path(temp_filename).unlink()
-        shutil.copyfile(contents_filename, jpeg_filename)
-        return jpeg_filename
 
-    def test_jpeg_synonym_cli(self):
-        """Make sure .jpeg synonym works in cli."""
-        jpeg_filename = self.get_jpeg_filename(self.raw_text_filename)
-        self.compare_cli_output(
-            jpeg_filename,
-            self.get_expected_filename(self.raw_text_filename),
-        )
-        Path(jpeg_filename).unlink()
+def _get_jpeg_filename(contents_filename: str) -> str:
+    """Return a .jpeg copy of contents_filename (caller must delete)."""
+    temp_filename = base.get_temp_filename()
+    jpeg_filename = temp_filename + ".jpeg"
+    Path(temp_filename).unlink()
+    shutil.copyfile(contents_filename, jpeg_filename)
+    return jpeg_filename
 
-    def test_jpeg_synonym_python(self):
-        """Make sure .jpeg synonym works in python."""
-        jpeg_filename = self.get_jpeg_filename(self.raw_text_filename)
-        self.compare_python_output(
-            jpeg_filename,
-            self.get_expected_filename(self.raw_text_filename),
-        )
-        Path(jpeg_filename).unlink()
+
+def test_raw_text_cli():
+    base.run_raw_text_cli(_EXTENSION)
+
+
+def test_raw_text_python():
+    base.run_raw_text_python(_EXTENSION)
+
+
+def test_standardized_text_cli():
+    base.run_standardized_text_cli(_EXTENSION)
+
+
+def test_standardized_text_python():
+    base.run_standardized_text_python(_EXTENSION)
+
+
+def test_filename_spaces():
+    base.run_filename_spaces(_EXTENSION)
+
+
+def test_jpeg_synonym_cli():
+    """Make sure .jpeg synonym works in cli."""
+    raw_filename = base.raw_text_filename(_EXTENSION)
+    jpeg_filename = _get_jpeg_filename(raw_filename)
+    try:
+        base.compare_cli_output(jpeg_filename, base.get_expected_filename(raw_filename))
+    finally:
+        Path(jpeg_filename).unlink(missing_ok=True)
+
+
+def test_jpeg_synonym_python():
+    """Make sure .jpeg synonym works in python."""
+    raw_filename = base.raw_text_filename(_EXTENSION)
+    jpeg_filename = _get_jpeg_filename(raw_filename)
+    try:
+        base.compare_python_output(jpeg_filename, base.get_expected_filename(raw_filename))
+    finally:
+        Path(jpeg_filename).unlink(missing_ok=True)
