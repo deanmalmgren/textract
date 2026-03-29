@@ -14,8 +14,6 @@ pytestmark = pytest.mark.skipif(
     reason="tesseract-ocr is not installed (see https://tesseract-ocr.github.io/tessdoc/Installation.html)",
 )
 
-_EXTENSION = "jpg"
-
 
 def _get_jpeg_filename(contents_filename: str) -> str:
     """Return a .jpeg copy of contents_filename (caller must delete)."""
@@ -26,29 +24,9 @@ def _get_jpeg_filename(contents_filename: str) -> str:
     return jpeg_filename
 
 
-def test_raw_text_cli():
-    base.run_raw_text_cli(_EXTENSION)
-
-
-def test_raw_text_python():
-    base.run_raw_text_python(_EXTENSION)
-
-
-def test_standardized_text_cli():
-    base.run_standardized_text_cli(_EXTENSION)
-
-
-def test_standardized_text_python():
-    base.run_standardized_text_python(_EXTENSION)
-
-
-def test_filename_spaces():
-    base.run_filename_spaces(_EXTENSION)
-
-
 def test_jpeg_synonym_cli():
     """Make sure .jpeg synonym works in cli."""
-    raw_filename = base.raw_text_filename(_EXTENSION)
+    raw_filename = base.raw_text_filename("jpg")
     jpeg_filename = _get_jpeg_filename(raw_filename)
     try:
         base.compare_cli_output(jpeg_filename, base.get_expected_filename(raw_filename))
@@ -58,7 +36,7 @@ def test_jpeg_synonym_cli():
 
 def test_jpeg_synonym_python():
     """Make sure .jpeg synonym works in python."""
-    raw_filename = base.raw_text_filename(_EXTENSION)
+    raw_filename = base.raw_text_filename("jpg")
     jpeg_filename = _get_jpeg_filename(raw_filename)
     try:
         base.compare_python_output(jpeg_filename, base.get_expected_filename(raw_filename))

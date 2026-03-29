@@ -77,7 +77,7 @@ class ShellError(CommandLineError):
     (meaning the command failed).
     """
 
-    def __init__(self, command: str, exit_code: int, stdout: str, stderr: str) -> None:
+    def __init__(self, command: str, exit_code: int, stdout: bytes, stderr: bytes) -> None:
         """Initialize with command execution details."""
         self.command = command
         self.exit_code = exit_code

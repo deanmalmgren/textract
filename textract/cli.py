@@ -7,6 +7,7 @@ import encodings
 from pathlib import Path
 import pkgutil
 import sys
+from typing import cast
 
 import argcomplete
 import six
@@ -18,7 +19,7 @@ from .parsers import DEFAULT_ENCODING, _get_available_extensions
 class AddToNamespaceAction(argparse.Action):
     """This adds KEY,VALUE arbitrary pairs to the argparse.Namespace object"""
     def __call__(self, parser, namespace, values, option_string=None):
-        key, val = values.strip().split('=')
+        key, val = cast(str, values).strip().split('=')
         if hasattr(namespace, key):
             parser.error((
                 'Duplicate specification of the key "%(key)s" with --option.'
@@ -34,7 +35,7 @@ class FileType(argparse.FileType):
                 string = sys.stdin.fileno()
             elif 'w' in self._mode:
                 string = sys.stdout.fileno()
-        return super(FileType, self).__call__(string)
+        return super(FileType, self).__call__(string)  # type: ignore[arg-type]
 
 
 # This function is necessary to enable autodocumentation of the script
@@ -53,7 +54,7 @@ def get_parser():
     # define the command line options here
     parser.add_argument(
         'filename', help='Filename to extract text.',
-    ).completer = argcomplete.completers.FilesCompleter
+    ).completer = argcomplete.completers.FilesCompleter  # type: ignore[attr-defined]
     parser.add_argument(
         '-e', '--encoding', type=str, default=DEFAULT_ENCODING,
         choices=_get_available_encodings(),

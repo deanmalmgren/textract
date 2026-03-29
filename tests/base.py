@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 from pathlib import Path
 import re
+from typing import Any
 import shutil
 import subprocess
 import tempfile
@@ -138,7 +141,7 @@ def _standardized_text_filename(extension: str, root: str = "") -> str:
     return _get_filename(extension, root, "standardized_text")
 
 
-def get_expected_filename(filename: str, **kwargs: object) -> str:
+def get_expected_filename(filename: str, **kwargs: Any) -> str:
     path = Path(filename)
     basename = path.stem
     if method := kwargs.get("method"):
@@ -160,7 +163,7 @@ def _get_standardized_text(extension: str) -> bytes:
 # ---------------------------------------------------------------------------
 
 def _assert_successful_textract(
-    filename: str, cleanup: bool = True, **kwargs: object
+    filename: str, cleanup: bool = True, **kwargs: Any
 ) -> str | None:
     temp_filename = get_temp_filename()
     cmd = ["textract"]
@@ -188,7 +191,7 @@ def _assert_successful_textract(
 
 
 def compare_cli_output(
-    filename: str, expected_filename: str | None = None, **kwargs: object
+    filename: str, expected_filename: str | None = None, **kwargs: Any
 ) -> None:
     """Run textract CLI on filename and assert output matches expected_filename.
 
@@ -212,7 +215,7 @@ def compare_cli_output(
 
 
 def compare_python_output(
-    filename: str, expected_filename: str | None = None, **kwargs: object
+    filename: str, expected_filename: str | None = None, **kwargs: Any
 ) -> None:
     """Call textract.process() on filename and assert output matches expected_filename.
 

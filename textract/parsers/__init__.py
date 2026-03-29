@@ -69,9 +69,6 @@ def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODI
         filetype_module = importlib.import_module(
             rel_module, 'textract.parsers'
         )
-    except ImportError:
-        raise exceptions.ExtensionNotSupported(ext)
-        filetype_module = importlib.import_module(rel_module, "textract.parsers")
     except ImportError as err:
         raise exceptions.ExtensionNotSupported(ext) from err
 
