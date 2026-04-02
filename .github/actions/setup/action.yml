@@ -28,21 +28,17 @@ runs:
       shell: pwsh
       run: |
         choco install tesseract ghostscript sox.portable poppler -y
-        # tesseract not shimmed by choco — https://community.chocolatey.org/packages/tesseract
+        # Add tesseract installation directory to PATH
         Add-Content -Path $env:GITHUB_PATH -Value "C:\Program Files\Tesseract-OCR"
-        # ghostscript bin not added to PATH (chocolatey-community/chocolatey-coreteampackages#1330)
-        # https://community.chocolatey.org/packages/ghostscript
-        # version number is in the path, so find it dynamically
+        # For ghostscript, the version number is in the path, so find it dynamically
         $gsBin = Get-ChildItem "C:\Program Files\gs" -Directory |
             Sort-Object Name |
             Select-Object -Last 1 -ExpandProperty FullName
         Add-Content -Path $env:GITHUB_PATH -Value "$gsBin\bin"
-        # poppler bin not added to PATH by choco — find pdftoppm.exe dynamically
+        # Add poppler to PATH — find pdftoppm.exe dynamically
         $popplerBin = Get-ChildItem "C:\tools" -Recurse -Filter "pdftoppm.exe" -ErrorAction SilentlyContinue |
             Select-Object -First 1 -ExpandProperty DirectoryName
-        if ($popplerBin) {
-            Add-Content -Path $env:GITHUB_PATH -Value $popplerBin
-        }
+        Add-Content -Path $env:GITHUB_PATH -Value $popplerBin
 
     - name: Install uv
       uses: astral-sh/setup-uv@v7
