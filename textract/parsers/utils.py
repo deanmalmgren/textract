@@ -96,7 +96,7 @@ class ShellParser(BaseParser):
                 # File not found.
                 # This is equivalent to getting exitcode 127 from sh
                 raise exceptions.ShellError(
-                    ' '.join(args), 127, b'', b'',
+                    ' '.join(args), 127, '', '',
                 )
             raise  # Reraise the last exception unmodified
 
