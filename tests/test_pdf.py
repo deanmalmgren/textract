@@ -18,28 +18,46 @@ _HAS_PDFTOPPM = shutil.which("pdftoppm") is not None
 _HAS_PDFTOTEXT = shutil.which("pdftotext") is not None
 _HAS_TESSERACT = shutil.which("tesseract") is not None
 
-_NO_PDFTOPPM_REASON = "pdftoppm is not installed (part of poppler; required for PDF OCR via tesseract)"
+_NO_PDFTOPPM_REASON = (
+    "pdftoppm is not installed (part of poppler; required for PDF OCR via tesseract)"
+)
 _NO_PDFTOTEXT_REASON = "pdftotext is not installed (part of poppler; install via your system package manager, e.g. apt/brew/pacman)"
 _NO_TESSERACT_REASON = "tesseract-ocr is not installed (see https://tesseract-ocr.github.io/tessdoc/Installation.html)"
-_LINUX_TESSERACT_REASON = "Tesseract OCR output varies by version; Linux CI has different output"
+_LINUX_TESSERACT_REASON = (
+    "Tesseract OCR output varies by version; Linux CI has different output"
+)
 _WINDOWS_PDF_REASON = "PDF content may differ on Windows"
 
-_pdftotext_marks = [
-    pytest.mark.skipif(not _HAS_PDFTOTEXT, reason=_NO_PDFTOTEXT_REASON),
-    pytest.mark.xfail(platform.system() == "Windows", reason=_WINDOWS_PDF_REASON, strict=False),
-]
-_tesseract_marks = [
-    pytest.mark.skipif(not _HAS_PDFTOPPM, reason=_NO_PDFTOPPM_REASON),
-    pytest.mark.skipif(not _HAS_TESSERACT, reason=_NO_TESSERACT_REASON),
-    pytest.mark.skipif(platform.system() == "Linux", reason=_LINUX_TESSERACT_REASON),
-]
+def _first_skip_reason(*conditions: tuple[bool, str]) -> str:
+    """Return the reason string for the first failing condition, or empty string."""
+    for condition, reason in conditions:
+        if condition:
+            return reason
+    return ""
 
-# Each method with its source fixture.  Expected output is auto-derived as
-# "<stem>-m=<method>.txt" by get_expected_filename() in base.py.
-_METHOD_PARAMS = [
-    pytest.param("pdftotext", "raw_text.pdf", marks=_pdftotext_marks),
-    pytest.param("pdfminer", "raw_text.pdf"),
-    pytest.param("tesseract", "ocr_text.pdf", marks=_tesseract_marks),
+
+# Each method with its source fixture and an optional skip reason.
+# Expected output is auto-derived as "<stem>-m=<method>.txt" by
+# get_expected_filename() in base.py.
+_METHOD_CASES: list[tuple[str, str, str]] = [
+    (
+        "pdftotext",
+        "raw_text.pdf",
+        _first_skip_reason(
+            (not _HAS_PDFTOTEXT, _NO_PDFTOTEXT_REASON),
+            (platform.system() == "Windows", _WINDOWS_PDF_REASON),
+        ),
+    ),
+    ("pdfminer", "raw_text.pdf", ""),
+    (
+        "tesseract",
+        "ocr_text.pdf",
+        _first_skip_reason(
+            (not _HAS_PDFTOPPM, _NO_PDFTOPPM_REASON),
+            (not _HAS_TESSERACT, _NO_TESSERACT_REASON),
+            (platform.system() == "Linux", _LINUX_TESSERACT_REASON),
+        ),
+    ),
 ]
 
 # Reusable decorator for the five default-method tests inherited from base.
@@ -77,17 +95,23 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
     def test_standardized_text_python(self):
         super().test_standardized_text_python()
 
-    @pytest.mark.parametrize("method,filename", _METHOD_PARAMS)
-    def test_method_python(self, method, filename):
+    def test_method_python(self):
         """Extract text via Python API for each supported method."""
         d = Path(self.get_extension_directory())
-        self.compare_python_output(str(d / filename), method=method)
+        for method, filename, skip_reason in _METHOD_CASES:
+            with self.subTest(method=method, filename=filename):
+                if skip_reason:
+                    self.skipTest(skip_reason)
+                self.compare_python_output(str(d / filename), method=method)
 
-    @pytest.mark.parametrize("method,filename", _METHOD_PARAMS)
-    def test_method_cli(self, method, filename):
+    def test_method_cli(self):
         """Extract text via CLI for each supported method."""
         d = Path(self.get_extension_directory())
-        self.compare_cli_output(str(d / filename), method=method)
+        for method, filename, skip_reason in _METHOD_CASES:
+            with self.subTest(method=method, filename=filename):
+                if skip_reason:
+                    self.skipTest(skip_reason)
+                self.compare_cli_output(str(d / filename), method=method)
 
     @pytest.mark.skipif(
         platform.system() in {"Linux", "Windows"},

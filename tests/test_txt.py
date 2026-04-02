@@ -1,8 +1,8 @@
 """Tests for TXT file format."""
 
-from pathlib import Path
 import shutil
 import unittest
+from pathlib import Path
 
 from . import base
 

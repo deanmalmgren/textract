@@ -4,4 +4,4 @@ from . import base
 
 
 class EmlTestCase(base.BaseParserTestCase, unittest.TestCase):
-    extension = 'eml'
+    extension = "eml"

@@ -20,12 +20,12 @@ class Parser(ShellParser):
     with Rich (US English) for best results
     """
 
-    def extract(self, filename, method='', **kwargs):
-        speech = ''
+    def extract(self, filename, method="", **kwargs):
+        speech = ""
 
         # convert to wav, if not already .wav
         base, ext = os.path.splitext(filename)
-        if ext != '.wav':
+        if ext != ".wav":
             temp_filename = self.convert_to_wav(filename)
             try:
                 speech = self.extract(temp_filename, method, **kwargs)
@@ -45,14 +45,14 @@ class Parser(ShellParser):
                 else:
                     raise UnknownMethod(method)
             except LookupError:  # audio is not understandable
-                speech = ''
+                speech = ""
             except sr.UnknownValueError:
-                speech = ''
+                speech = ""
             except sr.RequestError:  # API unavailable or network error
                 speech = ""
 
             # add a newline, to make output cleaner
-            speech += '\n'
+            speech += "\n"
 
         return speech
 

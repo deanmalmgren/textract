@@ -26,13 +26,13 @@ class BaseParser:
         text from a filename. This method can return either a
         byte-encoded string or unicode.
         """
-        raise NotImplementedError('must be overwritten by child classes')
+        raise NotImplementedError("must be overwritten by child classes")
 
     def encode(self, text, encoding):
         """Encode the ``text`` in ``encoding`` byte-encoding. This ignores
         code points that can't be encoded in byte-strings.
         """
-        return text.encode(encoding, 'ignore')
+        return text.encode(encoding, "ignore")
 
     def process(self, filename, input_encoding, output_encoding="utf8", **kwargs):
         """Process ``filename`` and encode byte-string with ``encoding``. This
@@ -60,7 +60,7 @@ class BaseParser:
 
         # empty text? nothing to decode
         if not text:
-            return u''
+            return ""
 
         # use the provided encoding
         if input_encoding:
@@ -68,7 +68,7 @@ class BaseParser:
 
         # use chardet to automatically detect the encoding text if no encoding is provided
         result = chardet.detect(text)
-        encoding = result['encoding'] if result['confidence'] > 0.80 else 'utf8'
+        encoding = result["encoding"] if result["confidence"] > 0.80 else "utf8"
         return text.decode(encoding, errors="replace")
 
 
@@ -96,7 +96,10 @@ class ShellParser(BaseParser):
                 # File not found.
                 # This is equivalent to getting exitcode 127 from sh
                 raise exceptions.ShellError(
-                    ' '.join(args), 127, '', '',
+                    " ".join(args),
+                    127,
+                    b"",
+                    b"",
                 )
             raise  # Reraise the last exception unmodified
 
@@ -107,14 +110,16 @@ class ShellParser(BaseParser):
         # if pipe is busted, raise an error (unlike Fabric)
         if pipe.returncode != 0:
             raise exceptions.ShellError(
-                ' '.join(args), pipe.returncode, stdout, stderr,
+                " ".join(args),
+                pipe.returncode,
+                stdout,
+                stderr,
             )
 
         return stdout, stderr
 
     def temp_filename(self):
-        """Return a unique tempfile name.
-        """
+        """Return a unique tempfile name."""
         # TODO: it would be nice to get this to behave more like a
         # context so we can make sure these temporary files are
         # removed, regardless of whether an error occurs or the

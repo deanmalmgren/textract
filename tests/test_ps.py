@@ -9,7 +9,7 @@ import pytest
 
 from . import base
 
-if sys.platform == 'win32':
+if sys.platform == "win32":
     _CAN_PROCESS_PS = shutil.which("gswin64c") is not None
 else:
     _CAN_PROCESS_PS = shutil.which("ps2ascii") is not None

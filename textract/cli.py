@@ -4,9 +4,9 @@ Use argparse to handle command-line arguments.
 
 import argparse
 import encodings
-from pathlib import Path
 import pkgutil
 import sys
+from pathlib import Path
 
 import argcomplete
 import six
@@ -17,23 +17,25 @@ from .parsers import DEFAULT_ENCODING, _get_available_extensions
 
 class AddToNamespaceAction(argparse.Action):
     """This adds KEY,VALUE arbitrary pairs to the argparse.Namespace object"""
-    def __call__(self, parser, namespace, values, option_string=None):
-        key, val = values.strip().split('=')
+
+    def __call__(self, parser, namespace, values: str, option_string=None):
+        key, val = values.strip().split("=")
         if hasattr(namespace, key):
-            parser.error((
-                'Duplicate specification of the key "%(key)s" with --option.'
-            ) % locals())
+            parser.error(
+                ('Duplicate specification of the key "%(key)s" with --option.')
+                % locals()
+            )
         setattr(namespace, key, val)
 
 
 # Fix FileType to honor 'b' flag, see: https://bugs.python.org/issue14156
 class FileType(argparse.FileType):
     def __call__(self, string):
-        if string == '-' and six.PY3:
-            if 'r' in self._mode:
-                string = sys.stdin.fileno()
-            elif 'w' in self._mode:
-                string = sys.stdout.fileno()
+        if string == "-" and six.PY3:
+            if "r" in self._mode:
+                string = str(sys.stdin.fileno())
+            elif "w" in self._mode:
+                string = str(sys.stdout.fileno())
         return super(FileType, self).__call__(string)
 
 
@@ -45,43 +47,60 @@ def get_parser():
 
     # initialize the parser
     parser = argparse.ArgumentParser(
-        description=(
-            'Command line tool for extracting text from any document. '
-        ) % locals(),
+        description=("Command line tool for extracting text from any document. ")
+        % locals(),
     )
 
     # define the command line options here
+    filename_action = parser.add_argument(
+        "filename",
+        help="Filename to extract text.",
+    )
+    filename_action.completer = argcomplete.completers.FilesCompleter  # type: ignore[attr-defined]
     parser.add_argument(
-        'filename', help='Filename to extract text.',
-    ).completer = argcomplete.completers.FilesCompleter
-    parser.add_argument(
-        '-e', '--encoding', type=str, default=DEFAULT_ENCODING,
+        "-e",
+        "--encoding",
+        type=str,
+        default=DEFAULT_ENCODING,
         choices=_get_available_encodings(),
-        help='Specify the encoding of the output.',
+        help="Specify the encoding of the output.",
     )
     parser.add_argument(
-        '--extension', type=str, default=None,
+        "--extension",
+        type=str,
+        default=None,
         choices=_get_available_extensions(),
-        help='Specify the extension of the file.',
+        help="Specify the extension of the file.",
     )
     parser.add_argument(
-        '-m', '--method', default='',
-        help='Specify a method of extraction for formats that support it',
+        "-m",
+        "--method",
+        default="",
+        help="Specify a method of extraction for formats that support it",
     )
     parser.add_argument(
-        '-o', '--output', type=FileType('wb'), default='-',
-        help='Output raw text in this file',
+        "-o",
+        "--output",
+        type=FileType("wb"),
+        default="-",
+        help="Output raw text in this file",
     )
     parser.add_argument(
-        '-O', '--option', type=str, action=AddToNamespaceAction,
+        "-O",
+        "--option",
+        type=str,
+        action=AddToNamespaceAction,
         help=(
-            'Add arbitrary options to various parsers of the form '
-            'KEYWORD=VALUE. A full list of available KEYWORD options is '
-            'available at http://bit.ly/textract-options'
+            "Add arbitrary options to various parsers of the form "
+            "KEYWORD=VALUE. A full list of available KEYWORD options is "
+            "available at http://bit.ly/textract-options"
         ),
     )
     parser.add_argument(
-        '-v', '--version', action='version', version='%(prog)s '+VERSION,
+        "-v",
+        "--version",
+        action="version",
+        version="%(prog)s " + VERSION,
     )
 
     # enable autocompletion with argcomplete

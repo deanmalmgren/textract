@@ -1,7 +1,7 @@
 """Tests for processing files without extensions."""
 
-from pathlib import Path
 import unittest
+from pathlib import Path
 
 import textract
 

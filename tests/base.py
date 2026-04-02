@@ -1,8 +1,8 @@
-from pathlib import Path
 import re
 import shutil
 import subprocess
 import tempfile
+from pathlib import Path
 
 import textract
 
@@ -45,16 +45,16 @@ def _format_diff_message(lines1: list[bytes], lines2: list[bytes], header: str) 
     msg_parts = [f"\n{header}", f"Line counts: {len(lines1)} vs {len(lines2)}"]
 
     min_lines = min(len(lines1), len(lines2))
-    first_diff_idx = next(
-        (i for i in range(min_lines) if lines1[i] != lines2[i]), None
-    )
+    first_diff_idx = next((i for i in range(min_lines) if lines1[i] != lines2[i]), None)
 
     if first_diff_idx is not None:
-        msg_parts.extend([
-            f"First difference at line {first_diff_idx + 1}:",
-            f"  Actual:   {lines1[first_diff_idx]!r}",
-            f"  Expected: {lines2[first_diff_idx]!r}",
-        ])
+        msg_parts.extend(
+            [
+                f"First difference at line {first_diff_idx + 1}:",
+                f"  Actual:   {lines1[first_diff_idx]!r}",
+                f"  Expected: {lines2[first_diff_idx]!r}",
+            ]
+        )
     elif len(lines1) != len(lines2):
         msg_parts.append("Files differ in length (all common lines match)")
 
@@ -213,9 +213,7 @@ class BaseParserTestCase(GenericUtilities):
         return option
 
     def get_standardized_text(self):
-        filename = (
-            Path(self.get_extension_directory()) / "standardized_text.txt"
-        )
+        filename = Path(self.get_extension_directory()) / "standardized_text.txt"
         if filename.exists():
             standardized_text = filename.read_bytes()
         else:
@@ -223,9 +221,7 @@ class BaseParserTestCase(GenericUtilities):
         return b"".join(standardized_text.split())
 
     def assertSuccessfulCommand(self, command):
-        assert subprocess.call(command, shell=True) == 0, (
-            f"COMMAND FAILED: {command}"
-        )
+        assert subprocess.call(command, shell=True) == 0, f"COMMAND FAILED: {command}"
 
     def assertSuccessfulTextract(self, filename, cleanup=True, **kwargs):
         option = self.get_cli_options(**kwargs)

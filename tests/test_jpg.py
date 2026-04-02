@@ -1,8 +1,8 @@
 """Tests for JPG image format."""
 
-from pathlib import Path
 import shutil
 import unittest
+from pathlib import Path
 
 import pytest
 

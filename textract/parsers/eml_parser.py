@@ -1,5 +1,5 @@
-from pathlib import Path
 from email.parser import Parser as EmailParser
+from pathlib import Path
 
 from .utils import BaseParser
 

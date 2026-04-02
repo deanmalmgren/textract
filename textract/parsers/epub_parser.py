@@ -10,16 +10,16 @@ class Parser(BaseParser):
 
     def extract(self, filename, **kwargs):
         book = zipfile.ZipFile(filename)
-        result = ''
+        result = ""
         for text_name in self.__epub_sections(book):
             if not text_name.endswith("html"):
                 continue
-            soup = BeautifulSoup(book.open(text_name), features='lxml')
-            html_content_tags = ['title', 'p', 'h1', 'h2', 'h3', 'h4']
+            soup = BeautifulSoup(book.open(text_name), features="lxml")
+            html_content_tags = ["title", "p", "h1", "h2", "h3", "h4"]
             for child in soup.find_all(html_content_tags):
                 inner_text = child.text.strip() if child.text else ""
                 if inner_text:
-                    result += inner_text + '\n'
+                    result += inner_text + "\n"
         return result
 
     def __epub_sections(self, book):

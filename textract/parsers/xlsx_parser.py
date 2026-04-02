@@ -5,8 +5,7 @@ from .utils import BaseParser
 
 
 class Parser(BaseParser):
-    """Extract text from Excel files (.xls/xlsx).
-    """
+    """Extract text from Excel files (.xls/xlsx)."""
 
     def extract(self, filename, **kwargs):
         workbook = xlrd.open_workbook(filename)

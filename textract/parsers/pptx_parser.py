@@ -4,8 +4,7 @@ from .utils import BaseParser
 
 
 class Parser(BaseParser):
-    """Extract text from pptx file using python-pptx
-    """
+    """Extract text from pptx file using python-pptx"""
 
     def extract(self, filename, **kwargs):
         presentation = pptx.Presentation(filename)

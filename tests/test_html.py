@@ -1,7 +1,7 @@
 """Tests for HTML file format."""
 
-from pathlib import Path
 import unittest
+from pathlib import Path
 
 from . import base
 

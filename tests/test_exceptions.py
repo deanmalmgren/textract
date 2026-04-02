@@ -1,7 +1,7 @@
-from pathlib import Path
 import subprocess
 import unittest
 import uuid
+from pathlib import Path
 
 import pytest
 

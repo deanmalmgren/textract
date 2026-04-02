@@ -12,12 +12,14 @@ class CommandLineError(Exception):
     errors occur on the command line to provide a useful command line
     interface.
     """
+
     def render(self, msg: str) -> str:
         return msg % vars(self)
 
 
 class ExtensionNotSupported(CommandLineError):
     """This error is raised with unsupported extensions"""
+
     def __init__(self, ext: str) -> None:
         """Initialize with unsupported extension."""
         self.ext = ext
@@ -30,12 +32,14 @@ class ExtensionNotSupported(CommandLineError):
         self.available_extensions_str = ", ".join(available_extensions)
 
     def __str__(self):
-        return self.render((
-            'The filename extension %(ext)s is not yet supported by\n'
-            'textract. Please suggest this filename extension here:\n\n'
-            '    https://github.com/deanmalmgren/textract/issues\n\n'
-            'Available extensions include: %(available_extensions_str)s\n'
-        ))
+        return self.render(
+            (
+                "The filename extension %(ext)s is not yet supported by\n"
+                "textract. Please suggest this filename extension here:\n\n"
+                "    https://github.com/deanmalmgren/textract/issues\n\n"
+                "Available extensions include: %(available_extensions_str)s\n"
+            )
+        )
 
 
 class MissingFileError(CommandLineError):
@@ -51,10 +55,12 @@ class MissingFileError(CommandLineError):
         self.ext = p.suffix
 
     def __str__(self):
-        return self.render((
-            'The file "%(filename)s" can not be found.\n'
-            'Is this the right path/to/file/you/want/to/extract%(ext)s?'
-        ))
+        return self.render(
+            (
+                'The file "%(filename)s" can not be found.\n'
+                "Is this the right path/to/file/you/want/to/extract%(ext)s?"
+            )
+        )
 
 
 class UnknownMethod(CommandLineError):
@@ -67,9 +73,9 @@ class UnknownMethod(CommandLineError):
         self.method = method
 
     def __str__(self):
-        return self.render((
-            'The method "%(method)s" can not be found for this filetype.'
-        ))
+        return self.render(
+            ('The method "%(method)s" can not be found for this filetype.')
+        )
 
 
 class ShellError(CommandLineError):
@@ -77,7 +83,9 @@ class ShellError(CommandLineError):
     (meaning the command failed).
     """
 
-    def __init__(self, command: str, exit_code: int, stdout: bytes, stderr: bytes) -> None:
+    def __init__(
+        self, command: str, exit_code: int, stdout: bytes, stderr: bytes
+    ) -> None:
         """Initialize with command execution details."""
         self.command = command
         self.exit_code = exit_code

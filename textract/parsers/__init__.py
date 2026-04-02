@@ -4,8 +4,8 @@ Route the request to the appropriate parser based on file type.
 
 import glob
 import importlib
-from pathlib import Path
 import re
+from pathlib import Path
 
 from textract import exceptions
 
@@ -23,14 +23,20 @@ EXTENSION_SYNONYMS = {
 # default encoding that is returned by the process method. specify it
 # here so the default is used on both the process function and also by
 # the command line interface
-DEFAULT_OUTPUT_ENCODING = 'utf_8'
-DEFAULT_ENCODING = 'utf_8'
+DEFAULT_OUTPUT_ENCODING = "utf_8"
+DEFAULT_ENCODING = "utf_8"
 
 # filename format
-_FILENAME_SUFFIX = '_parser'
+_FILENAME_SUFFIX = "_parser"
 
 
-def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODING, extension=None, **kwargs):
+def process(
+    filename,
+    input_encoding=None,
+    output_encoding=DEFAULT_OUTPUT_ENCODING,
+    extension=None,
+    **kwargs,
+):
     """This is the core function used for extracting text. It routes the
     ``filename`` to the appropriate parser and returns the extracted
     text as a byte-string encoded with ``encoding``.
@@ -49,8 +55,8 @@ def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODI
     if extension:
         ext = extension
         # check if the extension has the leading .
-        if not ext.startswith('.'):
-            ext = '.' + ext
+        if not ext.startswith("."):
+            ext = "." + ext
         ext = ext.lower()
     else:
         ext = Path(filename).suffix.lower()
@@ -66,11 +72,6 @@ def process(filename, input_encoding=None, output_encoding=DEFAULT_OUTPUT_ENCODI
     # If we can't import the module, the file extension isn't currently
     # supported
     try:
-        filetype_module = importlib.import_module(
-            rel_module, 'textract.parsers'
-        )
-    except ImportError:
-        raise exceptions.ExtensionNotSupported(ext)
         filetype_module = importlib.import_module(rel_module, "textract.parsers")
     except ImportError as err:
         raise exceptions.ExtensionNotSupported(ext) from err
