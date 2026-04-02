@@ -3,8 +3,8 @@ build-backend = "uv_build"
 requires = ["uv_build>=0.9.7,<2"]
 
 [project]
-# TODO: Add Kyle as maintainer?
 authors = [{name = "Dean Malmgren", email = "dean.malmgren@datascopeanalytics.com"}]
+maintainers = [{name = "Kyle King", email = "dev.act.kyle@gmail.com"}]
 description = "extract text from any document. no muss. no fuss. "
 license = {text = "MIT"}
 name = "textract"
