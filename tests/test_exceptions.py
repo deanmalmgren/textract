@@ -20,21 +20,24 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
     def test_unsupported_extension_cli(self):
         """Make sure unsupported extension exits with non-zero status."""
         filename = self.get_temp_filename(extension="extension")
-        result = subprocess.run(
-            ["textract", filename],
-            stderr=subprocess.DEVNULL,
-            check=False,
-        )
-        assert result.returncode == 1
-        Path(filename).unlink()
+        try:
+            result = subprocess.run(
+                ["textract", filename],
+                stderr=subprocess.DEVNULL,
+                check=False,
+            )
+            assert result.returncode == 1
+        finally:
+            Path(filename).unlink(missing_ok=True)
 
     def test_unsupported_extension_python(self):
         """Make sure unsupported extension raises the correct error."""
         filename = self.get_temp_filename(extension="extension")
-
-        with pytest.raises(ExtensionNotSupported):
-            textract.process(filename)
-        Path(filename).unlink()
+        try:
+            with pytest.raises(ExtensionNotSupported):
+                textract.process(filename)
+        finally:
+            Path(filename).unlink(missing_ok=True)
 
     def test_missing_filename_cli(self):
         """Make sure missing files exits with non-zero status."""

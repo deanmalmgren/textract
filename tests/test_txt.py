@@ -16,5 +16,7 @@ class TxtTestCase(base.BaseParserTestCase, unittest.TestCase):
         """Make sure that text from extensionless files is treated as txt."""
         temp_filename = self.get_temp_filename()
         shutil.copyfile(self.raw_text_filename, temp_filename)
-        self.compare_python_output(temp_filename, self.raw_text_filename)
-        Path(temp_filename).unlink()
+        try:
+            self.compare_python_output(temp_filename, self.raw_text_filename)
+        finally:
+            Path(temp_filename).unlink(missing_ok=True)

@@ -74,6 +74,7 @@ select = ["E4", "E7", "E9", "F", "I"]
 
 [tool.pytest.ini_options]
 addopts = ["-v", "--tb=short", "-ra"]
+python_classes = ["*TestCase", "Test*"]
 filterwarnings = [
     "ignore:aifc was removed in Python 3.13:DeprecationWarning:speech_recognition",
 ]

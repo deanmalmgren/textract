@@ -4,8 +4,6 @@ import shutil
 import subprocess
 import tempfile
 
-import six
-
 import textract
 
 
@@ -114,7 +112,7 @@ class GenericUtilities:
             )
             if processed:
                 cleaned_lines.append(processed)
-        return six.b("\n").join(cleaned_lines)
+        return b"\n".join(cleaned_lines)
 
 
 class BaseParserTestCase(GenericUtilities):
@@ -192,14 +190,14 @@ class BaseParserTestCase(GenericUtilities):
         assert temp_filename is not None
         content = Path(temp_filename).read_bytes()
         expected = self.get_standardized_text()
-        assert six.b("").join(content.split()) == expected
+        assert b"".join(content.split()) == expected
         Path(temp_filename).unlink()
 
     def test_standardized_text_python(self):
         """Make sure standardized text matches from python."""
         result = textract.process(self.standardized_text_filename)
         expected = self.get_standardized_text()
-        assert six.b("").join(result.split()) == expected
+        assert b"".join(result.split()) == expected
 
     def get_expected_filename(self, filename, **kwargs):
         path = Path(filename)
@@ -210,7 +208,7 @@ class BaseParserTestCase(GenericUtilities):
 
     def get_cli_options(self, **kwargs):
         option = ""
-        for key, val in six.iteritems(kwargs):
+        for key, val in kwargs.items():
             option += f"--{key}={val} "
         return option
 
@@ -221,8 +219,8 @@ class BaseParserTestCase(GenericUtilities):
         if filename.exists():
             standardized_text = filename.read_bytes()
         else:
-            standardized_text = six.b("the quick brown fox jumps over the lazy dog")
-        return six.b("").join(standardized_text.split())
+            standardized_text = b"the quick brown fox jumps over the lazy dog"
+        return b"".join(standardized_text.split())
 
     def assertSuccessfulCommand(self, command):
         assert subprocess.call(command, shell=True) == 0, (
@@ -297,9 +295,11 @@ class ShellParserTestCase(BaseParserTestCase):
         temp_filename = spaced_filename = self.get_temp_filename()
         spaced_filename += " a filename with spaces." + self.extension
         shutil.copyfile(self.raw_text_filename, spaced_filename)
-        self.compare_cli_output(
-            spaced_filename,
-            self.get_expected_filename(self.raw_text_filename),
-        )
-        Path(temp_filename).unlink()
-        Path(spaced_filename).unlink()
+        try:
+            self.compare_cli_output(
+                spaced_filename,
+                self.get_expected_filename(self.raw_text_filename),
+            )
+        finally:
+            Path(temp_filename).unlink(missing_ok=True)
+            Path(spaced_filename).unlink(missing_ok=True)
