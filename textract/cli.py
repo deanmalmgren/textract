@@ -5,11 +5,9 @@ Use argparse to handle command-line arguments.
 import argparse
 import encodings
 import pkgutil
-import sys
 from pathlib import Path
 
 import argcomplete
-import six
 
 from . import VERSION
 from .parsers import DEFAULT_ENCODING, _get_available_extensions
@@ -26,17 +24,6 @@ class AddToNamespaceAction(argparse.Action):
                 % locals()
             )
         setattr(namespace, key, val)
-
-
-# Fix FileType to honor 'b' flag, see: https://bugs.python.org/issue14156
-class FileType(argparse.FileType):
-    def __call__(self, string):
-        if string == "-" and six.PY3:
-            if "r" in self._mode:
-                string = str(sys.stdin.fileno())
-            elif "w" in self._mode:
-                string = str(sys.stdout.fileno())
-        return super(FileType, self).__call__(string)
 
 
 # This function is necessary to enable autodocumentation of the script
@@ -81,7 +68,7 @@ def get_parser():
     parser.add_argument(
         "-o",
         "--output",
-        type=FileType("wb"),
+        type=argparse.FileType("wb"),
         default="-",
         help="Output raw text in this file",
     )
