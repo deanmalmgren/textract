@@ -1,5 +1,3 @@
-import six
-
 from .utils import ShellParser
 
 
@@ -9,5 +7,5 @@ class Parser(ShellParser):
     def extract(self, filename, **kwargs):
         # http://superuser.com/a/243089/126633
         stdout, stderr = self.run(["unrtf", "--text", filename])
-        splitter = six.b("-") * 17 + six.b("\n")
+        splitter = b"-" * 17 + b"\n"
         return stdout.split(splitter, 1)[-1]

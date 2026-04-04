@@ -1,7 +1,6 @@
 import re
 from pathlib import Path
 
-import six
 from bs4 import BeautifulSoup
 
 from .utils import BaseParser
@@ -63,7 +62,7 @@ class Parser(BaseParser):
         """Used to filter text elements that have invisible text on the page."""
         return not (
             element.name in self._disallowed_names
-            or re.match(r"<!--.*-->", six.text_type(element.extract()))
+            or re.match(r"<!--.*-->", str(element.extract()))
         )
 
     def _inline(self, element) -> bool:
@@ -76,7 +75,7 @@ class Parser(BaseParser):
         """Looks for any possible text within given tag."""
         text = ""
         if tag is not None:
-            text = six.text_type(tag)
+            text = str(tag)
             text = re.sub(r"(<[^>]+>)", "", text)
             text = text.replace("\r\n", "\n").replace("\r", "\n")
             text = re.sub(r"\s", " ", text)

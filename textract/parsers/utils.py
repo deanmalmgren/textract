@@ -10,7 +10,6 @@ import subprocess
 import tempfile
 
 import chardet
-import six
 
 from textract import exceptions
 
@@ -55,7 +54,7 @@ class BaseParser:
         """
         # only decode byte strings into unicode if it hasn't already
         # been done by a subclass
-        if isinstance(text, six.text_type):
+        if isinstance(text, str):
             return text
 
         # empty text? nothing to decode

@@ -2,7 +2,6 @@ import os
 import shutil
 from tempfile import mkdtemp
 
-import six
 from pdfminer.high_level import extract_text
 
 from textract.exceptions import ShellError, UnknownMethod
@@ -60,6 +59,6 @@ class Parser(ShellParser):
                 page_path = os.path.join(temp_dir, page)
                 page_content = TesseractParser().extract(page_path, **kwargs)
                 contents.append(page_content)
-            return six.b("").join(contents)
+            return b"".join(contents)
         finally:
             shutil.rmtree(temp_dir)

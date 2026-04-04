@@ -1,5 +1,4 @@
 import extract_msg
-import six
 
 from .utils import BaseParser
 
@@ -12,7 +11,7 @@ def ensure_bytes(string) -> bytes:
 
     This helper functon makes sure, that bytes type is returned.
     """
-    if isinstance(string, six.string_types):
+    if isinstance(string, str):
         return string.encode("utf-8")
     if string is None:
         return b""
@@ -24,4 +23,4 @@ class Parser(BaseParser):
 
     def extract(self, filename, **kwargs):
         m = extract_msg.Message(filename)
-        return ensure_bytes(m.subject) + six.b("\n\n") + ensure_bytes(m.body)
+        return ensure_bytes(m.subject) + b"\n\n" + ensure_bytes(m.body)
