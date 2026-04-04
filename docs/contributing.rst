@@ -41,7 +41,7 @@ Quick start
 
    .. code-block:: bash
 
-        uv sync
+        make sync
         uv run pytest
 
 3. Install system dependencies for your platform. See the
@@ -192,7 +192,12 @@ Development Setup
 
 Install dependencies::
 
-    uv sync
+    make sync
+
+This runs ``uv sync`` and, on macOS, re-signs any compiled C extensions that
+may have an invalid code signature due to Python 3.14 build tooling. See
+`apple codesigning and scikit-build-core <https://github.com/scikit-build/scikit-build-core/issues>`_
+for upstream context.
 
 Install system dependencies (macOS, using `Homebrew <https://brew.sh/>`_)::
 

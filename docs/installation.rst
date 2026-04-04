@@ -63,6 +63,31 @@ First install XQuartz and system packages, then install textract from PyPI:
     homebrew, you may also need to install the python
     development header files for textract to properly install.
 
+.. note::
+
+    **pocketsphinx and Python 3.14+ on macOS**: No prebuilt wheel exists yet
+    for Python 3.14 on macOS ARM64. When installed from source,
+    scikit-build-core's post-build steps invalidate the code signature, causing
+    macOS to kill the process with ``SIGKILL (Code Signature Invalid)`` when the
+    extension loads. If you see a ``RuntimeError`` mentioning an invalid code
+    signature when using ``method="sphinx"``, re-sign the extension:
+
+    .. code-block:: bash
+
+        python -c "
+        import subprocess
+        from pathlib import Path
+        import importlib.util
+        spec = importlib.util.find_spec('pocketsphinx')
+        for loc in (spec.submodule_search_locations or []):
+            for so in Path(loc).glob('_pocketsphinx.cpython-*-darwin.so'):
+                subprocess.run(['codesign', '-s', '-', '-f', str(so)], check=True)
+                print(f'Re-signed: {so}')
+        "
+
+    This is a known upstream issue; once a Python 3.14 macOS wheel is published
+    to PyPI the workaround will no longer be needed.
+
 Windows
 -------
 

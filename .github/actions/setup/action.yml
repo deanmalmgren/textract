@@ -27,7 +27,7 @@ runs:
       if: runner.os == 'Windows'
       shell: pwsh
       run: |
-        choco install tesseract ghostscript sox.portable poppler -y
+        choco install make tesseract ghostscript sox.portable poppler -y
         # Add tesseract installation directory to PATH
         Add-Content -Path $env:GITHUB_PATH -Value "C:\Program Files\Tesseract-OCR"
         # For ghostscript, the version number is in the path, so find it dynamically
@@ -47,5 +47,5 @@ runs:
         python-version: ${{ inputs.python-version }}
 
     - name: Install Project Dependencies
-      run: uv sync --all-extras
+      run: make sync
       shell: bash

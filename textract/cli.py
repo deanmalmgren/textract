@@ -47,8 +47,7 @@ def get_parser():
 
     # initialize the parser
     parser = argparse.ArgumentParser(
-        description=("Command line tool for extracting text from any document. ")
-        % locals(),
+        description="Command line tool for extracting text from any document.",
     )
 
     # define the command line options here

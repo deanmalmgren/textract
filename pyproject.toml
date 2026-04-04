@@ -45,12 +45,13 @@ dev = [
     "pyright>=1.1.408",
     "pytest>=7.2.1",
     "ruff>=0.14.13",
+    "textract[pocketsphinx]",
 ]
 vulnerable_packages = [
     "Pygments>=2.20.0",
     "cryptography>=46.0.6",
-    # "pillow>=12.1.1",  # Requires Python 3.10
-    # "requests>=2.33.0",  # Requires Python 3.10
+    # "pillow>=12.1.1",  # PLANNED:Requires Python 3.10
+    # "requests>=2.33.0",  # PLANNED:Requires Python 3.10
 ]
 
 [tool.commitizen]
