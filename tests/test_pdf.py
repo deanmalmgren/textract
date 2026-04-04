@@ -28,6 +28,7 @@ _LINUX_TESSERACT_REASON = (
 )
 _WINDOWS_PDF_REASON = "PDF content may differ on Windows"
 
+
 def _first_skip_reason(*conditions: tuple[bool, str]) -> str:
     """Return the reason string for the first failing condition, or empty string."""
     for condition, reason in conditions:

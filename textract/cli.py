@@ -5,6 +5,7 @@ Use argparse to handle command-line arguments.
 import argparse
 import encodings
 import pkgutil
+import sys
 from pathlib import Path
 
 import argcomplete
@@ -13,10 +14,23 @@ from . import VERSION
 from .parsers import DEFAULT_ENCODING, _get_available_extensions
 
 
+# Workaround to address incorrect text mode when requesting binary
+# See: https://github.com/python/cpython/issues/58364
+class _BinaryFileType(argparse.FileType):
+    def __call__(self, string):
+        if string == "-":
+            if "r" in self._mode:
+                return sys.stdin.buffer if "b" in self._mode else sys.stdin
+            if "w" in self._mode:
+                return sys.stdout.buffer if "b" in self._mode else sys.stdout
+        return super().__call__(string)
+
+
 class AddToNamespaceAction(argparse.Action):
     """This adds KEY,VALUE arbitrary pairs to the argparse.Namespace object"""
 
-    def __call__(self, parser, namespace, values: str, option_string=None):
+    def __call__(self, parser, namespace, values, option_string=None):
+        assert isinstance(values, str)  # for pyright
         key, val = values.strip().split("=")
         if hasattr(namespace, key):
             parser.error(
@@ -68,7 +82,7 @@ def get_parser():
     parser.add_argument(
         "-o",
         "--output",
-        type=argparse.FileType("wb"),
+        type=_BinaryFileType("wb"),
         default="-",
         help="Output raw text in this file",
     )

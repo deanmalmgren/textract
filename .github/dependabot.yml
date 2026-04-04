@@ -2,8 +2,6 @@
 #   https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot
 
 # See Dependabot logs in: https://github.com/<owner>/<repo>/network/updates (under "Insights" tab)
-#
-# FYI: May need to replace tags with hashes to get the tags as comments (https://github.com/dependabot/dependabot-core/issues/4691)
 version: 2
 updates:
   - package-ecosystem: "github-actions"
