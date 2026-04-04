@@ -1,7 +1,7 @@
 """Tests for PDF file format."""
 
-import platform
 import shutil
+import sys
 import unittest
 import unittest.mock
 from pathlib import Path
@@ -13,6 +13,9 @@ from textract.exceptions import ShellError, UnknownMethod
 from textract.parsers.pdf_parser import Parser
 
 from . import base
+
+_IS_WINDOWS = sys.platform == "win32"
+_IS_LINUX = sys.platform == "linux"
 
 _HAS_PDFTOPPM = shutil.which("pdftoppm") is not None
 _HAS_PDFTOTEXT = shutil.which("pdftotext") is not None
@@ -46,7 +49,7 @@ _METHOD_CASES: list[tuple[str, str, str]] = [
         "raw_text.pdf",
         _first_skip_reason(
             (not _HAS_PDFTOTEXT, _NO_PDFTOTEXT_REASON),
-            (platform.system() == "Windows", _WINDOWS_PDF_REASON),
+            (_IS_WINDOWS, _WINDOWS_PDF_REASON),
         ),
     ),
     ("pdfminer", "raw_text.pdf", ""),
@@ -56,7 +59,7 @@ _METHOD_CASES: list[tuple[str, str, str]] = [
         _first_skip_reason(
             (not _HAS_PDFTOPPM, _NO_PDFTOPPM_REASON),
             (not _HAS_TESSERACT, _NO_TESSERACT_REASON),
-            (platform.system() == "Linux", _LINUX_TESSERACT_REASON),
+            (_IS_LINUX, _LINUX_TESSERACT_REASON),
         ),
     ),
 ]
@@ -65,7 +68,7 @@ _METHOD_CASES: list[tuple[str, str, str]] = [
 # A class-level mark cannot be used because the explicit-method tests (pdfminer,
 # tesseract) must not carry the Windows xfail.
 _windows_xfail = pytest.mark.xfail(
-    platform.system() == "Windows",
+    _IS_WINDOWS,
     reason=_WINDOWS_PDF_REASON,
     strict=False,
 )
@@ -115,7 +118,7 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
                 self.compare_cli_output(str(d / filename), method=method)
 
     @pytest.mark.skipif(
-        platform.system() in {"Linux", "Windows"},
+        _IS_LINUX or _IS_WINDOWS,
         reason="PDF layout extraction varies by platform; character encoding differs",
     )
     def test_two_column(self):

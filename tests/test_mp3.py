@@ -10,6 +10,8 @@ import pytest
 
 from . import base
 
+_IS_WINDOWS = sys.platform == "win32"
+
 _HAS_SOX = shutil.which("sox") is not None
 
 _HAS_POCKETSPHINX = importlib.util.find_spec("pocketsphinx") is not None
@@ -22,7 +24,7 @@ _SKIP_NETWORK_TESTS = os.environ.get("SKIP_NETWORK_TESTS", "false").lower() == "
     reason="sox is not installed (install via your system package manager, e.g. apt/brew/pacman)",
 )
 @pytest.mark.xfail(
-    sys.platform == "win32",
+    _IS_WINDOWS,
     reason="sox.portable on Windows lacks libmad for MP3 decoding",
     strict=True,
 )

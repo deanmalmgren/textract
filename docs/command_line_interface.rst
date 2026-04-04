@@ -19,6 +19,4 @@ textract
     <https://github.com/kislyuk/argcomplete>`_ package.  Follow
     instructions to `enable global autocomplete
     <https://github.com/kislyuk/argcomplete#activating-global-completion>`_
-    and you should be all set. As an example, this is also configured
-    in the `virtual machine provisioning for this project
-    <http://github.com/deanmalmgren/textract/blob/master/provision/development.sh#L17>`_.
+    and you should be all set.

@@ -26,9 +26,9 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
                 stderr=subprocess.DEVNULL,
                 check=False,
             )
-            assert result.returncode == 1
         finally:
             Path(filename).unlink(missing_ok=True)
+        assert result.returncode == 1
 
     def test_unsupported_extension_python(self):
         """Make sure unsupported extension raises the correct error."""

@@ -41,7 +41,7 @@ Quick start
 
    .. code-block:: bash
 
-        uv sync --group dev
+        uv sync
         uv run pytest
 
 3. Install system dependencies for your platform. See the
@@ -89,22 +89,12 @@ for the fork-branch-pull request model for github. Briefly, this means:
 
    .. code-block:: bash
 
-        emacs textract/parsers/csv_parser.py
+        code textract/parsers/csv_parser.py
         git add textract/parsers/csv_parser.py
-        git commit -m 'added csv_parser'
+        git commit -m 'feat: added csv_parser'
 
-4. If an issue already exists for the code you're contributing, use
-   `issue2pr <http://issue2pr.herokuapp.com/>`_ to attach your code to
-   that issue:
-
-   .. code-block:: bash
-
-        git push origin csv-support
-        chrome http://issue2pr.herokuapp.com
-        # enter the issue URL, HEAD=yourusername:csv-support, Base=master
-
-   If the issue doesn't already exist, just send a pull
-   request in the usual way:
+4. Open a PR on GitHub with your changes, explain the motivation for
+   the PR, any manual testing, and link any relevant issues:
 
    .. code-block:: bash
 

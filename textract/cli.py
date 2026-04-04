@@ -14,18 +14,6 @@ from . import VERSION
 from .parsers import DEFAULT_ENCODING, _get_available_extensions
 
 
-# Workaround to address incorrect text mode when requesting binary
-# See: https://github.com/python/cpython/issues/58364
-class _BinaryFileType(argparse.FileType):
-    def __call__(self, string):
-        if string == "-":
-            if "r" in self._mode:
-                return sys.stdin.buffer if "b" in self._mode else sys.stdin
-            if "w" in self._mode:
-                return sys.stdout.buffer if "b" in self._mode else sys.stdout
-        return super().__call__(string)
-
-
 class AddToNamespaceAction(argparse.Action):
     """This adds KEY,VALUE arbitrary pairs to the argparse.Namespace object"""
 
@@ -38,6 +26,17 @@ class AddToNamespaceAction(argparse.Action):
                 % locals()
             )
         setattr(namespace, key, val)
+
+
+# Fix FileType to honor 'b' flag, see: https://bugs.python.org/issue14156
+class FileType(argparse.FileType):
+    def __call__(self, string):
+        if string == "-":
+            if "r" in self._mode:
+                return sys.stdin.buffer if "b" in self._mode else sys.stdin
+            if "w" in self._mode:
+                return sys.stdout.buffer if "b" in self._mode else sys.stdout
+        return super().__call__(string)
 
 
 # This function is necessary to enable autodocumentation of the script
@@ -82,7 +81,7 @@ def get_parser():
     parser.add_argument(
         "-o",
         "--output",
-        type=_BinaryFileType("wb"),
+        type=FileType("wb"),
         default="-",
         help="Output raw text in this file",
     )
