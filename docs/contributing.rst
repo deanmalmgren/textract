@@ -220,24 +220,25 @@ Install system dependencies (Windows, using `Chocolatey <https://chocolatey.org/
 Releasing
 ---------
 
-Releases use `commitizen <https://commitizen-tools.github.io/commitizen/>`_ with a local-bump workflow.
-Commits on ``main`` must follow `conventional commits <https://www.conventionalcommits.org/>`_
-(``feat:``, ``fix:``, ``docs:``, etc.) for the version bump and changelog to be generated correctly.
-
-**Preview** the next version and changelog before bumping:
+Versioning follows `semantic versioning <http://semver.org/>`_. The version is declared in two
+places: ``pyproject.toml`` (``version``) and ``textract/__init__.py`` (``VERSION``). Use the
+helper script to update both atomically:
 
 .. code-block:: bash
 
-    uv run cz bump --dry-run
-    uv run cz changelog --dry-run --incremental
+    python scripts/bump_version.py 1.7.0
 
-**Bump** when ready — this updates version files, appends to ``docs/changelog.rst`` using
-``docs/changelog.j2``, commits, and creates a tag:
+**Update the changelog** in ``docs/changelog.rst`` — add a new section above the previous release
+with a short summary of notable changes. See existing entries for the format.
+
+**Tag and push:**
 
 .. code-block:: bash
 
-    uv run cz bump
+    git add pyproject.toml textract/__init__.py docs/changelog.rst
+    git commit -m "chore: release 1.7.0"
+    git tag v1.7.0
     git push --follow-tags
 
-CI then runs tests, creates a GitHub Release with auto-generated notes from merged PRs, and publishes to PyPI.
+CI runs tests, creates a GitHub Release with auto-generated notes from merged PRs, and publishes to PyPI.
 

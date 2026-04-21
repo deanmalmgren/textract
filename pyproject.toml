@@ -10,7 +10,7 @@ license = {text = "MIT"}
 name = "textract"
 readme = "README.rst"
 requires-python = ">=3.9"
-version = "1.6.4"
+version = "1.6.5"
 dependencies = [
     "Pillow>=9.0.0",
     "SpeechRecognition>=3.8.1",
@@ -41,7 +41,6 @@ Repository = "https://github.com/deanmalmgren/textract"
 
 [dependency-groups]
 dev = [
-    "commitizen>=3.29.1",
     "pyright>=1.1.408",
     "pytest>=7.2.1",
     "ruff>=0.14.13",
@@ -53,14 +52,6 @@ vulnerable_packages = [
     # "pillow>=12.1.1",  # PLANNED:Requires Python 3.10
     # "requests>=2.33.0",  # PLANNED:Requires Python 3.10
 ]
-
-[tool.commitizen]
-changelog_file = "docs/changelog.rst"
-tag_format = "v$version"
-template = "docs/changelog.j2"
-update_changelog_on_bump = true
-version = "1.6.4"
-version_files = ["pyproject.toml:^version", "textract/__init__.py:^VERSION"]
 
 [tool.uv.build-backend]
 module-name = "textract"
