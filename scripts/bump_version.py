@@ -5,7 +5,7 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parents[1]
 
 
 def _replace(path: Path, pattern: str, replacement: str) -> None:
@@ -19,11 +19,11 @@ def _replace(path: Path, pattern: str, replacement: str) -> None:
 def bump(version: str) -> None:
     _replace(ROOT / "pyproject.toml", r'^version = "[^"]+"', f'version = "{version}"')
     _replace(
-        ROOT / "textract" / "__init__.py",
+        ROOT / "textract/__init__.py",
         r'^VERSION = "[^"]+"',
         f'VERSION = "{version}"',
     )
-    print(f"Bumped to {version}")
+    print(f"Bumped to {version}. Run `uv lock`")
 
 
 if __name__ == "__main__":

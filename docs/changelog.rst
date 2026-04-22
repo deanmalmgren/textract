@@ -10,6 +10,24 @@ NEXT RELEASE
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
 
+2.0.0
+-------------------
+
+* Major modernization of textract absorbing the `textract-py3` fork (`#543`_ by `@KyleKing`_)
+
+  * Implement GitHub Actions CI/CD and improve test coverage
+  * Fix minor inconsistencies on Windows
+  * Resolve dependency specification errors by migrating to uv
+  * Update some minimum dependency versions and sets minimum Python to 3.9
+  * Migrate to PyPi Trusted Publisher for releases
+
+* Multiple Fixes:
+
+  * Return null on empty stream (`#422`_ by `@TheElementalOfDestruction`_)
+  * Enable encoding detection for the txt parser (`#456`_ by `@LoicGrobol`_)
+  * Catch ShellError from pdf2txt.py (`#495`_ by `@dhrim`_)
+  * Support python3.12 (`#502`_ by `@branchv`_)
+
 1.6.5
 -------------------
 
