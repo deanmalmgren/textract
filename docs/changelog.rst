@@ -28,6 +28,11 @@ NEXT RELEASE
   * Catch ShellError from pdf2txt.py (`#495`_ by `@dhrim`_)
   * Support python3.12 (`#502`_ by `@branchv`_)
 
+* Documentation Updates
+
+  * Add colons to issue template for consistency (`#520`_ by `@mcp292`_)
+  * Fix a few typos (`#430`_ by `@timgates42`_)
+
 1.6.5
 -------------------
 
