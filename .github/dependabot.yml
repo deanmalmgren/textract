@@ -11,6 +11,4 @@ updates:
     groups:
       all-dependencies:
         update-types:
-          - "major"
-          - "minor"
-          - "patch"
+          - "*"
