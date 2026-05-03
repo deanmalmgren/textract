@@ -82,12 +82,5 @@ jobs:
           tag_name: ${{ github.ref_name }}
       - name: Build Package
         run: uv build
-      - name: DEBUG Build Package
-        run: ls dist
       - name: Publish to PyPI
-        run: uv publish --verbose --trusted-publishing=always --dry-run
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          print-hash: true
-          verbose: true
+        run: uv publish --trusted-publishing=always
