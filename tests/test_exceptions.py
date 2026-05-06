@@ -1,5 +1,5 @@
-
 import subprocess
+import sys
 import unittest
 import uuid
 from pathlib import Path
@@ -70,12 +70,13 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
     def test_missing_module_python(self):
         """Make sure not installed modules raises the correct error"""
         filename = self.get_temp_filename()
-        import sys
+
         temp = os
-        sys.modules['os'] = None
+        sys.modules["os"] = None
         import textract
         from textract.exceptions import MissingModuleError
+
         with self.assertRaises(MissingModuleError):
             textract.process(filename)
-        sys.modules['os'] = temp
+        sys.modules["os"] = temp
         os.remove(filename)

@@ -124,17 +124,18 @@ class ShellError(CommandLineError):
 
 
 class MissingModuleError(CommandLineError):
-    """This error is raised when a dependency module is not installed.
-    """
+    """This error is raised when a dependency module is not installed."""
 
     def __init__(self, import_error):
         self.import_error = import_error.__str__()
-        self.missing_module = self.import_error.split('No module named ')[1]
+        self.missing_module = self.import_error.split("No module named ")[1]
 
     def __str__(self):
-        return self.render((
-            'Module %(missing_module)s is not installed on your system.\n'
-            'Please make sure the appropriate dependencies are installed \n'
-            'before using textract:\n\n'
-            '    http://textract.readthedocs.org/en/latest/installation.html\n'
-        ))
+        return self.render(
+            (
+                "Module %(missing_module)s is not installed on your system.\n"
+                "Please make sure the appropriate dependencies are installed \n"
+                "before using textract:\n\n"
+                "    http://textract.readthedocs.org/en/latest/installation.html\n"
+            )
+        )

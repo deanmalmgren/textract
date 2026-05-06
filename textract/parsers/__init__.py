@@ -4,8 +4,8 @@ Route the request to the appropriate parser based on file type.
 
 import glob
 import importlib
-import re
 import pkgutil
+import re
 from pathlib import Path
 
 from textract import exceptions
@@ -73,7 +73,7 @@ def process(
     # check if we can import the parser module related to the file extension
     try:
         # check if the module exists in the system
-        is_module = pkgutil.find_loader('textract.parsers'+rel_module)
+        is_module = pkgutil.find_loader("textract.parsers" + rel_module)
 
         if is_module is not None:
             filetype_module = importlib.import_module(rel_module, "textract.parsers")
@@ -83,7 +83,7 @@ def process(
             raise exceptions.ExtensionNotSupported(ext) from err
     except ImportError as err:
         # Raise the exception of the import failure
-        raise exceptions.MissingModuleError(e)
+        raise exceptions.MissingModuleError(err)
 
     # do the extraction
     parser = filetype_module.Parser()
