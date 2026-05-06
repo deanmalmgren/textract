@@ -2,7 +2,7 @@
 ..
 ..   * bumpversion {major|minor|patch}
 ..   * git push && git push --tags
-..   * python setup.py sdist upload
+..   * twine upload -r textract dist/*
 ..   * convert into release https://github.com/deanmalmgren/textract/releases
 
 textract
