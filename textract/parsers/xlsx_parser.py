@@ -13,7 +13,7 @@ class Parser(BaseParser):
             worksheet = workbook[sheet_name]
             
             for row in worksheet.iter_rows(values_only=True):
-                worksheet.row(curr_row)
+                
                 non_empty_values = []
                 for value in row:
                     if value:
