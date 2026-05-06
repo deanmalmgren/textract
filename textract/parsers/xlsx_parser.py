@@ -16,7 +16,6 @@ class Parser(BaseParser):
             num_cells = worksheet.ncols
 
             for curr_row in range(num_rows):
-                worksheet.row(curr_row)
                 new_output = []
                 for index_col in range(num_cells):
                     value = worksheet.cell_value(curr_row, index_col)

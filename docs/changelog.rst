@@ -10,6 +10,11 @@ NEXT RELEASE
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
 
+TBD
+-------------------
+
+* Minor nitpick to remove unused line (`#559`_ by `@KyleKing`_)
+
 2.0.0
 -------------------
 
