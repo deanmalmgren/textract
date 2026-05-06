@@ -22,7 +22,8 @@ dependencies = [
     "extract-msg>=0.40.0",
     "pdfminer.six>=20221105",
     "python-pptx>=0.6.18",
-    "xlrd>=1.2.0,<2.0.0",  # v2 drops support for xlsx. Requires openpyxl or alternative to support xlsx if upgrading xlrd. See: https://github.com/deanmalmgren/textract/pull/543#issuecomment-2684619988
+    "openpyxl>=3.0.0",  # Replaces xlrd for Excel file support (xlrd 2.0+ dropped xlsx support)
+    "xlrd>=2.0.0",  # Supports legacy .xls files (openpyxl does not support .xls)
 ]
 
 [project.optional-dependencies]

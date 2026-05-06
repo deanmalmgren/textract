@@ -13,7 +13,8 @@ NEXT RELEASE
 TBD
 -------------------
 
-* Minor nitpick to remove unused line (`#559`_ by `@KyleKing`_)
+* Minor nitpick to remove unused line (`#562`_ by `@KyleKing`_)
+* Utilize openpyxl for xlsx after xlrd dropped support (`#559`_ by `@KyleKing`_)
 
 2.0.0
 -------------------
