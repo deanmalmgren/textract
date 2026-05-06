@@ -5,16 +5,51 @@ This project uses `semantic versioning <http://semver.org/>`_ to
 track version numbers, where backwards incompatible changes
 (highlighted in **bold**) bump the major version of the package.
 
-
-latest changes in development for next release
-----------------------------------------------
+NEXT RELEASE
+-------------------
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
+
+TBD
+-------------------
+
+* Minor nitpick to remove unused line (`#559`_ by `@KyleKing`_)
+
+2.0.0
+-------------------
+
+* Major modernization of textract absorbing the `textract-py3` fork (`#543`_ by `@KyleKing`_)
+
+  * Implement GitHub Actions CI/CD and improve test coverage
+  * Fix minor inconsistencies on Windows
+  * Resolve dependency specification errors by migrating to uv
+  * Update some minimum dependency versions and sets minimum Python to 3.9
+  * Migrate to PyPi Trusted Publisher for releases
+
+* Multiple Fixes:
+
+  * Return null on empty stream (`#422`_ by `@TheElementalOfDestruction`_)
+  * Enable encoding detection for the txt parser (`#456`_ by `@LoicGrobol`_)
+  * Catch ShellError from pdf2txt.py (`#495`_ by `@dhrim`_)
+  * Support python3.12 (`#502`_ by `@branchv`_)
+
+* Documentation Updates
+
+  * Add colons to issue template for consistency (`#520`_ by `@mcp292`_)
+  * Fix a few typos (`#430`_ by `@timgates42`_)
+
+1.6.5
+-------------------
+
+* switched epub parsing to MIT license compatible package (`#411`_ by
+  `@jhale1805`_)
+
+1.6.4
+-------------------
 
 * several bug fixes, including:
 
   * fixing dependency declarations (`#162`_ by `@lillypad`_)
-
 
 1.6.1
 -------------------
@@ -22,7 +57,6 @@ latest changes in development for next release
 * several bug fixes, including:
 
   * fixing the readthedocs build (`#150`_)
-
 
 1.6.0
 -------------------
@@ -95,14 +129,12 @@ latest changes in development for next release
   * updated tests for ``.html``, ``.ogg``, ``.wav``, and ``.mp3`` file types to
     be consistent with more recent versions of the underlying packages.
 
-
 1.3.0
 -----
 
 * support for ``.rtf`` files (`#84`_)
 
 * support for ``.msg`` files (`#87`_ and `#17`_ by `@anthonygarvan`_)
-
 
 1.2.0
 -----
@@ -124,7 +156,6 @@ latest changes in development for next release
 
   * standardizing testing environment to be compatible with different versions
     of third-party command line tools (`#78`_)
-
 
 1.1.0
 -----
@@ -153,7 +184,6 @@ latest changes in development for next release
 
   * improved html output with reduced whitespace around inline
     elements in output text (`#58`_ by `@eiotec`_)
-
 
 1.0.0
 -----
@@ -186,7 +216,6 @@ latest changes in development for next release
 
   * including support for Docker-based testing (`#46`_ by `@ShawnMilo`_)
 
-
 0.5.1
 -----
 
@@ -195,7 +224,6 @@ latest changes in development for next release
   * documentation fixes
 
   * shell commands hanging on large files (`#33`_)
-
 
 0.5.0
 -----
@@ -221,7 +249,6 @@ latest changes in development for next release
 
   * cleaned up implementation of extension parsers to avoid magic
 
-
 0.4.0
 -----
 
@@ -232,7 +259,6 @@ latest changes in development for next release
 * automated the documentation for the python package using
   sphinx-apidoc in docs/Makefile (`#9`_)
 
-
 0.3.0
 -----
 
@@ -240,7 +266,6 @@ latest changes in development for next release
 
 * fixed installation bug with not properly including requirements
   files in the manifest
-
 
 0.2.0
 -----
@@ -255,12 +280,10 @@ latest changes in development for next release
 
   * fixing tests to make sure the work properly on travis-ci
 
-
 0.1.0
 -----
 
 * Initial release, support for ``.docx`` and ``.pptx``
-
 
 .. list of contributors that are linked to above. putting links here
 .. to make the text above relatively clean
@@ -276,6 +299,7 @@ latest changes in development for next release
 .. _@eiotec: https://github.com/eiotec
 .. _@evfredericksen: https://github.com/evfredericksen
 .. _@jaraco: https://github.com/jaraco
+.. _@jhale1805: https://github.com/jhale1805
 .. _@jsmith-mploir: https://github.com/jsmith-mploir
 .. _@kokxx: https://github.com/Kokxx
 .. _@levivm: https://github.com/levivm
@@ -287,7 +311,6 @@ latest changes in development for next release
 .. _@ShawnMilo: https://github.com/ShawnMilo
 .. _@sirex: https://github.com/sirex
 .. _@suned: https://github.com/suned
-
 
 .. list of issues that have been resolved. putting links here to make
 .. the text above relatively clean
@@ -356,3 +379,4 @@ latest changes in development for next release
 .. _#149: https://github.com/deanmalmgren/textract/issues/149
 .. _#150: https://github.com/deanmalmgren/textract/issues/150
 .. _#162: https://github.com/deanmalmgren/textract/issues/162
+.. _#411: https://github.com/deanmalmgren/textract/issues/411
