@@ -1,4 +1,5 @@
 import subprocess
+import sys
 import unittest
 import uuid
 from pathlib import Path
@@ -65,3 +66,17 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
             # There shouldn't be a command on the path matching a random uuid
             parser.run([str(uuid.uuid4())])
         assert exc_info.value.is_not_installed()
+
+    def test_missing_module_python(self):
+        """Make sure not installed modules raises the correct error"""
+        filename = self.get_temp_filename()
+
+        temp = os
+        sys.modules["os"] = None
+        import textract
+        from textract.exceptions import MissingModuleError
+
+        with self.assertRaises(MissingModuleError):
+            textract.process(filename)
+        sys.modules["os"] = temp
+        os.remove(filename)
