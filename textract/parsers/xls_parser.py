@@ -1,3 +1,28 @@
-from .xlsx_parser import Parser
+import xlrd
 
-__all__ = ["Parser"]
+from .utils import BaseParser
+
+
+class Parser(BaseParser):
+    """Extract text from legacy Excel files (.xls)."""
+
+    def extract(self, filename, **kwargs):
+        workbook = xlrd.open_workbook(filename)
+        sheets_name = workbook.sheet_names()
+        output = "\n"
+        for names in sheets_name:
+            worksheet = workbook.sheet_by_name(names)
+            num_rows = worksheet.nrows
+            num_cells = worksheet.ncols
+
+            for curr_row in range(num_rows):
+                new_output = []
+                for index_col in range(num_cells):
+                    value = worksheet.cell_value(curr_row, index_col)
+                    if value:
+                        if isinstance(value, (int, float)):
+                            value = str(value)
+                        new_output.append(value)
+                if new_output:
+                    output += " ".join(new_output) + "\n"
+        return output
