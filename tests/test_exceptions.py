@@ -1,4 +1,5 @@
 import subprocess
+import sys
 import unittest
 import uuid
 from pathlib import Path
@@ -65,3 +66,43 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
             # There shouldn't be a command on the path matching a random uuid
             parser.run([str(uuid.uuid4())])
         assert exc_info.value.is_not_installed()
+
+    def test_shell_parser_run_passes_startupinfo_on_windows(self):
+        """On win32, run() must pass a STARTUPINFO that suppresses the console
+        window, otherwise every call pops up a cmd window (#180).
+        """
+        captured_kwargs = {}
+        real_popen = subprocess.Popen
+
+        def _fake_popen(args, **kwargs):
+            captured_kwargs.update(kwargs)
+            return real_popen(
+                [sys.executable, "-c", "pass"],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+
+        with pytest.MonkeyPatch.context() as monkeypatch:
+            monkeypatch.setattr(utils.sys, "platform", "win32")
+            monkeypatch.setattr(
+                utils.subprocess,
+                "STARTUPINFO",
+                lambda: type("_FakeStartupInfo", (), {"dwFlags": 0})(),
+                raising=False,
+            )
+            fake_show_window_flag = 1
+            monkeypatch.setattr(
+                utils.subprocess,
+                "STARTF_USESHOWWINDOW",
+                fake_show_window_flag,
+                raising=False,
+            )
+            monkeypatch.setattr(utils.subprocess, "Popen", _fake_popen)
+
+            parser = utils.ShellParser()
+            parser.run(["ignored-on-fake-popen"])
+
+        assert "startupinfo" in captured_kwargs
+        startupinfo = captured_kwargs["startupinfo"]
+        assert startupinfo is not None
+        assert startupinfo.dwFlags & fake_show_window_flag
