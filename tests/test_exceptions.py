@@ -1,5 +1,4 @@
 import subprocess
-import sys
 import unittest
 import uuid
 from pathlib import Path
@@ -72,15 +71,16 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
         window, otherwise every call pops up a cmd window (#180).
         """
         captured_kwargs = {}
-        real_popen = subprocess.Popen
+
+        class _FakePipe:
+            returncode = 0
+
+            def communicate(self):
+                return b"", b""
 
         def _fake_popen(args, **kwargs):
             captured_kwargs.update(kwargs)
-            return real_popen(
-                [sys.executable, "-c", "pass"],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-            )
+            return _FakePipe()
 
         with pytest.MonkeyPatch.context() as monkeypatch:
             monkeypatch.setattr(utils.sys, "platform", "win32")
