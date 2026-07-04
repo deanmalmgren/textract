@@ -7,6 +7,7 @@ from __future__ import annotations
 import errno
 import os
 import subprocess
+import sys
 import tempfile
 
 import chardet
@@ -84,11 +85,17 @@ class ShellParser(BaseParser):
         """
 
         # run a subprocess and put the stdout and stderr on the pipe object
+        if sys.platform == 'win32':
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+        else:
+            startupinfo = None
         try:
             pipe = subprocess.Popen(
                 args,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
+                startupinfo=startupinfo,
             )
         except OSError as e:
             if e.errno == errno.ENOENT:

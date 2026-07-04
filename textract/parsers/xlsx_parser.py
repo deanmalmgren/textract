@@ -1,29 +1,31 @@
-import xlrd
+import openpyxl
 
 from .utils import BaseParser
 
 
 class Parser(BaseParser):
-    """Extract text from Excel files (.xls/xlsx)."""
+    """Extract text from Excel files (.xlsx)."""
 
     def extract(self, filename, **kwargs):
-        workbook = xlrd.open_workbook(filename)
-        sheets_name = workbook.sheet_names()
+        workbook = openpyxl.load_workbook(filename, data_only=True)
         output = "\n"
-        for names in sheets_name:
-            worksheet = workbook.sheet_by_name(names)
-            num_rows = worksheet.nrows
-            num_cells = worksheet.ncols
+        for sheet_name in workbook.sheetnames:
+            worksheet = workbook[sheet_name]
 
-            for curr_row in range(num_rows):
-                worksheet.row(curr_row)
-                new_output = []
-                for index_col in range(num_cells):
-                    value = worksheet.cell_value(curr_row, index_col)
-                    if value:
-                        if isinstance(value, (int, float)):
-                            value = str(value)
-                        new_output.append(value)
-                if new_output:
-                    output += " ".join(new_output) + "\n"
+            for row in worksheet.iter_rows(values_only=True):
+                non_empty_values = []
+                for value in row:
+                    if value is None or value is False:
+                        continue
+                    if isinstance(value, bool):
+                        value = "1"
+                    elif isinstance(value, (int, float)):
+                        # Convert to float to preserve decimal format (e.g., 83 -> 83.0)
+                        value = str(float(value))
+                    else:
+                        value = str(value)
+                    non_empty_values.append(value)
+                if non_empty_values:
+                    output += " ".join(non_empty_values) + "\n"
+
         return output

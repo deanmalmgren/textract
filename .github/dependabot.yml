@@ -2,15 +2,23 @@
 #   https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot
 
 # See Dependabot logs in: https://github.com/<owner>/<repo>/network/updates (under "Insights" tab)
+# Multi-ecosystem groups combine updates across different package managers into single PRs
+# Docs: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#multi-ecosystem-groups-
+
+# yaml-language-server: $schema=https://json.schemastore.org/dependabot-2.0.json
 version: 2
+
+multi-ecosystem-groups:
+  all-dependencies:
+    schedule:
+      interval: "monthly"
+
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
-    schedule:
-      interval: "monthly"
-    groups:
-      all-dependencies:
-        update-types:
-          - "major"
-          - "minor"
-          - "patch"
+    multi-ecosystem-group: "all-dependencies"
+    patterns: ['*']
+  - package-ecosystem: "uv"
+    directory: "/"
+    multi-ecosystem-group: "all-dependencies"
+    patterns: ['*']
