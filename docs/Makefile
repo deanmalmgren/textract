@@ -7,7 +7,7 @@ SPHINXBUILD   = sphinx-build
 PAPER         =
 BUILDDIR      = build
 APIDOC        = sphinx-apidoc
-TEXTRACT      = 
+TEXTRACT      =
 APIDOC_IGNORE = ../textract/colors.py
 
 # User-friendly check for sphinx-build
