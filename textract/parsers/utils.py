@@ -85,7 +85,7 @@ class ShellParser(BaseParser):
         """
 
         # run a subprocess and put the stdout and stderr on the pipe object
-        if sys.platform == 'win32':
+        if sys.platform == "win32":
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
         else:

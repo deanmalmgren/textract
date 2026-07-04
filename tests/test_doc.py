@@ -1,18 +1,19 @@
 """Tests for DOC file format."""
 
-import shutil
 import unittest
 
 import pytest
 
+from textract.parsers.doc_parser import _find_soffice
+
 from . import base
 
-_HAS_ANTIWORD = shutil.which("antiword") is not None
+_HAS_SOFFICE = _find_soffice() is not None
 
 
 @pytest.mark.skipif(
-    not _HAS_ANTIWORD,
-    reason=("antiword is not installed (install via your system package manager)"),
+    not _HAS_SOFFICE,
+    reason="LibreOffice (soffice) is not installed",
 )
 class DocTestCase(base.ShellParserTestCase, unittest.TestCase):
     """Test text extraction from DOC files."""
