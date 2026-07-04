@@ -1,4 +1,5 @@
 import subprocess
+import sys
 import unittest
 import uuid
 from pathlib import Path
@@ -6,7 +7,11 @@ from pathlib import Path
 import pytest
 
 import textract
-from textract.exceptions import ExtensionNotSupported, MissingFileError
+from textract.exceptions import (
+    ExtensionNotSupported,
+    MissingFileError,
+    MissingModuleError,
+)
 from textract.parsers import exceptions, utils
 
 from . import base
@@ -65,6 +70,30 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
             # There shouldn't be a command on the path matching a random uuid
             parser.run([str(uuid.uuid4())])
         assert exc_info.value.is_not_installed()
+
+    def test_missing_module_python(self):
+        """Make sure a missing third-party dependency of an otherwise
+        supported extension raises MissingModuleError, not
+        ExtensionNotSupported.
+        """
+        filename = self.get_temp_filename(extension="docx")
+        try:
+            # docx_parser depends on docx2txt; simulate it being
+            # uninstalled without touching any stdlib module other code
+            # relies on during the test. The parser module is dropped
+            # from sys.modules too, forcing a fresh import that actually
+            # re-executes "import docx2txt" (a cached import would skip
+            # that line and never trigger the ImportError).
+            with pytest.MonkeyPatch.context() as monkeypatch:
+                monkeypatch.setitem(sys.modules, "docx2txt", None)
+                monkeypatch.delitem(
+                    sys.modules, "textract.parsers.docx_parser", raising=False
+                )
+                with pytest.raises(MissingModuleError) as exc_info:
+                    textract.process(filename)
+            assert exc_info.value.missing_module == "docx2txt"
+        finally:
+            Path(filename).unlink(missing_ok=True)
 
     def test_shell_parser_run_passes_startupinfo_on_windows(self):
         """On win32, run() must pass a STARTUPINFO that suppresses the console
