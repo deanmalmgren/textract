@@ -1,5 +1,4 @@
 import json
-from pathlib import Path
 
 from .utils import BaseParser
 
@@ -10,9 +9,9 @@ class Parser(BaseParser):
     from mongodb dumps, for example.
     """
 
-    def extract(self, filename, input_encoding=None, **kwargs):
-        raw_bytes = Path(filename).read_bytes()
-        text = self.decode(raw_bytes, input_encoding)
+    needs_decoded_text = True
+
+    def extract_from_text(self, text, **kwargs):
         deserialized_json = json.loads(text)
         return self.get_text(deserialized_json)
 

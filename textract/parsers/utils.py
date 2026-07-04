@@ -9,6 +9,7 @@ import os
 import subprocess
 import sys
 import tempfile
+from pathlib import Path
 
 import chardet
 
@@ -21,10 +22,24 @@ class BaseParser:
     the responsibility of handling all unicode and byte-encoding.
     """
 
+    # Set to True by parsers that must decode the raw bytes into text
+    # before they can parse structure (csv, json, eml, etc). When set,
+    # process() reads and decodes the file itself and calls
+    # extract_from_text() instead of extract(), so those parsers never
+    # need to know about input_encoding.
+    needs_decoded_text = False
+
     def extract(self, filename, **kwargs) -> bytes | str:
         """This method must be overwritten by child classes to extract raw
         text from a filename. This method can return either a
         byte-encoded string or unicode.
+        """
+        raise NotImplementedError("must be overwritten by child classes")
+
+    def extract_from_text(self, text, **kwargs) -> bytes | str:
+        """This method must be overwritten by child classes that set
+        ``needs_decoded_text = True``. It receives already-decoded text
+        instead of a filename.
         """
         raise NotImplementedError("must be overwritten by child classes")
 
@@ -45,11 +60,12 @@ class BaseParser:
         # input byte strings and converting them to a predictable
         # output encoding
         # http://nedbatchelder.com/text/unipain/unipain.html#35
-        #
-        # input_encoding is also forwarded to extract() so parsers that
-        # must decode text before parsing structure (csv, json, eml, etc)
-        # can honor it directly instead of each inventing their own kwarg.
-        extracted = self.extract(filename, input_encoding=input_encoding, **kwargs)
+        if self.needs_decoded_text:
+            raw_bytes = Path(filename).read_bytes()
+            text = self.decode(raw_bytes, input_encoding)
+            extracted = self.extract_from_text(text, **kwargs)
+        else:
+            extracted = self.extract(filename, **kwargs)
         unicode_string = self.decode(extracted, input_encoding)
         return self.encode(unicode_string, output_encoding)
 
