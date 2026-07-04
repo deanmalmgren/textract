@@ -1,4 +1,5 @@
 from email.parser import Parser as EmailParser
+from pathlib import Path
 
 from .utils import BaseParser
 
@@ -8,9 +9,7 @@ class Parser(BaseParser):
     subject and all text from the contents.
     """
 
-    needs_decoded_text = True
-
-    def extract_from_text(self, text, **kwargs):
+    def extract(self, filename, input_encoding=None, **kwargs):
         # TODO: could make option here to omit all non-original content
         # (forwarded content, quoted content in reply, signature, etc),
         # perhaps using https://github.com/zapier/email-reply-parser
@@ -18,6 +17,8 @@ class Parser(BaseParser):
         # TODO: could also potentially grab text/html content instead of
         # only grabbing text/plain content
 
+        raw_bytes = Path(filename).read_bytes()
+        text = self.decode(raw_bytes, input_encoding)
         message = EmailParser().parsestr(text)
 
         text_content = [
