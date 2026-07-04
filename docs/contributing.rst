@@ -217,6 +217,26 @@ Install system dependencies (Windows, using `Chocolatey <https://chocolatey.org/
    <https://github.com/deanmalmgren/textract/blob/master/.github/actions/setup/action.yml>`_.
 
 
+Optional: pre-commit checks with hk
+------------------------------------
+
+This isn't required to contribute, but you can install `hk <https://hk.jdx.dev/>`_ to run the
+same ``ruff``, ``ruff format``, and ``pyright`` checks (defined in ``hk.pkl``) automatically as
+git hooks, instead of running ``make lint``/``make fix`` by hand.
+
+hk is installed via `mise <https://mise.jdx.dev/>`_:
+
+.. code-block:: bash
+
+    curl https://mise.run | sh
+    mise use -g hk
+    hk install --mise
+
+``hk install --mise`` wires up the git hooks and tells hk to use mise to fetch any additional
+tools its steps need. Once installed, hk runs automatically on ``git commit``/``git push``; run
+it manually with ``hk check --all`` or ``hk fix --all``.
+
+
 Releasing
 ---------
 

@@ -11,7 +11,7 @@ textract
    :func: get_parser
    :prog: textract
 
-.. note:: 
+.. note::
 
     To make the command line interface as usable as possible,
     autocompletion of available options with textract is enabled by
