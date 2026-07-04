@@ -8,10 +8,15 @@ name: CI Pipeline
   pull_request:
     paths:
       - .github/workflows/ci_pipeline.yml
+      - .github/actions/setup/action.yml
       - textract/**
       - tests/**
       - uv.lock
       - pyproject.toml
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   changelog-check:

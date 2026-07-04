@@ -201,15 +201,15 @@ for upstream context.
 
 Install system dependencies (macOS, using `Homebrew <https://brew.sh/>`_)::
 
-    brew install antiword tesseract ghostscript poppler sox unrtf
+    brew install libreoffice tesseract ghostscript poppler sox unrtf
 
 Install system dependencies (Ubuntu/Debian)::
 
-    apt-get install antiword tesseract-ocr ghostscript poppler-utils sox libsox-fmt-mp3 unrtf
+    apt-get install libreoffice-writer tesseract-ocr ghostscript poppler-utils sox libsox-fmt-mp3 unrtf
 
 Install system dependencies (Windows, using `Chocolatey <https://chocolatey.org/install>`_)::
 
-    choco install tesseract ghostscript sox.portable poppler -y
+    choco install tesseract ghostscript sox.portable poppler libreoffice-fresh -y
 
 .. note::
 
