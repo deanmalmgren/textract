@@ -3,8 +3,7 @@ Route the request to the appropriate parser based on file type.
 """
 
 import glob
-import importlib
-import pkgutil
+import importlib.util
 import re
 from pathlib import Path
 
@@ -25,7 +24,6 @@ EXTENSION_SYNONYMS = {
 # here so the default is used on both the process function and also by
 # the command line interface
 DEFAULT_OUTPUT_ENCODING = "utf_8"
-DEFAULT_ENCODING = "utf_8"
 
 # filename format
 _FILENAME_SUFFIX = "_parser"
@@ -70,20 +68,17 @@ def process(
     # the _parser extension
     rel_module = ext + _FILENAME_SUFFIX
 
-    # check if we can import the parser module related to the file extension
-    try:
-        # check if the module exists in the system
-        is_module = pkgutil.find_loader("textract.parsers" + rel_module)
+    # if there's no parser module for this extension at all, the file
+    # extension isn't currently supported
+    if importlib.util.find_spec("textract.parsers" + rel_module) is None:
+        raise exceptions.ExtensionNotSupported(ext)
 
-        if is_module is not None:
-            filetype_module = importlib.import_module(rel_module, "textract.parsers")
-        else:
-            # If we can't import the module, the file extension isn't currently
-            # supported
-            raise exceptions.ExtensionNotSupported(ext) from err
+    # the parser module exists, but importing it can still fail if one
+    # of its third-party dependencies isn't installed
+    try:
+        filetype_module = importlib.import_module(rel_module, "textract.parsers")
     except ImportError as err:
-        # Raise the exception of the import failure
-        raise exceptions.MissingModuleError(err)
+        raise exceptions.MissingModuleError(err) from err
 
     # do the extraction
     parser = filetype_module.Parser()

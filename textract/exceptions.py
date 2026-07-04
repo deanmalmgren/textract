@@ -126,9 +126,9 @@ class ShellError(CommandLineError):
 class MissingModuleError(CommandLineError):
     """This error is raised when a dependency module is not installed."""
 
-    def __init__(self, import_error):
-        self.import_error = import_error.__str__()
-        self.missing_module = self.import_error.split("No module named ")[1]
+    def __init__(self, import_error: ImportError) -> None:
+        """Initialize with the underlying ImportError."""
+        self.missing_module = import_error.name
 
     def __str__(self):
         return self.render(
