@@ -51,7 +51,8 @@ runs:
       if: runner.os == 'Linux' && inputs.install-libreoffice == 'true'
       uses: awalsh128/cache-apt-pkgs-action@v1
       with:
-        packages: libreoffice-writer
+        # Full meta-package avoids a headless UNO crash seen with libreoffice-writer alone.
+        packages: libreoffice dbus-x11
         version: 1.1
 
     - name: Install LibreOffice for .doc tests (macOS)
