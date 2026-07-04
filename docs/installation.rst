@@ -27,11 +27,16 @@ First install system packages using apt-get, then install textract from PyPI:
 
 .. code-block:: bash
 
-    apt-get install python-dev libxml2-dev libxslt1-dev antiword unrtf poppler-utils ghostscript tesseract-ocr \
+    apt-get install python-dev libxml2-dev libxslt1-dev libreoffice-writer unrtf poppler-utils ghostscript tesseract-ocr \
     flac ffmpeg lame libmad0 libsox-fmt-mp3 sox libjpeg-dev swig libpulse-dev
     pip install textract
     # or with uv
     uv pip install textract
+
+.. note::
+
+    ``libreoffice-writer`` is *optional*: it is only needed to extract legacy
+    ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
 
 .. note::
 
@@ -47,11 +52,16 @@ First install XQuartz and system packages, then install textract from PyPI:
 
 .. code-block:: bash
 
-    brew install --cask xquartz
-    brew install antiword ghostscript poppler sox tesseract unrtf swig
+    brew install --cask xquartz libreoffice
+    brew install ghostscript poppler sox tesseract unrtf swig
     pip install textract
     # or with uv
     uv pip install textract
+
+.. note::
+
+    ``libreoffice`` is *optional*: it is only needed to extract legacy
+    ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
 
 .. note::
 
@@ -95,10 +105,15 @@ Install `Chocolatey <https://chocolatey.org/install>`_ then install system packa
 
 .. code-block:: powershell
 
-    choco install tesseract ghostscript sox.portable poppler -y
+    choco install tesseract ghostscript sox.portable poppler libreoffice-fresh -y
     pip install textract
     # or with uv
     uv pip install textract
+
+.. note::
+
+    ``libreoffice-fresh`` is *optional*: it is only needed to extract legacy
+    ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
 
 .. note::
 
@@ -121,12 +136,40 @@ First install system packages using pkg, then install textract from PyPI:
 
 .. code-block:: bash
 
-    pkg install lang/python38 devel/py-pip textproc/libxml2 textproc/libxslt textproc/antiword textproc/unrtf \
+    pkg install lang/python38 devel/py-pip textproc/libxml2 textproc/libxslt editors/libreoffice textproc/unrtf \
     graphics/poppler print/pstotext graphics/tesseract audio/flac multimedia/ffmpeg audio/lame audio/sox \
     graphics/jpeg-turbo
     pip install textract
     # or with uv
     uv pip install textract
+
+.. note::
+
+    ``editors/libreoffice`` is *optional*: it is only needed to extract
+    legacy ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
+
+.. _converting-legacy-doc-files:
+
+Converting legacy ``.doc`` files
+--------------------------------
+
+Legacy ``.doc`` (Word 97-2003 binary) files are extracted with LibreOffice,
+which is an *optional* runtime dependency: textract only shells out to the
+``soffice`` executable when you actually process a ``.doc`` file, and every
+other format works without it.
+
+If you would rather not install LibreOffice alongside textract (for example in
+a slim container), you can pre-convert your ``.doc`` files to ``.docx`` once,
+elsewhere, and hand the results to textract, whose ``.docx`` parser is pure
+Python:
+
+.. code-block:: bash
+
+    soffice --headless --convert-to docx --outdir out/ *.doc
+
+Then run ``textract out/whatever.docx`` as usual. This keeps the heavier
+converter out of your extraction pipeline while still supporting legacy
+documents.
 
 Reference: CI System Dependencies
 ----------------------------------
@@ -164,8 +207,13 @@ documentation about how to install the textract dependencies, please
 
     - python header files are required for building lxml.
 
-    - `antiword <https://github.com/grobian/antiword>`_ is required by the
-      ``.doc`` parser (note: no longer actively maintained).
+    - `LibreOffice <https://www.libreoffice.org/>`_ (the ``soffice``
+      executable) is *optionally* required by the ``.doc`` parser. It is only
+      invoked when you extract a legacy ``.doc`` file; if it isn't installed,
+      textract raises an error explaining how to install it or pre-convert the
+      file. This replaces ``antiword``, which is no longer maintained or
+      packaged. See :ref:`converting-legacy-doc-files` for a batch
+      pre-conversion alternative.
 
     - `pdftotext <https://poppler.freedesktop.org/>`_ (part of poppler) is
       *optionally* required by the ``.pdf`` parser (there is a pure python

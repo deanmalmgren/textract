@@ -78,6 +78,21 @@ class UnknownMethod(CommandLineError):
         )
 
 
+class LibreOfficeNotFound(CommandLineError):
+    """Raised when a ``.doc`` file needs LibreOffice but it can't be found."""
+
+    def __str__(self):
+        return self.render(
+            "Extracting text from legacy .doc files requires LibreOffice\n"
+            "(the `soffice` executable), which could not be found on your\n"
+            "system or PATH. Either install it:\n\n"
+            "    http://textract.readthedocs.org/en/latest/installation.html\n\n"
+            "or convert the file to .docx (or .pdf) first and pass that to\n"
+            "textract instead. To batch-convert with LibreOffice:\n\n"
+            "    soffice --headless --convert-to docx --outdir out/ *.doc\n"
+        )
+
+
 class ShellError(CommandLineError):
     """This error is raised when a shell.run returns a non-zero exit code
     (meaning the command failed).
