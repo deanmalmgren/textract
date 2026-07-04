@@ -14,7 +14,8 @@ runs:
       if: runner.os == 'Linux'
       uses: awalsh128/cache-apt-pkgs-action@v1
       with:
-        packages: tesseract-ocr sox libsox-fmt-mp3 ghostscript unrtf poppler-utils
+        # Full libreoffice meta-package avoids a headless UNO crash seen with libreoffice-writer alone.
+        packages: tesseract-ocr sox libsox-fmt-mp3 ghostscript unrtf poppler-utils libreoffice dbus-x11
         version: 1.1
 
     - name: Install system dependencies (macOS)
@@ -22,12 +23,13 @@ runs:
       shell: bash
       run: |
         brew install tesseract sox lame mad ghostscript unrtf poppler
+        brew install --cask libreoffice
 
     - name: Install system dependencies (Windows)
       if: runner.os == 'Windows'
       shell: pwsh
       run: |
-        choco install make tesseract ghostscript sox.portable poppler -y
+        choco install make tesseract ghostscript sox.portable poppler libreoffice-fresh -y
         # Add tesseract installation directory to PATH
         Add-Content -Path $env:GITHUB_PATH -Value "C:\Program Files\Tesseract-OCR"
         # For ghostscript, the version number is in the path, so find it dynamically
@@ -39,25 +41,6 @@ runs:
         $popplerBin = Get-ChildItem "C:\tools" -Recurse -Filter "pdftoppm.exe" -ErrorAction SilentlyContinue |
             Select-Object -First 1 -ExpandProperty DirectoryName
         Add-Content -Path $env:GITHUB_PATH -Value $popplerBin
-
-    - name: Install LibreOffice for .doc tests (Ubuntu)
-      if: runner.os == 'Linux'
-      uses: awalsh128/cache-apt-pkgs-action@v1
-      with:
-        # Full meta-package avoids a headless UNO crash seen with libreoffice-writer alone.
-        packages: libreoffice dbus-x11
-        version: 1.1
-
-    - name: Install LibreOffice for .doc tests (macOS)
-      if: runner.os == 'macOS'
-      shell: bash
-      run: brew install --cask libreoffice
-
-    - name: Install LibreOffice for .doc tests (Windows)
-      if: runner.os == 'Windows'
-      shell: pwsh
-      run: |
-        choco install libreoffice-fresh -y
         # Add LibreOffice (soffice.exe) to PATH for the .doc parser
         Add-Content -Path $env:GITHUB_PATH -Value "C:\Program Files\LibreOffice\program"
 
