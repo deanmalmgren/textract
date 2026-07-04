@@ -45,8 +45,12 @@ class BaseParser:
         # input byte strings and converting them to a predictable
         # output encoding
         # http://nedbatchelder.com/text/unipain/unipain.html#35
-        byte_string = self.extract(filename, **kwargs)
-        unicode_string = self.decode(byte_string, input_encoding)
+        #
+        # input_encoding is also forwarded to extract() so parsers that
+        # must decode text before parsing structure (csv, json, eml, etc)
+        # can honor it directly instead of each inventing their own kwarg.
+        extracted = self.extract(filename, input_encoding=input_encoding, **kwargs)
+        unicode_string = self.decode(extracted, input_encoding)
         return self.encode(unicode_string, output_encoding)
 
     def decode(self, text, input_encoding=None):

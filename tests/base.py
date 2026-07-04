@@ -264,6 +264,21 @@ class BaseParserTestCase(GenericUtilities):
             raise AssertionError(diff_msg)
         Path(temp_filename).unlink()
 
+    def assert_input_encoding_respected(self, filename_root, encoding):
+        """Verify a non-UTF-8-encoded input file decodes correctly when
+        ``input_encoding`` is passed explicitly, via both the Python API
+        and the CLI. ``filename_root`` points at a fixture pair
+        ``{filename_root}.{self.extension}`` (encoded with ``encoding``)
+        and ``{filename_root}.txt`` (the expected UTF-8 text).
+        """
+        d = self.get_extension_directory()
+        filename = f"{d}/{filename_root}.{self.extension}"
+        expected_filename = f"{d}/{filename_root}.txt"
+        self.compare_python_output(filename, expected_filename, input_encoding=encoding)
+        self.compare_cli_output(
+            filename, expected_filename, **{"input-encoding": encoding}
+        )
+
     def compare_python_output(self, filename, expected_filename=None, **kwargs):
         if expected_filename is None:
             expected_filename = self.get_expected_filename(filename, **kwargs)

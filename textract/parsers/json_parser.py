@@ -10,9 +10,10 @@ class Parser(BaseParser):
     from mongodb dumps, for example.
     """
 
-    def extract(self, filename, encoding='utf-8', **kwargs):
-        with Path(filename).open(encoding=encoding) as raw:
-            deserialized_json = json.load(raw)
+    def extract(self, filename, input_encoding=None, **kwargs):
+        raw_bytes = Path(filename).read_bytes()
+        text = self.decode(raw_bytes, input_encoding)
+        deserialized_json = json.loads(text)
         return self.get_text(deserialized_json)
 
     def get_text(self, deserialized_json):

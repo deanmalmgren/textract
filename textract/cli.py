@@ -11,7 +11,7 @@ from pathlib import Path
 import argcomplete
 
 from . import VERSION
-from .parsers import DEFAULT_ENCODING, _get_available_extensions
+from .parsers import DEFAULT_OUTPUT_ENCODING, _get_available_extensions
 
 
 class AddToNamespaceAction(argparse.Action):
@@ -59,10 +59,23 @@ def get_parser():
     parser.add_argument(
         "-e",
         "--encoding",
+        dest="output_encoding",
         type=str,
-        default=DEFAULT_ENCODING,
+        default=DEFAULT_OUTPUT_ENCODING,
         choices=_get_available_encodings(),
         help="Specify the encoding of the output.",
+    )
+    parser.add_argument(
+        "-i",
+        "--input-encoding",
+        dest="input_encoding",
+        type=str,
+        default=None,
+        choices=_get_available_encodings(),
+        help=(
+            "Specify the encoding of the input file. If omitted, the "
+            "encoding is auto-detected."
+        ),
     )
     parser.add_argument(
         "--extension",
