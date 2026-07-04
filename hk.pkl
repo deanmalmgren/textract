@@ -1,0 +1,45 @@
+// Install with `hk install --mise` to ensure local tools are available
+
+amends "package://github.com/jdx/hk/releases/download/v1.49.0/hk@1.49.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.49.0/hk@1.49.0#/Builtins.pkl"
+
+min_hk_version = "1.49.0"
+
+local linters = new Mapping<String, Step> {
+    ["ruff"] = Builtins.ruff
+    ["ruff-format"] = Builtins.ruff_format
+    ["pyright"] {
+        glob = "*.py"
+        check = "uv run pyright"
+    }
+    ["check-added-large-files"] = Builtins.check_added_large_files
+    ["check-merge-conflict"] = Builtins.check_merge_conflict
+    ["check-symlinks"] = Builtins.check_symlinks
+    ["detect-private-key"] = Builtins.detect_private_key
+    // tests/ fixtures are raw output from real tools/libraries and preserve
+    // their original line endings and whitespace on purpose; don't "fix" them
+    ["mixed-line-ending"] = (Builtins.mixed_line_ending) { exclude = List("tests/**") }
+    ["trailing-whitespace"] = (Builtins.trailing_whitespace) { exclude = List("tests/**") }
+    ["python-check-ast"] = Builtins.python_check_ast
+    ["python-debug-statements"] = Builtins.python_debug_statements
+}
+
+hooks = new {
+    ["pre-commit"] {
+        fix = true    // automatically modify files with available linter fixes
+        stash = "git" // stashes unstaged changes while running fix steps
+        steps = linters
+    }
+    ["pre-push"] {
+        steps = linters
+    }
+
+    // "fix" and "check" are special steps for `hk fix` and `hk check` commands
+    ["fix"] {
+        fix = true
+        steps = linters
+    }
+    ["check"] {
+        steps = linters
+    }
+}
