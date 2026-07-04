@@ -80,3 +80,44 @@ class ExceptionTestCase(base.GenericUtilities, unittest.TestCase):
             textract.process(filename)
         sys.modules["os"] = temp
         os.remove(filename)
+
+    def test_shell_parser_run_passes_startupinfo_on_windows(self):
+        """On win32, run() must pass a STARTUPINFO that suppresses the console
+        window, otherwise every call pops up a cmd window (#180).
+        """
+        captured_kwargs = {}
+
+        class _FakePipe:
+            returncode = 0
+
+            def communicate(self):
+                return b"", b""
+
+        def _fake_popen(args, **kwargs):
+            captured_kwargs.update(kwargs)
+            return _FakePipe()
+
+        with pytest.MonkeyPatch.context() as monkeypatch:
+            monkeypatch.setattr(utils.sys, "platform", "win32")
+            monkeypatch.setattr(
+                utils.subprocess,
+                "STARTUPINFO",
+                lambda: type("_FakeStartupInfo", (), {"dwFlags": 0})(),
+                raising=False,
+            )
+            fake_show_window_flag = 1
+            monkeypatch.setattr(
+                utils.subprocess,
+                "STARTF_USESHOWWINDOW",
+                fake_show_window_flag,
+                raising=False,
+            )
+            monkeypatch.setattr(utils.subprocess, "Popen", _fake_popen)
+
+            parser = utils.ShellParser()
+            parser.run(["ignored-on-fake-popen"])
+
+        assert "startupinfo" in captured_kwargs
+        startupinfo = captured_kwargs["startupinfo"]
+        assert startupinfo is not None
+        assert startupinfo.dwFlags & fake_show_window_flag

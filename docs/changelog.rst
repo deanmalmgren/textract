@@ -13,7 +13,9 @@ NEXT RELEASE
 TBD
 -------------------
 
-* Minor nitpick to remove unused line (`#559`_ by `@KyleKing`_)
+* Minor nitpick to remove unused line (`#562`_ by `@KyleKing`_)
+* Utilize openpyxl for xlsx after xlrd dropped support (`#544`_ by `@KyleKing`_)
+* Prevent opening a cmd window with ``Popen()`` on Windows (`#574`_ by `@KyleKing`_)
 
 2.0.0
 -------------------
@@ -294,16 +296,21 @@ TBD
 .. _@ankushshah89: https://github.com/ankushshah89
 .. _@arvindch: https://github.com/arvindch
 .. _@barrust: https://github.com/barrust
+.. _@branchv: https://github.com/branchv
 .. _@AusIV: https://github.com/AusIV
 .. _@christomitov: https://github.com/christomitov
+.. _@dhrim: https://github.com/dhrim
 .. _@eiotec: https://github.com/eiotec
 .. _@evfredericksen: https://github.com/evfredericksen
 .. _@jaraco: https://github.com/jaraco
 .. _@jhale1805: https://github.com/jhale1805
 .. _@jsmith-mploir: https://github.com/jsmith-mploir
 .. _@kokxx: https://github.com/Kokxx
+.. _@KyleKing: https://github.com/KyleKing
 .. _@levivm: https://github.com/levivm
 .. _@lillypad: https://github.com/lillypad
+.. _@LoicGrobol: https://github.com/LoicGrobol
+.. _@mcp292: https://github.com/mcp292
 .. _@motazsaad: https://github.com/motazsaad
 .. _@onionradish: https://github.com/onionradish
 .. _@pierre-ernst: https://github.com/pierre-ernst
@@ -311,6 +318,8 @@ TBD
 .. _@ShawnMilo: https://github.com/ShawnMilo
 .. _@sirex: https://github.com/sirex
 .. _@suned: https://github.com/suned
+.. _@TheElementalOfDestruction: https://github.com/TheElementalOfDestruction
+.. _@timgates42: https://github.com/timgates42
 
 .. list of issues that have been resolved. putting links here to make
 .. the text above relatively clean
@@ -380,3 +389,14 @@ TBD
 .. _#150: https://github.com/deanmalmgren/textract/issues/150
 .. _#162: https://github.com/deanmalmgren/textract/issues/162
 .. _#411: https://github.com/deanmalmgren/textract/issues/411
+.. _#422: https://github.com/deanmalmgren/textract/pull/422
+.. _#430: https://github.com/deanmalmgren/textract/pull/430
+.. _#456: https://github.com/deanmalmgren/textract/pull/456
+.. _#495: https://github.com/deanmalmgren/textract/pull/495
+.. _#502: https://github.com/deanmalmgren/textract/pull/502
+.. _#520: https://github.com/deanmalmgren/textract/pull/520
+.. _#543: https://github.com/deanmalmgren/textract/pull/543
+.. _#544: https://github.com/deanmalmgren/textract/issues/544
+.. _#559: https://github.com/deanmalmgren/textract/pull/559
+.. _#562: https://github.com/deanmalmgren/textract/pull/562
+.. _#574: https://github.com/deanmalmgren/textract/pull/574
