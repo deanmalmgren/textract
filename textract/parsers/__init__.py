@@ -78,11 +78,15 @@ def process(
     try:
         filetype_module = importlib.import_module(rel_module, "textract.parsers")
     except ImportError as err:
-        raise exceptions.MissingModuleError(err) from err
+        raise exceptions.MissingModuleError(err, ext) from err
 
     # do the extraction
     parser = filetype_module.Parser()
-    return parser.process(filename, input_encoding, output_encoding, **kwargs)
+    try:
+        return parser.process(filename, input_encoding, output_encoding, **kwargs)
+    except exceptions.ShellError as err:
+        err.ext = ext
+        raise
 
 
 def _get_available_extensions():
