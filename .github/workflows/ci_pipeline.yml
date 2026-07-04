@@ -38,50 +38,18 @@ jobs:
             fi
           fi
 
-  changes:
-    name: Detect Changes
-    runs-on: ubuntu-latest
-    outputs:
-      # Whether to install LibreOffice (and thus run the legacy .doc tests).
-      libreoffice: ${{ steps.detect.outputs.libreoffice }}
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-      - name: Detect .doc-related changes
-        id: detect
-        shell: bash
-        run: |
-          # Always install on push (main / tags); on PRs only when the change
-          # touches .doc parsing, its tests, or the CI setup itself.
-          if [ "${{ github.event_name }}" != "pull_request" ]; then
-            echo "libreoffice=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          BASE=${{ github.event.pull_request.base.sha }}
-          HEAD=${{ github.event.pull_request.head.sha }}
-          if git diff --name-only "$BASE" "$HEAD" | grep -qE '^(textract/parsers/doc_parser\.py|textract/exceptions\.py|tests/test_doc\.py|tests/doc/|\.github/actions/setup/action\.yml|\.github/workflows/ci_pipeline\.yml)'; then
-            echo "libreoffice=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "libreoffice=false" >> "$GITHUB_OUTPUT"
-          fi
-
   test:
-    needs: changes
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
-        # On PRs, test all OSes on a single Python for fast feedback. On push
-        # to main and tags, test the full Python range before release.
-        python-version: ${{ github.event_name == 'pull_request' && fromJSON('["3.14"]') || fromJSON('["3.9", "3.14"]') }}
+        python-version: ["3.9", "3.14"]
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
         with:
           python-version: ${{ matrix.python-version }}
-          install-libreoffice: ${{ needs.changes.outputs.libreoffice }}
 
       - name: Run tests
         id: tests

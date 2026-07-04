@@ -6,13 +6,6 @@ inputs:
   python-version:
     description: Python version
     required: true
-  install-libreoffice:
-    description: >-
-      Install LibreOffice so the legacy .doc tests run. When "false" the .doc
-      tests skip automatically (soffice is absent). Kept off for PRs that don't
-      touch .doc-related files to avoid the heavy install.
-    required: false
-    default: "true"
 
 runs:
   using: composite
@@ -48,7 +41,7 @@ runs:
         Add-Content -Path $env:GITHUB_PATH -Value $popplerBin
 
     - name: Install LibreOffice for .doc tests (Ubuntu)
-      if: runner.os == 'Linux' && inputs.install-libreoffice == 'true'
+      if: runner.os == 'Linux'
       uses: awalsh128/cache-apt-pkgs-action@v1
       with:
         # Full meta-package avoids a headless UNO crash seen with libreoffice-writer alone.
@@ -56,12 +49,12 @@ runs:
         version: 1.1
 
     - name: Install LibreOffice for .doc tests (macOS)
-      if: runner.os == 'macOS' && inputs.install-libreoffice == 'true'
+      if: runner.os == 'macOS'
       shell: bash
       run: brew install --cask libreoffice
 
     - name: Install LibreOffice for .doc tests (Windows)
-      if: runner.os == 'Windows' && inputs.install-libreoffice == 'true'
+      if: runner.os == 'Windows'
       shell: pwsh
       run: |
         choco install libreoffice-fresh -y
