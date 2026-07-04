@@ -35,6 +35,11 @@ First install system packages using apt-get, then install textract from PyPI:
 
 .. note::
 
+    ``libreoffice-writer`` is *optional*: it is only needed to extract legacy
+    ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
+
+.. note::
+
     It may also be necessary to install ``zlib1g-dev`` on Docker
     instances of Ubuntu. See `issue #19
     <https://github.com/deanmalmgren/textract/pull/19>`_ for details
@@ -52,6 +57,11 @@ First install XQuartz and system packages, then install textract from PyPI:
     pip install textract
     # or with uv
     uv pip install textract
+
+.. note::
+
+    ``libreoffice`` is *optional*: it is only needed to extract legacy
+    ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
 
 .. note::
 
@@ -102,6 +112,11 @@ Install `Chocolatey <https://chocolatey.org/install>`_ then install system packa
 
 .. note::
 
+    ``libreoffice-fresh`` is *optional*: it is only needed to extract legacy
+    ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
+
+.. note::
+
     Two parsers are **not supported on Windows**:
 
     - ``.mp3`` / ``.ogg``: `sox.portable <https://community.chocolatey.org/packages/sox.portable>`_
@@ -127,6 +142,11 @@ First install system packages using pkg, then install textract from PyPI:
     pip install textract
     # or with uv
     uv pip install textract
+
+.. note::
+
+    ``editors/libreoffice`` is *optional*: it is only needed to extract
+    legacy ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
 
 .. _converting-legacy-doc-files:
 
