@@ -5,9 +5,20 @@ import "package://github.com/jdx/hk/releases/download/v1.49.0/hk@1.49.0#/Builtin
 
 min_hk_version = "1.49.0"
 
+// `ruff` builtin steps invoke the global `ruff` binary. Run it via `uv run`
+// instead so hk uses the version pinned in pyproject.toml, matching
+// `make lint`/`make fix` and the `uv run pyright` step below.
 local linters = new Mapping<String, Step> {
-    ["ruff"] = Builtins.ruff
-    ["ruff-format"] = Builtins.ruff_format
+    ["ruff"] {
+        glob = List("**/*.py")
+        check = "uv run ruff check {{files}}"
+        fix = "uv run ruff check --fix {{files}}"
+    }
+    ["ruff-format"] {
+        glob = List("**/*.py")
+        check_diff = "uv run ruff format --diff {{files}}"
+        fix = "uv run ruff format {{files}}"
+    }
     ["pyright"] {
         glob = "*.py"
         check = "uv run pyright"
