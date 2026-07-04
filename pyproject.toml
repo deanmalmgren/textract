@@ -24,6 +24,7 @@ dependencies = [
     "python-pptx>=0.6.18",
     "openpyxl>=3.0.0",  # Replaces xlrd for Excel file support (xlrd 2.0+ dropped xlsx support)
     "xlrd>=2.0.0",  # Supports legacy .xls files (openpyxl does not support .xls)
+    "odfpy>=1.4.1",  # Supports .ods files (OpenDocument Spreadsheet)
 ]
 
 [project.optional-dependencies]
@@ -75,4 +76,5 @@ addopts = ["-v", "--tb=short", "-ra"]
 python_classes = ["*TestCase", "Test*"]
 filterwarnings = [
     "ignore:aifc was removed in Python 3.13:DeprecationWarning:speech_recognition",
+    "ignore:.* extension is not supported and will be removed:UserWarning:openpyxl",
 ]

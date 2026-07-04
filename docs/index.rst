@@ -68,6 +68,8 @@ file types by either mentioning them on the `issue tracker
 
 * ``.odt`` via python builtins
 
+* ``.ods`` via `odfpy <https://pypi.python.org/pypi/odfpy>`_
+
 * ``.ogg`` via `sox`_, `SpeechRecognition`_, and `pocketsphinx`_
 
 * ``.pdf`` via `pdftotext`_ (default) or `pdfminer.six`_
