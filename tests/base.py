@@ -5,6 +5,7 @@ import tempfile
 from pathlib import Path
 
 import textract
+from textract import exceptions
 
 
 def _normalize_whitespace(content: bytes) -> list[bytes]:
@@ -277,6 +278,36 @@ class BaseParserTestCase(GenericUtilities):
         self.compare_python_output(filename, expected_filename, input_encoding=encoding)
         self.compare_cli_output(
             filename, expected_filename, **{"input-encoding": encoding}
+        )
+
+    def assert_invalid_input_encoding_raises(self, filename_root, wrong_encoding):
+        """Verify a valid-but-wrong ``input_encoding`` raises
+        :class:`textract.exceptions.InvalidInputEncoding` via the Python
+        API, and exits non-zero with a friendly message (no raw
+        traceback) via the CLI.
+        """
+        d = self.get_extension_directory()
+        filename = f"{d}/{filename_root}.{self.extension}"
+
+        try:
+            textract.process(filename, input_encoding=wrong_encoding)
+        except exceptions.InvalidInputEncoding:
+            pass
+        else:
+            raise AssertionError(
+                "expected InvalidInputEncoding to be raised for "
+                f"input_encoding={wrong_encoding!r}"
+            )
+
+        result = subprocess.run(
+            ["textract", "--input-encoding", wrong_encoding, filename],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+        assert result.returncode != 0, "expected non-zero exit code"
+        assert b"Traceback" not in result.stderr, (
+            f"raw traceback leaked to stderr: {result.stderr!r}"
         )
 
     def compare_python_output(self, filename, expected_filename=None, **kwargs):

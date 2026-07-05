@@ -18,11 +18,24 @@ parsing a pdf like this::
     import textract
     text = textract.process('path/to/a.pdf', method='pdfminer')
 
-or to specify a particular output encoding (input encodings are
-inferred using `chardet <https://github.com/chardet/chardet>`_)::
+or to specify a particular output encoding::
 
     import textract
     text = textract.process('path/to/file.extension', encoding='ascii')
+
+By default, input encodings are inferred using `chardet
+<https://github.com/chardet/chardet>`_. For parsers that consume decoded
+text (csv, eml, html, json), you can override this and specify the
+input file's encoding explicitly, which is useful when chardet's
+guess is wrong or its confidence is too low (e.g. for short files)::
+
+    import textract
+    text = textract.process('path/to/file.csv', input_encoding='cp1251')
+
+The same option is available on the command line as ``--input-encoding``.
+If ``input_encoding`` doesn't match the file's actual encoding, a
+:class:`textract.exceptions.InvalidInputEncoding` error is raised
+rather than silently producing corrupted text.
 
 When the file name has no extension, you specify the file's extension as an argument
 to ``textract.process`` like this::
@@ -84,6 +97,17 @@ class includes some convenience methods for streamlining access to the
 command line.
 
 .. autoclass:: textract.parsers.utils.ShellParser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Parsers that consume decoded text rather than a filename (csv, eml,
+html, json) can instead inherit from
+``textract.parsers.utils.TextParser``, which reads and decodes the
+file (honoring ``input_encoding``) before handing the text to
+:meth:`.TextParser.extract_from_text`.
+
+.. autoclass:: textract.parsers.utils.TextParser
     :members:
     :undoc-members:
     :show-inheritance:

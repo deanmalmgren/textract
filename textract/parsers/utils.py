@@ -65,7 +65,10 @@ class BaseParser:
 
         # use the provided encoding
         if input_encoding:
-            return text.decode(input_encoding)
+            try:
+                return text.decode(input_encoding)
+            except UnicodeDecodeError as err:
+                raise exceptions.InvalidInputEncoding(input_encoding, str(err)) from err
 
         # use chardet to automatically detect the encoding text if no encoding is provided
         result = chardet.detect(text)

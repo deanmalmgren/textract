@@ -1,12 +1,11 @@
 import re
-from pathlib import Path
 
 from bs4 import BeautifulSoup
 
-from .utils import BaseParser
+from .utils import TextParser
 
 
-class Parser(BaseParser):
+class Parser(TextParser):
     """Extract text from html file using beautifulsoup4. Filter text to
     only show the visible parts of the page. Insipration from `here
     <http://stackoverflow.com/a/1983219/564709>`_.
@@ -153,9 +152,8 @@ class Parser(BaseParser):
                 elem.unwrap()
         return soup
 
-    def extract(self, filename, **kwargs):
-        with Path(filename).open("rb") as stream:
-            soup = BeautifulSoup(stream, "lxml")
+    def extract_from_text(self, text, **kwargs):
+        soup = BeautifulSoup(text, "lxml")
 
         # Convert tables to ASCII ones
         soup = self._replace_tables(soup)
