@@ -17,6 +17,7 @@ TBD
 * Utilize openpyxl for xlsx after xlrd dropped support (`#544`_ by `@KyleKing`_)
 * Prevent opening a cmd window with ``Popen()`` on Windows (`#574`_ by `@KyleKing`_)
 * Replace unmaintained ``antiword`` with LibreOffice for ``.doc`` extraction (`#582`_ by `@KyleKing`_)
+* Report which file extension triggered a missing module or missing executable error (`#575`_ by `@KyleKing`_)
 
 2.0.0
 -------------------
@@ -401,4 +402,5 @@ TBD
 .. _#559: https://github.com/deanmalmgren/textract/pull/559
 .. _#562: https://github.com/deanmalmgren/textract/pull/562
 .. _#574: https://github.com/deanmalmgren/textract/pull/574
+.. _#575: https://github.com/deanmalmgren/textract/pull/575
 .. _#582: https://github.com/deanmalmgren/textract/pull/582

@@ -3,7 +3,7 @@ Route the request to the appropriate parser based on file type.
 """
 
 import glob
-import importlib
+import importlib.util
 import re
 from pathlib import Path
 
@@ -68,17 +68,25 @@ def process(
     # the _parser extension
     rel_module = ext + _FILENAME_SUFFIX
 
-    # If we can't import the module, the file extension isn't currently
-    # supported
+    # if there's no parser module for this extension at all, the file
+    # extension isn't currently supported
+    if importlib.util.find_spec("textract.parsers" + rel_module) is None:
+        raise exceptions.ExtensionNotSupported(ext)
+
+    # the parser module exists, but importing it can still fail if one
+    # of its third-party dependencies isn't installed
     try:
         filetype_module = importlib.import_module(rel_module, "textract.parsers")
     except ImportError as err:
-        raise exceptions.ExtensionNotSupported(ext) from err
+        raise exceptions.MissingModuleError(err, ext) from err
 
     # do the extraction
-
     parser = filetype_module.Parser()
-    return parser.process(filename, input_encoding, output_encoding, **kwargs)
+    try:
+        return parser.process(filename, input_encoding, output_encoding, **kwargs)
+    except exceptions.ShellError as err:
+        err.ext = ext
+        raise
 
 
 def _get_available_extensions():
