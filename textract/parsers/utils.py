@@ -9,6 +9,7 @@ import os
 import subprocess
 import sys
 import tempfile
+from pathlib import Path
 
 import chardet
 
@@ -45,12 +46,8 @@ class BaseParser:
         # input byte strings and converting them to a predictable
         # output encoding
         # http://nedbatchelder.com/text/unipain/unipain.html#35
-        #
-        # input_encoding is also forwarded to extract() so parsers that
-        # must decode text before parsing structure (csv, json, eml, etc)
-        # can honor it directly instead of each inventing their own kwarg.
-        extracted = self.extract(filename, input_encoding=input_encoding, **kwargs)
-        unicode_string = self.decode(extracted, input_encoding)
+        byte_string = self.extract(filename, **kwargs)
+        unicode_string = self.decode(byte_string, input_encoding)
         return self.encode(unicode_string, output_encoding)
 
     def decode(self, text, input_encoding=None):
@@ -137,3 +134,27 @@ class ShellParser(BaseParser):
         handle, filename = tempfile.mkstemp()
         os.close(handle)
         return filename
+
+
+class TextParser(BaseParser):
+    """The :class:`.TextParser` extends the :class:`.BaseParser` for
+    parsers that operate on decoded text rather than a filename. The
+    file is read and decoded here, honoring ``input_encoding``, so
+    subclasses implement :meth:`.TextParser.extract_from_text` and never
+    deal with byte-encodings themselves.
+    """
+
+    def extract(self, filename, input_encoding=None, **kwargs):
+        raw_bytes = Path(filename).read_bytes()
+        text = self.decode(raw_bytes, input_encoding)
+        return self.extract_from_text(text, **kwargs)
+
+    def extract_from_text(self, text, **kwargs) -> str:
+        """This method must be overwritten by child classes. It receives
+        the already-decoded contents of the file instead of a filename.
+        """
+        raise NotImplementedError("must be overwritten by child classes")
+
+    def process(self, filename, input_encoding, output_encoding="utf8", **kwargs):
+        unicode_string = self.extract(filename, input_encoding=input_encoding, **kwargs)
+        return self.encode(unicode_string, output_encoding)

@@ -1,17 +1,14 @@
 import csv
 import io
-from pathlib import Path
 
-from .utils import BaseParser
+from .utils import TextParser
 
 
-class Parser(BaseParser):
+class Parser(TextParser):
     """Extract text from comma separated values files (.csv)."""
 
     delimiter = ","
 
-    def extract(self, filename, input_encoding=None, **kwargs):
-        raw_bytes = Path(filename).read_bytes()
-        text = self.decode(raw_bytes, input_encoding)
+    def extract_from_text(self, text, **kwargs):
         reader = csv.reader(io.StringIO(text), delimiter=self.delimiter)
         return "\n".join(["\t".join(row) for row in reader])

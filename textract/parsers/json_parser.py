@@ -1,18 +1,15 @@
 import json
-from pathlib import Path
 
-from .utils import BaseParser
+from .utils import TextParser
 
 
-class Parser(BaseParser):
+class Parser(TextParser):
     """Extract all of the string values of a json file (no keys as those
     are, in some sense, markup). This is useful for parsing content
     from mongodb dumps, for example.
     """
 
-    def extract(self, filename, input_encoding=None, **kwargs):
-        raw_bytes = Path(filename).read_bytes()
-        text = self.decode(raw_bytes, input_encoding)
+    def extract_from_text(self, text, **kwargs):
         deserialized_json = json.loads(text)
         return self.get_text(deserialized_json)
 
