@@ -1,9 +1,9 @@
 import json
 
-from .utils import TextParser
+from .utils import NativeParser
 
 
-class Parser(TextParser):
+class Parser(NativeParser):
     """Extract all of the string values of a json file (no keys as those
     are, in some sense, markup). This is useful for parsing content
     from mongodb dumps, for example.

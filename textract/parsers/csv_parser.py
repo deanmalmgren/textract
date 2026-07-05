@@ -1,10 +1,10 @@
 import csv
 import io
 
-from .utils import TextParser
+from .utils import NativeParser
 
 
-class Parser(TextParser):
+class Parser(NativeParser):
     """Extract text from comma separated values files (.csv)."""
 
     delimiter = ","
