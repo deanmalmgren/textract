@@ -31,12 +31,6 @@ runs:
       if: runner.os == 'macOS'
       shell: bash
       run: |
-        # aws/tap ships preinstalled on GH macOS runners and is untrusted under
-        # Homebrew's tap-trust feature, so every brew command prints a warning
-        # and future Homebrew versions may hard-fail. It is Amazon's official
-        # tap, so trust it explicitly (|| true keeps this a no-op if a future
-        # runner image no longer preinstalls it).
-        brew trust aws/tap || true
         brew install tesseract sox lame mad ghostscript unrtf poppler
         brew install --cask libreoffice
 
