@@ -64,9 +64,28 @@ jobs:
           name: test-results-${{ matrix.os }}-py${{ matrix.python-version }}
           path: test-results.xml
 
+  cx-freeze:
+    name: cx_Freeze Smoke Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup
+        with:
+          python-version: "3.13"
+
+      - name: Install cx_Freeze
+        run: uv sync --group freeze
+
+      - name: Build and run frozen executable smoke test
+        run: uv run python tests/freeze/smoke_test.py
+
   release:
     name: Release and Publish
-    needs: [test]
+    needs: [test, cx-freeze]
     if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
     runs-on: ubuntu-latest
     environment:

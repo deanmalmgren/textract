@@ -48,6 +48,7 @@ dev = [
     "ruff>=0.14.13",
     "textract[pocketsphinx]",
 ]
+freeze = ["cx-Freeze>=7.0"]
 vulnerable_packages = [
     "Pygments>=2.20.0",
     "cryptography>=48.0.1",
