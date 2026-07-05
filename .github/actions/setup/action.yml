@@ -29,7 +29,18 @@ runs:
       if: runner.os == 'Windows'
       shell: pwsh
       run: |
-        choco install make tesseract ghostscript sox.portable poppler libreoffice-fresh -y
+        # ghostscript choco install intermittently hangs/"access is denied" on GH Windows
+        # runners: https://github.com/actions/runner-images/issues/11808
+        $maxAttempts = 3
+        for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+            choco install make tesseract ghostscript sox.portable poppler libreoffice-fresh -y --no-progress --execution-timeout=600
+            if ($LASTEXITCODE -eq 0) { break }
+            if ($attempt -eq $maxAttempts) {
+                throw "choco install failed after $maxAttempts attempts (exit code $LASTEXITCODE)"
+            }
+            Write-Host "choco install failed (exit code $LASTEXITCODE), retrying ($attempt/$maxAttempts)..."
+            Start-Sleep -Seconds 15
+        }
         # Add tesseract installation directory to PATH
         Add-Content -Path $env:GITHUB_PATH -Value "C:\Program Files\Tesseract-OCR"
         # For ghostscript, the version number is in the path, so find it dynamically

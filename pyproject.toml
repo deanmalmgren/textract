@@ -9,10 +9,10 @@ description = "extract text from any document. no muss. no fuss. "
 license = {text = "MIT"}
 name = "textract"
 readme = "README.rst"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 version = "2.0.0"
 dependencies = [
-    "Pillow>=9.0.0",
+    "Pillow>=12.2.0",
     "SpeechRecognition>=3.8.1",
     "argcomplete>=3.6.3",
     "beautifulsoup4>=4.8.0",
@@ -44,15 +44,16 @@ Repository = "https://github.com/deanmalmgren/textract"
 [dependency-groups]
 dev = [
     "pyright>=1.1.408",
-    "pytest>=7.2.1",
+    "pytest>=9.0.3",
     "ruff>=0.14.13",
     "textract[pocketsphinx]",
 ]
 vulnerable_packages = [
     "Pygments>=2.20.0",
-    "cryptography>=46.0.6",
-    # "pillow>=12.1.1",  # PLANNED:Requires Python 3.10
-    # "requests>=2.33.0",  # PLANNED:Requires Python 3.10
+    "cryptography>=48.0.1",
+    "idna>=3.15",
+    "requests>=2.33.0",
+    "urllib3>=2.7.0",
 ]
 
 [tool.uv.build-backend]
@@ -61,12 +62,12 @@ module-root = ""
 
 [tool.pyright]
 include = ["textract", "tests"]
-pythonVersion = "3.9"
+pythonVersion = "3.10"
 
 [tool.ruff]
 # Docs: https://github.com/charliermarsh/ruff
 # Tip: uv run ruff rule RUF100
-target-version = 'py39'
+target-version = 'py310'
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I"]
