@@ -38,6 +38,21 @@ jobs:
             fi
           fi
 
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup
+        with:
+          python-version: "3.10"
+
+      - name: Run ruff
+        run: uv run ruff check
+
+      - name: Run pyright
+        run: uv run pyright
+
   test:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -77,15 +92,12 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Install cx_Freeze
-        run: uv sync --group freeze
-
       - name: Build and run frozen executable smoke test
         run: uv run python tests/freeze/smoke_test.py
 
   release:
     name: Release and Publish
-    needs: [test, cx-freeze]
+    needs: [lint, test, cx-freeze]
     if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
     runs-on: ubuntu-latest
     environment:

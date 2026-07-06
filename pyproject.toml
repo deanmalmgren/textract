@@ -57,6 +57,9 @@ vulnerable_packages = [
     "urllib3>=2.7.0",
 ]
 
+[tool.uv]
+default-groups = ["dev", "freeze"]
+
 [tool.uv.build-backend]
 module-name = "textract"
 module-root = ""
