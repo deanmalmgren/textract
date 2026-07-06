@@ -57,6 +57,18 @@ jobs:
         env:
           SKIP_NETWORK_TESTS: "true"
 
+      # Runs once (not matrixed) since this only guards that the literal
+      # shell syntax in docs/command_line_interface.rst still works verbatim,
+      # a narrower check than the streaming/stdin coverage pytest already
+      # runs on every OS/Python combination above.
+      - name: Verify CLI stdin pipe example from the docs
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.14'
+        run: |
+          cat tests/csv/raw_text.csv \
+            | uv run textract --extension csv --input-encoding utf_8 - \
+            > /tmp/piped-output.txt
+          diff tests/csv/raw_text.txt /tmp/piped-output.txt
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v7

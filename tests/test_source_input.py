@@ -96,12 +96,12 @@ class SourceInputTestCase(unittest.TestCase):
         path = _CASES["csv"]
         source = Source.from_path(path, extension="csv")
         result = csv_parser.Parser().process_source(source, input_encoding="utf-8")
-        assert result == textract.process(str(path))
+        assert result == (path.parent / "raw_text.txt").read_bytes()
         assert source._data is None
 
     def test_csv_streams_from_stdin_pipe(self):
         path = _CASES["csv"]
-        expected = textract.process(str(path))
+        expected = (path.parent / "raw_text.txt").read_bytes()
         result = subprocess.run(
             ["textract", "--extension", "csv", "--input-encoding", "utf_8", "-"],
             input=path.read_bytes(),
@@ -113,7 +113,7 @@ class SourceInputTestCase(unittest.TestCase):
 
     def test_cli_stdin(self):
         path = _CASES["pdf"]
-        expected = textract.process(str(path))
+        expected = (path.parent / "raw_text.txt").read_bytes()
         result = subprocess.run(
             ["textract", "--extension", "pdf", "-"],
             input=path.read_bytes(),
