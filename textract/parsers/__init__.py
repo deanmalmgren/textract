@@ -5,9 +5,13 @@ Route the request to the appropriate parser based on file type.
 import glob
 import importlib.util
 import re
+import sys
+import warnings
 from pathlib import Path
+from typing import BinaryIO
 
 from textract import exceptions
+from textract.parsers.utils import Source
 
 # Dictionary structure for synonymous file extension types
 EXTENSION_SYNONYMS = {
@@ -39,29 +43,86 @@ def process(
     """This is the core function used for extracting text. It routes the
     ``filename`` to the appropriate parser and returns the extracted
     text as a byte-string encoded with ``encoding``.
+
+    ``filename`` may be ``"-"`` to read the document from ``stdin`` (beta),
+    in which case ``extension`` is required.
     """
+    if filename == "-":
+        return process_stream(
+            sys.stdin.buffer,
+            extension=extension,
+            input_encoding=input_encoding,
+            output_encoding=output_encoding,
+            **kwargs,
+        )
 
     # make sure the filename exists
     if not Path(filename).exists():
         raise exceptions.MissingFileError(filename)
 
-    # get the filename extension, which is something like .docx for
-    # example, and import the module dynamically using importlib. This
-    # is a relative import so the name of the package is necessary
-    # normally, file extension will be extracted from the file name
-    # if the file name has no extension, then the user can pass the
-    # extension as an argument
-    if extension:
-        ext = extension
-        # check if the extension has the leading .
+    source = Source.from_path(filename, extension=extension)
+    return _process_source(source, input_encoding, output_encoding, **kwargs)
+
+
+def process_bytes(
+    data: bytes,
+    extension: str | None,
+    input_encoding=None,
+    output_encoding=DEFAULT_OUTPUT_ENCODING,
+    **kwargs,
+):
+    """Beta: extract text from in-memory ``data`` (e.g. an HTTP response
+    body), no temp file required by the caller. ``extension`` is required to
+    route to a parser since there is no filename to sniff. See issue #300.
+    """
+    _warn_beta()
+    source = Source.from_bytes(data, extension=extension)
+    return _process_source(source, input_encoding, output_encoding, **kwargs)
+
+
+def process_stream(
+    stream: BinaryIO,
+    extension: str | None,
+    input_encoding=None,
+    output_encoding=DEFAULT_OUTPUT_ENCODING,
+    **kwargs,
+):
+    """Beta: extract text from a readable binary ``stream`` (e.g.
+    ``sys.stdin.buffer`` or an open file object). ``extension`` is required.
+    See issues #97 and #300.
+    """
+    _warn_beta()
+    source = Source.from_stream(stream, extension=extension)
+    return _process_source(source, input_encoding, output_encoding, **kwargs)
+
+
+def _warn_beta():
+    warnings.warn(
+        "textract's bytes/stream input (process_bytes, process_stream, and "
+        "`-` stdin) is beta; the Source API may change in a future release.",
+        FutureWarning,
+        stacklevel=3,
+    )
+
+
+def _resolve_extension(source: Source) -> str:
+    """Resolve the routing extension from an explicit override or the
+    source's filename, applying the leading-dot/lowercase/synonym rules.
+    """
+    if source.extension:
+        ext = source.extension
         if not ext.startswith("."):
             ext = "." + ext
         ext = ext.lower()
+    elif source.filename is not None:
+        ext = source.filename.suffix.lower()
     else:
-        ext = Path(filename).suffix.lower()
+        raise exceptions.ExtensionNotSupported("")
+    return EXTENSION_SYNONYMS.get(ext, ext)
 
-    # check the EXTENSION_SYNONYMS dictionary
-    ext = EXTENSION_SYNONYMS.get(ext, ext)
+
+def _process_source(source, input_encoding, output_encoding, **kwargs):
+    ext = _resolve_extension(source)
 
     # to avoid conflicts with packages that are installed globally
     # (e.g. python's json module), all extension parser modules have
@@ -83,7 +144,7 @@ def process(
     # do the extraction
     parser = filetype_module.Parser()
     try:
-        return parser.process(filename, input_encoding, output_encoding, **kwargs)
+        return parser.process_source(source, input_encoding, output_encoding, **kwargs)
     except (exceptions.ShellError, exceptions.InvalidInputEncoding) as err:
         err.ext = ext
         raise
