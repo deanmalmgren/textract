@@ -27,16 +27,15 @@ class Source:
     The core materializes the input into whatever form a parser declares it
     needs via :meth:`as_bytes` / :meth:`as_path` / :meth:`as_text_stream`, so
     parsers stop owning file I/O. This is what lets textract accept
-    in-memory content and streams (issues #300, #97) without every parser
-    learning about it. ``as_text_stream`` is the only one of the three that
-    avoids buffering the whole input in memory (the other two materialize
-    it, since ``as_bytes`` reads/drains it all and ``as_path`` spools it to
-    disk).
+    in-memory content and streams without every parser learning about it.
+    ``as_text_stream`` is the only one of the three that avoids buffering the
+    whole input in memory (the other two materialize it, since ``as_bytes``
+    reads/drains it all and ``as_path`` spools it to disk)
 
     Not frozen and single-use when backed by a stream: the stream is drained
     on the first :meth:`as_bytes`/:meth:`as_path` call and the bytes cached,
     and calling :meth:`as_text_stream` after that reads from the cache
-    rather than the (already-drained) stream.
+    rather than the (already-drained) stream
     """
 
     def __init__(
@@ -79,8 +78,7 @@ class Source:
     def as_path(self) -> Iterator[Path]:
         """Yield a real filesystem path for parsers that shell out to an
         external program. Uses the original file when there is one, otherwise
-        spools the bytes to a temp file that is removed on exit (the #300
-        workaround, done once inside the library).
+        spools the bytes to a temp file that is removed on exit
         """
         if self.filename is not None:
             yield self.filename
@@ -269,16 +267,6 @@ class DecodedParser(BaseParser):
     ``input_encoding``, so subclasses implement
     :meth:`.DecodedParser.extract_from_text` and never deal with byte-encodings
     themselves.
-
-    "Native" originally meant a pure-Python implementation, in contrast to
-    :class:`.ShellParser` spawning an external program (see #573). This class
-    reuses the name for a second, unrelated distinction: which input form a
-    parser needs (decoded text, vs. :class:`.BytesParser`'s raw bytes, vs.
-    :class:`.PathParser`'s filesystem path). The two don't line up: docx is
-    just as much a pure-Python/native implementation as csv, but it's a
-    BytesParser, not a DecodedParser, because it needs raw bytes rather than
-    decoded text. Read "native" here as "input kind: text," not "not shelling
-    out."
     """
 
     def extract_from_text(self, text, **kwargs) -> str:
@@ -288,14 +276,9 @@ class DecodedParser(BaseParser):
         raise NotImplementedError("must be overwritten by child classes")
 
     def extract_from_lines(self, lines, **kwargs) -> str:
-        """Beta streaming hook (issue #97): override alongside
-        :meth:`extract_from_text` for formats whose parsing library can
-        consume an iterator of decoded lines incrementally instead of one
-        big string (see ``csv_parser.py``). ``process_source`` only takes
-        this path when ``input_encoding`` is explicit, since auto-detection
-        needs the full byte content anyway. The default buffers ``lines``
-        into a single string and reuses ``extract_from_text``, so parsers
-        that haven't been migrated keep working unchanged.
+        """Beta streaming hook: override alongside :meth:`extract_from_text`
+        for formats whose parsing library can consume an iterator of decoded
+        lines incrementally instead of one big string (see ``csv_parser.py``)
         """
         return self.extract_from_text("".join(lines), **kwargs)
 

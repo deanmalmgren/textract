@@ -1,32 +1,33 @@
-"""Beta: bytes/stream/stdin input (issues #300, #97).
+"""Beta: bytes/stream/stdin input.
 
 Proves the new public entry points (``process_bytes``, ``process_stream``,
 and CLI ``-`` stdin) produce the same text as ``process(filename)`` across the
 three parser input kinds:
 
 - text  (csv -> DecodedParser, decoded in memory, or streamed line-by-line
-  when ``input_encoding`` is explicit, see ``test_csv_streams_without_
-  buffering_full_input`` and ``StreamingMemoryTestCase`` below)
+  when ``input_encoding`` is explicit, see
+  ``test_csv_streams_without_buffering_full_input`` and
+  ``StreamingMemoryTestCase`` below)
 - bytes (docx -> BytesParser, opened in memory, no temp file)
 - path  (pdf -> shell parser, Source spools a temp file for pdftotext)
 
-Next steps beyond this tracer bullet:
+Next steps beyond this tracer MVP:
 
 - Only csv has a real ``extract_from_lines`` streaming implementation.
   html/eml/json/txt all parse their whole document at once (DOM, MIME
   message, JSON), so they keep buffering. Worth revisiting per-format if a
-  truly huge file shows up in practice.
+  truly huge file shows up in practice
 - Streaming still requires an explicit ``input_encoding``, since
   auto-detection (chardet) scores confidence off the full byte content,
   which would force buffering anyway. A
   ``chardet.universaldetector.UniversalDetector`` fed incrementally could
-  recover auto-detection without giving up streaming.
+  recover auto-detection without giving up streaming
 - BytesParser formats (docx/xlsx/pptx/epub/msg) still materialize the whole
   blob in memory by design (their libraries need to seek a zip's central
   directory). That's a memory-vs-temp-file tradeoff, not a missed
-  optimization, so it isn't "streaming" in the same sense as the text path.
+  optimization, so it isn't "streaming" in the same sense as the text path
 - Streaming only applies to the input side: process_* still returns one
-  complete string, so very large *output* isn't addressed here.
+  complete string, so very large *output* isn't addressed yet
 """
 
 import io

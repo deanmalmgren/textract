@@ -15,16 +15,6 @@ NEXT RELEASE
   for parsers that operate on decoded text. A valid but incorrect
   ``input_encoding`` now raises a friendly ``InvalidInputEncoding`` error
   instead of a raw ``UnicodeDecodeError`` (`#573`_ by `@KyleKing`_)
-* **Beta:** accept in-memory and streamed input via ``process_bytes``,
-  ``process_stream``, and CLI ``textract ... -`` for stdin, so callers no
-  longer have to write their own temp file to reuse the #300 workaround.
-  Adds ``BytesParser``/``PathParser`` alongside ``DecodedParser`` as the
-  three parser input kinds. With an explicit ``--input-encoding``, csv is
-  read and decoded lazily instead of buffered whole; other formats still
-  buffer for now (see ``tests/test_source_input.py`` for what's left).
-  Raises a new ``ExtensionRequired`` error, instead of a confusing
-  ``ExtensionNotSupported("")``, when bytes/stream input has no filename to
-  detect the extension from (`#300`_, `#97`_ by `@KyleKing`_)
 
 TBD
 -------------------
@@ -388,7 +378,6 @@ TBD
 .. _#90: https://github.com/deanmalmgren/textract/issues/90
 .. _#92: https://github.com/deanmalmgren/textract/issues/92
 .. _#93: https://github.com/deanmalmgren/textract/issues/93
-.. _#97: https://github.com/deanmalmgren/textract/issues/97
 .. _#100: https://github.com/deanmalmgren/textract/issues/100
 .. _#104: https://github.com/deanmalmgren/textract/issues/104
 .. _#107: https://github.com/deanmalmgren/textract/issues/107
@@ -408,7 +397,6 @@ TBD
 .. _#149: https://github.com/deanmalmgren/textract/issues/149
 .. _#150: https://github.com/deanmalmgren/textract/issues/150
 .. _#162: https://github.com/deanmalmgren/textract/issues/162
-.. _#300: https://github.com/deanmalmgren/textract/issues/300
 .. _#411: https://github.com/deanmalmgren/textract/issues/411
 .. _#422: https://github.com/deanmalmgren/textract/pull/422
 .. _#430: https://github.com/deanmalmgren/textract/pull/430

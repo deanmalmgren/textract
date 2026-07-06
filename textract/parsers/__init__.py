@@ -64,6 +64,15 @@ def process(
     return _process_source(source, input_encoding, output_encoding, **kwargs)
 
 
+def _warn_beta():
+    warnings.warn(
+        "textract's bytes/stream input (process_bytes, process_stream, and "
+        "`-` stdin) is beta; the Source API may change in a future release.",
+        FutureWarning,
+        stacklevel=3,
+    )
+
+
 def process_bytes(
     data: bytes,
     extension: str | None,
@@ -73,7 +82,7 @@ def process_bytes(
 ):
     """Beta: extract text from in-memory ``data`` (e.g. an HTTP response
     body), no temp file required by the caller. ``extension`` is required to
-    route to a parser since there is no filename to sniff. See issue #300.
+    route to a parser since there is no filename to sniff
     """
     _warn_beta()
     source = Source.from_bytes(data, extension=extension)
@@ -88,21 +97,11 @@ def process_stream(
     **kwargs,
 ):
     """Beta: extract text from a readable binary ``stream`` (e.g.
-    ``sys.stdin.buffer`` or an open file object). ``extension`` is required.
-    See issues #97 and #300.
+    ``sys.stdin.buffer`` or an open file object). ``extension`` is required
     """
     _warn_beta()
     source = Source.from_stream(stream, extension=extension)
     return _process_source(source, input_encoding, output_encoding, **kwargs)
-
-
-def _warn_beta():
-    warnings.warn(
-        "textract's bytes/stream input (process_bytes, process_stream, and "
-        "`-` stdin) is beta; the Source API may change in a future release.",
-        FutureWarning,
-        stacklevel=3,
-    )
 
 
 def _resolve_extension(source: Source) -> str:
