@@ -11,7 +11,7 @@ NEXT RELEASE
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
 
 * Honor ``input_encoding`` in the csv, json, eml, and html parsers and add
-  the ``--input-encoding`` CLI flag; introduces ``NativeParser`` base class
+  the ``--input-encoding`` CLI flag; introduces ``DecodedParser`` base class
   for parsers that operate on decoded text. A valid but incorrect
   ``input_encoding`` now raises a friendly ``InvalidInputEncoding`` error
   instead of a raw ``UnicodeDecodeError`` (`#573`_ by `@KyleKing`_)

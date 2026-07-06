@@ -103,11 +103,11 @@ command line.
 
 Parsers with a native Python implementation that consume decoded text
 rather than a filename (csv, eml, html, json) can instead inherit from
-``textract.parsers.utils.NativeParser``, which reads and decodes the
+``textract.parsers.utils.DecodedParser``, which reads and decodes the
 file (honoring ``input_encoding``) before handing the text to
-:meth:`.NativeParser.extract_from_text`.
+:meth:`.DecodedParser.extract_from_text`.
 
-.. autoclass:: textract.parsers.utils.NativeParser
+.. autoclass:: textract.parsers.utils.DecodedParser
     :members:
     :undoc-members:
     :show-inheritance:

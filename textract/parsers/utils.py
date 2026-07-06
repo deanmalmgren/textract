@@ -139,11 +139,11 @@ class ShellParser(BaseParser):
         return filename
 
 
-class NativeParser(BaseParser):
-    """The :class:`.NativeParser` extends the :class:`.BaseParser` for
+class DecodedParser(BaseParser):
+    """The :class:`.DecodedParser` extends the :class:`.BaseParser` for
     parsers that operate on decoded text rather than a filename. The
     file is read and decoded here, honoring ``input_encoding``, so
-    subclasses implement :meth:`.NativeParser.extract_from_text` and never
+    subclasses implement :meth:`.DecodedParser.extract_from_text` and never
     deal with byte-encodings themselves.
     """
 
