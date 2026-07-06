@@ -5,8 +5,8 @@ and CLI ``-`` stdin) produce the same text as ``process(filename)`` across the
 three parser input kinds:
 
 - text  (csv -> NativeParser, decoded in memory, or streamed line-by-line
-  when ``input_encoding`` is explicit -- see ``test_csv_streams_without_
-  buffering_full_input``)
+  when ``input_encoding`` is explicit, see ``test_csv_streams_without_
+  buffering_full_input`` and ``StreamingMemoryTestCase`` below)
 - bytes (docx -> BytesParser, opened in memory, no temp file)
 - path  (pdf -> shell parser, Source spools a temp file for pdftotext)
 
@@ -14,15 +14,16 @@ Next steps beyond this tracer bullet:
 
 - Only csv has a real ``extract_from_lines`` streaming implementation.
   html/eml/json/txt all parse their whole document at once (DOM, MIME
-  message, JSON) so they keep buffering; worth revisiting per-format if a
+  message, JSON), so they keep buffering. Worth revisiting per-format if a
   truly huge file shows up in practice.
-- Streaming still requires an explicit ``input_encoding``: auto-detection
-  (chardet) scores confidence off the full byte content, which would force
-  buffering anyway. A ``chardet.universaldetector.UniversalDetector`` fed
-  incrementally could recover auto-detection without giving up streaming.
+- Streaming still requires an explicit ``input_encoding``, since
+  auto-detection (chardet) scores confidence off the full byte content,
+  which would force buffering anyway. A
+  ``chardet.universaldetector.UniversalDetector`` fed incrementally could
+  recover auto-detection without giving up streaming.
 - BytesParser formats (docx/xlsx/pptx/epub/msg) still materialize the whole
   blob in memory by design (their libraries need to seek a zip's central
-  directory); that's a memory-vs-temp-file tradeoff, not a missed
+  directory). That's a memory-vs-temp-file tradeoff, not a missed
   optimization, so it isn't "streaming" in the same sense as the text path.
 - Streaming only applies to the input side: process_* still returns one
   complete string, so very large *output* isn't addressed here.
@@ -30,6 +31,8 @@ Next steps beyond this tracer bullet:
 
 import io
 import subprocess
+import sys
+import tempfile
 import unittest
 import warnings
 from pathlib import Path
@@ -37,6 +40,11 @@ from pathlib import Path
 import textract
 from textract.parsers import csv_parser
 from textract.parsers.utils import Source
+
+try:
+    import resource
+except ImportError:  # resource (peak RSS) is POSIX-only
+    resource = None
 
 _FIXTURES = Path(__file__).resolve().parent
 _CASES = {
@@ -114,6 +122,60 @@ class SourceInputTestCase(unittest.TestCase):
             check=True,
         )
         assert result.stdout == expected
+
+
+class StreamingMemoryTestCase(unittest.TestCase):
+    """Real (not just white-box) proof that csv streaming bounds memory: runs
+    the CLI against a large file twice, with and without ``--input-encoding``,
+    and compares peak child RSS. The ratio (not an absolute byte threshold)
+    is what's asserted, so this holds regardless of ru_maxrss's unit (KB on
+    Linux, bytes on macOS) or a runner's baseline interpreter overhead.
+    """
+
+    @unittest.skipUnless(resource is not None, "resource module is POSIX-only")
+    def test_streaming_uses_less_memory_than_buffering(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "large.csv"
+            row = ",".join(f"field{i}" for i in range(8)) + "\n"
+            with path.open("w") as f:
+                for _ in range(int(20 * 1024 * 1024 / len(row))):
+                    f.write(row)
+
+            streamed_rss = self._child_max_rss(
+                [
+                    "textract",
+                    "--extension",
+                    "csv",
+                    "--input-encoding",
+                    "utf_8",
+                    str(path),
+                ]
+            )
+            buffered_rss = self._child_max_rss(
+                ["textract", "--extension", "csv", str(path)]
+            )
+            assert streamed_rss < buffered_rss * 0.85
+
+    @staticmethod
+    def _child_max_rss(cmd):
+        """Run ``cmd`` as the sole child of a throwaway python process and
+        return that child's peak RSS via RUSAGE_CHILDREN. Measuring from a
+        fresh process (rather than this test process) keeps subprocesses
+        started by other tests from inflating the high-water mark.
+        """
+        script = (
+            "import resource, subprocess\n"
+            f"subprocess.run({cmd!r}, check=True, stdout=subprocess.DEVNULL, "
+            "stderr=subprocess.DEVNULL)\n"
+            "print(resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss)\n"
+        )
+        result = subprocess.run(
+            [sys.executable, "-c", script],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=True,
+        )
+        return int(result.stdout.strip())
 
 
 if __name__ == "__main__":

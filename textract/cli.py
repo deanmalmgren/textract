@@ -53,7 +53,11 @@ def get_parser():
     # define the command line options here
     filename_action = parser.add_argument(
         "filename",
-        help="Filename to extract text.",
+        help=(
+            "Filename to extract text. Pass '-' to read the document from "
+            "stdin instead (beta, requires --extension since there's no "
+            "filename to detect it from)."
+        ),
     )
     filename_action.completer = argcomplete.completers.FilesCompleter  # type: ignore[attr-defined]
     parser.add_argument(

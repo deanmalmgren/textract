@@ -29,8 +29,9 @@ class Source:
     parsers stop owning file I/O. This is what lets textract accept
     in-memory content and streams (issues #300, #97) without every parser
     learning about it. ``as_text_stream`` is the only one of the three that
-    avoids buffering the whole input in memory; the other two materialize it
-    (``as_bytes`` reads/drains it all, ``as_path`` spools it to disk).
+    avoids buffering the whole input in memory (the other two materialize
+    it, since ``as_bytes`` reads/drains it all and ``as_path`` spools it to
+    disk).
 
     Not frozen and single-use when backed by a stream: the stream is drained
     on the first :meth:`as_bytes`/:meth:`as_path` call and the bytes cached,
@@ -263,18 +264,22 @@ class ShellParser(PathParser):
 
 
 class NativeParser(BaseParser):
-    """Input-kind base for parsers with a native Python implementation that
-    operate on decoded text rather than a filename (in contrast to
-    :class:`.ShellParser`). The core reads and decodes the source, honoring
+    """Input-kind base for parsers that operate on decoded text rather than a
+    filename. The core reads and decodes the source, honoring
     ``input_encoding``, so subclasses implement
     :meth:`.NativeParser.extract_from_text` and never deal with byte-encodings
     themselves.
-    """
 
-    def extract(self, filename, input_encoding=None, **kwargs):
-        raw_bytes = Path(filename).read_bytes()
-        text = self.decode(raw_bytes, input_encoding)
-        return self.extract_from_text(text, **kwargs)
+    "Native" originally meant a pure-Python implementation, in contrast to
+    :class:`.ShellParser` spawning an external program (see #573). This class
+    reuses the name for a second, unrelated distinction: which input form a
+    parser needs (decoded text, vs. :class:`.BytesParser`'s raw bytes, vs.
+    :class:`.PathParser`'s filesystem path). The two don't line up: docx is
+    just as much a pure-Python/native implementation as csv, but it's a
+    BytesParser, not a NativeParser, because it needs raw bytes rather than
+    decoded text. Read "native" here as "input kind: text," not "not shelling
+    out."
+    """
 
     def extract_from_text(self, text, **kwargs) -> str:
         """This method must be overwritten by child classes. It receives
@@ -315,9 +320,6 @@ class BytesParser(BaseParser):
     so no temp file is needed. Subclasses implement
     :meth:`.BytesParser.extract_from_bytes`.
     """
-
-    def extract(self, filename, **kwargs):
-        return self.extract_from_bytes(Path(filename).read_bytes(), **kwargs)
 
     def extract_from_bytes(self, data: bytes, **kwargs) -> bytes | str:
         """This method must be overwritten by child classes. It receives the
