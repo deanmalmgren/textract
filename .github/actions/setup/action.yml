@@ -10,22 +10,24 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Install system dependencies (Ubuntu)
+    - name: Install cached system dependencies (Ubuntu)
       if: runner.os == 'Linux'
       uses: awalsh128/cache-apt-pkgs-action@v1
       with:
-        # Full libreoffice meta-package avoids a headless UNO crash seen with libreoffice-writer alone.
-        packages: tesseract-ocr sox libsox-fmt-mp3 ghostscript unrtf poppler-utils libreoffice dbus-x11
+        packages: tesseract-ocr sox libsox-fmt-mp3 ghostscript unrtf poppler-utils
         version: 1.1
 
-    - name: Configure LibreOffice for headless runs (Ubuntu)
+    - name: Install LibreOffice (Ubuntu)
       if: runner.os == 'Linux'
       shell: bash
-      # Force the "svp" headless VCL plugin; the default gtk plugin
-      # intermittently aborts with a com::sun::star::uno::RuntimeException
-      # ("Unspecified Application Error") when soffice --convert-to runs
-      # without a display.
-      run: echo "SAL_USE_VCLPLUGIN=svp" >> "$GITHUB_ENV"
+      # LibreOffice is installed directly rather than through cache-apt-pkgs-action:
+      # that action restores package files without re-running the dpkg postinst
+      # triggers (fontconfig cache, mime database, ldconfig), which leaves
+      # soffice --headless aborting intermittently on cache-hit runs with a
+      # com::sun::star::uno::RuntimeException ("Unspecified Application Error").
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libreoffice dbus-x11
 
     - name: Install system dependencies (macOS)
       if: runner.os == 'macOS'
