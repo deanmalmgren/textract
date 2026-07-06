@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import contextlib
 import errno
+import io
 import os
 import subprocess
 import sys
@@ -24,12 +25,17 @@ class Source:
     lives (a file on disk, a ``bytes`` blob, or a readable binary stream).
 
     The core materializes the input into whatever form a parser declares it
-    needs via :meth:`as_bytes` / :meth:`as_path`, so parsers stop owning file
-    I/O. This is what lets textract accept in-memory content and streams
-    (issues #300, #97) without every parser learning about it.
+    needs via :meth:`as_bytes` / :meth:`as_path` / :meth:`as_text_stream`, so
+    parsers stop owning file I/O. This is what lets textract accept
+    in-memory content and streams (issues #300, #97) without every parser
+    learning about it. ``as_text_stream`` is the only one of the three that
+    avoids buffering the whole input in memory; the other two materialize it
+    (``as_bytes`` reads/drains it all, ``as_path`` spools it to disk).
 
     Not frozen and single-use when backed by a stream: the stream is drained
-    on the first :meth:`as_bytes`/:meth:`as_path` call and the bytes cached.
+    on the first :meth:`as_bytes`/:meth:`as_path` call and the bytes cached,
+    and calling :meth:`as_text_stream` after that reads from the cache
+    rather than the (already-drained) stream.
     """
 
     def __init__(
@@ -88,6 +94,30 @@ class Source:
             yield Path(handle.name)
         finally:
             os.unlink(handle.name)
+
+    @contextlib.contextmanager
+    def _binary_stream(self) -> Iterator[BinaryIO]:
+        if self._data is not None:
+            yield io.BytesIO(self._data)
+        elif self._stream is not None:
+            yield self._stream
+        elif self.filename is not None:
+            with self.filename.open("rb") as handle:
+                yield handle
+        else:
+            yield io.BytesIO(b"")
+
+    @contextlib.contextmanager
+    def as_text_stream(self, input_encoding: str) -> Iterator[Iterator[str]]:
+        """Yield decoded lines lazily instead of buffering the whole input in
+        memory (issue #97). Requires an explicit ``input_encoding``:
+        auto-detection (chardet) needs the full byte content to score its
+        confidence, which would defeat the point of streaming, so callers
+        without one fall back to :meth:`as_bytes` (see
+        ``NativeParser.process_source``).
+        """
+        with self._binary_stream() as binary:
+            yield io.TextIOWrapper(binary, encoding=input_encoding)
 
 
 class BaseParser:
@@ -252,7 +282,29 @@ class NativeParser(BaseParser):
         """
         raise NotImplementedError("must be overwritten by child classes")
 
+    def extract_from_lines(self, lines, **kwargs) -> str:
+        """Beta streaming hook (issue #97): override alongside
+        :meth:`extract_from_text` for formats whose parsing library can
+        consume an iterator of decoded lines incrementally instead of one
+        big string (see ``csv_parser.py``). ``process_source`` only takes
+        this path when ``input_encoding`` is explicit, since auto-detection
+        needs the full byte content anyway. The default buffers ``lines``
+        into a single string and reuses ``extract_from_text``, so parsers
+        that haven't been migrated keep working unchanged.
+        """
+        return self.extract_from_text("".join(lines), **kwargs)
+
     def process_source(self, source, input_encoding, output_encoding="utf8", **kwargs):
+        streamable = (
+            type(self).extract_from_lines is not NativeParser.extract_from_lines
+        )
+        if streamable and input_encoding:
+            try:
+                with source.as_text_stream(input_encoding) as lines:
+                    text = self.extract_from_lines(lines, **kwargs)
+            except UnicodeDecodeError as err:
+                raise exceptions.InvalidInputEncoding(input_encoding, str(err)) from err
+            return self.encode(text, output_encoding)
         text = self.decode(source.as_bytes(), input_encoding)
         return self.encode(self.extract_from_text(text, **kwargs), output_encoding)
 

@@ -117,7 +117,7 @@ def _resolve_extension(source: Source) -> str:
     elif source.filename is not None:
         ext = source.filename.suffix.lower()
     else:
-        raise exceptions.ExtensionNotSupported("")
+        raise exceptions.ExtensionRequired()
     return EXTENSION_SYNONYMS.get(ext, ext)
 
 
