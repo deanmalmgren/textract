@@ -171,28 +171,6 @@ Then run ``textract out/whatever.docx`` as usual. This keeps the heavier
 converter out of your extraction pipeline while still supporting legacy
 documents.
 
-Headless servers and containers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-On a headless Linux host (a server, CI runner, or container without a
-display), LibreOffice may abort with an error like::
-
-    terminate called after throwing an instance of 'com::sun::star::uno::RuntimeException'
-    Unspecified Application Error
-
-This is a LibreOffice issue, not a textract bug because the default
-graphics plugin expects a display. Force the headless plugin by setting
-``SAL_USE_VCLPLUGIN=svp`` in the environment before running textract:
-
-.. code-block:: bash
-
-    export SAL_USE_VCLPLUGIN=svp
-    textract this.doc
-
-If the crash still appears intermittently, installing the full
-``libreoffice`` package (rather than only ``libreoffice-writer``) and
-``dbus-x11`` will likely resolve remaining headless startup failures.
-
 Reference: CI System Dependencies
 ----------------------------------
 
