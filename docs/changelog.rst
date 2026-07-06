@@ -11,14 +11,14 @@ NEXT RELEASE
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
 
 * Honor ``input_encoding`` in the csv, json, eml, and html parsers and add
-  the ``--input-encoding`` CLI flag; introduces ``NativeParser`` base class
+  the ``--input-encoding`` CLI flag; introduces ``DecodedParser`` base class
   for parsers that operate on decoded text. A valid but incorrect
   ``input_encoding`` now raises a friendly ``InvalidInputEncoding`` error
   instead of a raw ``UnicodeDecodeError`` (`#573`_ by `@KyleKing`_)
 * **Beta:** accept in-memory and streamed input via ``process_bytes``,
   ``process_stream``, and CLI ``textract ... -`` for stdin, so callers no
   longer have to write their own temp file to reuse the #300 workaround.
-  Adds ``BytesParser``/``PathParser`` alongside ``NativeParser`` as the
+  Adds ``BytesParser``/``PathParser`` alongside ``DecodedParser`` as the
   three parser input kinds. With an explicit ``--input-encoding``, csv is
   read and decoded lazily instead of buffered whole; other formats still
   buffer for now (see ``tests/test_source_input.py`` for what's left).

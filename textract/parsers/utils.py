@@ -115,7 +115,7 @@ class Source:
         auto-detection (chardet) needs the full byte content to score its
         confidence, which would defeat the point of streaming, so callers
         without one fall back to :meth:`as_bytes` (see
-        ``NativeParser.process_source``).
+        ``DecodedParser.process_source``).
         """
         with self._binary_stream() as binary:
             yield io.TextIOWrapper(binary, encoding=input_encoding)
@@ -195,7 +195,7 @@ class PathParser(BaseParser):
     typically because they hand it to an external program. Behaviorally
     identical to :class:`.BaseParser` (whose default ``process_source``
     already spools bytes/stream input to a temp file); it exists to name the
-    third leg of the path/text/bytes taxonomy alongside :class:`.NativeParser`
+    third leg of the path/text/bytes taxonomy alongside :class:`.DecodedParser`
     and :class:`.BytesParser`.
     """
 
@@ -263,11 +263,11 @@ class ShellParser(PathParser):
         return filename
 
 
-class NativeParser(BaseParser):
+class DecodedParser(BaseParser):
     """Input-kind base for parsers that operate on decoded text rather than a
     filename. The core reads and decodes the source, honoring
     ``input_encoding``, so subclasses implement
-    :meth:`.NativeParser.extract_from_text` and never deal with byte-encodings
+    :meth:`.DecodedParser.extract_from_text` and never deal with byte-encodings
     themselves.
 
     "Native" originally meant a pure-Python implementation, in contrast to
@@ -276,7 +276,7 @@ class NativeParser(BaseParser):
     parser needs (decoded text, vs. :class:`.BytesParser`'s raw bytes, vs.
     :class:`.PathParser`'s filesystem path). The two don't line up: docx is
     just as much a pure-Python/native implementation as csv, but it's a
-    BytesParser, not a NativeParser, because it needs raw bytes rather than
+    BytesParser, not a DecodedParser, because it needs raw bytes rather than
     decoded text. Read "native" here as "input kind: text," not "not shelling
     out."
     """
@@ -301,7 +301,7 @@ class NativeParser(BaseParser):
 
     def process_source(self, source, input_encoding, output_encoding="utf8", **kwargs):
         streamable = (
-            type(self).extract_from_lines is not NativeParser.extract_from_lines
+            type(self).extract_from_lines is not DecodedParser.extract_from_lines
         )
         if streamable and input_encoding:
             try:

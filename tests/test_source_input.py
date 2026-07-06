@@ -4,7 +4,7 @@ Proves the new public entry points (``process_bytes``, ``process_stream``,
 and CLI ``-`` stdin) produce the same text as ``process(filename)`` across the
 three parser input kinds:
 
-- text  (csv -> NativeParser, decoded in memory, or streamed line-by-line
+- text  (csv -> DecodedParser, decoded in memory, or streamed line-by-line
   when ``input_encoding`` is explicit, see ``test_csv_streams_without_
   buffering_full_input`` and ``StreamingMemoryTestCase`` below)
 - bytes (docx -> BytesParser, opened in memory, no temp file)

@@ -1,9 +1,9 @@
 from email.parser import Parser as EmailParser
 
-from .utils import NativeParser
+from .utils import DecodedParser
 
 
-class Parser(NativeParser):
+class Parser(DecodedParser):
     """Extract text from email messages in .eml format. This gets the
     subject and all text from the contents.
     """
