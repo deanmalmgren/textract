@@ -84,7 +84,7 @@ def process(
     parser = filetype_module.Parser()
     try:
         return parser.process(filename, input_encoding, output_encoding, **kwargs)
-    except exceptions.ShellError as err:
+    except (exceptions.ShellError, exceptions.InvalidInputEncoding) as err:
         err.ext = ext
         raise
 

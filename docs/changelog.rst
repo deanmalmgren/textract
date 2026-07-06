@@ -10,6 +10,12 @@ NEXT RELEASE
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
 
+* Honor ``input_encoding`` in the csv, json, eml, and html parsers and add
+  the ``--input-encoding`` CLI flag; introduces ``DecodedParser`` base class
+  for parsers that operate on decoded text. A valid but incorrect
+  ``input_encoding`` now raises a friendly ``InvalidInputEncoding`` error
+  instead of a raw ``UnicodeDecodeError`` (`#573`_ by `@KyleKing`_)
+
 TBD
 -------------------
 
@@ -17,6 +23,7 @@ TBD
 * Utilize openpyxl for xlsx after xlrd dropped support (`#544`_ by `@KyleKing`_)
 * Prevent opening a cmd window with ``Popen()`` on Windows (`#574`_ by `@KyleKing`_)
 * Replace unmaintained ``antiword`` with LibreOffice for ``.doc`` extraction (`#582`_ by `@KyleKing`_)
+* Add ``.ods`` spreadsheet support (`#583`_ by `@KyleKing`_)
 * Report which file extension triggered a missing module or missing executable error (`#575`_ by `@KyleKing`_)
 
 2.0.0
@@ -401,6 +408,8 @@ TBD
 .. _#544: https://github.com/deanmalmgren/textract/issues/544
 .. _#559: https://github.com/deanmalmgren/textract/pull/559
 .. _#562: https://github.com/deanmalmgren/textract/pull/562
+.. _#573: https://github.com/deanmalmgren/textract/pull/573
 .. _#574: https://github.com/deanmalmgren/textract/pull/574
 .. _#575: https://github.com/deanmalmgren/textract/pull/575
 .. _#582: https://github.com/deanmalmgren/textract/pull/582
+.. _#583: https://github.com/deanmalmgren/textract/pull/583

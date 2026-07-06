@@ -1,0 +1,7 @@
+From: test@example.com
+To: test2@example.com
+Subject: Test Cyrillic
+Content-Type: text/plain; charset="windows-1251"
+Content-Transfer-Encoding: 8bit
+
+Привет мир
