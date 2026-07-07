@@ -72,14 +72,26 @@ def _quiet(func, *args, **kwargs):
 
 
 class SourceInputTestCase(base.GenericUtilities, unittest.TestCase):
-    def _assert_text_equal(self, actual: bytes, expected: bytes, label: str) -> None:
+    def _assert_text_equal(
+        self, actual: bytes, expected: bytes, label: str, *, dewrap: bool = False
+    ) -> None:
         """Compare extracted text tolerantly of platform-specific whitespace
         (line endings, tabs/nbsp, blank lines), same as the rest of the suite
         (see ``base.GenericUtilities.clean_text``), so these fixture-backed
         comparisons don't break on Windows CI's CRLF checkout.
+
+        ``dewrap=True`` additionally collapses all whitespace and normalizes
+        quote glyphs (see ``base.dewrap``), for formats like PDF where the
+        underlying tool (Poppler) wraps text at different widths, and maps
+        quote/apostrophe glyphs to different Unicode code points, across
+        platforms/versions.
         """
-        cleaned_actual = self.clean_text(actual)
-        cleaned_expected = self.clean_text(expected)
+        if dewrap:
+            cleaned_actual = base.dewrap(actual)
+            cleaned_expected = base.dewrap(expected)
+        else:
+            cleaned_actual = self.clean_text(actual)
+            cleaned_expected = self.clean_text(expected)
         if cleaned_actual != cleaned_expected:
             raise AssertionError(
                 base._generate_bytes_diff_message(
@@ -154,7 +166,10 @@ class SourceInputTestCase(base.GenericUtilities, unittest.TestCase):
             check=True,
         )
         self._assert_text_equal(
-            result.stdout, expected_filename.read_bytes(), str(expected_filename)
+            result.stdout,
+            expected_filename.read_bytes(),
+            str(expected_filename),
+            dewrap=True,
         )
 
 
