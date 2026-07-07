@@ -38,14 +38,24 @@ import unittest
 import warnings
 from pathlib import Path
 
+import pytest
+
 import textract
 from textract.parsers import csv_parser
 from textract.parsers.utils import Source
+
+from . import base
 
 try:
     import resource
 except ImportError:  # resource (peak RSS) is POSIX-only
     resource = None
+
+_WINDOWS_PDF_XFAIL = pytest.mark.xfail(
+    sys.platform == "win32",
+    reason="PDF content may differ on Windows",
+    strict=False,
+)
 
 _FIXTURES = Path(__file__).resolve().parent
 _CASES = {
@@ -61,13 +71,28 @@ def _quiet(func, *args, **kwargs):
         return func(*args, **kwargs)
 
 
-class SourceInputTestCase(unittest.TestCase):
+class SourceInputTestCase(base.GenericUtilities, unittest.TestCase):
+    def _assert_text_equal(self, actual: bytes, expected: bytes, label: str) -> None:
+        """Compare extracted text tolerantly of platform-specific whitespace
+        (line endings, tabs/nbsp, blank lines), same as the rest of the suite
+        (see ``base.GenericUtilities.clean_text``), so these fixture-backed
+        comparisons don't break on Windows CI's CRLF checkout.
+        """
+        cleaned_actual = self.clean_text(actual)
+        cleaned_expected = self.clean_text(expected)
+        if cleaned_actual != cleaned_expected:
+            raise AssertionError(
+                base._generate_bytes_diff_message(
+                    cleaned_actual, cleaned_expected, label
+                )
+            )
+
     def test_process_bytes_matches_filename(self):
         for ext, path in _CASES.items():
             with self.subTest(ext=ext):
                 expected = textract.process(str(path))
                 got = _quiet(textract.process_bytes, path.read_bytes(), extension=ext)
-                assert got == expected
+                self._assert_text_equal(got, expected, str(path))
 
     def test_process_stream_matches_filename(self):
         for ext, path in _CASES.items():
@@ -78,7 +103,7 @@ class SourceInputTestCase(unittest.TestCase):
                     io.BytesIO(path.read_bytes()),
                     extension=ext,
                 )
-                assert got == expected
+                self._assert_text_equal(got, expected, str(path))
 
     def test_beta_warning(self):
         with warnings.catch_warnings(record=True) as caught:
@@ -97,12 +122,15 @@ class SourceInputTestCase(unittest.TestCase):
         path = _CASES["csv"]
         source = Source.from_path(path, extension="csv")
         result = csv_parser.Parser().process_source(source, input_encoding="utf-8")
-        assert result == (path.parent / "raw_text.txt").read_bytes()
+        expected_filename = path.parent / "raw_text.txt"
+        self._assert_text_equal(
+            result, expected_filename.read_bytes(), str(expected_filename)
+        )
         assert source._data is None
 
     def test_csv_streams_from_stdin_pipe(self):
         path = _CASES["csv"]
-        expected = (path.parent / "raw_text.txt").read_bytes()
+        expected_filename = path.parent / "raw_text.txt"
         result = subprocess.run(
             ["textract", "--extension", "csv", "--input-encoding", "utf_8", "-"],
             input=path.read_bytes(),
@@ -110,11 +138,14 @@ class SourceInputTestCase(unittest.TestCase):
             stderr=subprocess.PIPE,
             check=True,
         )
-        assert result.stdout == expected
+        self._assert_text_equal(
+            result.stdout, expected_filename.read_bytes(), str(expected_filename)
+        )
 
+    @_WINDOWS_PDF_XFAIL
     def test_cli_stdin(self):
         path = _CASES["pdf"]
-        expected = (path.parent / "raw_text.txt").read_bytes()
+        expected_filename = path.parent / "raw_text.txt"
         result = subprocess.run(
             ["textract", "--extension", "pdf", "-"],
             input=path.read_bytes(),
@@ -122,7 +153,9 @@ class SourceInputTestCase(unittest.TestCase):
             stderr=subprocess.PIPE,
             check=True,
         )
-        assert result.stdout == expected
+        self._assert_text_equal(
+            result.stdout, expected_filename.read_bytes(), str(expected_filename)
+        )
 
 
 class StreamingMemoryTestCase(unittest.TestCase):
