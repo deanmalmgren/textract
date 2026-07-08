@@ -7,12 +7,11 @@ import unittest
 import pytest
 
 from . import base
-from .platform_limitations import reason_for
 
 _IS_WINDOWS = sys.platform == "win32"
 _CAN_PROCESS_PS = shutil.which("gswin64c" if _IS_WINDOWS else "ps2ascii") is not None
 
-_WINDOWS_PS_REASON = reason_for("PostScript (.ps)")
+_WINDOWS_PS_REASON = "PS text layout may differ between gswin64c txtwrite and ps2ascii"
 
 
 @pytest.mark.skipif(

@@ -146,7 +146,6 @@ Contents:
    command_line_interface
    python_package
    installation
-   platform_differences
    contributing
    changelog
 

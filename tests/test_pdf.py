@@ -13,7 +13,6 @@ from textract.exceptions import ShellError, UnknownMethod
 from textract.parsers.pdf_parser import Parser
 
 from . import base
-from .platform_limitations import reason_for
 
 _IS_WINDOWS = sys.platform == "win32"
 _IS_LINUX = sys.platform == "linux"
@@ -27,8 +26,10 @@ _NO_PDFTOPPM_REASON = (
 )
 _NO_PDFTOTEXT_REASON = "pdftotext is not installed (part of poppler; install via your system package manager, e.g. apt/brew/pacman)"
 _NO_TESSERACT_REASON = "tesseract-ocr is not installed (see https://tesseract-ocr.github.io/tessdoc/Installation.html)"
-_LINUX_TESSERACT_REASON = reason_for("PDF (tesseract OCR)")
-_WINDOWS_PDF_REASON = reason_for("PDF")
+_LINUX_TESSERACT_REASON = (
+    "Tesseract OCR output varies by version; Linux CI has different output"
+)
+_WINDOWS_PDF_REASON = "PDF content may differ on Windows"
 
 
 def _first_skip_reason(*conditions: tuple[bool, str]) -> str:
@@ -92,29 +93,11 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
 
     @_windows_xfail
     def test_standardized_text_cli(self):
-        """Make sure standardized text matches from the command line,
-        tolerant of Poppler's platform-specific line-wrap and quote-glyph
-        differences (see base.dewrap).
-        """
-        temp_filename = self.assertSuccessfulTextract(
-            self.standardized_text_filename,
-            cleanup=False,
-        )
-        assert temp_filename is not None
-        content = Path(temp_filename).read_bytes()
-        expected = self.get_standardized_text()
-        assert base.dewrap(content) == base.dewrap(expected)
-        Path(temp_filename).unlink()
+        super().test_standardized_text_cli()
 
     @_windows_xfail
     def test_standardized_text_python(self):
-        """Make sure standardized text matches from python, tolerant of
-        Poppler's platform-specific line-wrap and quote-glyph differences
-        (see base.dewrap).
-        """
-        result = textract.process(self.standardized_text_filename)
-        expected = self.get_standardized_text()
-        assert base.dewrap(result) == base.dewrap(expected)
+        super().test_standardized_text_python()
 
     def test_method_python(self):
         """Extract text via Python API for each supported method."""
