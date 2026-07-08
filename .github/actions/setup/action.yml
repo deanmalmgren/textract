@@ -54,6 +54,13 @@ runs:
         }
         # Add tesseract installation directory to PATH
         Add-Content -Path $env:GITHUB_PATH -Value "C:\Program Files\Tesseract-OCR"
+        # The choco tesseract package doesn't reliably bundle eng.traineddata,
+        # leaving the binary installed but unable to load any language.
+        $tessdataDir = "C:\Program Files\Tesseract-OCR\tessdata"
+        if (-not (Test-Path "$tessdataDir\eng.traineddata")) {
+            Invoke-WebRequest -Uri "https://github.com/tesseract-ocr/tessdata_fast/raw/main/eng.traineddata" -OutFile "$tessdataDir\eng.traineddata"
+        }
+        Add-Content -Path $env:GITHUB_ENV -Value "TESSDATA_PREFIX=$tessdataDir"
         # For ghostscript, the version number is in the path, so find it dynamically
         $gsBin = Get-ChildItem "C:\Program Files\gs" -Directory |
             Sort-Object Name |
