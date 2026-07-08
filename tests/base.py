@@ -12,14 +12,15 @@ _QUOTE_NORMALIZATIONS = (
     ("’", "'"),
     ("“", '"'),
     ("”", '"'),
+    ("…", "..."),
 )
 
 
 def normalize_quotes(content: bytes) -> str:
-    """Normalize typographic quote/apostrophe glyphs to their ASCII
+    """Normalize typographic quote/apostrophe/ellipsis glyphs to their ASCII
     equivalents. Different Poppler builds map the same PDF font glyph to
-    different Unicode code points (straight vs curly) for the same
-    quote/apostrophe character.
+    different Unicode code points (e.g. straight vs curly quotes, or a
+    single ellipsis character vs three periods) for the same punctuation.
     """
     text = content.decode("utf-8", errors="replace")
     for curly, straight in _QUOTE_NORMALIZATIONS:

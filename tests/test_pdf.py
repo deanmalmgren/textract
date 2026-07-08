@@ -13,6 +13,7 @@ from textract.exceptions import ShellError, UnknownMethod
 from textract.parsers.pdf_parser import Parser
 
 from . import base
+from .platform_limitations import reason_for
 
 _IS_WINDOWS = sys.platform == "win32"
 _IS_LINUX = sys.platform == "linux"
@@ -26,10 +27,8 @@ _NO_PDFTOPPM_REASON = (
 )
 _NO_PDFTOTEXT_REASON = "pdftotext is not installed (part of poppler; install via your system package manager, e.g. apt/brew/pacman)"
 _NO_TESSERACT_REASON = "tesseract-ocr is not installed (see https://tesseract-ocr.github.io/tessdoc/Installation.html)"
-_LINUX_TESSERACT_REASON = (
-    "Tesseract OCR output varies by version; Linux CI has different output"
-)
-_WINDOWS_PDF_REASON = "PDF content may differ on Windows"
+_LINUX_TESSERACT_REASON = reason_for("PDF (tesseract OCR)")
+_WINDOWS_PDF_REASON = reason_for("PDF")
 
 
 def _first_skip_reason(*conditions: tuple[bool, str]) -> str:
