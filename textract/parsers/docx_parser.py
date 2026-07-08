@@ -1,10 +1,12 @@
+import io
+
 import docx2txt
 
-from .utils import BaseParser
+from .utils import BytesParser
 
 
-class Parser(BaseParser):
-    """Extract text from docx file using python-docx."""
+class Parser(BytesParser):
+    """Extract text from docx file using docx2txt."""
 
-    def extract(self, filename, **kwargs):
-        return docx2txt.process(filename)
+    def extract_from_bytes(self, data, **kwargs):
+        return docx2txt.process(io.BytesIO(data))

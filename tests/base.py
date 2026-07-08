@@ -7,6 +7,37 @@ from pathlib import Path
 import textract
 from textract import exceptions
 
+_QUOTE_NORMALIZATIONS = (
+    ("‘", "'"),
+    ("’", "'"),
+    ("“", '"'),
+    ("”", '"'),
+    ("…", "..."),
+)
+
+
+def normalize_quotes(content: bytes) -> str:
+    """Normalize typographic quote/apostrophe/ellipsis glyphs to their ASCII
+    equivalents. Different Poppler builds map the same PDF font glyph to
+    different Unicode code points (e.g. straight vs curly quotes, or a
+    single ellipsis character vs three periods) for the same punctuation.
+    """
+    text = content.decode("utf-8", errors="replace")
+    for curly, straight in _QUOTE_NORMALIZATIONS:
+        text = text.replace(curly, straight)
+    return text
+
+
+def dewrap(content: bytes) -> bytes:
+    """Collapse all whitespace (including non-breaking spaces) and
+    normalize quote glyphs, so platform-specific line-wrap/column-layout
+    differences (e.g. Poppler versions wrapping the same PDF at different
+    widths) don't affect comparison. Splits at the ``str`` level (not
+    ``bytes``) since only ``str.split()`` recognizes U+00A0 (nbsp) as
+    whitespace.
+    """
+    return "".join(normalize_quotes(content).split()).encode("utf-8")
+
 
 def _normalize_whitespace(content: bytes) -> list[bytes]:
     """Normalize whitespace for comparison.

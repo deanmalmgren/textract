@@ -43,6 +43,49 @@ to ``textract.process`` like this::
     import textract
     text = textract.process('path/to/file', extension='docx')
 
+.. _beta-in-memory-input:
+
+Beta: in-memory and streamed input
+-----------------------------------
+
+If you already have the document's bytes in memory (e.g. an HTTP response
+body) rather than a path on disk, ``process_bytes`` skips writing your own
+temp file::
+
+    import requests
+    import textract
+
+    response = requests.get('https://example.com/report.pdf')
+    text = textract.process_bytes(response.content, extension='pdf')
+
+For a readable binary stream (a socket, an open file object, ``sys.stdin.
+buffer``), ``process_stream`` works the same way::
+
+    import textract
+
+    with open('path/to/file.docx', 'rb') as stream:
+        text = textract.process_stream(stream, extension='docx')
+
+Both require ``extension`` explicitly, since there's no filename to detect
+it from; omitting it raises :class:`textract.exceptions.ExtensionRequired`.
+Both also emit a ``FutureWarning`` since this API is still beta and may
+change.
+
+For csv specifically, passing ``input_encoding`` lets textract read and
+decode the input lazily line-by-line instead of buffering the whole
+document in memory first (this is also what powers the CLI's ``-i``/
+``--input-encoding`` flag with ``-`` stdin, see
+:ref:`command-line-interface`)::
+
+    import textract
+
+    with open('path/to/huge.csv', 'rb') as stream:
+        text = textract.process_stream(stream, extension='csv', input_encoding='utf_8')
+
+Other formats don't have a streaming implementation yet and still buffer
+the whole input regardless of ``input_encoding``. See the "Next steps"
+note in ``tests/test_source_input.py`` for what's left.
+
 .. _additional-options:
 
 Additional options
@@ -91,10 +134,25 @@ must inherit from ``textract.parsers.utils.BaseParser``.
     :undoc-members:
     :show-inheritance:
 
+Whatever the caller passed in (a filename, ``bytes``, or a stream) is
+normalized into a single ``textract.parsers.utils.Source`` before reaching
+a parser, so parsers don't have to own file I/O themselves. A parser
+declares which form it needs by which of ``BaseParser``'s three
+input-kind subclasses it inherits from.
+
+.. autoclass:: textract.parsers.utils.Source
+    :members:
+    :undoc-members:
+
 Many of the parsers rely on command line utilities to do some of the
 parsing. For convenience, the ``textract.parsers.utils.ShellParser``
-class includes some convenience methods for streamlining access to the
-command line.
+class (a kind of ``PathParser``, see below) includes some convenience
+methods for streamlining access to the command line.
+
+.. autoclass:: textract.parsers.utils.PathParser
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 .. autoclass:: textract.parsers.utils.ShellParser
     :members:
@@ -108,6 +166,16 @@ file (honoring ``input_encoding``) before handing the text to
 :meth:`.DecodedParser.extract_from_text`.
 
 .. autoclass:: textract.parsers.utils.DecodedParser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+**Beta:** parsers whose underlying library can consume raw bytes or a
+file-like object directly (e.g. docx/xlsx/pptx/epub opening a zip) can
+instead inherit from ``textract.parsers.utils.BytesParser``, which never
+needs a temp file.
+
+.. autoclass:: textract.parsers.utils.BytesParser
     :members:
     :undoc-members:
     :show-inheritance:
