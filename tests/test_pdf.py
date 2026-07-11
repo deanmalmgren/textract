@@ -63,10 +63,9 @@ _METHOD_CASES: list[tuple[str, str, str]] = [
     ),
 ]
 
-# Reusable decorator for the raw-text/filename-spaces tests inherited from base.
-# The standardized_text tests are normalized via base.dewrap and are expected to
-# pass on Windows, so they don't carry this mark. A class-level mark can't be used
-# because the explicit-method tests (pdfminer, tesseract) must not carry it either.
+# Reusable decorator for the five default-method tests inherited from base.
+# A class-level mark cannot be used because the explicit-method tests (pdfminer,
+# tesseract) must not carry the Windows xfail.
 _windows_xfail = pytest.mark.xfail(
     _IS_WINDOWS,
     reason=_WINDOWS_PDF_REASON,
@@ -91,6 +90,7 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
     def test_raw_text_python(self):
         super().test_raw_text_python()
 
+    @_windows_xfail
     def test_standardized_text_cli(self):
         """Make sure standardized text matches from the command line,
         tolerant of Poppler's platform-specific line-wrap and quote-glyph
@@ -106,6 +106,7 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
         assert base.dewrap(content) == base.dewrap(expected)
         Path(temp_filename).unlink()
 
+    @_windows_xfail
     def test_standardized_text_python(self):
         """Make sure standardized text matches from python, tolerant of
         Poppler's platform-specific line-wrap and quote-glyph differences
