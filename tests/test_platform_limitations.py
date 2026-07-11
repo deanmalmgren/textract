@@ -5,9 +5,7 @@ from pathlib import Path
 
 from .platform_limitations import PLATFORM_LIMITATIONS
 
-_DOCS_PAGE = (
-    Path(__file__).resolve().parent.parent / "docs" / "platform_differences.rst"
-)
+_DOCS_PAGE = Path(__file__).resolve().parents[1] / "docs" / "platform_differences.rst"
 
 
 class PlatformLimitationsTestCase(unittest.TestCase):
