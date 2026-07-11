@@ -36,6 +36,15 @@ runs:
         brew install tesseract sox lame mad ghostscript unrtf poppler
         brew install --cask libreoffice
 
+    - name: Cache Chocolatey downloads (Windows)
+      if: runner.os == 'Windows'
+      uses: actions/cache@v4
+      with:
+        path: C:\choco-cache
+        # Keyed on this file so any change to the installed package list
+        # invalidates the cache and re-fetches from community.chocolatey.org.
+        key: choco-downloads-${{ hashFiles('.github/actions/setup/action.yml') }}
+
     - name: Install system dependencies (Windows)
       if: runner.os == 'Windows'
       shell: pwsh
@@ -46,11 +55,15 @@ runs:
         # Installed one package at a time (rather than one `choco install` call for
         # all of them) so a transient 504 from community.chocolatey.org on a single
         # package only re-attempts that package, not the ones that already succeeded.
+        # --cache-location reuses previously-downloaded package files (restored by
+        # actions/cache above) instead of re-fetching from community.chocolatey.org
+        # on every run; the install itself still always runs, so this only reduces
+        # network exposure, it never skips real installation steps.
         function Install-ChocoPackage {
             param([string]$Package)
             $maxAttempts = 4
             for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
-                choco install $Package -y --no-progress --execution-timeout=600
+                choco install $Package -y --no-progress --execution-timeout=600 --cache-location="C:\choco-cache"
                 if ($LASTEXITCODE -eq 0) { return }
                 if ($attempt -eq $maxAttempts) {
                     throw "choco install $Package failed after $maxAttempts attempts (exit code $LASTEXITCODE)"
