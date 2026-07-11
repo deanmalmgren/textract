@@ -8,12 +8,15 @@ import unittest
 import pytest
 
 from . import base
+from .platform_limitations import reason_for
 
 _IS_WINDOWS = sys.platform == "win32"
 
 _HAS_SOX = shutil.which("sox") is not None
 
 _SKIP_NETWORK_TESTS = os.environ.get("SKIP_NETWORK_TESTS", "false").lower() == "true"
+
+_WINDOWS_MP3_REASON = reason_for("MP3")
 
 
 @pytest.mark.skipif(
@@ -22,7 +25,7 @@ _SKIP_NETWORK_TESTS = os.environ.get("SKIP_NETWORK_TESTS", "false").lower() == "
 )
 @pytest.mark.xfail(
     _IS_WINDOWS,
-    reason="sox.portable on Windows lacks libmad for MP3 decoding",
+    reason=_WINDOWS_MP3_REASON,
     strict=True,
 )
 class Mp3TestCase(base.ShellParserTestCase, unittest.TestCase):
