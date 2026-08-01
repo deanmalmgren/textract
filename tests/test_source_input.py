@@ -141,6 +141,15 @@ class SourceInputTestCase(base.GenericUtilities, unittest.TestCase):
         )
         assert source._data is None
 
+    def test_process_stream_leaves_caller_stream_open(self):
+        """The caller owns the stream: process_stream must not close it,
+        even on the streaming path where it is wrapped in a TextIOWrapper
+        (which closes its underlying stream unless detached).
+        """
+        stream = io.BytesIO(_CASES["csv"].read_bytes())
+        _quiet(textract.process_stream, stream, extension="csv", input_encoding="utf-8")
+        assert not stream.closed
+
     def test_csv_streams_from_stdin_pipe(self):
         path = _CASES["csv"]
         expected_filename = path.parent / "raw_text.txt"

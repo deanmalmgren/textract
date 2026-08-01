@@ -113,10 +113,15 @@ class Source:
         auto-detection (chardet) needs the full byte content to score its
         confidence, which would defeat the point of streaming, so callers
         without one fall back to :meth:`as_bytes` (see
-        ``DecodedParser.process_source``).
+        ``DecodedParser.process_source``). The text wrapper is detached on
+        exit so a caller-owned stream is never closed by this method.
         """
         with self._binary_stream() as binary:
-            yield io.TextIOWrapper(binary, encoding=input_encoding)
+            wrapper = io.TextIOWrapper(binary, encoding=input_encoding)
+            try:
+                yield wrapper
+            finally:
+                wrapper.detach()
 
 
 class BaseParser:
