@@ -81,6 +81,7 @@ runs:
         # leaving the binary installed but unable to load any language.
         $tessdataDir = "C:\Program Files\Tesseract-OCR\tessdata"
         if (-not (Test-Path "$tessdataDir\eng.traineddata")) {
+            New-Item -ItemType Directory -Path $tessdataDir -Force | Out-Null
             Invoke-WebRequest -Uri "https://github.com/tesseract-ocr/tessdata_fast/raw/main/eng.traineddata" -OutFile "$tessdataDir\eng.traineddata"
         }
         Add-Content -Path $env:GITHUB_ENV -Value "TESSDATA_PREFIX=$tessdataDir"
