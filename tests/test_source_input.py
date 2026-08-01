@@ -141,6 +141,18 @@ class SourceInputTestCase(base.GenericUtilities, unittest.TestCase):
         )
         assert source._data is None
 
+    def test_csv_crlf_quoted_newlines_match_across_paths(self):
+        """A CRLF csv with an embedded newline in a quoted field must extract
+        identically through the buffered path (no input_encoding) and the
+        streaming path (explicit input_encoding).
+        """
+        data = b'a,"line1\r\nline2",c\r\nd,e,f\r\n'
+        buffered = _quiet(textract.process_bytes, data, extension="csv")
+        streamed = _quiet(
+            textract.process_bytes, data, extension="csv", input_encoding="utf-8"
+        )
+        assert buffered == streamed
+
     def test_process_stream_leaves_caller_stream_open(self):
         """The caller owns the stream: process_stream must not close it,
         even on the streaming path where it is wrapped in a TextIOWrapper
