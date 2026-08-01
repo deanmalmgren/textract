@@ -163,6 +163,9 @@ class SourceInputTestCase(base.GenericUtilities, unittest.TestCase):
         self._assert_text_equal(
             result.stdout, expected_filename.read_bytes(), str(expected_filename)
         )
+        assert b"FutureWarning" not in result.stderr, (
+            f"beta warning leaked to CLI stderr: {result.stderr!r}"
+        )
 
     @_WINDOWS_PDF_XFAIL
     def test_cli_stdin(self):

@@ -45,16 +45,15 @@ def process(
     text as a byte-string encoded with ``encoding``.
 
     ``filename`` may be ``"-"`` to read the document from ``stdin`` (beta),
-    in which case ``extension`` is required.
+    in which case ``extension`` is required. This means a file literally
+    named ``-`` needs a path prefix, e.g. ``"./-"``. Unlike calling
+    :func:`process_stream` directly, the ``"-"`` shorthand does not emit the
+    beta ``FutureWarning``, since on the command line the warning would be
+    unsuppressable noise on every piped invocation.
     """
     if filename == "-":
-        return process_stream(
-            sys.stdin.buffer,
-            extension=extension,
-            input_encoding=input_encoding,
-            output_encoding=output_encoding,
-            **kwargs,
-        )
+        source = Source.from_stream(sys.stdin.buffer, extension=extension)
+        return _process_source(source, input_encoding, output_encoding, **kwargs)
 
     # make sure the filename exists
     if not Path(filename).exists():
