@@ -12,7 +12,7 @@ runs:
   steps:
     - name: Install cached system dependencies (Ubuntu)
       if: runner.os == 'Linux'
-      uses: awalsh128/cache-apt-pkgs-action@v1
+      uses: awalsh128/cache-apt-pkgs-action@553a35bb8ebd9fcabcb1c9451aa4c98e1b4ca8a9 # v1.6.3
       with:
         packages: tesseract-ocr sox libsox-fmt-mp3 ghostscript unrtf poppler-utils
         version: 1.1
@@ -67,7 +67,7 @@ runs:
         Add-Content -Path $env:GITHUB_PATH -Value "C:\Program Files\LibreOffice\program"
 
     - name: Install uv
-      uses: astral-sh/setup-uv@v7
+      uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
       with:
         enable-cache: true
         python-version: ${{ inputs.python-version }}
