@@ -24,9 +24,8 @@ or to specify a particular output encoding::
     text = textract.process('path/to/file.extension', encoding='ascii')
 
 By default, input encodings are inferred using `chardet
-<https://github.com/chardet/chardet>`_. For parsers that consume decoded
-text (csv, eml, html, json), you can override this and specify the
-input file's encoding explicitly, which is useful when chardet's
+<https://github.com/chardet/chardet>`_. You can override this and specify
+the input file's encoding explicitly, which is useful when chardet's
 guess is wrong or its confidence is too low (e.g. for short files)::
 
     import textract
