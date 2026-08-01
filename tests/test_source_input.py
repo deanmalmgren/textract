@@ -45,6 +45,7 @@ from textract.parsers import csv_parser
 from textract.parsers.utils import Source
 
 from . import base
+from .test_pdf import _WINDOWS_PDF_REASON
 
 try:
     import resource
@@ -53,7 +54,7 @@ except ImportError:  # resource (peak RSS) is POSIX-only
 
 _WINDOWS_PDF_XFAIL = pytest.mark.xfail(
     sys.platform == "win32",
-    reason="",
+    reason=_WINDOWS_PDF_REASON,
     strict=False,
 )
 
