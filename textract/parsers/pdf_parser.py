@@ -10,6 +10,8 @@ from textract.exceptions import ShellError, UnknownMethod
 from .image import Parser as TesseractParser
 from .utils import ShellParser
 
+PDFTOTEXT_ENC = "UTF-8"
+
 
 class Parser(ShellParser):
     """Extract text from pdf files using either the ``pdftotext`` method
@@ -50,17 +52,14 @@ class Parser(ShellParser):
 
     def extract_pdftotext(self, filename, **kwargs):
         """Extract text from pdfs using the pdftotext command line utility."""
-        # Force UTF-8 output: some poppler builds default to Latin-1, which
-        # mangles non-Latin text (e.g. Czech diacritics, CJK). Decode here
-        # (instead of returning bytes) so the "unicode sandwich" passes this
-        # through unchanged rather than second-guessing it via chardet or a
-        # caller-supplied input_encoding.
-        args = ["pdftotext", "-enc", "UTF-8"]
+        # Force UTF-8 output because some OSes default to Latin-1, which
+        # mangles non-Latin text (e.g. Czech diacritics, CJK)
+        args = ["pdftotext", "-enc", PDFTOTEXT_ENC]
         if "layout" in kwargs:
             args.append("-layout")
         args += [filename, "-"]
         stdout, _ = self.run(args)
-        return stdout.decode("utf-8", errors="replace")
+        return stdout.decode(PDFTOTEXT_ENC, errors="replace")
 
     def extract_pdfminer(self, filename, **kwargs):
         """Extract text from pdfs using pdfminer."""
