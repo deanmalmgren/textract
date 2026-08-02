@@ -36,10 +36,12 @@ class Parser(ShellParser):
 
     def extract_pdftotext(self, filename, **kwargs):
         """Extract text from pdfs using the pdftotext command line utility."""
+        # Force UTF-8 output: some poppler builds default to Latin-1, which
+        # mangles non-Latin text (e.g. Czech diacritics, CJK).
+        args = ["pdftotext", "-enc", "UTF-8"]
         if "layout" in kwargs:
-            args = ["pdftotext", "-layout", filename, "-"]
-        else:
-            args = ["pdftotext", filename, "-"]
+            args.append("-layout")
+        args += [filename, "-"]
         stdout, _ = self.run(args)
         return stdout
 
