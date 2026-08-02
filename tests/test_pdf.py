@@ -154,3 +154,19 @@ class PdfTestCase(base.ShellParserTestCase, unittest.TestCase):
         assert "žluťoučký" in text
         assert "ďábelské" in text
         assert "안녕하세요" in text
+
+    @pytest.mark.skipif(not _HAS_PDFTOTEXT, reason=_NO_PDFTOTEXT_REASON)
+    def test_pdftotext_ignores_input_encoding(self):
+        """pdftotext output is always UTF-8, so a conflicting input_encoding
+        must not corrupt it, and passing one warns that it's ignored.
+        """
+        d = Path(self.get_extension_directory())
+        with pytest.warns(UserWarning, match="input_encoding is ignored"):
+            result = textract.process(
+                str(d / "unicode_text.pdf"),
+                method="pdftotext",
+                input_encoding="latin-1",
+            )
+        text = result.decode("utf-8")
+        assert "žluťoučký" in text
+        assert "안녕하세요" in text
