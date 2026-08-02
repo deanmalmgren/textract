@@ -10,7 +10,11 @@ class Parser(DecodedParser):
     delimiter = ","
 
     def extract_from_text(self, text, **kwargs):
-        reader = csv.reader(io.StringIO(text), delimiter=self.delimiter)
+        """``newline=None`` applies the same universal-newline translation as
+        the streaming path's ``TextIOWrapper``, so quoted fields with embedded
+        CRLF extract identically through both paths.
+        """
+        reader = csv.reader(io.StringIO(text, newline=None), delimiter=self.delimiter)
         return "\n".join(["\t".join(row) for row in reader])
 
     def extract_from_lines(self, lines, **kwargs):
