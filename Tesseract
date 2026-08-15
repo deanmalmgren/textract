@@ -1,0 +1,121 @@
+name: CI Pipeline
+
+"on":
+  push:
+    branches: [main]
+    tags: [v*]
+  pull_request:
+    paths:
+      - .github/workflows/ci_pipeline.yml
+      - .github/actions/setup/action.yml
+      - textract/**
+      - tests/**
+      - uv.lock
+      - pyproject.toml
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  changelog-check:
+    name: Changelog Check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Require changelog update when library changes
+        run: |
+          BASE=${{ github.event.pull_request.base.sha }}
+          HEAD=${{ github.event.pull_request.head.sha }}
+          if git diff --name-only "$BASE" "$HEAD" | grep -qE '^textract/.*\.py$'; then
+            if ! git diff --name-only "$BASE" "$HEAD" | grep -q '^docs/changelog\.rst$'; then
+              echo "textract/**/*.py changed but docs/changelog.rst was not updated."
+              exit 1
+            fi
+          fi
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+        with:
+          python-version: "3.10"
+
+      - name: Run ruff
+        run: uv run ruff check
+
+      - name: Run pyright
+        run: uv run pyright
+
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        python-version: ["3.10", "3.14"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run tests
+        id: tests
+        run: uv run pytest --junit-xml=test-results.xml
+        env:
+          SKIP_NETWORK_TESTS: "true"
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-results-${{ matrix.os }}-py${{ matrix.python-version }}
+          path: test-results.xml
+
+  cx-freeze:
+    name: cx_Freeze Smoke Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+        with:
+          python-version: "3.13"
+
+      - name: Build and run frozen executable smoke test
+        run: uv run python tests/freeze/smoke_test.py
+
+  release:
+    name: Release and Publish
+    needs: [lint, test, cx-freeze]
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/textract
+    permissions:
+      contents: write
+      id-token: write  # IMPORTANT: mandatory for PyPI trusted publishing
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.14"
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          generate_release_notes: true
+          tag_name: ${{ github.ref_name }}
+      - name: Build Package
+        run: uv build
+      - name: Publish to PyPI
+        run: uv publish --trusted-publishing=always
