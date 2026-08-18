@@ -13,6 +13,7 @@ NEXT RELEASE
 TBD
 -------------------
 
+* Publish a ``-full`` Docker image to GHCR with all system dependencies preinstalled (`#526`_ by `@KyleKing`_)
 * Minor nitpick to remove unused line (`#562`_ by `@KyleKing`_)
 * Utilize openpyxl for xlsx after xlrd dropped support (`#544`_ by `@KyleKing`_)
 * Prevent opening a cmd window with ``Popen()`` on Windows (`#574`_ by `@KyleKing`_)
@@ -397,6 +398,7 @@ TBD
 .. _#495: https://github.com/deanmalmgren/textract/pull/495
 .. _#502: https://github.com/deanmalmgren/textract/pull/502
 .. _#520: https://github.com/deanmalmgren/textract/pull/520
+.. _#526: https://github.com/deanmalmgren/textract/issues/526
 .. _#543: https://github.com/deanmalmgren/textract/pull/543
 .. _#544: https://github.com/deanmalmgren/textract/issues/544
 .. _#559: https://github.com/deanmalmgren/textract/pull/559
