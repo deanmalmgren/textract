@@ -42,6 +42,13 @@ runs:
       run: |
         # ghostscript choco install intermittently hangs/"access is denied" on GH Windows
         # runners: https://github.com/actions/runner-images/issues/11808
+        #
+        # When it does hang, the gs installer's own process (gs<version>w64.exe)
+        # survives the timeout as an orphan and keeps its exe file locked, so a
+        # same-attempt retry fails immediately with "being used by another
+        # process" instead of getting a clean shot. If this keeps recurring,
+        # kill orphaned gs*.exe processes (`Get-Process gs* | Stop-Process -Force`)
+        # before each retry so it isn't fighting the previous attempt's lock.
         $maxAttempts = 3
         for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
             choco install make tesseract ghostscript sox.portable poppler libreoffice-fresh -y --no-progress --execution-timeout=600
