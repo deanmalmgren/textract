@@ -143,6 +143,19 @@ First install system packages using pkg, then install textract from PyPI:
     # or with uv
     uv pip install textract
 
+Docker
+------
+
+A container image is published to `GHCR
+<https://github.com/deanmalmgren/textract/pkgs/container/textract>`_ with every
+system dependency (LibreOffice, tesseract, ghostscript, poppler, sox)
+preinstalled, if you want to try out all of textract's capabilities without local
+installation and/or want to run textract in a hosted environment.
+
+.. code-block:: bash
+
+    docker run --rm -v "$PWD:/data" ghcr.io/deanmalmgren/textract:latest-full /data/path/to/file.pdf
+
 .. note::
 
     ``editors/libreoffice`` is *optional*: it is only needed to extract
@@ -170,23 +183,6 @@ Python:
 Then run ``textract out/whatever.docx`` as usual. This keeps the heavier
 converter out of your extraction pipeline while still supporting legacy
 documents.
-
-Docker
-------
-
-A container image is published to `GHCR
-<https://github.com/deanmalmgren/textract/pkgs/container/textract>`_ with every
-system dependency (LibreOffice, tesseract, ghostscript, poppler, sox)
-preinstalled, so nothing needs to be installed on the host:
-
-.. code-block:: bash
-
-    docker run --rm -v "$PWD:/data" ghcr.io/deanmalmgren/textract:latest-full /data/path/to/file.pdf
-
-The ``-full`` tag suffix is deliberate: it reserves room for a smaller,
-feature-scoped image (for example one without LibreOffice) in the future
-without renaming the tag users already depend on. Today ``-full`` is the only
-variant published.
 
 Reference: CI System Dependencies
 ----------------------------------

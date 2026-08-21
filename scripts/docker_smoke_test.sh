@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
-# Runs every non-network fixture in tests/ through a built (or pulled) textract
-# Docker image and compares the output to the committed raw_text.txt, the same
-# fixtures tests/base.py uses for the real test suite. This proves the image's
-# system dependencies (LibreOffice, tesseract, ghostscript, poppler, sox) are
-# actually wired up, not just that the layer installed cleanly.
+# Evaluates the built docker image by running the same files as the test suite
+# to verify that the installation and PATH all work as expected
 #
 # Usage:
 #   scripts/docker_smoke_test.sh                 # builds ghcr.io/deanmalmgren/textract:smoke-test locally
 #   scripts/docker_smoke_test.sh some/image:tag   # tests an already-built or pulled image
+
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

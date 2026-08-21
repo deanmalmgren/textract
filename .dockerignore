@@ -1,12 +1,12 @@
+*.egg-info
+*.pyc
 .git
 .github
-.venv
 .pytest_cache
 .ruff_cache
+.venv
 __pycache__
-*.pyc
 build
 dist
 docs
 tests
-*.egg-info
