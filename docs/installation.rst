@@ -156,10 +156,23 @@ installation and/or want to run textract in a hosted environment.
 
     docker run --rm -v "$PWD:/data" ghcr.io/deanmalmgren/textract:latest-full /data/path/to/file.pdf
 
+Any CLI option works the same way, for example forcing OCR on a scanned PDF:
+
+.. code-block:: bash
+
+    docker run --rm -v "$PWD:/data" ghcr.io/deanmalmgren/textract:latest-full --method tesseract /data/scan.pdf
+
 .. note::
 
     ``editors/libreoffice`` is *optional*: it is only needed to extract
     legacy ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
+
+.. note::
+
+    If you never process ``.doc`` files, drop ``libreoffice-writer`` and
+    ``dbus-x11`` from the ``apt-get install`` line in the ``Dockerfile`` and
+    rebuild to significantly reduce the image size. See
+    :ref:`converting-legacy-doc-files` for the pre-conversion alternative.
 
 .. _converting-legacy-doc-files:
 

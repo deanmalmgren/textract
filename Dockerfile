@@ -24,3 +24,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY --from=builder /app/.venv /app/.venv
 ENV PATH="/app/.venv/bin:${PATH}"
 ENTRYPOINT ["textract"]
+CMD ["--help"]
