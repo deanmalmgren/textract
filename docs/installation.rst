@@ -132,9 +132,9 @@ Docker
 
 A container image is published to `GHCR
 <https://github.com/deanmalmgren/textract/pkgs/container/textract>`_ with every
-system dependency (tesseract, ghostscript, poppler, sox) preinstalled, if you
-want to try out all of textract's capabilities without local installation
-and/or want to run textract in a hosted environment.
+system dependency (tesseract, ghostscript, poppler, sox, pocketsphinx)
+preinstalled, if you want to try out all of textract's capabilities without
+local installation and/or want to run textract in a hosted environment.
 
 .. code-block:: bash
 
@@ -145,6 +145,13 @@ Any CLI option works the same way, for example forcing OCR on a scanned PDF:
 .. code-block:: bash
 
     docker run --rm -v "$PWD:/data" ghcr.io/deanmalmgren/textract:latest-full --method tesseract /data/scan.pdf
+
+Audio transcription defaults to Google's network speech API; the image also
+includes pocketsphinx, so ``--method sphinx`` works offline:
+
+.. code-block:: bash
+
+    docker run --rm -v "$PWD:/data" ghcr.io/deanmalmgren/textract:latest-full --method sphinx /data/audio.wav
 
 The image doesn't include LibreOffice by default; see
 :ref:`converting-legacy-doc-files` for how to add it if you need ``.doc``

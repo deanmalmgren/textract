@@ -13,7 +13,7 @@ NEXT RELEASE
 TBD
 -------------------
 
-* Publish a ``-full`` Docker image to GHCR with all system dependencies preinstalled except LibreOffice, which most users don't need (`#526`_ by `@KyleKing`_)
+* Publish a ``-full`` Docker image to GHCR with all system dependencies preinstalled except LibreOffice, which most users don't need; includes pocketsphinx for offline audio transcription (`#526`_ by `@KyleKing`_)
 * Minor nitpick to remove unused line (`#562`_ by `@KyleKing`_)
 * Utilize openpyxl for xlsx after xlrd dropped support (`#544`_ by `@KyleKing`_)
 * Prevent opening a cmd window with ``Popen()`` on Windows (`#574`_ by `@KyleKing`_)

@@ -17,11 +17,12 @@ if [[ -z "$IMAGE" ]]; then
     docker build -t "$IMAGE" .
 fi
 
-# mp3/ogg/wav default to Google's network speech API (same reason the pytest
-# suite skips them under SKIP_NETWORK_TESTS); the offline sphinx method needs
-# pocketsphinx, which isn't installed in the image. doc needs LibreOffice,
-# which the image doesn't include by default (see installation.rst).
-SKIP_EXTENSIONS=(doc mp3 ogg wav)
+# doc needs LibreOffice, which the image doesn't include by default (see
+# installation.rst). mp3/ogg/wav are tested via the offline sphinx method
+# instead of the network-dependent Google default (same reason the pytest
+# suite skips the Google methods under SKIP_NETWORK_TESTS).
+SKIP_EXTENSIONS=(doc)
+SPHINX_EXTENSIONS=(mp3 ogg wav)
 
 failures=()
 tested=0
@@ -30,8 +31,6 @@ for fixture in tests/*/raw_text.*; do
     [[ "$fixture" == *.txt ]] && continue
     ext_dir=$(dirname "$fixture")
     ext=$(basename "$ext_dir")
-    expected="$ext_dir/raw_text.txt"
-    [[ -f "$expected" ]] || continue
 
     skip=false
     for skip_ext in "${SKIP_EXTENSIONS[@]}"; do
@@ -39,9 +38,19 @@ for fixture in tests/*/raw_text.*; do
     done
     "$skip" && continue
 
+    method_args=()
+    expected="$ext_dir/raw_text.txt"
+    for sphinx_ext in "${SPHINX_EXTENSIONS[@]}"; do
+        if [[ "$ext" == "$sphinx_ext" ]]; then
+            method_args=(--method sphinx)
+            expected="$ext_dir/raw_text-m=sphinx.txt"
+        fi
+    done
+    [[ -f "$expected" ]] || continue
+
     tested=$((tested + 1))
     stderr_file=$(mktemp)
-    actual=$(docker run --rm -v "$REPO_ROOT/tests:/data:ro" "$IMAGE" "/data/$ext/raw_text.$ext" 2>"$stderr_file") || {
+    actual=$(docker run --rm -v "$REPO_ROOT/tests:/data:ro" "$IMAGE" "${method_args[@]}" "/data/$ext/raw_text.$ext" 2>"$stderr_file") || {
         echo "FAIL $ext: textract exited non-zero"
         cat "$stderr_file"
         rm -f "$stderr_file"
