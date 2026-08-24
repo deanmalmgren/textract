@@ -19,8 +19,9 @@ fi
 
 # mp3/ogg/wav default to Google's network speech API (same reason the pytest
 # suite skips them under SKIP_NETWORK_TESTS); the offline sphinx method needs
-# pocketsphinx, which isn't installed in the image.
-SKIP_EXTENSIONS=(mp3 ogg wav)
+# pocketsphinx, which isn't installed in the image. doc needs LibreOffice,
+# which the image doesn't include by default (see installation.rst).
+SKIP_EXTENSIONS=(doc mp3 ogg wav)
 
 failures=()
 tested=0

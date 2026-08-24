@@ -9,12 +9,11 @@ COPY pyproject.toml uv.lock README.rst ./
 COPY textract ./textract
 RUN uv sync --locked --no-dev --no-editable
 
-# Build the 'full' image with all dependencies
+# Build the 'full' image; excludes LibreOffice, which most users don't need
+# (see docs/installation.rst#converting-legacy-doc-files to add it back)
 FROM python:3.14-slim-trixie
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        dbus-x11 \
         ghostscript \
-        libreoffice-writer \
         libsox-fmt-mp3 \
         poppler-utils \
         sox \
