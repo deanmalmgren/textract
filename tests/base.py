@@ -5,6 +5,7 @@ import tempfile
 from pathlib import Path
 
 import textract
+from textract import exceptions
 
 
 def _normalize_whitespace(content: bytes) -> list[bytes]:
@@ -263,6 +264,51 @@ class BaseParserTestCase(GenericUtilities):
             Path(temp_filename).unlink()
             raise AssertionError(diff_msg)
         Path(temp_filename).unlink()
+
+    def assert_input_encoding_respected(self, filename_root, encoding):
+        """Verify a non-UTF-8-encoded input file decodes correctly when
+        ``input_encoding`` is passed explicitly, via both the Python API
+        and the CLI. ``filename_root`` points at a fixture pair
+        ``{filename_root}.{self.extension}`` (encoded with ``encoding``)
+        and ``{filename_root}.txt`` (the expected UTF-8 text).
+        """
+        d = self.get_extension_directory()
+        filename = f"{d}/{filename_root}.{self.extension}"
+        expected_filename = f"{d}/{filename_root}.txt"
+        self.compare_python_output(filename, expected_filename, input_encoding=encoding)
+        self.compare_cli_output(
+            filename, expected_filename, **{"input-encoding": encoding}
+        )
+
+    def assert_invalid_input_encoding_raises(self, filename_root, wrong_encoding):
+        """Verify a valid-but-wrong ``input_encoding`` raises
+        :class:`textract.exceptions.InvalidInputEncoding` via the Python
+        API, and exits non-zero with a friendly message (no raw
+        traceback) via the CLI.
+        """
+        d = self.get_extension_directory()
+        filename = f"{d}/{filename_root}.{self.extension}"
+
+        try:
+            textract.process(filename, input_encoding=wrong_encoding)
+        except exceptions.InvalidInputEncoding:
+            pass
+        else:
+            raise AssertionError(
+                "expected InvalidInputEncoding to be raised for "
+                f"input_encoding={wrong_encoding!r}"
+            )
+
+        result = subprocess.run(
+            ["textract", "--input-encoding", wrong_encoding, filename],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+        assert result.returncode != 0, "expected non-zero exit code"
+        assert b"Traceback" not in result.stderr, (
+            f"raw traceback leaked to stderr: {result.stderr!r}"
+        )
 
     def compare_python_output(self, filename, expected_filename=None, **kwargs):
         if expected_filename is None:
