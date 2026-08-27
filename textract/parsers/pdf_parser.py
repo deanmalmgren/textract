@@ -18,7 +18,7 @@ class Parser(ShellParser):
     (default) or the ``pdfminer`` method.
     """
 
-    def process(self, filename, input_encoding, output_encoding="utf8", **kwargs):
+    def process_source(self, source, input_encoding, output_encoding="utf8", **kwargs):
         method = kwargs.get("method", "")
         if input_encoding is not None and method in {"", "pdftotext"}:
             warnings.warn(
@@ -29,7 +29,7 @@ class Parser(ShellParser):
                 UserWarning,
                 stacklevel=2,
             )
-        return super().process(filename, input_encoding, output_encoding, **kwargs)
+        return super().process_source(source, input_encoding, output_encoding, **kwargs)
 
     def extract(self, filename, method="", **kwargs):
         if method in {"", "pdftotext"}:
