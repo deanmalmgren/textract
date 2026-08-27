@@ -44,6 +44,20 @@ class ExtensionNotSupported(CommandLineError):
         )
 
 
+class ExtensionRequired(CommandLineError):
+    """Raised when bytes/stream input has no filename to detect the
+    extension from and the caller didn't pass one explicitly.
+    """
+
+    def __str__(self):
+        return self.render(
+            "An extension is required to process bytes/stream input since "
+            "there is no filename to detect it from. Pass one explicitly, "
+            'e.g. process_bytes(data, extension="pdf") or\n'
+            "`textract --extension pdf -`.\n"
+        )
+
+
 class MissingFileError(CommandLineError):
     """This error is raised when the file can not be located at the
     specified path.

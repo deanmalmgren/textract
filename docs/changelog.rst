@@ -15,6 +15,15 @@ NEXT RELEASE
   for parsers that operate on decoded text. A valid but incorrect
   ``input_encoding`` now raises a friendly ``InvalidInputEncoding`` error
   instead of a raw ``UnicodeDecodeError`` (`#573`_ by `@KyleKing`_)
+* Beta: accept in-memory and streamed input via ``process_bytes``,
+  ``process_stream``, and CLI ``-`` stdin, normalized through a new
+  ``Source`` abstraction. csv reads lazily with an explicit
+  ``input_encoding`` instead of buffering the whole document; docx opens
+  in memory via the new ``BytesParser`` base class. **The core now invokes
+  ``parser.process_source(source, ...)`` instead of ``parser.process(filename,
+  ...)``, so third-party parsers that override ``process`` must migrate to
+  ``process_source`` (or ``extract``/``extract_from_text``/
+  ``extract_from_bytes``, which are still honored)** (`#588`_ by `@KyleKing`_)
 
 TBD
 -------------------
@@ -413,3 +422,4 @@ TBD
 .. _#575: https://github.com/deanmalmgren/textract/pull/575
 .. _#582: https://github.com/deanmalmgren/textract/pull/582
 .. _#583: https://github.com/deanmalmgren/textract/pull/583
+.. _#588: https://github.com/deanmalmgren/textract/pull/588
