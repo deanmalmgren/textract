@@ -27,16 +27,11 @@ First install system packages using apt-get, then install textract from PyPI:
 
 .. code-block:: bash
 
-    apt-get install python-dev libxml2-dev libxslt1-dev libreoffice-writer unrtf poppler-utils ghostscript tesseract-ocr \
+    apt-get install python-dev libxml2-dev libxslt1-dev unrtf poppler-utils ghostscript tesseract-ocr \
     flac ffmpeg lame libmad0 libsox-fmt-mp3 sox libjpeg-dev swig libpulse-dev
     pip install textract
     # or with uv
     uv pip install textract
-
-.. note::
-
-    ``libreoffice-writer`` is *optional*: it is only needed to extract legacy
-    ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
 
 .. note::
 
@@ -48,20 +43,14 @@ macOS
 -----
 
 These steps rely on you having `Homebrew <https://brew.sh/>`_ installed.
-First install XQuartz and system packages, then install textract from PyPI:
+First install system packages, then install textract from PyPI:
 
 .. code-block:: bash
 
-    brew install --cask xquartz libreoffice
     brew install ghostscript poppler sox tesseract unrtf swig
     pip install textract
     # or with uv
     uv pip install textract
-
-.. note::
-
-    ``libreoffice`` is *optional*: it is only needed to extract legacy
-    ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
 
 .. note::
 
@@ -105,15 +94,10 @@ Install `Chocolatey <https://chocolatey.org/install>`_ then install system packa
 
 .. code-block:: powershell
 
-    choco install tesseract ghostscript sox.portable poppler libreoffice-fresh -y
+    choco install tesseract ghostscript sox.portable poppler -y
     pip install textract
     # or with uv
     uv pip install textract
-
-.. note::
-
-    ``libreoffice-fresh`` is *optional*: it is only needed to extract legacy
-    ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
 
 .. note::
 
@@ -136,17 +120,42 @@ First install system packages using pkg, then install textract from PyPI:
 
 .. code-block:: bash
 
-    pkg install lang/python38 devel/py-pip textproc/libxml2 textproc/libxslt editors/libreoffice textproc/unrtf \
+    pkg install lang/python38 devel/py-pip textproc/libxml2 textproc/libxslt textproc/unrtf \
     graphics/poppler print/pstotext graphics/tesseract audio/flac multimedia/ffmpeg audio/lame audio/sox \
     graphics/jpeg-turbo
     pip install textract
     # or with uv
     uv pip install textract
 
-.. note::
+Docker
+------
 
-    ``editors/libreoffice`` is *optional*: it is only needed to extract
-    legacy ``.doc`` (Word 97-2003) files. See :ref:`converting-legacy-doc-files`.
+A container image is published to `GHCR
+<https://github.com/deanmalmgren/textract/pkgs/container/textract>`_ with every
+system dependency (tesseract, ghostscript, poppler, sox, pocketsphinx)
+preinstalled, if you want to try out all of textract's capabilities without
+local installation and/or want to run textract in a hosted environment.
+
+.. code-block:: bash
+
+    docker run --rm -v "$PWD:/data" ghcr.io/deanmalmgren/textract:latest-full /data/path/to/file.pdf
+
+Any CLI option works the same way, for example forcing OCR on a scanned PDF:
+
+.. code-block:: bash
+
+    docker run --rm -v "$PWD:/data" ghcr.io/deanmalmgren/textract:latest-full --method tesseract /data/scan.pdf
+
+Audio transcription defaults to Google's network speech API; the image also
+includes pocketsphinx, so ``--method sphinx`` works offline:
+
+.. code-block:: bash
+
+    docker run --rm -v "$PWD:/data" ghcr.io/deanmalmgren/textract:latest-full --method sphinx /data/audio.wav
+
+The image doesn't include LibreOffice by default; see
+:ref:`converting-legacy-doc-files` for how to add it if you need ``.doc``
+support.
 
 .. _converting-legacy-doc-files:
 
@@ -156,12 +165,35 @@ Converting legacy ``.doc`` files
 Legacy ``.doc`` (Word 97-2003 binary) files are extracted with LibreOffice,
 which is an *optional* runtime dependency: textract only shells out to the
 ``soffice`` executable when you actually process a ``.doc`` file, and every
-other format works without it.
+other format works without it. None of the install instructions above include
+it, since most textract users never touch legacy ``.doc`` files.
 
-If you would rather not install LibreOffice alongside textract (for example in
-a slim container), you can pre-convert your ``.doc`` files to ``.docx`` once,
-elsewhere, and hand the results to textract, whose ``.docx`` parser is pure
-Python:
+If you do need it, install it yourself:
+
+.. code-block:: bash
+
+    # Ubuntu / Debian
+    apt-get install libreoffice-writer
+
+    # macOS (via Homebrew)
+    brew install --cask xquartz libreoffice
+
+    # Windows (via Chocolatey)
+    choco install libreoffice-fresh -y
+
+    # FreeBSD
+    pkg install editors/libreoffice
+
+    # Docker: add to the apt-get install line in the Dockerfile and rebuild
+    apt-get install libreoffice-writer dbus-x11
+
+Once ``soffice`` is on your ``PATH``, textract picks it up automatically the
+next time it processes a ``.doc`` file.
+
+If you would rather not install LibreOffice alongside textract at all (for
+example in a slim container), you can pre-convert your ``.doc`` files to
+``.docx`` once, elsewhere, and hand the results to textract, whose ``.docx``
+parser is pure Python:
 
 .. code-block:: bash
 
