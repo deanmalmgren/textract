@@ -10,13 +10,30 @@ NEXT RELEASE
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
 
+* Honor ``input_encoding`` in the csv, json, eml, and html parsers and add
+  the ``--input-encoding`` CLI flag; introduces ``DecodedParser`` base class
+  for parsers that operate on decoded text. A valid but incorrect
+  ``input_encoding`` now raises a friendly ``InvalidInputEncoding`` error
+  instead of a raw ``UnicodeDecodeError`` (`#573`_ by `@KyleKing`_)
+* Beta: accept in-memory and streamed input via ``process_bytes``,
+  ``process_stream``, and CLI ``-`` stdin, normalized through a new
+  ``Source`` abstraction. csv reads lazily with an explicit
+  ``input_encoding`` instead of buffering the whole document; docx opens
+  in memory via the new ``BytesParser`` base class. **The core now invokes
+  ``parser.process_source(source, ...)`` instead of ``parser.process(filename,
+  ...)``, so third-party parsers that override ``process`` must migrate to
+  ``process_source`` (or ``extract``/``extract_from_text``/
+  ``extract_from_bytes``, which are still honored)** (`#588`_ by `@KyleKing`_)
+
 TBD
 -------------------
 
+* Publish a ``-full`` Docker image to GHCR with all system dependencies preinstalled except LibreOffice, which most users don't need; includes pocketsphinx for offline audio transcription (`#526`_ by `@KyleKing`_)
 * Minor nitpick to remove unused line (`#562`_ by `@KyleKing`_)
 * Utilize openpyxl for xlsx after xlrd dropped support (`#544`_ by `@KyleKing`_)
 * Prevent opening a cmd window with ``Popen()`` on Windows (`#574`_ by `@KyleKing`_)
 * Replace unmaintained ``antiword`` with LibreOffice for ``.doc`` extraction (`#582`_ by `@KyleKing`_)
+* Add ``.ods`` spreadsheet support (`#583`_ by `@KyleKing`_)
 * Report which file extension triggered a missing module or missing executable error (`#575`_ by `@KyleKing`_)
 * Standardize PDF text extraction to UTF-8 to avoid mangled non-Latin text (`#596`_ by `@KyleKing`_)
 
@@ -398,11 +415,15 @@ TBD
 .. _#495: https://github.com/deanmalmgren/textract/pull/495
 .. _#502: https://github.com/deanmalmgren/textract/pull/502
 .. _#520: https://github.com/deanmalmgren/textract/pull/520
+.. _#526: https://github.com/deanmalmgren/textract/issues/526
 .. _#543: https://github.com/deanmalmgren/textract/pull/543
 .. _#544: https://github.com/deanmalmgren/textract/issues/544
 .. _#559: https://github.com/deanmalmgren/textract/pull/559
 .. _#562: https://github.com/deanmalmgren/textract/pull/562
+.. _#573: https://github.com/deanmalmgren/textract/pull/573
 .. _#574: https://github.com/deanmalmgren/textract/pull/574
 .. _#575: https://github.com/deanmalmgren/textract/pull/575
 .. _#582: https://github.com/deanmalmgren/textract/pull/582
+.. _#583: https://github.com/deanmalmgren/textract/pull/583
+.. _#588: https://github.com/deanmalmgren/textract/pull/588
 .. _#596: https://github.com/deanmalmgren/textract/pull/596

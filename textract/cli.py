@@ -53,16 +53,33 @@ def get_parser():
     # define the command line options here
     filename_action = parser.add_argument(
         "filename",
-        help="Filename to extract text.",
+        help=(
+            "Filename to extract text. Pass '-' to read the document from "
+            "stdin instead (beta, requires --extension since there's no "
+            "filename to detect it from)."
+        ),
     )
     filename_action.completer = argcomplete.completers.FilesCompleter  # type: ignore[attr-defined]
     parser.add_argument(
         "-e",
         "--encoding",
+        dest="output_encoding",
         type=str,
         default=DEFAULT_OUTPUT_ENCODING,
         choices=_get_available_encodings(),
         help="Specify the encoding of the output.",
+    )
+    parser.add_argument(
+        "-i",
+        "--input-encoding",
+        dest="input_encoding",
+        type=str,
+        default=None,
+        choices=_get_available_encodings(),
+        help=(
+            "Specify the encoding of the input file. If omitted, the "
+            "encoding is auto-detected."
+        ),
     )
     parser.add_argument(
         "--extension",

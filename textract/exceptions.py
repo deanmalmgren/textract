@@ -44,6 +44,20 @@ class ExtensionNotSupported(CommandLineError):
         )
 
 
+class ExtensionRequired(CommandLineError):
+    """Raised when bytes/stream input has no filename to detect the
+    extension from and the caller didn't pass one explicitly.
+    """
+
+    def __str__(self):
+        return self.render(
+            "An extension is required to process bytes/stream input since "
+            "there is no filename to detect it from. Pass one explicitly, "
+            'e.g. process_bytes(data, extension="pdf") or\n'
+            "`textract --extension pdf -`.\n"
+        )
+
+
 class MissingFileError(CommandLineError):
     """This error is raised when the file can not be located at the
     specified path.
@@ -145,6 +159,37 @@ class ShellError(CommandLineError):
         if self.is_not_installed():
             return self.not_installed_message()
         return self.failed_message()
+
+
+class InvalidInputEncoding(CommandLineError):
+    """Raised when ``input_encoding`` is a valid codec name but can't
+    decode the file's bytes (i.e. the wrong codec was specified).
+    """
+
+    def __init__(
+        self,
+        encoding: str,
+        reason: str,
+        ext: str | None = None,
+    ) -> None:
+        """Initialize with the attempted encoding and the decode failure reason."""
+        self.encoding = encoding
+        self.reason = reason
+        self.ext = ext
+
+    def __str__(self):
+        filetype_note = f" {self.ext} " if self.ext else " "
+        return self.render(
+            (
+                "The input encoding %(encoding)s could not decode this"
+                + filetype_note
+                + "file:\n\n"
+                "    %(reason)s\n\n"
+                "Double check that --input-encoding/input_encoding matches "
+                "the file's actual encoding, or omit it to let textract "
+                "auto-detect it.\n"
+            )
+        )
 
 
 class MissingModuleError(CommandLineError):

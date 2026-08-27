@@ -1,17 +1,27 @@
 import csv
-from pathlib import Path
+import io
 
-from .utils import BaseParser
+from .utils import DecodedParser
 
 
-class Parser(BaseParser):
+class Parser(DecodedParser):
     """Extract text from comma separated values files (.csv)."""
 
     delimiter = ","
 
-    def extract(self, filename, **kwargs):
+    def extract_from_text(self, text, **kwargs):
+        """``newline=None`` applies the same universal-newline translation as
+        the streaming path's ``TextIOWrapper``, so quoted fields with embedded
+        CRLF extract identically through both paths.
+        """
+        reader = csv.reader(io.StringIO(text, newline=None), delimiter=self.delimiter)
+        return "\n".join(["\t".join(row) for row in reader])
 
-        # quick 'n dirty solution for the time being
-        with Path(filename).open(encoding="utf-8") as stream:
-            reader = csv.reader(stream, delimiter=self.delimiter)
-            return "\n".join(["\t".join(row) for row in reader])
+    def extract_from_lines(self, lines, **kwargs):
+        """Beta streaming path (issue #97): ``csv.reader`` pulls rows one at
+        a time from ``lines``, so with an explicit ``input_encoding`` this
+        never buffers the whole file, only used with process_bytes/
+        process_stream/``-`` stdin and an explicit ``--input-encoding``.
+        """
+        reader = csv.reader(lines, delimiter=self.delimiter)
+        return "\n".join("\t".join(row) for row in reader)

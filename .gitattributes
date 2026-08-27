@@ -1,0 +1,4 @@
+# Normalize text files to LF on checkout so byte-exact test fixture
+#  comparisons don't break on Windows CI, where git otherwise checks
+#  text files out with CRLF (core.autocrlf=true).
+* text=auto eol=lf
