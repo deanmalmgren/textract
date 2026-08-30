@@ -10,6 +10,22 @@ NEXT RELEASE
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
 
+* Publish a wheel alongside the sdist on PyPI (`#560`_ by `@KyleKing`_)
+* **Drop support for Python 3.9, now requiring 3.10+** (`#585`_ by `@KyleKing`_)
+* Publish a ``-full`` Docker image to GHCR with all system dependencies
+  preinstalled except LibreOffice, which most users don't need; includes
+  pocketsphinx for offline audio transcription (`#600`_ by `@KyleKing`_)
+* Minor nitpick to remove unused line (`#559`_ by `@KyleKing`_)
+* Utilize openpyxl for xlsx after xlrd dropped support (`#572`_ by `@KyleKing`_)
+* Prevent opening a cmd window with ``Popen()`` on Windows (`#574`_ by
+  `@KyleKing`_)
+* Replace unmaintained ``antiword`` with LibreOffice for ``.doc`` extraction
+  (`#582`_ by `@KyleKing`_)
+* Add ``.ods`` spreadsheet support (`#583`_ by `@KyleKing`_)
+* Report which file extension triggered a missing module or missing
+  executable error (`#575`_ by `@KyleKing`_)
+* Standardize PDF text extraction to UTF-8 to avoid mangled non-Latin text
+  (`#596`_ by `@KyleKing`_)
 * Honor ``input_encoding`` in the csv, json, eml, and html parsers and add
   the ``--input-encoding`` CLI flag; introduces ``DecodedParser`` base class
   for parsers that operate on decoded text. A valid but incorrect
@@ -24,16 +40,6 @@ NEXT RELEASE
   ...)``, so third-party parsers that override ``process`` must migrate to
   ``process_source`` (or ``extract``/``extract_from_text``/
   ``extract_from_bytes``, which are still honored)** (`#588`_ by `@KyleKing`_)
-
-TBD
--------------------
-
-* Minor nitpick to remove unused line (`#562`_ by `@KyleKing`_)
-* Utilize openpyxl for xlsx after xlrd dropped support (`#544`_ by `@KyleKing`_)
-* Prevent opening a cmd window with ``Popen()`` on Windows (`#574`_ by `@KyleKing`_)
-* Replace unmaintained ``antiword`` with LibreOffice for ``.doc`` extraction (`#582`_ by `@KyleKing`_)
-* Add ``.ods`` spreadsheet support (`#583`_ by `@KyleKing`_)
-* Report which file extension triggered a missing module or missing executable error (`#575`_ by `@KyleKing`_)
 
 2.0.0
 -------------------
@@ -394,8 +400,8 @@ TBD
 .. _#114: https://github.com/deanmalmgren/textract/issues/114
 .. _#116: https://github.com/deanmalmgren/textract/issues/116
 .. _#119: https://github.com/deanmalmgren/textract/issues/119
-.. _#126: https://github.com/deanmalmgren/textract/issues/126
 .. _#122: https://github.com/deanmalmgren/textract/issues/122
+.. _#126: https://github.com/deanmalmgren/textract/issues/126
 .. _#127: https://github.com/deanmalmgren/textract/issues/127
 .. _#136: https://github.com/deanmalmgren/textract/issues/136
 .. _#139: https://github.com/deanmalmgren/textract/issues/139
@@ -414,12 +420,15 @@ TBD
 .. _#502: https://github.com/deanmalmgren/textract/pull/502
 .. _#520: https://github.com/deanmalmgren/textract/pull/520
 .. _#543: https://github.com/deanmalmgren/textract/pull/543
-.. _#544: https://github.com/deanmalmgren/textract/issues/544
 .. _#559: https://github.com/deanmalmgren/textract/pull/559
-.. _#562: https://github.com/deanmalmgren/textract/pull/562
+.. _#560: https://github.com/deanmalmgren/textract/pull/560
+.. _#572: https://github.com/deanmalmgren/textract/pull/572
 .. _#573: https://github.com/deanmalmgren/textract/pull/573
 .. _#574: https://github.com/deanmalmgren/textract/pull/574
 .. _#575: https://github.com/deanmalmgren/textract/pull/575
 .. _#582: https://github.com/deanmalmgren/textract/pull/582
 .. _#583: https://github.com/deanmalmgren/textract/pull/583
+.. _#585: https://github.com/deanmalmgren/textract/pull/585
 .. _#588: https://github.com/deanmalmgren/textract/pull/588
+.. _#596: https://github.com/deanmalmgren/textract/pull/596
+.. _#600: https://github.com/deanmalmgren/textract/pull/600

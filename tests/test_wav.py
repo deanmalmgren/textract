@@ -18,3 +18,7 @@ class WavTestCase(base.BaseParserTestCase, unittest.TestCase):
     """Test text extraction from WAV audio files."""
 
     extension = "wav"
+
+    def test_wav_sphinx(self):
+        """Make sure sphinx python output is correct."""
+        self.compare_python_output(self.raw_text_filename, method="sphinx")

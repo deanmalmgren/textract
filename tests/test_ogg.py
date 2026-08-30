@@ -18,3 +18,7 @@ class OggTestCase(base.ShellParserTestCase, unittest.TestCase):
     """Test text extraction from OGG audio files."""
 
     extension = "ogg"
+
+    def test_ogg_sphinx(self):
+        """Make sure sphinx python output is correct."""
+        self.compare_python_output(self.raw_text_filename, method="sphinx")
