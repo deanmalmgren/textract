@@ -10,6 +10,9 @@ NEXT RELEASE
 
 .. THANKS FOR CONTRIBUTING; ADD YOUR UNRELEASED CHANGES HERE!
 
+2.1.0
+-------------------
+
 * Publish a wheel alongside the sdist on PyPI (`#560`_ by `@KyleKing`_)
 * **Drop support for Python 3.9, now requiring 3.10+** (`#585`_ by `@KyleKing`_)
 * Publish a ``-full`` Docker image to GHCR with all system dependencies
