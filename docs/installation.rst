@@ -203,6 +203,62 @@ Then run ``textract out/whatever.docx`` as usual. This keeps the heavier
 converter out of your extraction pipeline while still supporting legacy
 documents.
 
+.. _ocr-troubleshooting:
+
+Troubleshooting OCR (images and scanned PDFs)
+---------------------------------------------
+
+Text extraction from images (``.jpg``, ``.png``, ``.gif``) and scanned PDFs
+relies on `tesseract-ocr <https://tesseract-ocr.github.io/>`_. If textract
+returns empty output, whitespace, or placeholder characters instead of text,
+tesseract is usually either not installed or not on your ``PATH``.
+
+Verify that tesseract is installed and reachable:
+
+.. code-block:: bash
+
+    tesseract --version      # prints the installed version
+    which tesseract          # Linux / macOS: prints the resolved path
+    where tesseract          # Windows (PowerShell / cmd): prints the resolved path
+
+If those commands fail, install tesseract with your platform's package manager
+(see the sections above) and re-open a shell so the updated ``PATH`` takes
+effect.
+
+Confirm tesseract can read your file on its own, independent of textract:
+
+.. code-block:: bash
+
+    tesseract scanned_page.png stdout
+
+If that prints the expected text but ``textract scanned_page.png`` does not,
+the problem is in how textract invokes tesseract rather than tesseract itself,
+and is worth reporting as a bug.
+
+.. note::
+
+    Scanned PDFs need the ``tesseract`` method explicitly, because the default
+    ``pdftotext`` path only extracts an existing text layer (which a scan does
+    not have):
+
+    .. code-block:: bash
+
+        textract --method tesseract scanned.pdf
+
+    This also requires ``pdftoppm`` (part of poppler) to rasterize each page
+    before OCR.
+
+Common failure modes:
+
+- If textract fails with "The command ``tesseract`` failed because the
+  executable is not installed", install ``tesseract-ocr`` and confirm
+  ``tesseract --version`` works in the same shell you run textract from.
+- Empty output or image placeholders mean tesseract isn't running. Test it
+  directly with ``tesseract <file> stdout`` and check your ``PATH``.
+- Wrong or missing characters for non-English text mean the language pack is
+  missing. Install it for your language (for example ``tesseract-ocr-ces`` for
+  Czech on Debian/Ubuntu) so tesseract can recognize the script.
+
 Reference: CI System Dependencies
 ----------------------------------
 
