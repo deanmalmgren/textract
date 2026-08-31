@@ -34,9 +34,12 @@ jobs:
         run: |
           BASE=${{ github.event.pull_request.base.sha }}
           HEAD=${{ github.event.pull_request.head.sha }}
-          if git diff --name-only "$BASE" "$HEAD" | grep -qE '^textract/.*\.py$'; then
+          # pyproject.toml (not uv.lock) catches user-facing floor bumps like a
+          # minimum Python version drop, without flagging routine dependency
+          # bumps, which only touch uv.lock or workflow files.
+          if git diff --name-only "$BASE" "$HEAD" | grep -qE '^(textract/.*\.py|pyproject\.toml)$'; then
             if ! git diff --name-only "$BASE" "$HEAD" | grep -q '^docs/changelog\.rst$'; then
-              echo "textract/**/*.py changed but docs/changelog.rst was not updated."
+              echo "textract/**/*.py or pyproject.toml changed but docs/changelog.rst was not updated."
               exit 1
             fi
           fi
