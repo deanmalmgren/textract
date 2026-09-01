@@ -127,6 +127,63 @@ First install system packages using pkg, then install textract from PyPI:
     # or with uv
     uv pip install textract
 
+RHEL / Rocky Linux / AlmaLinux / CentOS Stream
+-----------------------------------------------
+
+textract isn't tested in CI on any Red Hat family distro (GitHub Actions has no
+hosted RHEL runner), but ``scripts/test_redhat_family_install.sh`` in this
+repository probes it against real images with Docker. On Rocky Linux 8/9,
+AlmaLinux 9 and CentOS Stream 9, install the system packages plus a newer
+Python from AppStream/EPEL (the system ``python3`` is 3.9 on EL9 and 3.6 on
+EL8, both below textract's ``>=3.10`` floor), then build your virtualenv with
+that newer Python:
+
+.. code-block:: bash
+
+    # EL9 (Rocky 9, AlmaLinux 9, CentOS Stream 9)
+    dnf install -y epel-release
+    dnf config-manager --set-enabled crb   # powertools on EL8
+    dnf install -y python3.13 python3.13-devel python3.13-pip gcc \
+        libxml2-devel libxslt-devel libjpeg-turbo-devel swig \
+        tesseract sox ghostscript poppler-utils libreoffice-writer
+    python3.13 -m venv .venv && source .venv/bin/activate
+    pip install textract
+
+.. note::
+
+    On Rocky Linux 8, use ``python3.11`` instead of ``python3.12``:
+    AppStream's ``python3.12`` package links against a newer ``libexpat``
+    than EL8 ships, and ``pip`` fails at import time with
+    ``undefined symbol: XML_SetBillionLaughsAttackProtectionMaximumAmplification``.
+    ``python3.11`` doesn't hit this.
+
+.. note::
+
+    ``.rtf`` is **not supported**: ``unrtf`` isn't packaged for EL8 or EL9,
+    in EPEL or elsewhere. Pre-convert with LibreOffice instead, the same
+    workaround used for legacy ``.doc`` files
+    (see :ref:`converting-legacy-doc-files`):
+
+    .. code-block:: bash
+
+        soffice --headless --convert-to txt --outdir out/ *.rtf
+
+Every other extension, including ``.doc`` via LibreOffice and ``.mp3``/``.wav``
+via ``--method sphinx``, is confirmed working on all four distros above.
+
+Red Hat's own UBI9 container images (``registry.access.redhat.com/ubi9/ubi``)
+are **not sufficient** on their own: without a paid RHEL subscription
+registered via ``subscription-manager``, UBI9's mirrored repos don't carry
+``tesseract``, ``libreoffice-writer``, ``swig`` or a Python newer than the
+system 3.9, even with EPEL enabled. Use Rocky Linux, AlmaLinux or CentOS
+Stream instead, or register the subscription to unlock RHEL's full AppStream
+content.
+
+.. note::
+
+    These results are from ``linux/arm64`` images (Docker on Apple Silicon);
+    package availability has not been separately verified on ``linux/amd64``.
+
 Docker
 ------
 
