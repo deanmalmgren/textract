@@ -116,11 +116,12 @@ Install `Chocolatey <https://chocolatey.org/install>`_ then install system packa
 FreeBSD
 -------
 
-First install system packages using pkg, then install textract from PyPI:
+Install Python 3.10 or newer (as required by textract) and its matching pip
+package, then install the system dependencies and textract from PyPI:
 
 .. code-block:: bash
 
-    pkg install lang/python38 devel/py-pip textproc/libxml2 textproc/libxslt textproc/unrtf \
+    pkg install textproc/libxml2 textproc/libxslt textproc/unrtf \
     graphics/poppler print/pstotext graphics/tesseract audio/flac multimedia/ffmpeg audio/lame audio/sox \
     graphics/jpeg-turbo
     pip install textract
@@ -222,8 +223,9 @@ Converting legacy ``.doc`` files
 Legacy ``.doc`` (Word 97-2003 binary) files are extracted with LibreOffice,
 which is an *optional* runtime dependency: textract only shells out to the
 ``soffice`` executable when you actually process a ``.doc`` file, and every
-other format works without it. None of the install instructions above include
-it, since most textract users never touch legacy ``.doc`` files.
+other format works without it. The RHEL-family instructions above include
+LibreOffice; for the other platforms, install it separately if you need
+legacy ``.doc`` support.
 
 If you do need it, install it yourself:
 
@@ -320,7 +322,7 @@ Reference: CI System Dependencies
 ----------------------------------
 
 The canonical list of system dependencies is maintained in the GitHub Actions
-workflow at `.github/actions/setup/action.yml <https://github.com/deanmalmgren/textract/blob/main/.github/actions/setup/action.yml>`_.
+workflow at `.github/actions/setup/action.yml <https://github.com/deanmalmgren/textract/blob/master/.github/actions/setup/action.yml>`_.
 This is what CI uses and is kept up-to-date with each platform's requirements.
 
 Don't see your operating system installation instructions here?
@@ -339,18 +341,10 @@ documentation about how to install the textract dependencies, please
    install the following libraries before running ``pip install
    textract``:
 
-    - `libxml2 2.6.21 or later <http://xmlsoft.org/downloads.html>`_
-      is required by the ``.docx`` parser which uses `lxml
-      <http://lxml.de/installation.html#requirements>`_ via
-      python-docx.
-
-    - `libxslt 1.1.15 or later
-      <http://xmlsoft.org/XSLT/downloads.html>`_ is required by the
-      ``.docx`` parser which users `lxml
-      <http://lxml.de/installation.html#requirements>`_ via
-      python-docx.
-
-    - python header files are required for building lxml.
+    - If building `lxml <https://lxml.de/installation.html#requirements>`_
+      from source, install its libxml2, libxslt and Python development
+      headers. The HTML and EPUB parsers use lxml via BeautifulSoup;
+      the ``.docx`` parser uses docx2txt, not python-docx.
 
     - `LibreOffice <https://www.libreoffice.org/>`_ (the ``soffice``
       executable) is *optionally* required by the ``.doc`` parser. It is only
@@ -375,8 +369,8 @@ documentation about how to install the textract dependencies, please
       You need to install ffmpeg, lame, libmad0 and libsox-fmt-mp3,
       before building sox, for these filetypes to work.
 
-2. Add a requirements file to the `requirements directory
-   <https://github.com/deanmalmgren/textract/tree/master/requirements>`_
-   of the project with the lower-cased name of your operating system
-   (e.g. ``requirements/windows``) so we can try to keep these things
-   up to date in the future.
+2. If adding CI coverage for the platform, update
+   `.github/actions/setup/action.yml
+   <https://github.com/deanmalmgren/textract/blob/master/.github/actions/setup/action.yml>`_
+   with its system dependencies. Python dependencies are declared in
+   ``pyproject.toml``.

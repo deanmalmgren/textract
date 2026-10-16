@@ -52,7 +52,7 @@ file types by either mentioning them on the `issue tracker
 
 * ``.eml`` via python builtins
 
-* ``.epub`` via `ebooklib`_
+* ``.epub`` via python builtins and `beautifulsoup4`_
 
 * ``.gif`` via `tesseract-ocr`_
 
@@ -88,14 +88,13 @@ file types by either mentioning them on the `issue tracker
 
 * ``.wav`` via `SpeechRecognition`_ and `pocketsphinx`_
 
-* ``.xlsx`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
+* ``.xlsx`` via `openpyxl <https://openpyxl.readthedocs.io/>`_
 
 * ``.xls`` via `xlrd <https://pypi.python.org/pypi/xlrd>`_
 
 .. this is a list of all the packages that textract uses for extraction
 .. _LibreOffice: https://www.libreoffice.org/
 .. _beautifulsoup4: http://beautiful-soup-4.readthedocs.org/en/latest/
-.. _ebooklib: https://github.com/aerkalov/ebooklib
 .. _msg-extractor: https://github.com/mattgwwalker/msg-extractor
 .. _pdfminer.six: https://github.com/goulu/pdfminer
 .. _pdftotext: http://poppler.freedesktop.org/

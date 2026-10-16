@@ -21,7 +21,7 @@ parsing a pdf like this::
 or to specify a particular output encoding::
 
     import textract
-    text = textract.process('path/to/file.extension', encoding='ascii')
+    text = textract.process('path/to/file.extension', output_encoding='ascii')
 
 By default, input encodings are inferred using `chardet
 <https://github.com/chardet/chardet>`_. You can override this and specify
@@ -65,8 +65,9 @@ buffer``), ``process_stream`` works the same way::
     with open('path/to/file.docx', 'rb') as stream:
         text = textract.process_stream(stream, extension='docx')
 
-Both require ``extension`` explicitly, since there's no filename to detect
-it from; omitting it raises :class:`textract.exceptions.ExtensionRequired`.
+Both require the ``extension`` argument explicitly, since there's no filename
+to detect it from. Passing ``extension=None`` raises
+:class:`textract.exceptions.ExtensionRequired`.
 Both also emit a ``FutureWarning`` since this API is still beta and may
 change.
 
