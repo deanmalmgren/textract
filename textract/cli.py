@@ -59,7 +59,7 @@ def get_parser():
             "filename to detect it from)."
         ),
     )
-    filename_action.completer = argcomplete.completers.FilesCompleter  # type: ignore[attr-defined]
+    filename_action.completer = argcomplete.completers.FilesCompleter()  # type: ignore[attr-defined]
     parser.add_argument(
         "-e",
         "--encoding",
